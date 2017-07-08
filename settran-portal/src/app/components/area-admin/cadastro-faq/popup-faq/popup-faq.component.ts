@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FaqService } from '../services/faq.service';
 import { URLSearchParams } from '@angular/http';
 
+declare var $:any; // JQUERY
+
 @Component({
   selector: 'app-popup-faq',
   templateUrl: './popup-faq.component.html',
@@ -22,7 +24,8 @@ export class PopupFaqComponent implements OnInit {
   }
   
   onSubmit() {
-    // $('#myModal').modal('hide'); // fecha modal
+	$('#loadingModal').modal('show'); // abre loadingModal
+	
     let params: URLSearchParams = new URLSearchParams();
     params = this.entity;
     // Salva dado
@@ -30,15 +33,22 @@ export class PopupFaqComponent implements OnInit {
                       .subscribe(
                           result => {
                             alert('Dados gravados com sucesso!');
-                            //$('#recarregaGrid').click();
+							
+							$('#faqModal').modal('hide'); // fecha modal
+							$('#loadingModal').modal('hide'); // fecha loadingModal
+                            $('#recarregaGrid').click();
+							
                           }, //Bind to view
                           err => {
-                            alert('Ocorreram erros ao gravar os dados! Tente novamente!');
+                            alert('Ocorreram erros ao gravar os dados! Por favor, tente novament!');
+							$('#loadingModal').modal('hide'); // fecha loadingModal
                             console.log(err);
                           });
   }
   
   deleteData () {
+	$('#loadingModal').modal('show'); // abre loadingModal
+	
     let params: URLSearchParams = new URLSearchParams();
     params = this.entity;
     // Deleta dado
@@ -46,10 +56,14 @@ export class PopupFaqComponent implements OnInit {
                       .subscribe(
                           result => {
                             alert('Dado deletado com sucesso!');
-                            //$('#recarregaGrid').click();
+							
+							$('#faqModal').modal('hide'); // fecha modal
+							$('#loadingModal').modal('hide'); // fecha loadingModal
+                            $('#recarregaGrid').click();
                           }, //Bind to view
                           err => {
-                            alert('Ocorreram erros ao deletar o dado! Tente novamente!');
+                            alert('Ocorreram erros ao deletar o dado! Por favor, tente novament!');
+							$('#loadingModal').modal('hide'); // fecha loadingModal
                             console.log(err);
                           });
   }

@@ -25,6 +25,7 @@ import { FaqService } from './components/area-admin/cadastro-faq/services/faq.se
 import { PopupRegraComponent } from './components/area-admin/cadastro-regra/popup-regra/popup-regra.component';
 import { PopupAgenteComponent } from './components/area-admin/cadastro-agente/popup-agente/popup-agente.component';
 import { PopupFaqComponent } from './components/area-admin/cadastro-faq/popup-faq/popup-faq.component';
+import { FaqHomeComponent } from './components/area-admin/cadastro-faq/faq-home/faq-home.component';
 
 const appRoutes: Routes = [
 	  { 
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
 	GridComponent,
 	PopupRegraComponent,
 	PopupAgenteComponent,
-	PopupFaqComponent
+	PopupFaqComponent,
+	FaqHomeComponent
   ],
   imports: [
     BrowserModule,

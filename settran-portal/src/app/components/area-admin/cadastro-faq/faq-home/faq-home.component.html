@@ -1,0 +1,52 @@
+<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <div class="panel-heading" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">Perguntas frequentes</div>
+  <div *ngFor='let faq of fetchedData | slice:0:1; let currentElementIndex = index;' class="panel-body">
+	
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{currentElementIndex}}">
+			{{faq.pergunta}}</a>
+		</h4>
+	</div>
+	<div id="collapse{{currentElementIndex}}" class="panel-collapse collapse in">
+		<div class="panel-body">
+			{{faq.resposta}}
+		</div>
+	</div>
+	
+  </div>				  
+  <div class="row-fluid" style="padding-bottom: 10px;text-align: center;">
+	<button class="btn" style="border-color: #F0E68C !important;background-color: #F0E68C;color:black;font-weight:bold;border: solid 1px;" type="submit" data-toggle="modal" data-target="#myModal">Mais perguntas</button>
+  </div>
+</div>
+
+<!-- Modal Perguntas Frequentes-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Perguntas Frequentes</h4>
+	  </div>
+	  <div *ngFor='let faq of fetchedData; let currentElementIndex = index;' class="modal-body">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{currentElementIndex}}">
+				{{faq.pergunta}}</a>
+			</h4>
+		</div>
+		<div id="collapse_{{currentElementIndex}}" class="panel-collapse collapse in">
+			<div class="panel-body">
+				{{faq.resposta}}
+			</div>
+		</div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	  </div>
+	</div>
+
+  </div>
+</div>

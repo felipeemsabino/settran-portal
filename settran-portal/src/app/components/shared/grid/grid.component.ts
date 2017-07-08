@@ -39,6 +39,8 @@ export class GridComponent implements OnInit {
   fetchedData: any[];
 	
   getData() {
+	$('#loadingModal').modal('show'); // abre loadingModal
+	
   	this.setUrlParams();
 	let retorno: any[];
     // Get all data
@@ -53,9 +55,13 @@ export class GridComponent implements OnInit {
 							
 							if(this.isPaginated)
 								this.createRange();
+							
+							$('#loadingModal').modal('hide'); // fecha modal
                           }, //Bind to view
                           err => {
                             console.log(err);
+							alert('Ocorreram erros ao recuperar os registros! Por favor, tente novamente!');
+							$('#loadingModal').modal('hide'); // fecha modal
                           });
   }
   
@@ -131,6 +137,8 @@ export class GridComponent implements OnInit {
   }
   
   reorderData(movedRow: any, row: any) {
+	$('#loadingModal').modal('show'); // abre loadingModal
+	
     console.log('1 -> '+movedRow);
 	console.log('2 -> '+row);
 
@@ -141,9 +149,13 @@ export class GridComponent implements OnInit {
                       .subscribe(
                           result => {
 						    console.log('resultado reordenar -> '+result);
+							alert('Registros reordenados com sucesso!');
+							$('#loadingModal').modal('hide'); // fecha modal
                           }, //Bind to view
                           err => {
                             console.log(err);
+							alert('Ocorreram erros ao reordenar os registros! Por favor, tente novamente!');
+							$('#loadingModal').modal('hide'); // fecha modal
                           });
   }
 }
