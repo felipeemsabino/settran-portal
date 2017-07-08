@@ -21,8 +21,10 @@ import { GridComponent } from './components/shared/grid/grid.component';
 import { IDataService } from './components/interfaces/idata-service'
 import { AgenteService } from './components/area-admin/cadastro-agente/services/agente.service';
 import { RegrasService } from './components/area-admin/cadastro-regra/services/regras.service';
+import { FaqService } from './components/area-admin/cadastro-faq/services/faq.service';
 import { PopupRegraComponent } from './components/area-admin/cadastro-regra/popup-regra/popup-regra.component';
 import { PopupAgenteComponent } from './components/area-admin/cadastro-agente/popup-agente/popup-agente.component';
+import { PopupFaqComponent } from './components/area-admin/cadastro-faq/popup-faq/popup-faq.component';
 
 const appRoutes: Routes = [
 	  { 
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     RetificaDatComponent,
 	GridComponent,
 	PopupRegraComponent,
-	PopupAgenteComponent
+	PopupAgenteComponent,
+	PopupFaqComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,9 @@ const appRoutes: Routes = [
     },
     {
       provide: 'IDataService', useClass: RegrasService, multi: true
+    },
+    {
+      provide: 'IDataService', useClass: FaqService, multi: true
     } ],
   bootstrap: [AppComponent]
 })

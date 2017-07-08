@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroFaqComponent implements OnInit {
 
+  gridTitle: string = "Cadastro de Perguntas Frequentes";
+    
+  object: any = {};
+  
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  public updateObjectParameter(object: any):void {
+	this.object = object;
+    console.log('Updating parameter... ', this.object);
   }
 
 }

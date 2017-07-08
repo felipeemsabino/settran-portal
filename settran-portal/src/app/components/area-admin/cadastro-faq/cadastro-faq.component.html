@@ -1,3 +1,14 @@
-<p>
-  cadastro-faq works!
-</p>
+<app-grid
+  [gridTitle]="gridTitle"
+  [service]="2"
+  [paginated]="false"
+  [reorder]="true"
+  [search]="false"
+  (onObjectChange)="updateObjectParameter($event)"
+  [row_detail]="{'isModal':true,'modalName':'#faqModal'}"
+  [columns]="[
+	{'name':'Ordem', 'filter':false, 'attr':'ordem'},
+    {'name':'Pergunta', 'filter':false, 'attr':'pergunta'},
+	{'name':'Resposta', 'filter':false, 'attr':'resposta'}]" >
+</app-grid>
+<app-popup-faq [object]="object"></app-popup-faq>
