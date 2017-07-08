@@ -34,7 +34,7 @@ export class PopupRegraComponent implements OnInit {
                           result => {
                             alert('Dados gravados com sucesso!');
 							
-							$('#faqModal').modal('hide'); // fecha modal
+							$('#regrasModal').modal('hide'); // fecha modal
 							$('#loadingModal').modal('hide'); // fecha loadingModal
                             $('#recarregaGrid').click();
                           }, //Bind to view
@@ -55,7 +55,7 @@ export class PopupRegraComponent implements OnInit {
                       .subscribe(
                           result => {
 							
-							$('#faqModal').modal('hide'); // fecha modal
+							$('#regrasModal').modal('hide'); // fecha modal
 							$('#loadingModal').modal('hide'); // fecha loadingModal
                             $('#recarregaGrid').click();
                           }, //Bind to view
