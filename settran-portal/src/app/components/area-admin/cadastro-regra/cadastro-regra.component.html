@@ -1,0 +1,15 @@
+<app-grid
+  [gridTitle]="gridTitle"
+  [service]="1"
+  [paginated]="false"
+  [reorder]="true"
+  [search]="false"
+  (onObjectChange)="updateObjectParameter($event)"
+  [row_detail]="{'isModal':true,'modalName':'#regrasModal'}"
+  [columns]="[
+	{'name':'Ordem', 'filter':false, 'attr':'ordem'},
+    {'name':'Regra', 'filter':false, 'attr':'descricaoRegra'},
+	{'name':'Resposta esperada', 'filter':false, 'attr':'resposta'},
+	{'name':'Mensagem de erro', 'filter':false, 'attr':'msgDivergente'}]" >
+</app-grid>
+<app-popup-regra [object]="object"></app-popup-regra>

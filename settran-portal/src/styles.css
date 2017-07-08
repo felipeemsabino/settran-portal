@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+/* CSS used here will be applied after bootstrap.css */
+body {
+  background: #000;
+}
+
+.main-nav {
+  background-color:#FFEF96;
+  font-weight:bolder;
+  font-family:inherit;
+}
+
+.nav-tabs > li > a{
+  border: medium none;
+  color:black;
+}
+
+.nav-tabs > li > a:hover{
+  background-color: #FFFFCC !important;
+  border: none;
+  border-radius: 0;
+  text-decoration: underline !important;
+}
+
+.nav-tabs > li > a:active,
+.nav-tabs > li > a:focus  {
+  background-color:#FFEF96 !important;
+  border-radius:0px !important;
+  text-decoration: underline !important;
+}
+
+
+/*FAQ*/
+.faq-h1{
+  font-family: 'ubuntuBold','Helvetica Neue','Helvetica','Roboto','Arial',sans-serif !important;
+  font-size: 36px !important;
+  margin-bottom: 30px !important;
+}
+
+.panel-heading [data-toggle="collapse"]:after {
+	font-family: 'Glyphicons Halflings';
+	content: "\e072"; /* "play" icon */
+	float: right;
+	color: #F58723;
+	font-size: 18px;
+	line-height: 22px;
+	/* rotate "play" icon from > (right arrow) to down arrow */
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+.panel-heading [data-toggle="collapse"].collapsed:after {
+	/* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	color: #454444;
+}

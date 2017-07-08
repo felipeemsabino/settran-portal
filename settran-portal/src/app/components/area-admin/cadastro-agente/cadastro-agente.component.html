@@ -1,0 +1,11 @@
+<app-grid
+  [gridTitle]="gridTitle"
+  [service]="0"
+  [paginated]="true"
+  [reorder]="false"
+  [search]="true"
+  (onObjectChange)="updateObjectParameter($event)"
+  [row_detail]="{'isModal':true,'modalName':'#agenteModal'}"
+  [columns]="[{'name':'#','filter':false,'attr':''}, {'name':'Matrícula', 'filter':true, 'attr':'matriculaAgente', 'value':''},
+    {'name':'Nome', 'filter':false, 'attr':'nomeAgente'}]" >
+</app-grid>

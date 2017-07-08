@@ -1,0 +1,99 @@
+<nav class="navbar navbar-inverse" style="color: #FFFFCC;">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>                        
+	  </button>
+	  <a class="navbar-brand" href="#">Settran eDAT-DOT</a>
+	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+	  <ul class="nav navbar-nav" style="font-color:#FFFFCC">
+		<li class="active"><a href="#">Home</a></li>
+		<li class=""><a href="javascript:;" [routerLink]="['area-municipe-home']">Área munícipe</a></li>
+		<li class=""><a href="javascript:;" data-toggle="modal" data-target="#myModal">FAQ</a></li>
+	  </ul>
+	  <ul class="nav navbar-nav navbar-right">
+	  </ul>
+	</div>
+  </div>
+</nav>
+<div class="container" style="text-align:center;margin-bottom: 10px;margin-top:10px;">
+	<div class="col-md-4">
+		<img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/1000px-AngularJS_logo.svg.png">
+	</div>
+	<div class="col-md-4">
+		<img class="img-responsive" src="http://www.webdefends.com/images/boot3.png">
+	</div>
+	<div class="col-md-4">
+		<img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWAZr4UPMKxKQ3crsWY45gtaIrvvw9urXvtvifkao4KHueBTu7SA">
+	</div>
+</div>
+<div class="container">
+	<div class="row equal-height-panels">
+		<div class="col-md-4">
+			<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+			  <div class="panel-heading" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">Acesso exclusivo SETTRAN</div>
+			  <div class="panel-body">
+				  <form class="form-signin" style="text-align:center;">
+					<h4 class="form-signin-heading">Dados de usuario</h4>
+					<div class="row-fluid" style="padding-bottom: 10px">
+						<label for="username" class="sr-only">E-mail</label>
+						<input type="email" id="username" name="username" [(ngModel)]="registerCredentials.user" class="form-control" placeholder="Email" required autofocus>
+					</div>
+					<div class="row-fluid" style="padding-bottom: 10px">
+						<label for="password" class="sr-only">Senha</label>
+						<input type="password" id="password" name="password" [(ngModel)]="registerCredentials.pass" class="form-control" placeholder="Senha" required>
+					</div>
+					<div class="row-fluid" style="padding-bottom: 10px;">
+						<button class="btn" (click)="entrar()"
+						style="border-color: #F0E68C !important;background-color: #F0E68C;color:black;font-weight:bold;border: solid 1px;">Entrar</button>
+					</div>
+					<div>
+					  <label>
+						<a style="color:black;cursor:pointer;"> Esqueci minha senha </a>
+					  </label>
+					</div>
+				  </form>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+			  <div class="panel-heading" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">Acesso munícipe</div>
+			  <div class="panel-body">
+				<ul>
+				<li><a href="javascript:;" [routerLink]="['area-municipe-home']" style="cursor: pointer;font-size:large;padding-bottom:10px;">Registrar Declaração de Acidente de Trânsito (DAT)</a></li>
+				<li><a href="javascript:;" [routerLink]="['area-municipe-home']" style="cursor: pointer;font-size:large;padding-bottom:10px;">Consultar Declaração de Acidente de Trânsito (DAT)</a></li>
+				<li><a href="javascript:;" [routerLink]="['area-municipe-home']" style="cursor: pointer;font-size:large;padding-bottom:10px;">Solicitar retificação de Declaração de Acidente de Trânsito (DAT)</a></li>
+				</ul>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row equal-height-panels">
+		<div class="col-md-4">
+			<div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+			  <div class="panel-heading" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">Para cadastrar tenha em mãos os dados a seguir:</div>
+			  <div class="panel-body">
+				<ul>
+					<li>CNH e RG do condutor;</li>
+					<li>CRLV do veículo</li>
+					<li>Endereço do local do acidente, data e horário do fato;</li>
+					<li>Endereço de e-mail;</li>
+					<li>Número de telefone para contato;</li>
+				</ul>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<!--app-perguntas-frequentes></app-perguntas-frequentes-->
+		</div>
+	</div>
+</div>
+<div class="container" style="width:100%;text-align:center;background-color: black;color:#F0E68C;font-weight:bold;">
+	<p style="">Fale conosco: faleconosco@settran.com</p>
+	<p style="">Telefone: (31) 3333-3333</p>
+	<p style="">Av. Professor Mario Werneck, 6534, Buritis - Uberlandia - Minas Gerais</p>
+</div>

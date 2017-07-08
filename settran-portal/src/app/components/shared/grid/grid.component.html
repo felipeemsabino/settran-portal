@@ -1,0 +1,77 @@
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading clearfix" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">{{gridTitle}}
+	<div class="pull-right">
+		<button type="button" class="btn btn-primary" (click)="callObjectWindow({})" 
+			attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
+			attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}">
+		  <span class="glyphicon glyphicon-plus"></span> Novo
+		</button>
+		<button type="button" class="btn btn-success" (click)="getFilteredData()" id="buscar" name="buscar" *ngIf="search">
+		  <span class="glyphicon glyphicon-search"></span> Pesquisar
+		</button>
+	</div>
+  </div>
+  <div class="panel-body">
+    <!-- Filtros  -->
+    <div class="row" style="display:none;"><!-- recarregar o grid após alterar registro  -->
+      <button type="button" class="btn btn-info" (click)="this.getData()" id="recarregaGrid" name="recarregaGrid">
+    </button>
+    </div>
+    <div class="row">
+      <div *ngFor='let column of columnsConfiguration;'>
+		<div *ngIf="column.filter===true" class="col-sm-2 col-md-2">
+		  <label for="nome">{{column.name}}</label>
+		  <input class="form-control" type="text" id="{{column.attr}}" name="{{column.attr}}" [(ngModel)]="column.value">
+		</div>
+      </div>
+    </div>
+    <div class="row top-buffer" style="padding-top:10px;">
+      <!-- Table -->
+      <table class="table table-bordered table-hover" >
+        <thead>
+          <tr>
+			<th *ngIf="reorder===true" class="text-center">Reordenar</th>
+            <th *ngFor='let column of columnsConfiguration;' class="text-center">{{column.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let fData of fetchedData; let currentElementIndex = index;'>
+			<td *ngIf="reorder===true" style="text-align:center;padding: 0px;vertical-align: middle;">
+				<div class="row" *ngIf="currentElementIndex > 0">
+				  <span class="glyphicon glyphicon glyphicon-chevron-up arrow-icon" style="cursor:pointer;" (click)="moveUp(currentElementIndex);"></span>
+				</div>
+				<div class="row" *ngIf="currentElementIndex < fetchedData.length-1">
+				  <span class="glyphicon glyphicon glyphicon-chevron-down arrow-icon" style="cursor:pointer;" (click)="moveDown(currentElementIndex);"></span>
+				</div>
+			</td>
+            <td 
+			  style="cursor:pointer;text-align:center"
+              (click)="callObjectWindow(fData)" 	
+			  attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
+			  attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}"
+			  *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ? currentElementIndex : fData[column.attr]}}
+			</td>
+		  </tr>
+        </tbody>
+      </table>
+    <div>
+    <nav style="text-align:center;" *ngIf="isPaginated">
+      <ul class="pagination" max-size="10">
+        <li>
+          <a href="javascript:;" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li *ngFor='let item of numeroPaginas; let currentElementIndex = index;'>
+          <a href="javascript:;" (click)="calculaRange(item)">
+          {{currentElementIndex+1}}</a></li>
+        <li>
+          <a href="javascript:;" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
