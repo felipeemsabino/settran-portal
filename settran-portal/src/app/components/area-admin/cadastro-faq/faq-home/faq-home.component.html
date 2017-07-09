@@ -4,7 +4,7 @@
 	
 	<div class="panel-heading">
 		<h4 class="panel-title">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{currentElementIndex}}">
+			<a style="font-weight:600;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{currentElementIndex}}">
 			{{faq.pergunta}}</a>
 		</h4>
 	</div>
@@ -33,7 +33,7 @@
 	  <div *ngFor='let faq of fetchedData; let currentElementIndex = index;' class="modal-body">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{currentElementIndex}}">
+				<a style="font-weight:600;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{currentElementIndex}}">
 				{{faq.pergunta}}</a>
 			</h4>
 		</div>

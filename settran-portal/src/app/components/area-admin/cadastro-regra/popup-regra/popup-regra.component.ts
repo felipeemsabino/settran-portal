@@ -17,6 +17,9 @@ export class PopupRegraComponent implements OnInit {
   @Input('object')
   set object(value: any) {
 	this.entity = Object.assign({}, value);
+	if(!this.entity.resposta) {
+	  this.entity.resposta = 'S';
+	}
   }
   constructor(private regrasService: RegrasService) { }
 
@@ -25,16 +28,13 @@ export class PopupRegraComponent implements OnInit {
   
   onSubmit() {
 	$('#loadingModal').modal('show'); // abre loadingModal
-	
+	console.log(this.entity);
     let params: URLSearchParams = new URLSearchParams();
     params = this.entity;
     // Salva dado
     this.regrasService.saveData(params)
                       .subscribe(
                           result => {
-                            alert('Dados gravados com sucesso!');
-							
-							$('#regrasModal').modal('hide'); // fecha modal
 							$('#loadingModal').modal('hide'); // fecha loadingModal
                             $('#recarregaGrid').click();
                           }, //Bind to view
@@ -66,4 +66,7 @@ export class PopupRegraComponent implements OnInit {
                           });
   }
   
+  alteraResposta (resposta: string) {
+	this.entity.resposta = resposta;
+  }
 }

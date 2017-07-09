@@ -32,9 +32,6 @@ export class PopupFaqComponent implements OnInit {
     this.faqService.saveData(params)
                       .subscribe(
                           result => {
-                            alert('Dados gravados com sucesso!');
-							
-							$('#faqModal').modal('hide'); // fecha modal
 							$('#loadingModal').modal('hide'); // fecha loadingModal
                             $('#recarregaGrid').click();
 							

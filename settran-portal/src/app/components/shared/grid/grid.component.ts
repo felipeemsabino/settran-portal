@@ -147,8 +147,6 @@ export class GridComponent implements OnInit {
     this.providerService[this.service].reorderData(JSON.stringify(body))
                       .subscribe(
                           result => {
-						    console.log('resultado reordenar -> '+result);
-							alert('Registros reordenados com sucesso!');
 							$('#loadingModal').modal('hide'); // fecha modal
                           }, //Bind to view
                           err => {

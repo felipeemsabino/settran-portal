@@ -17,10 +17,10 @@
 				<input type="text" class="form-control" id="descricaoRegra" name="descricaoRegra" required 
 				  [(ngModel)]="entity.descricaoRegra">
 			</div>
-			<div class="form-group">
-				<label for="email">Resposta esperada</label>
-				<input type="text" class="form-control" id="resposta" name="resposta" required
-				  [(ngModel)]="entity.resposta">
+			<div class="form-group" required>
+				<label for="email">Resposta esperada</label> <br>
+				<label><input type="radio" name="radiogroup" [checked]="entity.resposta == 'S'" (change)="alteraResposta('S');" >Sim</label>
+				<label><input type="radio" name="radiogroup" [checked]="entity.resposta == 'N'" (change)="alteraResposta('N');" >Não</label>
 			</div>
 			<div class="form-group">
 			  <label for="comment">Mensagem para resposta divergente</label>
