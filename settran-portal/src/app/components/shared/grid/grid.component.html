@@ -18,7 +18,7 @@
       <button type="button" class="btn btn-info" (click)="this.getData()" id="recarregaGrid" name="recarregaGrid">
     </button>
     </div>
-    <div class="row">
+    <div class="row"><!-- campos filtros  -->
       <div *ngFor='let column of columnsConfiguration;'>
 		<div *ngIf="column.filter===true" class="col-sm-2 col-md-2">
 		  <label for="nome">{{column.name}}</label>
@@ -26,13 +26,13 @@
 		</div>
       </div>
     </div>
-    <div class="row top-buffer" style="padding-top:10px;">
+    <div class="table-responsive" style="padding-top:10px;">
       <!-- Table -->
       <table class="table table-bordered table-hover" >
         <thead>
           <tr>
 			<th *ngIf="reorder===true" class="text-center">Reordenar</th>
-            <th *ngFor='let column of columnsConfiguration;' class="text-center">{{column.name}}</th>
+            <th *ngFor='let column of columnsConfiguration;' class="text-center">{{column.name}}</th> <!-- colunas  -->
           </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
 		  </tr>
         </tbody>
       </table>
-    <div>
+    </div>
     <nav style="text-align:center;" *ngIf="isPaginated">
       <ul class="pagination" max-size="10">
         <li>
