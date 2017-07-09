@@ -31,7 +31,7 @@ export class AgenteService implements IDataService {
 	return null;
   }
   
-  reorderData(params: URLSearchParams): Observable<any []> {
+  reorderData(body: string): Observable<any []> {
 	return null;
   }
 

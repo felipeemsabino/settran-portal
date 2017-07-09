@@ -54,6 +54,7 @@ export class PopupRegraComponent implements OnInit {
     this.regrasService.deleteData(this.entity.id)
                       .subscribe(
                           result => {
+                            alert('Dado deletado com sucesso!');
 							
 							$('#regrasModal').modal('hide'); // fecha modal
 							$('#loadingModal').modal('hide'); // fecha loadingModal

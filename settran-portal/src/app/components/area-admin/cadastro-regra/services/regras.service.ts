@@ -46,14 +46,14 @@ export class RegrasService implements IDataService {
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
   
-  reorderData(params: URLSearchParams): Observable<any []> {
+  reorderData(body: string): Observable<any []> {
   	let header = new Headers();
 	header.append('Content-Type', 'application/json');
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
-    let options = new RequestOptions({ headers: header, search: params });
+    let options = new RequestOptions({ headers: header });
 	
     return this.http.put('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/regrasdevalidacao/reordenarregrasvalidacao/',
-							options)
+							body, options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }

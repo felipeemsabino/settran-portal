@@ -6,5 +6,5 @@ export interface IDataService {
   getData(params: URLSearchParams): Observable<any []>
   saveData(params: URLSearchParams): Observable<any []>
   deleteData(dataId: any): Observable<any []>
-  reorderData(params: URLSearchParams): Observable<any []>
+  reorderData(body: string): Observable<any []>
 }

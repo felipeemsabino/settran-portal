@@ -48,14 +48,15 @@ export class GridComponent implements OnInit {
     this.providerService[this.service].getData(this.params)
                       .subscribe(
                           result => {
-							if(this.isPaginated)
-								this.retornoQtdRestante = Number((<any>result.pop()).split(":")[1].replace("}",""));
-                            
-							this.fetchedData = result;
-							
-							if(this.isPaginated)
-								this.createRange();
-							
+							if(result.length > 0) {
+								if(this.isPaginated)
+									this.retornoQtdRestante = Number((<any>result.pop()).split(":")[1].replace("}",""));
+								
+								this.fetchedData = result;
+								
+								if(this.isPaginated)
+									this.createRange();
+							}
 							$('#loadingModal').modal('hide'); // fecha modal
                           }, //Bind to view
                           err => {
@@ -139,13 +140,11 @@ export class GridComponent implements OnInit {
   reorderData(movedRow: any, row: any) {
 	$('#loadingModal').modal('show'); // abre loadingModal
 	
-    console.log('1 -> '+movedRow);
-	console.log('2 -> '+row);
+	let body = [];
+	body.push(movedRow);
+	body.push(row);
 
-	this.params = new URLSearchParams();
-	this.params.append('movedRow', movedRow);
-	this.params.append('row', row);
-    this.providerService[this.service].reorderData(this.params)
+    this.providerService[this.service].reorderData(JSON.stringify(body))
                       .subscribe(
                           result => {
 						    console.log('resultado reordenar -> '+result);
@@ -156,6 +155,7 @@ export class GridComponent implements OnInit {
                             console.log(err);
 							alert('Ocorreram erros ao reordenar os registros! Por favor, tente novamente!');
 							$('#loadingModal').modal('hide'); // fecha modal
+                            $('#recarregaGrid').click();
                           });
   }
 }
