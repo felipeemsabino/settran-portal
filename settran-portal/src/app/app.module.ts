@@ -26,6 +26,7 @@ import { PopupRegraComponent } from './components/area-admin/cadastro-regra/popu
 import { PopupAgenteComponent } from './components/area-admin/cadastro-agente/popup-agente/popup-agente.component';
 import { PopupFaqComponent } from './components/area-admin/cadastro-faq/popup-faq/popup-faq.component';
 import { FaqHomeComponent } from './components/area-admin/cadastro-faq/faq-home/faq-home.component';
+import { KeysPipe } from './components/pipes/keys.pipe';
 
 const appRoutes: Routes = [
 	  { 
@@ -34,6 +35,15 @@ const appRoutes: Routes = [
 	  {
 		path: 'area-admin', 
 		component: AreaAdminComponent,
+		  children: [
+			{ path: 'cadastro-agente', component: CadastroAgenteComponent },
+			{ path: 'cadastro-regra', component: CadastroRegraComponent },
+			{ path: 'cadastro-faq', component: CadastroFaqComponent }
+		  ]
+	  },
+	  {
+		path: 'area-municipe', 
+		component: AreaMunicipeComponent,
 		  children: [
 			{ path: 'cadastro-agente', component: CadastroAgenteComponent },
 			{ path: 'cadastro-regra', component: CadastroRegraComponent },
@@ -61,7 +71,8 @@ const appRoutes: Routes = [
 	PopupRegraComponent,
 	PopupAgenteComponent,
 	PopupFaqComponent,
-	FaqHomeComponent
+	FaqHomeComponent,
+	KeysPipe
   ],
   imports: [
     BrowserModule,
