@@ -27,6 +27,7 @@ import { PopupAgenteComponent } from './components/area-admin/cadastro-agente/po
 import { PopupFaqComponent } from './components/area-admin/cadastro-faq/popup-faq/popup-faq.component';
 import { FaqHomeComponent } from './components/area-admin/cadastro-faq/faq-home/faq-home.component';
 import { KeysPipe } from './components/pipes/keys.pipe';
+import { PerguntasPreliminaresComponent } from './components/area-municipe/cadastro-dat/perguntas-preliminares/perguntas-preliminares.component';
 
 const appRoutes: Routes = [
 	  { 
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
 	PopupAgenteComponent,
 	PopupFaqComponent,
 	FaqHomeComponent,
-	KeysPipe
+	KeysPipe,
+	PerguntasPreliminaresComponent
   ],
   imports: [
     BrowserModule,

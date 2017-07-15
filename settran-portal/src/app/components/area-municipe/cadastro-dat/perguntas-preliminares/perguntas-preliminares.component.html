@@ -1,0 +1,10 @@
+<div class="container-fluid" style="padding-top: 19px;">
+	<div class="well" style="padding-bottom: 0px;padding-top: 0px;" *ngFor='let pergunta of perguntas;let currentElementIndex = index;'>
+		<h4>{{pergunta.descricaoRegra}}</h4>
+		<div>
+			<label>Resposta</label> <br>
+			<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'S'" (change)="alteraResposta('S');" >Sim</label>
+			<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'N'" (change)="alteraResposta('N');" >Não</label>
+		</div>
+	</div>
+</div>
