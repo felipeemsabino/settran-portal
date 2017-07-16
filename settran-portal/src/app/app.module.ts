@@ -13,7 +13,6 @@ import { CadastroFaqComponent } from './components/area-admin/cadastro-faq/cadas
 import { AreaAgenteComponent } from './components/area-agente/area-agente.component';
 import { ValidarDatComponent } from './components/area-agente/validar-dat/validar-dat.component';
 import { RevisarDatComponent } from './components/area-agente/revisar-dat/revisar-dat.component';
-import { AreaMunicipeComponent } from './components/area-municipe/area-municipe.component';
 import { CadastroDatComponent } from './components/area-municipe/cadastro-dat/cadastro-dat.component';
 import { ConsultaDatComponent } from './components/area-municipe/consulta-dat/consulta-dat.component';
 import { RetificaDatComponent } from './components/area-municipe/retifica-dat/retifica-dat.component';
@@ -37,7 +36,7 @@ import { ConfirmacaoDatComponent } from './components/area-municipe/cadastro-dat
 import { ResumoComponent } from './components/area-municipe/cadastro-dat/resumo/resumo.component';
 
 const appRoutes: Routes = [
-	  { 
+	  {
 	    path: '', component: HomeComponent
 	  },
 	  {
@@ -50,27 +49,21 @@ const appRoutes: Routes = [
 		  ]
 	  },
 	  {
-		path: 'area-municipe', 
-		component: AreaMunicipeComponent,
-		  children: [
-			{
-				path: 'cadastro-dat', 
-				component: CadastroDatComponent,
-					children: [
-						{ path: 'perguntas-preliminares', component: PerguntasPreliminaresComponent },
-						{ path: 'app-seu-veiculo', component: SeuVeiculoComponent },
-						{ path: 'app-dados-acidente', component: DadosAcidenteComponent },
-						{ path: 'app-outros-veiculos', component: OutrosVeiculosComponent },
-						{ path: 'app-testemunhas', component: TestemunhasComponent },
-						{ path: 'app-relato', component: RelatoComponent },
-						{ path: 'app-confirmacao-dat', component: ConfirmacaoDatComponent },
-						{ path: 'app-resumo', component: ResumoComponent }
-					]
-			},
-			{ path: 'cadastro-regra', component: CadastroRegraComponent },
-			{ path: 'cadastro-faq', component: CadastroFaqComponent }
-		  ]
-	  }
+		path: 'cadastro-dat', 
+		component: CadastroDatComponent,
+		children: [
+			{ path: 'perguntas-preliminares', component: PerguntasPreliminaresComponent },
+			{ path: 'seu-veiculo', component: SeuVeiculoComponent },
+			{ path: 'dados-acidente', component: DadosAcidenteComponent },
+			{ path: 'outros-veiculos', component: OutrosVeiculosComponent },
+			{ path: 'testemunhas', component: TestemunhasComponent },
+			{ path: 'relato', component: RelatoComponent },
+			{ path: 'confirmacao-dat', component: ConfirmacaoDatComponent },
+			{ path: 'resumo', component: ResumoComponent }
+		]
+	  },
+	  { path: 'cadastro-regra', component: CadastroRegraComponent },
+	  { path: 'cadastro-faq', component: CadastroFaqComponent }
 ];
 
 @NgModule({
@@ -84,7 +77,6 @@ const appRoutes: Routes = [
     AreaAgenteComponent,
     ValidarDatComponent,
     RevisarDatComponent,
-    AreaMunicipeComponent,
     CadastroDatComponent,
     ConsultaDatComponent,
     RetificaDatComponent,
