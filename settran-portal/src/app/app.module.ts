@@ -28,6 +28,13 @@ import { PopupFaqComponent } from './components/area-admin/cadastro-faq/popup-fa
 import { FaqHomeComponent } from './components/area-admin/cadastro-faq/faq-home/faq-home.component';
 import { KeysPipe } from './components/pipes/keys.pipe';
 import { PerguntasPreliminaresComponent } from './components/area-municipe/cadastro-dat/perguntas-preliminares/perguntas-preliminares.component';
+import { SeuVeiculoComponent } from './components/area-municipe/cadastro-dat/seu-veiculo/seu-veiculo.component';
+import { DadosAcidenteComponent } from './components/area-municipe/cadastro-dat/dados-acidente/dados-acidente.component';
+import { OutrosVeiculosComponent } from './components/area-municipe/cadastro-dat/outros-veiculos/outros-veiculos.component';
+import { TestemunhasComponent } from './components/area-municipe/cadastro-dat/testemunhas/testemunhas.component';
+import { RelatoComponent } from './components/area-municipe/cadastro-dat/relato/relato.component';
+import { ConfirmacaoDatComponent } from './components/area-municipe/cadastro-dat/confirmacao-dat/confirmacao-dat.component';
+import { ResumoComponent } from './components/area-municipe/cadastro-dat/resumo/resumo.component';
 
 const appRoutes: Routes = [
 	  { 
@@ -46,7 +53,20 @@ const appRoutes: Routes = [
 		path: 'area-municipe', 
 		component: AreaMunicipeComponent,
 		  children: [
-			{ path: 'cadastro-agente', component: CadastroAgenteComponent },
+			{
+				path: 'cadastro-dat', 
+				component: CadastroDatComponent,
+					children: [
+						{ path: 'perguntas-preliminares', component: PerguntasPreliminaresComponent },
+						{ path: 'app-seu-veiculo', component: SeuVeiculoComponent },
+						{ path: 'app-dados-acidente', component: DadosAcidenteComponent },
+						{ path: 'app-outros-veiculos', component: OutrosVeiculosComponent },
+						{ path: 'app-testemunhas', component: TestemunhasComponent },
+						{ path: 'app-relato', component: RelatoComponent },
+						{ path: 'app-confirmacao-dat', component: ConfirmacaoDatComponent },
+						{ path: 'app-resumo', component: ResumoComponent }
+					]
+			},
 			{ path: 'cadastro-regra', component: CadastroRegraComponent },
 			{ path: 'cadastro-faq', component: CadastroFaqComponent }
 		  ]
@@ -74,7 +94,14 @@ const appRoutes: Routes = [
 	PopupFaqComponent,
 	FaqHomeComponent,
 	KeysPipe,
-	PerguntasPreliminaresComponent
+	PerguntasPreliminaresComponent,
+	SeuVeiculoComponent,
+	DadosAcidenteComponent,
+	OutrosVeiculosComponent,
+	TestemunhasComponent,
+	RelatoComponent,
+	ConfirmacaoDatComponent,
+	ResumoComponent
   ],
   imports: [
     BrowserModule,
