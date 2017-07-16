@@ -17,7 +17,20 @@ export class CadastroDatComponent implements OnInit {
   static readonly CONFIRMACAO_DAT = "/cadastro-dat/confirmacao-dat";
   static readonly RESUMO = "/cadastro-dat/resumo";
 
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute) { }
+  eDAT: any;
+  
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute) { 
+    this.eDAT = {
+	  "perguntas": [],
+	  "seu_veiculo": [],
+	  "dados_acidente": [],
+	  "outros_veiculos": [],
+	  "testemunhas": [],
+	  "relato_acidente": [],
+	  "confirmacao_dat": [],
+	  "resumo": [],
+	};
+  }
 
   ngOnInit() {
 	this.parentRouter.navigate(['/cadastro-dat/perguntas-preliminares']);
@@ -32,7 +45,6 @@ export class CadastroDatComponent implements OnInit {
   }
   
   avancar() {
-	console.log(this.parentRouter.url);
 	switch(this.parentRouter.url) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
