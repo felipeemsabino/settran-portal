@@ -51,11 +51,14 @@
 			<button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
 		  </div>
 		  <div class="col col-md-4">
-			<button type="button" class="btn btn-success" (click)="voltar();">Voltar</button>
+			<button type="button" class="btn btn-success" (click)="changePage('back');" *ngIf="currentPage !== getPergPreliminaresUrl();">
+				<< Voltar</button>
 		  </div>
 		  <div class="col col-md-4">
-			<button type="button" class="btn btn-primary" (click)="avancar();"
-			  style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Próximo</button>
+			<button type="button" class="btn btn-primary" (click)="changePage('next');" *ngIf="currentPage !== getResumoUrl();">
+				Próximo >></button>
+			<button type="button" class="btn btn-primary" (click)="confirmar();" *ngIf="currentPage === getResumoUrl();"
+			  style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Confirmar</button>
 		  </div>
 		</div>
 		<div class="row" style="text-align: center; padding-top: 10px;">

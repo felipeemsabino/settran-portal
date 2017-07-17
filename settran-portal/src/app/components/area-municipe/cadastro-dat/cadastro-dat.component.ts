@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-dat',
@@ -18,6 +18,7 @@ export class CadastroDatComponent implements OnInit {
   static readonly RESUMO = "/cadastro-dat/resumo";
 
   eDAT: any;
+  currentPage: string;
   
   constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute) { 
     this.eDAT = {
@@ -30,6 +31,13 @@ export class CadastroDatComponent implements OnInit {
 	  "confirmacao_dat": [],
 	  "resumo": [],
 	};
+	
+	parentRouter.events.subscribe((val) => {
+	  if(val instanceof NavigationEnd) {
+        console.log(val.url);
+        this.currentPage = val.url;
+	  }
+    });
   }
 
   ngOnInit() {
@@ -40,12 +48,54 @@ export class CadastroDatComponent implements OnInit {
 	alert('cancelar');
   }
   
+  changePage(action: string) {
+	if(action == "back")
+	  this.voltar();
+	else if (action == "next")
+	  this.avancar();
+  }
+  
   voltar() {
-	alert('voltar');
+  
+	switch(this.currentPage) {
+	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
+	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
+	    break; 
+	  }
+	  case CadastroDatComponent.SEU_VEICULO: {
+	    this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
+	    break; 
+	  }
+	  case CadastroDatComponent.DADOS_ACIDENTE: {
+	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
+	    break; 
+	  }  
+	  case CadastroDatComponent.OUTROS_VEICULOS: {
+	    this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
+	    break; 
+	  }  
+	  case CadastroDatComponent.TESTEMUNHAS: {
+	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
+	    break; 
+	  }  
+	  case CadastroDatComponent.RELATO_ACIDENTE: {
+	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
+	    break; 
+	  }  
+	  case CadastroDatComponent.CONFIRMACAO_DAT: {
+	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
+	    break; 
+	  }  
+	  case CadastroDatComponent.RESUMO: {
+	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
+	    break; 
+	  } 
+	}
   }
   
   avancar() {
-	switch(this.parentRouter.url) {
+  
+	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
 	    break; 
@@ -77,7 +127,18 @@ export class CadastroDatComponent implements OnInit {
 	  default: { // navegar para tela inicial
 	    //this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 	    break; 
-	  } 
-	} 
+	  }
+	}
+  }  
+  
+  confirmar() {
+    alert('Confirma eDAT');
+  }
+  
+  getPergPreliminaresUrl() {
+    return CadastroDatComponent.PERGUNTAS_PRELIMINARES;
+  }  
+  getResumoUrl() {
+    return CadastroDatComponent.RESUMO;
   }
 }
