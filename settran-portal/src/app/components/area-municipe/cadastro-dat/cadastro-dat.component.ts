@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { EDATService } from '../../shared/services/e-dat.service';
 
 @Component({
   selector: 'app-cadastro-dat',
   templateUrl: './cadastro-dat.component.html',
-  styleUrls: ['./cadastro-dat.component.css']
+  styleUrls: ['./cadastro-dat.component.css'],
+  providers: [EDATService]
 })
 export class CadastroDatComponent implements OnInit {
   
@@ -19,29 +21,18 @@ export class CadastroDatComponent implements OnInit {
 
   eDAT: any;
   currentPage: string;
-  
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute) { 
-    this.eDAT = {
-	  "perguntas": [],
-	  "seu_veiculo": [],
-	  "dados_acidente": [],
-	  "outros_veiculos": [],
-	  "testemunhas": [],
-	  "relato_acidente": [],
-	  "confirmacao_dat": [],
-	  "resumo": [],
-	};
-	
+    
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, private eDATService: EDATService) {	
+    this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
+		
 	parentRouter.events.subscribe((val) => {
 	  if(val instanceof NavigationEnd) {
-        console.log(val.url);
         this.currentPage = val.url;
 	  }
     });
   }
 
   ngOnInit() {
-	this.parentRouter.navigate(['/cadastro-dat/perguntas-preliminares']);
   }
   
   cancelar() {
@@ -94,7 +85,7 @@ export class CadastroDatComponent implements OnInit {
   }
   
   avancar() {
-  
+	
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
@@ -137,7 +128,8 @@ export class CadastroDatComponent implements OnInit {
   
   getPergPreliminaresUrl() {
     return CadastroDatComponent.PERGUNTAS_PRELIMINARES;
-  }  
+  }
+  
   getResumoUrl() {
     return CadastroDatComponent.RESUMO;
   }

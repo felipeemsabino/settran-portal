@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { URLSearchParams, QueryEncoder, Http, Response } from '@angular/http';
 import { RegrasService } from '../../../area-admin/cadastro-regra/services/regras.service';
+import { EDATService } from '../../../shared/services/e-dat.service';
 
 declare var $:any; // JQUERY
 
@@ -8,21 +9,23 @@ declare var $:any; // JQUERY
   selector: 'app-perguntas-preliminares',
   templateUrl: './perguntas-preliminares.component.html',
   styleUrls: ['./perguntas-preliminares.component.css'],
-  providers: [RegrasService]
+  providers: [RegrasService, EDATService]
 })
 export class PerguntasPreliminaresComponent implements OnInit {
   
   params: URLSearchParams;
   perguntas: any;
   
-  constructor(private regrasService: RegrasService) {}
+  constructor(private regrasService: RegrasService, private eDATService: EDATService) {
+  }
 
   ngOnInit() {
 	this.getData();
   }
 
   getData() {
-	$('#loadingModal').modal('show');
+	console.log('PerguntasPreliminares getData -> '+this.eDATService.eDAT);
+	/*$('#loadingModal').modal('show');
 	
   	this.setUrlParams();
 
@@ -38,7 +41,7 @@ export class PerguntasPreliminaresComponent implements OnInit {
                             console.log(err);
 							alert('Ocorreram erros ao recuperar os registros! Por favor, tente novamente!');
 							$('#loadingModal').modal('hide'); // fecha modal
-                          });
+                          });*/
   }
   
   alteraResposta (resposta: string) {

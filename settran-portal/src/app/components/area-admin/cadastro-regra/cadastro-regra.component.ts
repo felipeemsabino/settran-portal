@@ -18,7 +18,6 @@ export class CadastroRegraComponent implements OnInit {
   
   public updateObjectParameter(object: any):void {
 	this.object = object;
-    console.log('Updating parameter... ', this.object);
   }
 
 
