@@ -9,23 +9,27 @@ declare var $:any; // JQUERY
   selector: 'app-perguntas-preliminares',
   templateUrl: './perguntas-preliminares.component.html',
   styleUrls: ['./perguntas-preliminares.component.css'],
-  providers: [RegrasService, EDATService]
+  providers: [RegrasService]
 })
 export class PerguntasPreliminaresComponent implements OnInit {
   
   params: URLSearchParams;
-  perguntas: any;
+  perguntas: any[];
+  perguntasUsuario: any[];
   
-  constructor(private regrasService: RegrasService, private eDATService: EDATService) {
+  constructor(private regrasService: RegrasService, private edatService: EDATService) {
   }
 
   ngOnInit() {
-	this.getData();
+    
+	if(this.edatService.resultadoPerguntas.length == 0)
+	  this.getData();
   }
 
   getData() {
-	console.log('PerguntasPreliminares getData -> '+this.eDATService.eDAT);
-	/*$('#loadingModal').modal('show');
+	console.log('PerguntasPreliminares getData -> '+JSON.stringify(this.edatService.eDAT));
+	
+	$('#loadingModal').modal('show');
 	
   	this.setUrlParams();
 
@@ -33,7 +37,13 @@ export class PerguntasPreliminaresComponent implements OnInit {
                       .subscribe(
                           result => {
 							if(result.length > 0) {
-								this.perguntas = result;
+								let index = 0;
+								result.forEach((r) => {
+								  this.edatService.resultadoPerguntas.push(Object.assign({}, r));
+							      this.edatService.perguntas.push(Object.assign({}, r));
+								  this.edatService.perguntas[index].resposta = "";
+								  index++;
+							    });
 							}
 							$('#loadingModal').modal('hide'); // fecha modal
                           }, //Bind to view
@@ -41,11 +51,15 @@ export class PerguntasPreliminaresComponent implements OnInit {
                             console.log(err);
 							alert('Ocorreram erros ao recuperar os registros! Por favor, tente novamente!');
 							$('#loadingModal').modal('hide'); // fecha modal
-                          });*/
+                          });
   }
   
-  alteraResposta (resposta: string) {
-	//alert(resposta);
+  alteraResposta (id: any, resposta: string) {
+    for (let p of this.edatService.perguntas) {
+	  if(p.id == id) {
+		p.resposta = resposta;
+	  }
+	}
   }
   
   setUrlParams() {

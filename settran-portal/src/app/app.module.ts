@@ -34,6 +34,7 @@ import { TestemunhasComponent } from './components/area-municipe/cadastro-dat/te
 import { RelatoComponent } from './components/area-municipe/cadastro-dat/relato/relato.component';
 import { ConfirmacaoDatComponent } from './components/area-municipe/cadastro-dat/confirmacao-dat/confirmacao-dat.component';
 import { ResumoComponent } from './components/area-municipe/cadastro-dat/resumo/resumo.component';
+import { EDATService } from './components/shared/services/e-dat.service';
 
 const appRoutes: Routes = [
 	  {
@@ -110,7 +111,7 @@ const appRoutes: Routes = [
     },
     {
       provide: 'IDataService', useClass: FaqService, multi: true
-    } ],
+    }, EDATService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

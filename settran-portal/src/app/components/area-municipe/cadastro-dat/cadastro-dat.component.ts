@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { EDATService } from '../../shared/services/e-dat.service';
 
+declare var $:any; // JQUERY
+
 @Component({
   selector: 'app-cadastro-dat',
   templateUrl: './cadastro-dat.component.html',
-  styleUrls: ['./cadastro-dat.component.css'],
-  providers: [EDATService]
+  styleUrls: ['./cadastro-dat.component.css']
 })
 export class CadastroDatComponent implements OnInit {
   
@@ -22,7 +23,8 @@ export class CadastroDatComponent implements OnInit {
   eDAT: any;
   currentPage: string;
     
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, private eDATService: EDATService) {	
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, private edatService: EDATService) {	
+  
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 		
 	parentRouter.events.subscribe((val) => {
@@ -84,10 +86,12 @@ export class CadastroDatComponent implements OnInit {
 	}
   }
   
-  avancar() {
-	
+  avancar() {	
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
+		if(!this.validarPerguntas())
+			break;
+		
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
 	    break; 
 	  }
@@ -132,5 +136,41 @@ export class CadastroDatComponent implements OnInit {
   
   getResumoUrl() {
     return CadastroDatComponent.RESUMO;
+  }
+  
+  validarPerguntas(){
+    let validacao = true;
+	validacao = this.validarTotalRespostas();
+	if(!validacao)
+		return validacao;
+
+	validacao = this.validarRespostasEsperadas();
+	
+	if(!validacao)
+		$('#modalAlertaRegras').modal('show');
+	return validacao;
+	
+  }
+  
+  validarTotalRespostas(){
+    for (let p of this.edatService.perguntas) {
+		if(p.resposta.length == 0) {
+			alert('Por favor, responda todas as perguntas antes de prosseguir com o registro da DAT.');
+			return false;
+		}
+	}
+	return true;
+  }
+  
+  validarRespostasEsperadas() {
+    this.edatService.respostasInvalidas = new Array();
+    for (let index in this.edatService.resultadoPerguntas) {
+		if(this.edatService.resultadoPerguntas[index].resposta != this.edatService.perguntas[index].resposta ) {
+			this.edatService.respostasInvalidas.push(this.edatService.resultadoPerguntas[index]);
+		}
+	}
+	if(this.edatService.respostasInvalidas.length == 0)
+		return true;
+	return false;
   }
 }

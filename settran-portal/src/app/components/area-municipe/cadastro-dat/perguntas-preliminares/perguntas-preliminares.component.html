@@ -1,12 +1,39 @@
 <div class="container-fluid" style="padding-top: 19px;">
 	<div class="well" style="padding-bottom: 0px;padding-top: 0px;" >
-		<div *ngFor='let pergunta of perguntas;let currentElementIndex = index;'>
+		<div *ngFor='let pergunta of edatService.perguntas;let currentElementIndex = index;'>
 			<h4>{{pergunta.descricaoRegra}}</h4>
 			<div>
 				<label>Resposta</label> <br>
-				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'S'" (change)="alteraResposta('S');" >Sim</label>
-				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'N'" (change)="alteraResposta('N');" >Não</label>
+				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'S'" (change)="alteraResposta(pergunta.id, 'S');" >Sim</label>
+				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'N'" (change)="alteraResposta(pergunta.id, 'N');" >Não</label>
 			</div>
 		</div>
+	</div><!-- Modal Perguntas Frequentes-->
+<div id="modalAlertaRegras" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Perguntas preliminares popup-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Perguntas Preliminares</h4>
+	  </div>
+	  <div *ngFor='let pergunta of edatService.respostasInvalidas; let currentElementIndex = index;' class="modal-body">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a style="font-weight:600;">
+				{{pergunta.descricaoRegra}}</a>
+			</h4>
+		</div>
+		<div class="panel-body">
+			{{pergunta.msgDivergente}}
+		</div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	  </div>
 	</div>
+
+  </div>
+</div>
 </div>

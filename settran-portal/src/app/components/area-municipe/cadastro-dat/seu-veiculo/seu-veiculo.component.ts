@@ -9,7 +9,6 @@ export class SeuVeiculoComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
