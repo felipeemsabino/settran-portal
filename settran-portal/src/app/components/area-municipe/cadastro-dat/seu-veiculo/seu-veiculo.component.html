@@ -78,7 +78,7 @@
 		<div class="row">
 			<div class="form-group col-md-9">
 			  <label class="control-label" for="nomeMunicipe">Nome</label>
-			  <input type="text" class="form-control" id="nomeMunicipe">
+			  <input type="text" class="form-control" id="nomeMunicipe" [(ngModel)]="this.edatService.eDAT.nomeMunicipe">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="dataNascimento">Data Nascimento</label>
@@ -88,11 +88,11 @@
 		<div class="row">
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="cpf">CPF</label>
-			  <input type="text" class="form-control" id="cpf">
+			  <input type="text" class="form-control" id="cpf" [(ngModel)]="this.edatService.eDAT.cpf">
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="rg">RG</label>
-			  <input type="text" class="form-control" id="rg">
+			  <input type="text" class="form-control" id="rg" [(ngModel)]="this.edatService.eDAT.rg">
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
@@ -156,18 +156,20 @@
 		<div class="row">
 			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
 				<div class="checkbox">
-				  <label class="control-label" for="nomePropietario"><input id="condutorProprietario" type="checkbox" value="">O condutor é o proprietário</label>
+				  <label class="control-label" for="nomePropietario">
+					<input id="condutorProprietario" type="checkbox" (click)="setDadosProprietario();">O condutor é o proprietário
+				  </label>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="nomePropietario">Nome do Proprietário</label>
-			  <input type="text" class="form-control" id="nomePropietario">
+			  <input type="text" class="form-control" id="nomePropietario" [(ngModel)]="this.edatService.eDAT.nomePropietario">
 			</div>
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="docPropietario">CPF/CNPJ Proprietário</label>
-			  <input type="text" class="form-control" id="docPropietario">
+			  <input type="text" class="form-control" id="docPropietario" [(ngModel)]="this.edatService.eDAT.docPropietario">
 			</div>
 		</div>		
 	</fieldset>

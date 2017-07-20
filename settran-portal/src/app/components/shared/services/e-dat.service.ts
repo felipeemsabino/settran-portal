@@ -40,10 +40,10 @@ export class EDATService {
 		"dataValidadeCNH": "16/07/2017",
 		"categoriaCnh": "A",
 		"sexo": "M",
-		"nomeMunicipe": "Nadal",
+		"nomeMunicipe": "",
 		"dataNascimento": "16/07/2017",
-		"cpf": "06328648693",
-		"rg": "11111111111111111",
+		"cpf": "",
+		"rg": "",
 		"orgaoExpedidor": "ssp-mg",
 		"emailMunicipe": "wwwwww@sssss.com.br",
 		"logradouro":{
@@ -96,8 +96,8 @@ export class EDATService {
 				"urlFoto": "11111111111111111Sun Jul 16 21:55:13 BRT 20171"
 			}
 		],
-		"docPropietario": "XXXXXXX",
-		"nomePropietario": "Roberto",
+		"docPropietario": "",
+		"nomePropietario": "",
 		"enviouSms": "S",
 		"numeroEnvioSms": "222222222222",
 		"emailEnviaConfirmacao": "email@email.com",
