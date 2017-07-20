@@ -105,3 +105,4 @@ export class EDATService {
 		"temSeguro":"S"
 	}
 }
+}
