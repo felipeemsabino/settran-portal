@@ -24,13 +24,13 @@ export class EDATService {
 			"dataAcidente": "16/07/2017",
 			"horaAcidente": "09:00",
 			"zona": "RURAL",
-			"tipoLogradouro": "Avenida",
-			"endereco": "Logradouro",
-			"bairro": "Bairro",
+			"logradouro":{"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
+				"nomeCidade":"nomeCidade","uf":"uf"
+				},
 			"numeroEndereco": "30B",
-			"tipoLogradouroCruzamento": "AV",
-			"logradouroAcidenteCruzamento": "Acidente Perto",
-			"numeroLogradouroAcidenteCruzamento": "300"
+			"logradouroCruzamento": {"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
+				"nomeCidade":"nomeCidade","uf":"uf"
+				}
 		}],
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": "OLHAR REGRA PARA TEXTO NO DOCUMENTO"
@@ -46,10 +46,15 @@ export class EDATService {
 		"rg": "11111111111111111",
 		"orgaoExpedidor": "ssp-mg",
 		"emailMunicipe": "wwwwww@sssss.com.br",
-		"cep": "31313131",
-		"tipoLogradouro": "RUA",
-		"endereco": "ruauauauauuaududu",
-		"bairro": "xxxxxxxx",
+		"logradouro":{
+			"id":"1",
+			"nomeLogradouro":"xxxxxx",
+			"tipoLogradouro":"Rua",
+			"nomeBairro":"Manti",
+			"cep":"31510300",
+			"nomeCidade":"nomeCidade",
+			"uf":"uf"
+		},
 		"numeroEndereco": "21221",
 		"complementoEndereco": "apartamento",
 		"telefone": "313131313113",
@@ -64,16 +69,15 @@ export class EDATService {
 				"tipoVeiculo": {
 					"id": 1
 				},
+				"temSeguro":"S",
 				"cnh": "11111111111111",
 				"cpf": "06328648693",
 				"rg": "11111111111111111",
 				"orgaoExpedidor": "ssp-mg",
 				"nomeCondutorOutroVeiculo": "Nadal",
-				"cep": "31313131",
-				"tipoLogradouro": "RUA",
-				"bairro": "xxxxxxxx",
-				"endereco": "ruauauauauuaududu",
-				"numeroEndereco": "21221",
+				"logradouro":{"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
+				"nomeCidade":"nomeCidade","uf":"uf"
+				},
 				"complementoEndereco": "apartamento",
 				"telefone": "3131313131"
 			}
@@ -97,9 +101,7 @@ export class EDATService {
 		"enviouSms": "S",
 		"numeroEnvioSms": "222222222222",
 		"emailEnviaConfirmacao": "email@email.com",
-		"confirmacaoDados": "S"
+		"confirmacaoDados": "S",
+		"temSeguro":"S"
 	}
-	this.resultadoPerguntas = new Array();
-	this.respostasInvalidas = new Array();
-  }
 }

@@ -96,6 +96,9 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }
 	  case CadastroDatComponent.SEU_VEICULO: {
+		if(!this.validarAbaSeuVeiculo())
+			break;
+			
 	    this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
 	    break; 
 	  }
@@ -138,6 +141,7 @@ export class CadastroDatComponent implements OnInit {
     return CadastroDatComponent.RESUMO;
   }
   
+  /* Validacao de perguntas */
   validarPerguntas(){
     let validacao = true;
 	validacao = this.validarTotalRespostas();
@@ -173,4 +177,29 @@ export class CadastroDatComponent implements OnInit {
 		return true;
 	return false;
   }
+  
+  /* Validacao dos dados seu-veiculo */
+  
+    validarAbaSeuVeiculo(){
+      let validacao = true;	
+	  
+	  validacao = this.validaAba2DadosObrigatorios();
+	  if(!validacao)
+		return validacao;
+		
+	  return validacao;
+	}
+	
+	validaAba2DadosObrigatorios () {
+	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
+	  camposObrigatorios.removeClass('has-error');
+	  
+	  let camposNaoPreenchidos = camposObrigatorios.find('input').filter(function() { return $(this).val() == ""; });
+	  if (camposNaoPreenchidos.length > 0) {
+		camposNaoPreenchidos.parent().addClass('has-error');
+		return false;
+	  }
+	  
+	  return true;
+	}
 }

@@ -10,5 +10,7 @@ export class SeuVeiculoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+  
+  alteraPossuiVeiculo() {}
 
 }

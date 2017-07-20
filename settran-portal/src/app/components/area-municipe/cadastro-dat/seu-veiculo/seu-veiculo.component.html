@@ -1,12 +1,174 @@
 <div class="container-fluid" style="padding-top: 19px;">
-	<div class="well" style="padding-bottom: 0px;padding-top: 0px;" >
-		<form data-toggle="validator" role="form">
-			<div class="form-group has-success has-feedback">
-			  <label class="control-label" for="inputSuccess2">Input with success</label>
-			  <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
-			  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-			  <span id="inputSuccess2Status" class="sr-only">(success)</span>
-			</div>		  
-		</form>
-	</div>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Seu Veículo</legend>
+		<div class="row">
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="placa">Placa</label>
+			  <input type="text" class="form-control" id="placa">
+			</div>
+			<div class="form-group col-md-3">
+				<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
+				<select class="form-control" id="tipoVeiculo">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">			
+			  <label class="control-label" for="marcaVeiculo">Marca</label>
+				<select class="form-control" id="marcaVeiculo">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">				
+			  <label class="control-label" for="modeloVeiculo">Modelo</label>
+				<select class="form-control" id="modeloVeiculo">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="chassi">Chassi</label>
+			  <input type="text" class="form-control" id="chassi">
+			</div>
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="renavan">Renavan</label>
+			  <input type="text" class="form-control" id="renavan">
+			</div>
+			<div class="form-group nao-obrigatorio col-md-3">
+			  <label class="control-label" for="cor">Cor</label>
+			  <input type="text" class="form-control" id="cor">
+			</div>
+			<div class="form-group nao-obrigatorio col-md-3">
+			  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
+			  <label><input type="radio" name="possuiSeguro" [checked]="pergunta.resposta == 'S'" (change)="alteraPossuiVeiculo('S');" >Sim</label>
+			  <label><input type="radio" name="possuiSeguro" [checked]="pergunta.resposta == 'N'" (change)="alteraPossuiVeiculo('N');" >Não</label>
+			</div>
+		</div>	
+	</fieldset>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Seus Dados</legend>
+		<div class="row">
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="cnh">CNH</label>
+			  <input type="text" class="form-control" id="cnh">
+			</div>
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="dataValidadeCNH">Validade CNH</label>
+			  <input type="date" class="form-control" id="dataValidadeCNH">
+			</div>
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="categoriaCnh">Categoria CNH</label>
+			  <input type="text" class="form-control" id="categoriaCnh">
+			</div>
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="sexo">Sexo</label><br/>
+			  <label><input type="radio" name="sexo" [checked]="pergunta.resposta == 'S'" (change)="alteraSexo('F');" >Fem.</label>
+			  <label><input type="radio" name="sexo" [checked]="pergunta.resposta == 'N'" (change)="alteraSexo('M');" >Masc.</label>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group col-md-9">
+			  <label class="control-label" for="nomeMunicipe">Nome</label>
+			  <input type="text" class="form-control" id="nomeMunicipe">
+			</div>
+			<div class="form-group col-md-3">
+			  <label class="control-label" for="dataNascimento">Data Nascimento</label>
+			  <input type="date" class="form-control" id="dataNascimento">
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="cpf">CPF</label>
+			  <input type="text" class="form-control" id="cpf">
+			</div>
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="rg">RG</label>
+			  <input type="text" class="form-control" id="rg">
+			</div>
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
+			  <input type="text" class="form-control" id="orgaoExpedidor">
+			</div>
+		</div>		
+		<div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="cpf">Email</label>
+			  <input type="text" class="form-control" id="cpf">
+			</div>
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="emailMunicipe">Confirme o email</label>
+			  <input type="text" class="form-control" id="emailMunicipe">
+			</div>
+		</div>	
+	</fieldset>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Seu Endereço</legend>
+		<div class="row">
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="cep">CEP</label>
+			  <input type="text" class="form-control" id="cep">
+			</div>
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="municipio">Município</label>
+			  <input type="text" class="form-control" id="municipio" value="Uberlândia" readonly>
+			</div>
+			<div class="form-group col-md-4">
+			  <label class="control-label" for="uf">UF</label>
+			  <input type="text" class="form-control" id="uf"  value="Minas Gerais" readonly>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group col-md-8">
+			  <label class="control-label" for="logradouro">Logradouro</label>
+			  <input type="text" class="form-control" id="logradouro">
+			</div>
+			<div class="form-group col-md-2">
+			  <label class="control-label" for="numeroEndereco">Nº</label>
+			  <input type="text" class="form-control" id="numeroEndereco">
+			</div>
+			<div class="form-group nao-obrigatorio col-md-2">
+			  <label class="control-label" for="complementoEndereco">Compl.</label>
+			  <input type="text" class="form-control" id="complementoEndereco">
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="telefone">Telefone residencial</label>
+			  <input type="text" class="form-control" id="telefone">
+			</div>
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="celular">Telefone celular</label>
+			  <input type="text" class="form-control" id="celular">
+			</div>
+		</div>		
+	</fieldset>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Dados do Proprietário</legend>
+		<div class="row">
+			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
+				<div class="checkbox">
+				  <label class="control-label" for="nomePropietario"><input id="condutorProprietario" type="checkbox" value="">O condutor é o proprietário</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="nomePropietario">Nome do Proprietário</label>
+			  <input type="text" class="form-control" id="nomePropietario">
+			</div>
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="docPropietario">CPF/CNPJ Proprietário</label>
+			  <input type="text" class="form-control" id="docPropietario">
+			</div>
+		</div>		
+	</fieldset>
 </div>
