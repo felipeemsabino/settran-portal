@@ -49,8 +49,8 @@
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
-			  <label><input type="radio" name="possuiSeguro" [checked]="pergunta.resposta == 'S'" (change)="alteraPossuiVeiculo('S');" >Sim</label>
-			  <label><input type="radio" name="possuiSeguro" [checked]="pergunta.resposta == 'N'" (change)="alteraPossuiVeiculo('N');" >Não</label>
+			  <label><input type="radio" name="possuiSeguro" (change)="alteraPossuiVeiculo('S');" >Sim</label>
+			  <label><input type="radio" name="possuiSeguro" (change)="alteraPossuiVeiculo('N');" >Não</label>
 			</div>
 		</div>	
 	</fieldset>
@@ -71,8 +71,8 @@
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="sexo">Sexo</label><br/>
-			  <label><input type="radio" name="sexo" [checked]="pergunta.resposta == 'S'" (change)="alteraSexo('F');" >Fem.</label>
-			  <label><input type="radio" name="sexo" [checked]="pergunta.resposta == 'N'" (change)="alteraSexo('M');" >Masc.</label>
+			  <label><input type="radio" name="sexo" (change)="alteraSexo('F');" >Fem.</label>
+			  <label><input type="radio" name="sexo" (change)="alteraSexo('M');" >Masc.</label>
 			</div>
 		</div>	
 		<div class="row">
@@ -88,7 +88,7 @@
 		<div class="row">
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="cpf">CPF</label>
-			  <input type="text" class="form-control" id="cpf" [(ngModel)]="this.edatService.eDAT.cpf">
+			  <input type="text" class="form-control cpf" id="cpf" [(ngModel)]="this.edatService.eDAT.cpf">
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="rg">RG</label>
@@ -101,12 +101,12 @@
 		</div>		
 		<div class="row">
 			<div class="form-group col-md-6">
-			  <label class="control-label" for="cpf">Email</label>
-			  <input type="text" class="form-control" id="cpf">
+			  <label class="control-label" for="emailMunicipe">Email</label>
+			  <input type="text" class="form-control" id="emailMunicipe">
 			</div>
 			<div class="form-group col-md-6">
-			  <label class="control-label" for="emailMunicipe">Confirme o email</label>
-			  <input type="text" class="form-control" id="emailMunicipe">
+			  <label class="control-label" for="emailMunicipeConfirm">Confirme o email</label>
+			  <input type="text" class="form-control" id="emailMunicipeConfirm">
 			</div>
 		</div>	
 	</fieldset>
@@ -115,7 +115,7 @@
 		<div class="row">
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="cep">CEP</label>
-			  <input type="text" class="form-control" id="cep">
+			  <input type="text" class="form-control cep" id="cep">
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="municipio">Município</label>
@@ -143,11 +143,11 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="telefone">Telefone residencial</label>
-			  <input type="text" class="form-control" id="telefone">
+			  <input type="text" class="form-control phone" id="telefone">
 			</div>
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="celular">Telefone celular</label>
-			  <input type="text" class="form-control" id="celular">
+			  <input type="text" class="form-control phone_with_ddd" id="celular">
 			</div>
 		</div>		
 	</fieldset>
@@ -168,8 +168,8 @@
 			  <input type="text" class="form-control" id="nomePropietario" [(ngModel)]="this.edatService.eDAT.nomePropietario">
 			</div>
 			<div class="form-group col-md-6">
-			  <label class="control-label" for="docPropietario">CPF/CNPJ Proprietário</label>
-			  <input type="text" class="form-control" id="docPropietario" [(ngModel)]="this.edatService.eDAT.docPropietario">
+			  <label class="control-label" for="docProprietario">CPF/CNPJ Proprietário</label>
+			  <input type="text" class="form-control cpf" id="docProprietario" [(ngModel)]="this.edatService.eDAT.docPropietario">
 			</div>
 		</div>		
 	</fieldset>
