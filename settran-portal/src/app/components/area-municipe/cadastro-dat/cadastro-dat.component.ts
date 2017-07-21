@@ -186,6 +186,10 @@ export class CadastroDatComponent implements OnInit {
 	  validacao = this.validaAba2DadosObrigatorios();
 	  if(!validacao)
 		return validacao;
+	  
+	  validacao = this.validaAba2Email();
+	  if(!validacao)
+		return validacao;
 		
 	  return validacao;
 	}
@@ -197,6 +201,27 @@ export class CadastroDatComponent implements OnInit {
 	  let camposNaoPreenchidos = camposObrigatorios.find('input').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
 		camposNaoPreenchidos.parent().addClass('has-error');
+		alert('Favor preencher todos os campos obrigatórios.');
+		return false;
+	  }
+	  
+	  return true;
+	}
+	
+	validaAba2Email() {
+	  let camposEmails = $( ".form-group.municipe-email" );
+	  camposEmails.removeClass('has-error');
+	  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+
+	  if( !$( "#emailMunicipe" ).val().match(emailRegex) ) {
+	    alert('Favor inserir um e-mail válido.');
+		camposEmails.addClass('has-error');
+		return false;
+	  }
+	  
+	  if ( $( "#emailMunicipe" ).val() != $( "#emailMunicipeConfirm" ).val() ){
+	    alert('E-mails não conferem.');
+		camposEmails.addClass('has-error');
 		return false;
 	  }
 	  
