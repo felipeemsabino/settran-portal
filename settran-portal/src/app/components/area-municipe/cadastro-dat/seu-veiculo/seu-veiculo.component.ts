@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 import { VeiculoService } from '../../../shared/services/veiculo.service';
+import { EnderecoService } from '../../../shared/services/endereco.service';
 import { URLSearchParams } from '@angular/http';
 
 declare var $:any; // JQUERY
@@ -9,14 +10,14 @@ declare var $:any; // JQUERY
   selector: 'app-seu-veiculo',
   templateUrl: './seu-veiculo.component.html',
   styleUrls: ['./seu-veiculo.component.css'],
-  providers: [VeiculoService]
+  providers: [VeiculoService, EnderecoService]
 })
 export class SeuVeiculoComponent implements OnInit {
 
   marcasVeiculo: any[];
   modelosVeiculo: any[];
   
-  constructor(private edatService: EDATService, private veiculoService: VeiculoService) { 
+  constructor(private edatService: EDATService, private veiculoService: VeiculoService, private enderecoService: EnderecoService) { 
   }
 
   ngOnInit() {
@@ -39,7 +40,13 @@ export class SeuVeiculoComponent implements OnInit {
 	}, 1000);
   }
   
-  alteraPossuiVeiculo() {}
+  alteraPossuiSeguro(possuiSeguro: string) {
+	this.edatService.eDAT.temSeguro = possuiSeguro;
+  }
+  
+  alteraSexo(sexo: string) {
+	this.edatService.eDAT.sexo = sexo;
+  }
   
   setDadosProprietario() {
     this.edatService.eDAT.nomePropietario = this.edatService.eDAT.nomeMunicipe;
@@ -69,6 +76,8 @@ export class SeuVeiculoComponent implements OnInit {
 	  return;
 	}
 	
+	this.edatService.eDAT.tipoVeiculo.id = tipoVeiculoVal;
+	
 	$('#loadingModal').modal('show'); // abre loadingModal
 	
 	this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc)
@@ -93,6 +102,8 @@ export class SeuVeiculoComponent implements OnInit {
 	  return;
 	}
 	
+	this.edatService.eDAT.marcaVeiculo = tipoVeiculoDesc;
+	
 	$('#loadingModal').modal('show'); // abre loadingModal
 	
 	this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal)
@@ -100,6 +111,38 @@ export class SeuVeiculoComponent implements OnInit {
 					  result => {
 						this.modelosVeiculo = result;
 						
+						$('#loadingModal').modal('hide'); // fecha modal		
+					  }, //Bind to view
+					  err => {
+						console.log(err);
+					  });
+  }
+  
+  setModeloVeiculo () {
+    let modeloVeiculoDesc = $("#modeloVeiculo option:selected").text();
+  
+	this.edatService.eDAT.modeloVeiculo = modeloVeiculoDesc;
+  }
+  
+  getCEP() { //38411876
+	let cep = $( '#cep' ).val();
+	
+    if(cep === "") {
+	  return;
+	}
+	
+	let params: URLSearchParams = new URLSearchParams();
+	params.set("cep", cep.replace(/\D/g,'')); // remove nao numericos
+	
+	$('#loadingModal').modal('show'); // abre loadingModal
+	
+	this.enderecoService.getCEP(params)
+				  .subscribe(
+					  result => {
+						if(result.length > 0) {
+						  this.edatService.eDAT.logradouro = result[0];
+						  console.log(this.edatService.eDAT);
+						}
 						$('#loadingModal').modal('hide'); // fecha modal		
 					  }, //Bind to view
 					  err => {

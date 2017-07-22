@@ -98,7 +98,7 @@ export class CadastroDatComponent implements OnInit {
 	  case CadastroDatComponent.SEU_VEICULO: {
 		if(!this.validarAbaSeuVeiculo())
 			break;
-			
+		console.log(this.edatService.eDAT);
 	    this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
 	    break; 
 	  }

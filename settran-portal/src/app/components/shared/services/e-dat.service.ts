@@ -12,11 +12,11 @@ export class EDATService {
   constructor() {
     this.eDAT = {
 		"isPropietario" : "S",
-		"renavam": "999999999",
-		"placa": "PWE 8745",
-		"marcaVeiculo": "Fiat",
-		"modeloVeiculo": "Novo UNO",
-		"chassi": "222222222222222222222222",
+		"renavam": "",
+		"placa": "",
+		"marcaVeiculo": "",
+		"modeloVeiculo": "",
+		"chassi": "",
 		"tipoVeiculo": {
 			"id": 1
 		},
@@ -36,30 +36,30 @@ export class EDATService {
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": "OLHAR REGRA PARA TEXTO NO DOCUMENTO"
 		}],
-		"cor": "1111111111",
-		"cnh": "11111111111111",
-		"dataValidadeCNH": "16/07/2017",
-		"categoriaCnh": "A",
-		"sexo": "M",
+		"cor": "",
+		"cnh": "",
+		"dataValidadeCNH": "",
+		"categoriaCnh": "",
+		"sexo": "",
 		"nomeMunicipe": "",
-		"dataNascimento": "16/07/2017",
+		"dataNascimento": "",
 		"cpf": "",
 		"rg": "",
-		"orgaoExpedidor": "ssp-mg",
-		"emailMunicipe": "wwwwww@sssss.com.br",
+		"orgaoExpedidor": "",
+		"emailMunicipe": "",
 		"logradouro":{
-			"id":"1",
-			"nomeLogradouro":"xxxxxx",
-			"tipoLogradouro":"Rua",
-			"nomeBairro":"Manti",
-			"cep":"31510300",
-			"nomeCidade":"nomeCidade",
-			"uf":"uf"
+			"id":"",
+			"nomeLogradouro":"",
+			"tipoLogradouro":"",
+			"nomeBairro":"",
+			"cep":"",
+			"nomeCidade":"",
+			"uf":""
 		},
-		"numeroEndereco": "21221",
-		"complementoEndereco": "apartamento",
-		"telefone": "313131313113",
-		"celular": "3131313131",
+		"numeroEndereco": "",
+		"complementoEndereco": "",
+		"telefone": "",
+		"celular": "",
 		"ipRequisicao": "192.168.0.122",
 		"codigoConfirmacaoDat": "012943",
 		"outrosVeiculosDat": [
@@ -103,7 +103,7 @@ export class EDATService {
 		"numeroEnvioSms": "222222222222",
 		"emailEnviaConfirmacao": "email@email.com",
 		"confirmacaoDados": "S",
-		"temSeguro":"S"
+		"temSeguro":""
 	}
   }
 }
