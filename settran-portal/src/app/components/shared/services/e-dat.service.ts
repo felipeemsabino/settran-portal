@@ -7,6 +7,7 @@ export class EDATService {
   public resultadoPerguntas: any[] = new Array();
   public perguntas: any[] = new Array();
   public respostasInvalidas: any[] = new Array();
+  tiposVeiculo: any[] = new Array();
   
   constructor() {
     this.eDAT = {
@@ -104,5 +105,5 @@ export class EDATService {
 		"confirmacaoDados": "S",
 		"temSeguro":"S"
 	}
-}
+  }
 }

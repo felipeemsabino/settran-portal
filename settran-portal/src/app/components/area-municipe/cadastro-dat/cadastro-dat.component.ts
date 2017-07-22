@@ -198,7 +198,7 @@ export class CadastroDatComponent implements OnInit {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
 	  camposObrigatorios.removeClass('has-error');
 	  
-	  let camposNaoPreenchidos = camposObrigatorios.find('input').filter(function() { return $(this).val() == ""; });
+	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
 		camposNaoPreenchidos.parent().addClass('has-error');
 		alert('Favor preencher todos os campos obrigatórios.');
