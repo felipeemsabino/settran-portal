@@ -10,21 +10,23 @@ declare var $:any; // JQUERY
 })
 export class DadosAcidenteComponent implements OnInit {
 
-  constructor(private edatService: EDATService) { }
+  constructor(private edatService: EDATService) {}
 
   ngOnInit() {
 	this.configuraAutoComplete();
   }
 
   alteraTipoAcidente(tipoAcidente: string) {
-	console.log('alteraTipoAcidente -> '+ tipoAcidente);
+	this.edatService.eDAT.acidenteDat.tipoAcidente = tipoAcidente;
   }
 
   alteraZona(zona: string) {
-	console.log('alteraZona -> '+ zona);
+	this.edatService.eDAT.acidenteDat.zona = zona;
   }
   
   configuraAutoComplete() {
+    var self = this;
+	
     $( function() {
 	
 		$( ".logradouro-auto-complete" ).autocomplete({
@@ -40,7 +42,8 @@ export class DadosAcidenteComponent implements OnInit {
 				response($.map(data, function(item) {
                     return {
                         label: item.tipoLogradouro+" "+item.nomeLogradouro,
-                        value: item.nomeLogradouro
+                        value: item.nomeLogradouro,
+						fullObject: item
                     }
                 }))
 			  },
@@ -51,7 +54,11 @@ export class DadosAcidenteComponent implements OnInit {
 		  },
 		  minLength: 3,
 		  select: function( event, ui ) {
-			console.log( "Selected: " + ui );
+		  
+			if(event.target.id == "logradouro")
+				self.edatService.eDAT.acidenteDat.logradouro = ui.item.fullObject;
+			else 
+				self.edatService.eDAT.acidenteDat.logradouroCruzamento = ui.item.fullObject;
 		  }
 		} );
 	} );

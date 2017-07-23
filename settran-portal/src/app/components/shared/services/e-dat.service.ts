@@ -20,19 +20,15 @@ export class EDATService {
 		"tipoVeiculo": {
 			"id": 1
 		},
-		"acidenteDat": [{
-			"tipoAcidente": "Abalroamento",
-			"dataAcidente": "16/07/2017",
-			"horaAcidente": "09:00",
-			"zona": "RURAL",
-			"logradouro":{"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
-				"nomeCidade":"nomeCidade","uf":"uf"
-				},
-			"numeroEndereco": "30B",
-			"logradouroCruzamento": {"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
-				"nomeCidade":"nomeCidade","uf":"uf"
-				}
-		}],
+		"acidenteDat": {
+			"tipoAcidente": "",
+			"dataAcidente": "",
+			"horaAcidente": "",
+			"zona": "",
+			"logradouro":{},
+			"numeroEndereco": "",
+			"logradouroCruzamento": {}
+		},
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": "OLHAR REGRA PARA TEXTO NO DOCUMENTO"
 		}],

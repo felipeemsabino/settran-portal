@@ -3,27 +3,27 @@
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Tipo do Acidente</legend>
 		<div class="row">
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Abalroamento');" >Abalroamento</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Abalroamento'" (change)="alteraTipoAcidente('Abalroamento');" >Abalroamento</label>
 				<span class='glyphicon glyphicon-question-sign'></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Choque');" >Choque</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Choque'" (change)="alteraTipoAcidente('Choque');" >Choque</label>
 				<span class='glyphicon glyphicon-question-sign' title="Tooltip here"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Tombamento');" >Tombamento</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Tombamento'" (change)="alteraTipoAcidente('Tombamento');" >Tombamento</label>
 				<span class='glyphicon glyphicon-question-sign'></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Colisão');" >Colisão</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Colisão'" (change)="alteraTipoAcidente('Colisão');" >Colisão</label>
 				<span class='glyphicon glyphicon-question-sign'></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Capotamento');" >Capotamento</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Capotamento'" (change)="alteraTipoAcidente('Capotamento');" >Capotamento</label>
 				<span class='glyphicon glyphicon-question-sign'></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" (change)="alteraTipoAcidente('Outro');" >Outro</label>
+				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat.tipoAcidente == 'Outro'" (change)="alteraTipoAcidente('Outro');" >Outro</label>
 				<span class='glyphicon glyphicon-question-sign'></span>
 			</div>
 		</div>		
@@ -33,59 +33,59 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="dataAcidente">Data</label>
-			  <input type="date" class="form-control" id="dataAcidente" >
+			  <input type="date" class="form-control" id="dataAcidente" [(ngModel)]="edatService.eDAT.acidenteDat.dataAcidente">
 			</div>
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="horaAcidente">Hora</label>
-			  <input type="time" class="form-control" id="horaAcidente" >
+			  <input type="time" class="form-control" id="horaAcidente" [(ngModel)]="edatService.eDAT.acidenteDat.horaAcidente">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="municipio">Município</label>
-			  <input type="text" class="form-control" id="municipio" value="Uberlândia" readonly >
+			  <input type="text" class="form-control" id="municipio" readonly [(ngModel)]="this.edatService.eDAT.acidenteDat.logradouro.nomeCidade">
 			</div>			
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="bairro">Bairro</label>
-			  <input type="text" class="form-control" id="bairro" value="Bairro X" readonly>
+			  <input type="text" class="form-control" id="bairro" readonly [(ngModel)]="edatService.eDAT.acidenteDat.logradouro.nomeBairro">
 			</div>			
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="zona">Zona</label><br/>
-			  <label><input type="radio" name="zona" (change)="alteraZona('F');" >Rural</label>
-			  <label><input type="radio" name="zona" (change)="alteraZona('M');" >Urbana</label>
+			  <label><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat.zona == 'RURAL'" (change)="alteraZona('RURAL');" >Rural</label>
+			  <label><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat.zona == 'URBANA'" (change)="alteraZona('URBANA');" >Urbana</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-2">
 			  <label class="control-label" for="tipoLogradouro">Tipo Logradouro</label>
-			  <input type="text" class="form-control" id="tipoLogradouro" >
+			  <input type="text" class="form-control" id="tipoLogradouro" [(ngModel)]="edatService.eDAT.acidenteDat.logradouro.tipoLogradouro" readonly>
 			</div>
 			<div class="form-group col-md-8">
 			  <label class="control-label" for="logradouro">Logradouro</label>
 			  <div class="ui-widget">
-				<input type="text" class="form-control logradouro-auto-complete" id="logradouro" >
+				<input type="text" class="form-control logradouro-auto-complete" id="logradouro" [(ngModel)]="edatService.eDAT.acidenteDat.logradouro.nomeLogradouro">
 			  </div>
 			</div>
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-2 nao-obrigatorio">
 			  <label class="control-label" for="numeroEndereco">Nº</label>
-			  <input type="text" class="form-control" id="numeroEndereco" >
+			  <input type="text" class="form-control" id="numeroEndereco" [(ngModel)]="edatService.eDAT.acidenteDat.numeroEndereco">
 			</div>
 		</div>
 	</fieldset>
 	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Cruzamento com</legend>
 		<div class="row">
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-2 nao-obrigatorio">
 			  <label class="control-label" for="tipoLogradouroCruz">Tipo Logradouro</label>
-			  <input type="text" class="form-control" id="tipoLogradouroCruz" >
+			  <input type="text" class="form-control" id="tipoLogradouroCruz" readonly [(ngModel)]="edatService.eDAT.acidenteDat.logradouroCruzamento.tipoLogradouro">
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 nao-obrigatorio">
 			  <label class="control-label" for="logradouroCruz">Logradouro</label>
-			  <input type="text" class="form-control logradouro-auto-complete" id="logradouroCruz" >
+			  <input type="text" class="form-control logradouro-auto-complete" id="logradouroCruz" [(ngModel)]="edatService.eDAT.acidenteDat.logradouroCruzamento.nomeLogradouro">
 			</div>
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-2 nao-obrigatorio">
 			  <label class="control-label" for="numeroEnderecoCruz">Nº</label>
-			  <input type="text" class="form-control" id="numeroEnderecoCruz" >
+			  <input type="text" class="form-control" id="numeroEnderecoCruz" [(ngModel)]="edatService.eDAT.acidenteDat.numeroEnderecoCruz">
 			</div>
 		</div>
 	</fieldset>

@@ -103,6 +103,8 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
+		if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
+			break;
 	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
 	    break; 
 	  }  
@@ -183,7 +185,7 @@ export class CadastroDatComponent implements OnInit {
     validarAbaSeuVeiculo(){
       let validacao = true;	
 	  
-	  validacao = this.validaAba2DadosObrigatorios();
+	  validacao = this.validaDadosObrigatorios();
 	  if(!validacao)
 		return validacao;
 	  
@@ -194,7 +196,7 @@ export class CadastroDatComponent implements OnInit {
 	  return validacao;
 	}
 	
-	validaAba2DadosObrigatorios () {
+	validaDadosObrigatorios () {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
 	  camposObrigatorios.removeClass('has-error');
 	  
@@ -222,6 +224,20 @@ export class CadastroDatComponent implements OnInit {
 	  if ( $( "#emailMunicipe" ).val() != $( "#emailMunicipeConfirm" ).val() ){
 	    alert('E-mails não conferem.');
 		camposEmails.addClass('has-error');
+		return false;
+	  }
+	  
+	  return true;
+	}
+	
+	validaAba3Options() {
+	  if(this.edatService.eDAT.acidenteDat.tipoAcidente == "") {
+	    alert('Favor informar o tipo de acidente.');
+		return false;
+	  }
+	   
+	  if(this.edatService.eDAT.acidenteDat.zona == "") {
+	    alert('Favor informar a zona.');
 		return false;
 	  }
 	  
