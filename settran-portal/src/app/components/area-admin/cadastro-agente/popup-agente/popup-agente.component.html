@@ -6,6 +6,37 @@
         <h4 class="modal-title">Edição</h4>
       </div>
       <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="cpf">CPF</label>
+				<input type="text" class="form-control cpf" id="cpf" name="cpf" required 
+				  [(ngModel)]="entity.cpf">
+			</div>
+			<div class="form-group">
+				<label for="nomeAgente">Nome</label>
+				<input type="text" class="form-control" id="nomeAgente" name="nomeAgente" required 
+				  [(ngModel)]="entity.nomeAgente">
+			</div>
+			<div class="form-group">
+				<label for="usuario">Usuário</label>
+				<input type="text" class="form-control" id="usuario" name="usuario" required 
+				  [(ngModel)]="entity.usuario">
+			</div>
+			<div class="form-group">
+				<label for="senha">Senha</label>
+				<input type="password" class="form-control" id="senha" name="senha" required 
+				  [(ngModel)]="entity.senha">
+			</div>
+			<div class="form-group">
+				<label for="confirmacaoSenha">Confirmar senha</label>
+				<input type="password" class="form-control" id="confirmacaoSenha" name="confirmacaoSenha" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" class="form-control" id="email" name="email" required 
+				  [(ngModel)]="entity.email">
+			</div>
+		</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" style="float:left;" data-dismiss="modal"
             >Excluir</button>

@@ -6,12 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./cadastro-agente.component.css']
 })
 export class CadastroAgenteComponent implements OnInit {
-
-  object: any = {};
-  gridTitle: string = "Cadastro de Agentes";
   
-  constructor() { 
-  }
+  gridTitle: string = "Cadastro de Agentes";
+    
+  object: any = {};
+  
+  constructor() { }
 
   ngOnInit() {
   }
