@@ -17,11 +17,11 @@ export class DadosAcidenteComponent implements OnInit {
   }
 
   alteraTipoAcidente(tipoAcidente: string) {
-	this.edatService.eDAT.acidenteDat.tipoAcidente = tipoAcidente;
+	this.edatService.eDAT.acidenteDat[0].tipoAcidente = tipoAcidente;
   }
 
   alteraZona(zona: string) {
-	this.edatService.eDAT.acidenteDat.zona = zona;
+	this.edatService.eDAT.acidenteDat[0].zona = zona;
   }
   
   configuraAutoComplete() {
@@ -56,9 +56,9 @@ export class DadosAcidenteComponent implements OnInit {
 		  select: function( event, ui ) {
 		  
 			if(event.target.id == "logradouro")
-				self.edatService.eDAT.acidenteDat.logradouro = ui.item.fullObject;
+				self.edatService.eDAT.acidenteDat[0].logradouro = ui.item.fullObject;
 			else 
-				self.edatService.eDAT.acidenteDat.logradouroCruzamento = ui.item.fullObject;
+				self.edatService.eDAT.acidenteDat[0].logradouroCruzamento = ui.item.fullObject;
 		  }
 		} );
 	} );

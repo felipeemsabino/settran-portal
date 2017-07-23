@@ -20,7 +20,7 @@ export class EDATService {
 		"tipoVeiculo": {
 			"id": 1
 		},
-		"acidenteDat": {
+		"acidenteDat": [{
 			"tipoAcidente": "",
 			"dataAcidente": "",
 			"horaAcidente": "",
@@ -28,7 +28,7 @@ export class EDATService {
 			"logradouro":{},
 			"numeroEndereco": "",
 			"logradouroCruzamento": {}
-		},
+		}],
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": "OLHAR REGRA PARA TEXTO NO DOCUMENTO"
 		}],
