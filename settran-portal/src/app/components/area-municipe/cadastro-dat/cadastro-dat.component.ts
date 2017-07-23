@@ -103,8 +103,9 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
-		if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
-			break;
+		/*if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
+			break;*/
+			
 	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
 	    break; 
 	  }  
