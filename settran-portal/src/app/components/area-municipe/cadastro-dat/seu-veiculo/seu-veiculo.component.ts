@@ -23,8 +23,11 @@ export class SeuVeiculoComponent implements OnInit {
   ngOnInit() {
     if(this.edatService.tiposVeiculo.length == 0) {
 	  this.getTiposVeiculo();
+	  this.setMasks();
+	} else {
+	  this.resetMasks();
 	}
-    this.setMasks();
+    
   }
   
   setMasks() {
@@ -34,10 +37,19 @@ export class SeuVeiculoComponent implements OnInit {
 	$('.cpf').mask('000.000.000-00', {reverse: true});
   }
   
+  resetMasks() {  
+	setTimeout(function() {
+		$('.cep').mask('00000-000');
+		$('.phone').mask('0000-0000');
+		$('.phone_with_ddd').mask('(00) 00000-0000');
+		$('.cpf').mask('000.000.000-00', {reverse: true});
+	}, 500);
+  }
+  
   resetCPFMask() {  
 	setTimeout(function() {
 		$('#docProprietario').unmask().mask('000.000.000-00', {reverse: true});
-	}, 1000);
+	}, 500);
   }
   
   alteraPossuiSeguro(possuiSeguro: string) {
@@ -49,8 +61,8 @@ export class SeuVeiculoComponent implements OnInit {
   }
   
   setDadosProprietario() {
+	this.edatService.eDAT.isPropietario = 'S';
     this.edatService.eDAT.nomePropietario = this.edatService.eDAT.nomeMunicipe;
-	console.log(this.edatService.eDAT.cpf);
 	let doc = this.edatService.eDAT.cpf.replace(/\D/g,'');
 	this.edatService.eDAT.docPropietario = doc;
     this.resetCPFMask();

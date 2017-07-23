@@ -44,8 +44,8 @@
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
-			  <label><input type="radio" name="possuiSeguro" (change)="alteraPossuiSeguro('S');" >Sim</label>
-			  <label><input type="radio" name="possuiSeguro" (change)="alteraPossuiSeguro('N');" >Não</label>
+			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'S'" (change)="alteraPossuiSeguro('S');" >Sim</label>
+			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'N'" (change)="alteraPossuiSeguro('N');" >Não</label>
 			</div>
 		</div>	
 	</fieldset>
@@ -66,8 +66,8 @@
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="sexo">Sexo</label><br/>
-			  <label><input type="radio" name="sexo" (change)="alteraSexo('F');" >Fem.</label>
-			  <label><input type="radio" name="sexo" (change)="alteraSexo('M');" >Masc.</label>
+			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'F'" (change)="alteraSexo('F');" >Fem.</label>
+			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'M'" (change)="alteraSexo('M');" >Masc.</label>
 			</div>
 		</div>	
 		<div class="row">
@@ -111,7 +111,7 @@
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="cep">CEP</label>
 			  <div class="input-group">
-				<input type="text" class="form-control cep" id="cep">
+				<input type="text" class="form-control cep" id="cep" [(ngModel)]="edatService.eDAT.logradouro.cep">
 				<div class="input-group-btn">
 				  <span class="input-group-btn ">
 				    <button type="button" class="btn" (click)="getCEP()">
@@ -133,7 +133,7 @@
 		<div class="row">
 			<div class="form-group col-md-8">
 			  <label class="control-label" for="logradouro">Logradouro</label>
-			  <input type="text" class="form-control" id="logradouro" [(ngModel)]="edatService.eDAT.logradouro.nomeLogradouro">
+			  <input type="text" class="form-control" id="logradouro" readonly [(ngModel)]="edatService.eDAT.logradouro.nomeLogradouro">
 			</div>
 			<div class="form-group col-md-2">
 			  <label class="control-label" for="numeroEndereco">Nº</label>
@@ -161,7 +161,7 @@
 			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
 				<div class="checkbox">
 				  <label class="control-label" for="nomePropietario">
-					<input id="condutorProprietario" type="checkbox" (click)="setDadosProprietario();">O condutor é o proprietário
+					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.isPropietario == 'S'"  (click)="setDadosProprietario();">O condutor é o proprietário
 				  </label>
 				</div>
 			</div>

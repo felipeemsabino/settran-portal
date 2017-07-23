@@ -11,7 +11,7 @@ export class EDATService {
   
   constructor() {
     this.eDAT = {
-		"isPropietario" : "S",
+		"isPropietario" : "",
 		"renavam": "",
 		"placa": "",
 		"marcaVeiculo": "",
