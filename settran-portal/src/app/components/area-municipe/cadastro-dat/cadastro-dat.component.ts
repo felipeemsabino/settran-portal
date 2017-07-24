@@ -110,6 +110,9 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.OUTROS_VEICULOS: {
+		if(!this.validaDadosObrigatorios () || !this.validaAba4Options())
+			break;
+			
 	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
 	    break; 
 	  }  
@@ -244,4 +247,16 @@ export class CadastroDatComponent implements OnInit {
 	  
 	  return true;
 	}
+	
+	validaAba4Options() {
+	  for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
+	    if(veiculo.temSeguro == "") {
+		  alert('Favor informar se os veículos possuem seguro.');
+		  return false;
+	    }
+	  }
+	  
+	  return true;
+	}
+	
 }

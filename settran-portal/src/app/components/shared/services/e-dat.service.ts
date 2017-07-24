@@ -7,7 +7,11 @@ export class EDATService {
   public resultadoPerguntas: any[] = new Array();
   public perguntas: any[] = new Array();
   public respostasInvalidas: any[] = new Array();
+  
   tiposVeiculo: any[] = new Array();
+  
+  arraysMarcasVeiculo: any[];
+  arraysModeloVeiculo: any[];
   
   constructor() {
     this.eDAT = {
@@ -58,27 +62,7 @@ export class EDATService {
 		"celular": "",
 		"ipRequisicao": "192.168.0.122",
 		"codigoConfirmacaoDat": "012943",
-		"outrosVeiculosDat": [
-			{
-				"placa": "PWE 8745",
-				"marcaVeiculo": "Fiat",
-				"modeloVeiculo": "Novo UNO",
-				"tipoVeiculo": {
-					"id": 1
-				},
-				"temSeguro":"S",
-				"cnh": "11111111111111",
-				"cpf": "06328648693",
-				"rg": "11111111111111111",
-				"orgaoExpedidor": "ssp-mg",
-				"nomeCondutorOutroVeiculo": "Nadal",
-				"logradouro":{"id":"1","nomeLogradouro":"xxxxxx","tipoLogradouro":"Rua","nomeBairro":"Manti","cep":"31510300",
-				"nomeCidade":"nomeCidade","uf":"uf"
-				},
-				"complementoEndereco": "apartamento",
-				"telefone": "3131313131"
-			}
-		],
+		"outrosVeiculosDat": [],
 		"testemunhasDat": [
 			{
 				"nomeTestemunha": "Testemonies",
