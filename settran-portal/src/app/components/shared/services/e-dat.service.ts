@@ -13,6 +13,13 @@ export class EDATService {
   arraysMarcasVeiculo: any[];
   arraysModeloVeiculo: any[];
   
+  textosPadrao: {
+	  "padrao1":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
+	  "padrao2":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
+	  "padrao3":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente (tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento (tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>. Foi envolvido ainda o veículo <<dados veiculo envolvido1>>, conduzido por <<nome, cpf do envolvido1>>",
+	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente (tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento (tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>. Foi envolvido ainda o veículo <<dados veiculo envolvido1>>, conduzido por <<nome, cpf do envolvido1>>"
+  };
+  
   constructor() {
     this.eDAT = {
 		"isPropietario" : "",
@@ -34,7 +41,7 @@ export class EDATService {
 			"logradouroCruzamento": {}
 		}],
 		"relatoDat":[ {
-			"descricaoRelatoAcidente": "OLHAR REGRA PARA TEXTO NO DOCUMENTO"
+			"descricaoRelatoAcidente": ""
 		}],
 		"cor": "",
 		"cnh": "",
@@ -63,14 +70,7 @@ export class EDATService {
 		"ipRequisicao": "192.168.0.122",
 		"codigoConfirmacaoDat": "012943",
 		"outrosVeiculosDat": [],
-		"testemunhasDat": [
-			{
-				"nomeTestemunha": "Testemonies",
-				"dataNascimento": "16/07/2017",
-				"rg": "222222222222",
-				"orgaoExpedidor": "SSP-MG"
-			}
-		],
+		"testemunhasDat": [],
 		"fotosDat": [
 			{
 				"descricaoFoto": "Foto 1 acidente",

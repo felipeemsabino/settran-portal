@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EDATService } from '../../../shared/services/e-dat.service';
 
 @Component({
   selector: 'app-testemunhas',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestemunhasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private edatService: EDATService) { }
 
   ngOnInit() {
+  }
+
+  removerTestemunha(index: number) {
+    this.edatService.eDAT.testemunhasDat.splice(index, 1);
+  }
+  
+  adicionarTestemunha() {
+	var self = this;
+	
+	this.edatService.eDAT.testemunhasDat.push({
+		"nomeTestemunha": "",
+		"dataNascimento": "",
+		"rg": "",
+		"orgaoExpedidor": ""
+	});
   }
 
 }
