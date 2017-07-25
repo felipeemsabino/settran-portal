@@ -109,12 +109,13 @@ export class SeuVeiculoComponent implements OnInit {
     let tipoVeiculoDesc = $("#tipoVeiculo option:selected").text();
 	let tipoVeiculoVal = $( '#tipoVeiculo' ).val();
 	let marcaVeiculoVal = $( '#marcaVeiculo' ).val();
+    let marcaVeiculoDesc = $("#marcaVeiculo option:selected").text();
 	
     if(tipoVeiculoVal === "" || marcaVeiculoVal === "") {
 	  return;
 	}
 	
-	this.edatService.eDAT.marcaVeiculo = tipoVeiculoDesc;
+	this.edatService.eDAT.marcaVeiculo = marcaVeiculoDesc;
 	
 	$('#loadingModal').modal('show'); // abre loadingModal
 	

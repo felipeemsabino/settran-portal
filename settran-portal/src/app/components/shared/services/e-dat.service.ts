@@ -13,18 +13,18 @@ export class EDATService {
   arraysMarcasVeiculo: any[];
   arraysModeloVeiculo: any[];
   
-  textosPadrao: {
+  public textosPadrao: any = {
 	  "padrao1":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
 	  "padrao2":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
-	  "padrao3":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente (tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento (tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>. Foi envolvido ainda o veículo <<dados veiculo envolvido1>>, conduzido por <<nome, cpf do envolvido1>>",
-	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente (tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento (tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>. Foi envolvido ainda o veículo <<dados veiculo envolvido1>>, conduzido por <<nome, cpf do envolvido1>>"
+	  "padrao3":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
+	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>."
   };
   
   constructor() {
     this.eDAT = {
-		"isPropietario" : "",
+		"isPropietario" : "S",
 		"renavam": "",
-		"placa": "",
+		"placa": "HAX4735",
 		"marcaVeiculo": "",
 		"modeloVeiculo": "",
 		"chassi": "",
@@ -32,13 +32,29 @@ export class EDATService {
 			"id": 1
 		},
 		"acidenteDat": [{
-			"tipoAcidente": "",
-			"dataAcidente": "",
-			"horaAcidente": "",
-			"zona": "",
-			"logradouro":{},
+			"tipoAcidente": "Abalroamento",
+			"dataAcidente": "16/07/2017",
+			"horaAcidente": "09:00",
+			"zona": "RURAL",
+			"logradouro":{
+				"id":"1083373",
+				"nomeLogradouro":"xxxxxx",
+				"tipoLogradouro":"Rua",
+				"nomeBairro":"Manti",
+				"cep":"31510300",
+				"nomeCidade":"nomeCidade",
+				"uf":"uf"
+            },
 			"numeroEndereco": "",
-			"logradouroCruzamento": {}
+			"logradouroCruzamento": {
+				"id":"1083373",
+				"nomeLogradouro":"xxxxxx",
+				"tipoLogradouro":"Rua",
+				"nomeBairro":"Manti",
+				"cep":"31510300",
+				"nomeCidade":"nomeCidade",
+				"uf":"uf"
+			}
 		}],
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": ""
@@ -48,9 +64,9 @@ export class EDATService {
 		"dataValidadeCNH": "",
 		"categoriaCnh": "",
 		"sexo": "",
-		"nomeMunicipe": "",
+		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
 		"dataNascimento": "",
-		"cpf": "",
+		"cpf": "070.469.196-58",
 		"rg": "",
 		"orgaoExpedidor": "",
 		"emailMunicipe": "",
