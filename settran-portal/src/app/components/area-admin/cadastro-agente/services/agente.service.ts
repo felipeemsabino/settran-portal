@@ -24,10 +24,18 @@ export class AgenteService implements IDataService {
   }
   
   saveData(params: URLSearchParams): Observable<any []> {
-	return null;
+  	let header = new Headers();
+	header.append('Content-Type', 'application/json');
+	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
+    let options = new RequestOptions({ headers: header });
+
+    return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/agente/cadastraragente/',
+							params, options)
+                     .map((res:Response) =>this.extractData(res))
+                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
   
-  deleteData() {
+  deleteData(dataId: any): Observable<any []>  {
 	return null;
   }
   
