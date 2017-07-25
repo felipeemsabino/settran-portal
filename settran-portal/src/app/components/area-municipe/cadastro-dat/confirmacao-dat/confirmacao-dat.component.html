@@ -1,3 +1,58 @@
-<p>
-  confirmacao-dat works!
-</p>
+<div class="container-fluid" style="padding-top: 19px;">
+	<div class="row" style="text-align: center;padding-bottom: 10px;">
+		<h3 for="descricaoRelatoAcidente">Atenção!</h3>
+		<label class="control-label" style="text-align: left;">
+			Antes de confirmar a DAT confira todos os dados informados navegando pela janelas/abas anteriores. Caso necessário, altere ou complemente
+			essas informações.<br/>
+			Após a conferência dos dados, confirme seu email e informe o código de confirmação da DAT.<br/>
+			Você também pode optar por receber o código de confirmação por SMS.
+		</label>
+	</div>	
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Confirme seu email e telefone de celular</legend>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="control-label" for="foto4">Email para o qual será enviado o código de confirmação da DAT:</label>
+				<input type="text" class="form-control" id="emailConfirmacaoEDAT">
+			</div>
+		</div>	
+		<div class="row">
+			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
+				<div class="checkbox">
+				  <label class="control-label" for="nomePropietario">
+					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.isPropietario == 'S'"  (click)="setDadosProprietario();">Desejo receber o código de confirmação também por SMS.
+				  </label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="nomePropietario">Telefone celular:</label>
+			  <input type="text" class="form-control" id="nomePropietario">
+			</div>
+			<div class="form-group col-md-3">
+			  <label for="enviarConfirmacao">&nbsp;</label>
+			  <button type="button" class="btn btn-primary form-control" id="enviarConfirmacao">Enviar código para Email/SMS</button>
+			</div>
+		</div>			
+	</fieldset>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Confirme o código</legend>
+			<div class=" row">
+				<div class="form-group col-md-6">
+				  <label class="control-label" for="codigoRecebido">Informe o código de confirmação recebido por email:</label>
+				  <input type="text" class="form-control" id="codigoRecebido">
+				</div>
+				<div class="form-group col-md-3">
+				  <label for="confirmarCodigo">&nbsp;</label>
+				  <button type="button" class="btn btn-primary form-control" id="confirmarCodigo">Confirmar código</button>
+				</div>
+			</div>
+			<div class=" row">
+				<div class="form-group col-md-6">
+				  <label class="control-label" for="enviarNovoCodigo">Não recebeu o código de confirmação ou o código recebido está inválido?</label>
+				  <button type="button" class="btn btn-primary" id="enviarNovoCodigo">Enviar novo código</button>
+				</div>
+			</div>
+	</fieldset>
+</div>
