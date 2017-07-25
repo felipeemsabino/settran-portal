@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EDATService } from '../../../shared/services/e-dat.service';
 
 @Component({
   selector: 'app-resumo',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResumoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private edatService: EDATService) { }
 
   ngOnInit() {
   }

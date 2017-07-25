@@ -1,3 +1,142 @@
-<p>
-  resumo works!
-</p>
+<div class="container-fluid" style="padding-top: 19px;">	
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Resumo da DAT</legend>
+		  <!-- List group -->
+	    <ul class="list-group">
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="1">Nome solicitante: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="1">{{edatService.eDAT.nomeMunicipe}}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="2">CNH: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="2">{{edatService.eDAT.cnh + " " + edatService.eDAT.dataValidadeCNH }}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="3">CPF: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="3">{{edatService.eDAT.cpf}}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="4">Email de contato: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="4">{{edatService.eDAT.emailMunicipe}}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="5">Veículo do solicitante: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="5">{{edatService.eDAT.placa + " - " + edatService.eDAT.marcaVeiculo + "/" + edatService.eDAT.modeloVeiculo }}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="6">Local do acidente: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="6">{{edatService.eDAT.acidenteDat[0].logradouro.tipoLogradouro + " " +
+													  edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro + " " +
+													  edatService.eDAT.acidenteDat[0].logradouro.numeroEndereco + " " +
+													  edatService.eDAT.acidenteDat[0].logradouro.nomeBairro + " " }}</label>
+						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0" 
+							   id="7">{{edatService.eDAT.acidenteDat[0].logradouroCruzamento.tipoLogradouro + " " +
+													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeLogradouro + " " +
+													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.numeroEndereco + " " +
+													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeBairro + " " }}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="8">Data e hora do acidente: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="8">{{edatService.eDAT.acidenteDat[0].dataAcidente + " " + edatService.eDAT.acidenteDat[0].dataAcidente}}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="9">Tipo de acidente: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="9">{{edatService.eDAT.acidenteDat[0].tipoAcidente}}</label>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="10">Outros veículos: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="10" *ngFor='let veiculo of edatService.eDAT.outrosVeiculosDat;'>
+						{{veiculo.placa+"/"+veiculo.marcaVeiculo+"/"+veiculo.modeloVeiculo}}</label>
+				    </div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="11">Testemunhas: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="11" *ngFor='let testemunha of edatService.eDAT.testemunhasDat;'>
+						{{testemunha.nomeTestemunha+"/"+testemunha.dataNascimento+"/"+testemunha.rg+"/"+testemunha.orgaoExpedidor}}</label>
+				    </div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="12">Relato do acidente: </label>
+					</div>
+					<div class="col-md-8">
+						<label id="12">{{edatService.eDAT.relatoDat[0].descricaoRelatoAcidente}}</label>
+					</div>
+				</div>
+			</li>
+	    </ul>
+	</fieldset>
+	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
+		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Declaração de veracidade das informações prestadas</legend>
+			<div class=" row">
+			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
+				<div class="checkbox">
+				  <label class="control-label" for="nomePropietario">
+					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.isPropietario == 'S'"  
+					(click)="setDadosProprietario();">DECLARO SEREM VERDADEIRAS AS INFORMAÇÕES AQUI PRESTADAS, SOBRE AS QUAIS ASSUMO
+					 TODAS AS RESPONSABILIDADES PERANTE O ARTIGO 299 DO CÓDIGO PENAL.
+				  </label>
+				</div>
+			</div>
+			</div>
+	</fieldset>
+</div>
