@@ -27,7 +27,6 @@ export class PerguntasPreliminaresComponent implements OnInit {
   }
 
   getData() {
-	console.log('PerguntasPreliminares getData -> '+JSON.stringify(this.edatService.eDAT));
 	
 	$('#loadingModal').modal('show');
 	

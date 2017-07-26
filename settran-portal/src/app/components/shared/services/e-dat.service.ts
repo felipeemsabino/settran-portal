@@ -31,7 +31,7 @@ export class EDATService {
 	  "padrao3":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
 	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>."
   };
-  
+
   constructor(private http: Http) {
     this.eDAT = {
 		"isPropietario" : "",
@@ -45,27 +45,13 @@ export class EDATService {
 		},
 		"acidenteDat": [{
 			"tipoAcidente": "",
-			"dataAcidente": "10/10/2018",
+			"dataAcidente": "",
 			"horaAcidente": "",
 			"zona": "",
 			"logradouro":{
-				"id":"",
-				"nomeLogradouro":"",
-				"tipoLogradouro":"",
-				"nomeBairro":"",
-				"cep":"",
-				"nomeCidade":"",
-				"uf":""
             },
 			"numeroEndereco": "",
 			"logradouroCruzamento": {
-				"id":"1083373",
-				"nomeLogradouro":"",
-				"tipoLogradouro":"",
-				"nomeBairro":"",
-				"cep":"",
-				"nomeCidade":"",
-				"uf":""
 			}
 		}],
 		"relatoDat":[ {
@@ -73,12 +59,12 @@ export class EDATService {
 		}],
 		"cor": "",
 		"cnh": "",
-		"dataValidadeCNH": "11/11/2018",
+		"dataValidadeCNH": "",
 		"categoriaCnh": "",
 		"sexo": "",
-		"nomeMunicipe": "Felipe Sabino",
-		"dataNascimento": "30/03/1987",
-		"cpf": "07046919658",
+		"nomeMunicipe": "",
+		"dataNascimento": "",
+		"cpf": "",
 		"rg": "",
 		"orgaoExpedidor": "",
 		"emailMunicipe": "",
@@ -98,12 +84,7 @@ export class EDATService {
 		"ipRequisicao": "",
 		"codigoConfirmacaoDat": "",
 		"outrosVeiculosDat": [],
-		"testemunhasDat": [{
-            "nomeTestemunha": "Testemonies",
-            "dataNascimento": "16/07/2017",
-            "rg": "222222222222",
-            "orgaoExpedidor": "SSP-MG"
-        }],
+		"testemunhasDat": [],
 		"fotosDat": [
 			{
 				"descricaoFoto": "",
@@ -128,9 +109,9 @@ export class EDATService {
 		],
 		"docPropietario": "",
 		"nomePropietario": "",
-		"enviouSms": "N",
+		"enviouSms": "S",
 		"numeroEnvioSms": "",
-		"emailEnviaConfirmacao": "felipeems87@gmail.com",
+		"emailEnviaConfirmacao": "",
 		"confirmacaoDados": "N",
 		"temSeguro": ""
 	}
@@ -150,5 +131,49 @@ export class EDATService {
 
   extractData(res: Response) {
     return res.json();
+  }
+  
+  /* Limpa máscaras de CPF e padroniza mascara de telefone */
+  limpaMascaras() {
+	this.eDAT.cpf = this.eDAT.cpf.replace(/\D/g,'');
+	let date: string;
+	
+	if(this.eDAT.acidenteDat[0].dataAcidente) {
+		date = this.eDAT.acidenteDat[0].dataAcidente.split("-");
+		this.eDAT.acidenteDat[0].dataAcidente = date[2]+"/"+date[1]+"/"+date[0];
+	}
+	
+	if(this.eDAT.dataValidadeCNH) {
+		date = this.eDAT.dataValidadeCNH.split("-");
+		this.eDAT.dataValidadeCNH = date[2]+"/"+date[1]+"/"+date[0];
+	}
+	
+	if(this.eDAT.dataNascimento) {
+		date = this.eDAT.dataNascimento.split("-");
+		this.eDAT.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
+	}
+	
+	for (let testemunha of this.eDAT.testemunhasDat) {
+		date = testemunha.dataNascimento.split("-");
+		testemunha.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
+	}
+  }  
+  
+  /* Limpa máscaras de CPF e padroniza mascara de telefone */
+  reverteMascarasData() {
+	console.log('reverteMascarasData');
+	let date = this.eDAT.acidenteDat[0].dataAcidente.split("/");
+	this.eDAT.acidenteDat[0].dataAcidente = date[2]+"-"+date[1]+"-"+date[0];
+	
+	date = this.eDAT.dataValidadeCNH.split("/");
+	this.eDAT.dataValidadeCNH = date[2]+"-"+date[1]+"-"+date[0];
+	
+	date = this.eDAT.dataNascimento .split("/");
+	this.eDAT.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
+	
+	for (let testemunha of this.eDAT.testemunhasDat) {
+		date = testemunha.dataNascimento.split("/");
+		testemunha.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
+	}
   }
 }

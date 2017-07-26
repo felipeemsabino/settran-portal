@@ -35,6 +35,7 @@ export class CadastroDatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserIp();
   }
   
   cancelar() {
@@ -80,6 +81,7 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.RESUMO: {
+		this.edatService.reverteMascarasData();
 	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
 	    break; 
 	  } 
@@ -89,8 +91,8 @@ export class CadastroDatComponent implements OnInit {
   avancar() {	
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
-		if(!this.validarPerguntas())
-			break;
+		/*if(!this.validarPerguntas())
+			break;*/
 		
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
 	    break; 
@@ -140,6 +142,7 @@ export class CadastroDatComponent implements OnInit {
   
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
+		this.edatService.limpaMascaras();
 		$('#loadingModal').modal('show'); // fecha modal
 		this.edatService.enviarEDAT()
 				  .subscribe(
@@ -181,6 +184,8 @@ export class CadastroDatComponent implements OnInit {
   }
   
   validarTotalRespostas(){
+    if(this.edatService.perguntas.length == 0)
+		return false;
     for (let p of this.edatService.perguntas) {
 		if(p.resposta.length == 0) {
 			alert('Por favor, responda todas as perguntas antes de prosseguir com o registro da DAT.');
@@ -277,4 +282,10 @@ export class CadastroDatComponent implements OnInit {
 	  return true;
 	}
 	
+	getUserIp(){
+		let self = this;
+		$.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+		  self.edatService.eDAT.ipRequisicao = data.ip;
+		});
+	}
 }

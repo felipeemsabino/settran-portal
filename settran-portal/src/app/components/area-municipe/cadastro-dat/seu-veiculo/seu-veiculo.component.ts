@@ -20,26 +20,15 @@ export class SeuVeiculoComponent implements OnInit {
   ngOnInit() {
     if(this.edatService.tiposVeiculo.length == 0) {
 	  this.getTiposVeiculo();
-	  this.setMasks();
-	} else {
-	  this.resetMasks();
 	}
-	
+	this.resetMasks();
 	if(!this.edatService.seuVeiculoMarcas && !this.edatService.seuVeiculoModelos) {
 	  this.edatService.seuVeiculoMarcas = new Array();
 	  this.edatService.seuVeiculoModelos = new Array();	
 	}
-    
   }
   
-  setMasks() {
-	$('.cep').mask('00000-000');
-	$('.phone').mask('0000-0000');
-    $('.phone_with_ddd').mask('(00) 00000-0000');
-	$('.cpf').mask('000.000.000-00', {reverse: true});
-  }
-  
-  resetMasks() {  
+  resetMasks() {
 	setTimeout(function() {
 		$('.cep').mask('00000-000');
 		$('.phone').mask('0000-0000');
