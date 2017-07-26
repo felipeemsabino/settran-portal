@@ -94,7 +94,7 @@ export class OutrosVeiculosComponent implements OnInit {
                           }, //Bind to view
                           err => {
                             console.log(err);						
-						$('#loadingModal').modal('hide'); // fecha modal	
+							$('#loadingModal').modal('hide'); // fecha modal	
                           });
   }
   

@@ -18,7 +18,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto1">Descrição da foto</label>
-				<input type="text" class="form-control" id="descFoto1">
+				<input type="text" class="form-control" id="descFoto1" [(ngModel)]="edatService.eDAT.fotosDat[0].descricaoFoto">
 			</div>
 		</div>
 		<div class=" row">
@@ -28,7 +28,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto2">Descrição da foto</label>
-				<input type="text" class="form-control" id="descFoto2">
+				<input type="text" class="form-control" id="descFoto2" [(ngModel)]="edatService.eDAT.fotosDat[1].descricaoFoto">
 			</div>
 		</div>
 		<div class=" row">
@@ -38,7 +38,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto3">Descrição da foto</label>
-				<input type="text" class="form-control" id="descFoto3">
+				<input type="text" class="form-control" id="descFoto3" [(ngModel)]="edatService.eDAT.fotosDat[2].descricaoFoto">
 			</div>
 		</div>
 		<div class=" row">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto4">Descrição da foto</label>
-				<input type="text" class="form-control" id="descFoto4">
+				<input type="text" class="form-control" id="descFoto4" [(ngModel)]="edatService.eDAT.fotosDat[3].descricaoFoto">
 			</div>
 		</div>
 		<div class=" row">
@@ -58,7 +58,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto5">Descrição da foto</label>
-				<input type="text" class="form-control" id="descFoto5">
+				<input type="text" class="form-control" id="descFoto5" [(ngModel)]="edatService.eDAT.fotosDat[4].descricaoFoto">
 			</div>
 		</div>
 		<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>

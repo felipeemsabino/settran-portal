@@ -125,6 +125,9 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
+	    if(this.edatService.codigoVerificado == 'N' || !this.edatService.codigoVerificado) {
+		  return;
+		}
 	    this.parentRouter.navigate([CadastroDatComponent.RESUMO]);
 	    break; 
 	  } 
@@ -136,7 +139,22 @@ export class CadastroDatComponent implements OnInit {
   }  
   
   confirmar() {
-    alert('Confirma eDAT');
+    if(this.edatService.eDAT.confirmacaoDados == 'S') {
+		$('#loadingModal').modal('show'); // fecha modal
+		this.edatService.enviarEDAT()
+				  .subscribe(
+					  result => {
+						alert('e-DAT criada com sucesso!');
+						$('#loadingModal').modal('hide'); // fecha modal
+					  }, //Bind to view
+					  err => {
+						console.log(err);	
+						alert('Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!');
+						$('#loadingModal').modal('hide'); // fecha modal	
+					  });
+	} else {
+		alert('Necessário aceitar os termos e condições antes de prosseguir.');
+	}
   }
   
   getPergPreliminaresUrl() {

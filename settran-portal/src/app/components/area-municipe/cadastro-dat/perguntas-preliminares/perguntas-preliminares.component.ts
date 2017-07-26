@@ -22,8 +22,8 @@ export class PerguntasPreliminaresComponent implements OnInit {
 
   ngOnInit() {
     
-	//if(this.edatService.resultadoPerguntas.length == 0)
-	  //this.getData();
+	if(this.edatService.resultadoPerguntas.length == 0)
+	  this.getData();
   }
 
   getData() {

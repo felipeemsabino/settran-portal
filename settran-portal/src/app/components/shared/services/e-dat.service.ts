@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http, Response, URLSearchParams, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
 
 @Injectable()
 export class EDATService {
@@ -18,6 +22,9 @@ export class EDATService {
   arraysMarcasVeiculo: any[];
   arraysModeloVeiculo: any[];
   
+  /*Aba confirmação dat*/
+  codigoVerificado: string;
+  
   public textosPadrao: any = {
 	  "padrao1":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
 	  "padrao2":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
@@ -25,7 +32,7 @@ export class EDATService {
 	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>."
   };
   
-  constructor() {
+  constructor(private http: Http) {
     this.eDAT = {
 		"isPropietario" : "",
 		"renavam": "",
@@ -38,7 +45,7 @@ export class EDATService {
 		},
 		"acidenteDat": [{
 			"tipoAcidente": "",
-			"dataAcidente": "",
+			"dataAcidente": "10/10/2018",
 			"horaAcidente": "",
 			"zona": "",
 			"logradouro":{
@@ -66,12 +73,12 @@ export class EDATService {
 		}],
 		"cor": "",
 		"cnh": "",
-		"dataValidadeCNH": "",
+		"dataValidadeCNH": "11/11/2018",
 		"categoriaCnh": "",
 		"sexo": "",
-		"nomeMunicipe": "",
-		"dataNascimento": "",
-		"cpf": "",
+		"nomeMunicipe": "Felipe Sabino",
+		"dataNascimento": "30/03/1987",
+		"cpf": "07046919658",
 		"rg": "",
 		"orgaoExpedidor": "",
 		"emailMunicipe": "",
@@ -91,8 +98,29 @@ export class EDATService {
 		"ipRequisicao": "",
 		"codigoConfirmacaoDat": "",
 		"outrosVeiculosDat": [],
-		"testemunhasDat": [],
+		"testemunhasDat": [{
+            "nomeTestemunha": "Testemonies",
+            "dataNascimento": "16/07/2017",
+            "rg": "222222222222",
+            "orgaoExpedidor": "SSP-MG"
+        }],
 		"fotosDat": [
+			{
+				"descricaoFoto": "",
+				"urlFoto": ""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": ""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": ""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": ""
+			},
 			{
 				"descricaoFoto": "",
 				"urlFoto": ""
@@ -100,11 +128,27 @@ export class EDATService {
 		],
 		"docPropietario": "",
 		"nomePropietario": "",
-		"enviouSms": "",
+		"enviouSms": "N",
 		"numeroEnvioSms": "",
-		"emailEnviaConfirmacao": "",
-		"confirmacaoDados": "",
+		"emailEnviaConfirmacao": "felipeems87@gmail.com",
+		"confirmacaoDados": "N",
 		"temSeguro": ""
 	}
+  }
+  
+  enviarEDAT() {
+    let header = new Headers();
+	header.append('Content-Type', 'application/json');
+	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
+    let options = new RequestOptions({ headers: header });
+
+    return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/cadastrardat/',
+							this.eDAT, options)
+                     .map((res:Response) =>this.extractData(res))
+                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  extractData(res: Response) {
+    return res.json();
   }
 }
