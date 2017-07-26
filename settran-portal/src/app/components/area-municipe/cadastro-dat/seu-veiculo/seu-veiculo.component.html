@@ -10,22 +10,27 @@
 				<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
 				<select class="form-control" id="tipoVeiculo" (change)="getMarcasVeiculo()">
 					<option value="">Select</option>
-					<option value="1">Carros</option>
-					<option *ngFor='let tipo of edatService.tiposVeiculo;' value="{{tipo.id}}">{{tipo.descTipoVeiculo}}</option>
+					<option *ngFor='let tipo of edatService.tiposVeiculo;' 
+					[selected]="tipo.id == edatService.eDAT.tipoVeiculo.id" 
+					value="{{tipo.id}}">{{tipo.descTipoVeiculo}}</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3">			
 			  <label class="control-label" for="marcaVeiculo">Marca</label>
 				<select class="form-control" id="marcaVeiculo" (change)="getModelosVeiculo()">
 					<option value="">Select</option>
-					<option *ngFor='let marca of marcasVeiculo;' value="{{marca.id}}">{{marca.fipe_name}}</option>
+					<option *ngFor='let marca of edatService.seuVeiculoMarcas;' 
+					[selected]="marca.fipe_name == edatService.eDAT.marcaVeiculo" 
+					value="{{marca.id}}">{{marca.fipe_name}}</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3">				
 			  <label class="control-label" for="modeloVeiculo">Modelo</label>
 				<select class="form-control" id="modeloVeiculo" (change)="setModeloVeiculo()">
 					<option value="">Select</option>
-					<option *ngFor='let modelo of modelosVeiculo;' value="{{modelo.fipe_name}}">{{modelo.fipe_name}}</option>
+					<option *ngFor='let modelo of edatService.seuVeiculoModelos;'
+					[selected]="modelo.fipe_name == edatService.eDAT.modeloVeiculo" 
+					value="{{modelo.fipe_name}}">{{modelo.fipe_name}}</option>
 				</select>
 			</div>
 		</div>	

@@ -13,9 +13,6 @@ declare var $:any; // JQUERY
   providers: [VeiculoService, EnderecoService]
 })
 export class SeuVeiculoComponent implements OnInit {
-
-  marcasVeiculo: any[];
-  modelosVeiculo: any[];
   
   constructor(private edatService: EDATService, private veiculoService: VeiculoService, private enderecoService: EnderecoService) { 
   }
@@ -26,6 +23,11 @@ export class SeuVeiculoComponent implements OnInit {
 	  this.setMasks();
 	} else {
 	  this.resetMasks();
+	}
+	
+	if(!this.edatService.seuVeiculoMarcas && !this.edatService.seuVeiculoModelos) {
+	  this.edatService.seuVeiculoMarcas = new Array();
+	  this.edatService.seuVeiculoModelos = new Array();	
 	}
     
   }
@@ -95,8 +97,9 @@ export class SeuVeiculoComponent implements OnInit {
 	this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc)
 				  .subscribe(
 					  result => {
-						this.marcasVeiculo = result;
-						this.modelosVeiculo = new Array();
+						console.log(this.edatService);
+						this.edatService.seuVeiculoMarcas = result;
+						this.edatService.seuVeiculoModelos = new Array();
 						
 						$('#loadingModal').modal('hide'); // fecha modal
 					  }, //Bind to view
@@ -122,7 +125,7 @@ export class SeuVeiculoComponent implements OnInit {
 	this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal)
 				  .subscribe(
 					  result => {
-						this.modelosVeiculo = result;
+						this.edatService.seuVeiculoModelos = result;
 						
 						$('#loadingModal').modal('hide'); // fecha modal		
 					  }, //Bind to view

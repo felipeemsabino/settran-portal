@@ -10,6 +10,11 @@ export class EDATService {
   
   tiposVeiculo: any[] = new Array();
   
+  /*Aba seus veiculos*/
+  seuVeiculoMarcas: any[];
+  seuVeiculoModelos: any[];
+  
+  /*Aba outros envolvidos*/
   arraysMarcasVeiculo: any[];
   arraysModeloVeiculo: any[];
   
@@ -22,38 +27,38 @@ export class EDATService {
   
   constructor() {
     this.eDAT = {
-		"isPropietario" : "S",
+		"isPropietario" : "",
 		"renavam": "",
-		"placa": "HAX4735",
+		"placa": "",
 		"marcaVeiculo": "",
 		"modeloVeiculo": "",
 		"chassi": "",
 		"tipoVeiculo": {
-			"id": 1
+			"id": ""
 		},
 		"acidenteDat": [{
-			"tipoAcidente": "Abalroamento",
-			"dataAcidente": "16/07/2017",
-			"horaAcidente": "09:00",
-			"zona": "RURAL",
+			"tipoAcidente": "",
+			"dataAcidente": "",
+			"horaAcidente": "",
+			"zona": "",
 			"logradouro":{
-				"id":"1083373",
-				"nomeLogradouro":"xxxxxx",
-				"tipoLogradouro":"Rua",
-				"nomeBairro":"Manti",
-				"cep":"31510300",
-				"nomeCidade":"nomeCidade",
-				"uf":"uf"
+				"id":"",
+				"nomeLogradouro":"",
+				"tipoLogradouro":"",
+				"nomeBairro":"",
+				"cep":"",
+				"nomeCidade":"",
+				"uf":""
             },
 			"numeroEndereco": "",
 			"logradouroCruzamento": {
 				"id":"1083373",
-				"nomeLogradouro":"xxxxxx",
-				"tipoLogradouro":"Rua",
-				"nomeBairro":"Manti",
-				"cep":"31510300",
-				"nomeCidade":"nomeCidade",
-				"uf":"uf"
+				"nomeLogradouro":"",
+				"tipoLogradouro":"",
+				"nomeBairro":"",
+				"cep":"",
+				"nomeCidade":"",
+				"uf":""
 			}
 		}],
 		"relatoDat":[ {
@@ -64,9 +69,9 @@ export class EDATService {
 		"dataValidadeCNH": "",
 		"categoriaCnh": "",
 		"sexo": "",
-		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
+		"nomeMunicipe": "",
 		"dataNascimento": "",
-		"cpf": "070.469.196-58",
+		"cpf": "",
 		"rg": "",
 		"orgaoExpedidor": "",
 		"emailMunicipe": "",
@@ -83,23 +88,23 @@ export class EDATService {
 		"complementoEndereco": "",
 		"telefone": "",
 		"celular": "",
-		"ipRequisicao": "192.168.0.122",
-		"codigoConfirmacaoDat": "012943",
+		"ipRequisicao": "",
+		"codigoConfirmacaoDat": "",
 		"outrosVeiculosDat": [],
 		"testemunhasDat": [],
 		"fotosDat": [
 			{
-				"descricaoFoto": "Foto 1 acidente",
-				"urlFoto": "11111111111111111Sun Jul 16 21:55:13 BRT 20171"
+				"descricaoFoto": "",
+				"urlFoto": ""
 			}
 		],
 		"docPropietario": "",
 		"nomePropietario": "",
-		"enviouSms": "S",
-		"numeroEnvioSms": "222222222222",
-		"emailEnviaConfirmacao": "email@email.com",
-		"confirmacaoDados": "S",
-		"temSeguro":""
+		"enviouSms": "",
+		"numeroEnvioSms": "",
+		"emailEnviaConfirmacao": "",
+		"confirmacaoDados": "",
+		"temSeguro": ""
 	}
   }
 }
