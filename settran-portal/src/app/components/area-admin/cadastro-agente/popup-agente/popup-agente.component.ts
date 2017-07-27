@@ -21,10 +21,10 @@ export class PopupAgenteComponent implements OnInit {
 		this.entity.ativo = 'S';
 		this.entity.adm = 'S';
 	}
-	
+	this.resetMasks();
   }
   
-  constructor(private agenteService: AgenteService) { }
+  constructor(private agenteService: AgenteService) {}
 
   ngOnInit() {
     this.setCPFMask();
@@ -36,7 +36,7 @@ export class PopupAgenteComponent implements OnInit {
   
   resetMasks() {
 	setTimeout(function() {
-	  $('.cpf').mask('000.000.000-00', {reverse: true});
+	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
 	}, 500);
   }
   
@@ -70,7 +70,6 @@ export class PopupAgenteComponent implements OnInit {
                             alert('Ocorreram erros ao gravar os dados! Por favor, tente novament!');
 							$('#loadingModal').modal('hide'); // fecha loadingModal
                             console.log(err);
-							this.resetMasks();
                           });
   }
   

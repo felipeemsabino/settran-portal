@@ -22,7 +22,7 @@
       <div *ngFor='let column of columnsConfiguration;'>
 		<div *ngIf="column.filter===true" class="col-sm-2 col-md-2">
 		  <label for="nome">{{column.name}}</label>
-		  <input class="form-control" type="text" id="{{column.attr}}" name="{{column.attr}}" [(ngModel)]="column.value">
+		  <input class="form-control" [ngClass]="column.class" type="text" id="{{column.attr}}" name="{{column.attr}}" [(ngModel)]="column.value">
 		</div>
       </div>
     </div>
@@ -50,6 +50,7 @@
               (click)="callObjectWindow(fData)" 	
 			  attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
 			  attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}"
+			  [ngClass]="column.class"
 			  *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ? currentElementIndex : fData[column.attr]}}
 			</td>
 		  </tr>

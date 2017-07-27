@@ -26,6 +26,7 @@ export class GridComponent implements OnInit {
 
   ngOnInit() {
 	this.getData();
+	this.setCPFMask();
   }
 
   params: URLSearchParams; // parametro que será enviado para a tela de manutenção
@@ -58,6 +59,7 @@ export class GridComponent implements OnInit {
 									this.createRange();
 							}
 							$('#loadingModal').modal('hide'); // fecha modal
+							this.resetMasks();
                           }, //Bind to view
                           err => {
                             console.log(err);
@@ -70,7 +72,11 @@ export class GridComponent implements OnInit {
 	this.params = new URLSearchParams();
 	for(var index = 0;index < this.columnsConfiguration.length;index++) {
       if(this.columnsConfiguration[index].filter === true) {
-	    this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value);
+		if(this.columnsConfiguration[index].class == 'cpf') {
+		  this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value.replace(/\D/g,''));
+		}else {
+	      this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value);
+		}
 	  }
 	}
 	this.params.set('initialPosition', ""+this.initialPosition);
@@ -155,5 +161,15 @@ export class GridComponent implements OnInit {
 							$('#loadingModal').modal('hide'); // fecha modal
                             $('#recarregaGrid').click();
                           });
+  }
+  
+  setCPFMask () {
+	$('.cpf').mask('000.000.000-00', {reverse: true});
+  }
+  
+  resetMasks() {
+	setTimeout(function() {
+	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
+	}, 500);
   }
 }
