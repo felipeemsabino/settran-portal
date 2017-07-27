@@ -31,8 +31,8 @@ export class GridComponent implements OnInit {
   params: URLSearchParams; // parametro que será enviado para a tela de manutenção
 
   // Parametros para pesquisa. Filtros e paginção
-  initialPosition: number = 1;     //paginação
-  finalPosition: number = 10; //paginação
+  initialPosition: number = 0;     //paginação
+  finalPosition: number = 9; //paginação
   paginaAtual: number = 0;//paginação
   numeroPaginas: number[]; // armazena o numero das paginas
   retornoQtdRestante: number = 0; // quantos fetchedData existem para serem mostrados em pesquisa
