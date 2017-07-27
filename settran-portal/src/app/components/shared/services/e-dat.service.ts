@@ -88,23 +88,28 @@ export class EDATService {
 		"fotosDat": [
 			{
 				"descricaoFoto": "",
-				"urlFoto": ""
+				"urlFoto": "",
+				"decodeImagem":""
 			},
 			{
 				"descricaoFoto": "",
-				"urlFoto": ""
+				"urlFoto": "",
+				"decodeImagem":""
 			},
 			{
 				"descricaoFoto": "",
-				"urlFoto": ""
+				"urlFoto": "",
+				"decodeImagem":""
 			},
 			{
 				"descricaoFoto": "",
-				"urlFoto": ""
+				"urlFoto": "",
+				"decodeImagem":""
 			},
 			{
 				"descricaoFoto": "",
-				"urlFoto": ""
+				"urlFoto": "",
+				"decodeImagem":""
 			}
 		],
 		"docPropietario": "",
@@ -159,17 +164,24 @@ export class EDATService {
 	}
   }  
   
-  /* Limpa máscaras de CPF e padroniza mascara de telefone */
+  /* Atualiza as datas para o padrao do type date */
   reverteMascarasData() {
-	console.log('reverteMascarasData');
-	let date = this.eDAT.acidenteDat[0].dataAcidente.split("/");
-	this.eDAT.acidenteDat[0].dataAcidente = date[2]+"-"+date[1]+"-"+date[0];
+	let date: string;
 	
-	date = this.eDAT.dataValidadeCNH.split("/");
-	this.eDAT.dataValidadeCNH = date[2]+"-"+date[1]+"-"+date[0];
+	if(this.eDAT.acidenteDat[0].dataAcidente) {
+		date = this.eDAT.acidenteDat[0].dataAcidente.split("/");
+		this.eDAT.acidenteDat[0].dataAcidente = date[2]+"-"+date[1]+"-"+date[0];
+	}
 	
-	date = this.eDAT.dataNascimento .split("/");
-	this.eDAT.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
+	if(this.eDAT.dataValidadeCNH) {
+		date = this.eDAT.dataValidadeCNH.split("/");
+		this.eDAT.dataValidadeCNH = date[2]+"-"+date[1]+"-"+date[0];
+	}
+	
+	if(this.eDAT.dataNascimento) {
+		date = this.eDAT.dataNascimento.split("/");
+		this.eDAT.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
+	}
 	
 	for (let testemunha of this.eDAT.testemunhasDat) {
 		date = testemunha.dataNascimento.split("/");

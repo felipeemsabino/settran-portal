@@ -14,7 +14,7 @@
 		<div class=" row">
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto1">Foto 1:</label>
-				<input type="file" class="form-control" hidden id="foto1">
+				<input type="file" class="form-control" hidden id="foto1" accept="image/*" (change)="changeListener($event, 0)">
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto1">Descrição da foto</label>
@@ -24,7 +24,7 @@
 		<div class=" row">
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto2">Foto 2:</label>
-				<input type="file" class="form-control" hidden id="foto2">
+				<input type="file" class="form-control" hidden id="foto2" accept="image/*" (change)="changeListener($event, 1)">
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto2">Descrição da foto</label>
@@ -34,7 +34,7 @@
 		<div class=" row">
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto3">Foto 3:</label>
-				<input type="file" class="form-control" hidden id="foto3">
+				<input type="file" class="form-control" hidden id="foto3" accept="image/*" (change)="changeListener($event, 2)">
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto3">Descrição da foto</label>
@@ -44,7 +44,7 @@
 		<div class=" row">
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto4">Foto 4:</label>
-				<input type="file" class="form-control" hidden id="foto4">
+				<input type="file" class="form-control" hidden id="foto4" accept="image/*" (change)="changeListener($event, 3)">
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto4">Descrição da foto</label>
@@ -54,7 +54,7 @@
 		<div class=" row">
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto5">Foto 5:</label>
-				<input type="file" class="form-control" hidden id="foto5">
+				<input type="file" class="form-control" hidden id="foto5" accept="image/*" (change)="changeListener($event, 4)">
 			</div>
 			<div class="form-group col-md-6">
 				<label class="control-label" for="foto5">Descrição da foto</label>

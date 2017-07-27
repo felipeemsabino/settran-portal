@@ -98,4 +98,19 @@ export class RelatoComponent implements OnInit {
 	
 	return outrosEnvolvidosTexto;
   }
+  
+  changeListener($event, index) : void {
+    this.readThis($event.target, index);
+  }
+
+  readThis(inputValue: any, index: number): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+	  this.edatService.eDAT.fotosDat[index].decodeImagem = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+  
 }

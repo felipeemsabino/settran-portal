@@ -91,22 +91,22 @@ export class CadastroDatComponent implements OnInit {
   avancar() {	
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
-		/*if(!this.validarPerguntas())
-			break;*/
+		if(!this.validarPerguntas())
+			break;
 		
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
 	    break; 
 	  }
 	  case CadastroDatComponent.SEU_VEICULO: {
-		/*if(!this.validarAbaSeuVeiculo())
-			break;*/
+		if(!this.validarAbaSeuVeiculo())
+			break;
 
 		this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
 	    break; 
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
-		/*if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
-			break;*/
+		if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
+			break;
 			
 	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
 	    break; 
@@ -143,6 +143,8 @@ export class CadastroDatComponent implements OnInit {
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
 		this.edatService.limpaMascaras();
+		//console.log(JSON.stringify(this.edatService.eDAT));
+		
 		$('#loadingModal').modal('show'); // fecha modal
 		this.edatService.enviarEDAT()
 				  .subscribe(
