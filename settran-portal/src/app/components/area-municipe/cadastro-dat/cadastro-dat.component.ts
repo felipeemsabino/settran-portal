@@ -88,7 +88,11 @@ export class CadastroDatComponent implements OnInit {
 	}
   }
   
-  avancar() {	
+  avancar() {
+	if(!this.validarEmail()){
+		return false;
+	}
+	
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 		if(!this.validarPerguntas())
@@ -140,6 +144,18 @@ export class CadastroDatComponent implements OnInit {
 	}
   }  
   
+  validarEmail() {
+    if($('.email').length == 0)
+		return true;
+		
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+	if(!$('.email').val().match(re)) {
+		alert('Por favor, entre com um email válido.');
+		return false;
+	}
+	return true;
+  }
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
 		this.edatService.limpaMascaras();
@@ -260,16 +276,22 @@ export class CadastroDatComponent implements OnInit {
 	}
 	
 	validaAba3Options() {
-	  if(this.edatService.eDAT.acidenteDat.tipoAcidente == "") {
+	  if(this.edatService.eDAT.acidenteDat[0].tipoAcidente == "") {
 	    alert('Favor informar o tipo de acidente.');
 		return false;
 	  }
 	   
-	  if(this.edatService.eDAT.acidenteDat.zona == "") {
+	  if(this.edatService.eDAT.acidenteDat[0].zona == "") {
 	    alert('Favor informar a zona.');
 		return false;
 	  }
 	  
+	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
+	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
+	  if(dataAcidente < dataLimite) {
+		alert('Não é possível registrar eDAT com data do acidente anterior a 30 dias!');
+		return false;
+	  }
 	  return true;
 	}
 	
