@@ -35,6 +35,7 @@ import { RelatoComponent } from './components/area-municipe/cadastro-dat/relato/
 import { ConfirmacaoDatComponent } from './components/area-municipe/cadastro-dat/confirmacao-dat/confirmacao-dat.component';
 import { ResumoComponent } from './components/area-municipe/cadastro-dat/resumo/resumo.component';
 import { EDATService } from './components/shared/services/e-dat.service';
+import { HeaderComponent } from './components/shared/header/header.component';
 
 const appRoutes: Routes = [
 	  {
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
 	TestemunhasComponent,
 	RelatoComponent,
 	ConfirmacaoDatComponent,
-	ResumoComponent
+	ResumoComponent,
+	HeaderComponent
   ],
   imports: [
     BrowserModule,
