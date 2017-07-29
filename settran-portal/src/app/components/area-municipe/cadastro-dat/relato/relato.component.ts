@@ -16,9 +16,9 @@ export class RelatoComponent implements OnInit {
 	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao1;
 	} else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
 	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao2;
-	} else if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length > 1) {
+	} else if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
 	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao3;
-	} else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length > 1) {
+	} else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
 	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao4;
 	}
 	
@@ -67,15 +67,15 @@ export class RelatoComponent implements OnInit {
   
   formataEnderecoCruzamentoAcidente() {
 	let enderecoCruzamento = "";
-	if(this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.id == "") {
-		return enderecoCruzamento
+	if(!this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.id || this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.id == "") {
+		return enderecoCruzamento;
 	}
 	
 	enderecoCruzamento = ", cruzamento com "+this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.tipoLogradouro + " " +
 				   this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeLogradouro;
 	
 	if (this.edatService.eDAT.acidenteDat[0].numeroEndereco != "") {
-	  enderecoCruzamento += " "+this.edatService.eDAT.acidenteDat[0].numeroEndereco;
+	  enderecoCruzamento += " "+this.edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento;
 	}
 	
 	enderecoCruzamento += " "+this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeBairro + " " + this.edatService.eDAT.acidenteDat[0].zona;
@@ -84,6 +84,9 @@ export class RelatoComponent implements OnInit {
   }
   
   formataOutrosEnvolvidos() {
+    if(this.edatService.eDAT.outrosVeiculosDat.length == 0)
+		return "";
+		
 	let outrosEnvolvidosTexto = " Foi envolvido ainda";
 	let index = 0;
 	

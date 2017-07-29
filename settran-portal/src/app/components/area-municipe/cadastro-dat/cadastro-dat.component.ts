@@ -73,6 +73,7 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
+		this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
 	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
 	    break; 
 	  }  
@@ -81,7 +82,6 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.RESUMO: {
-		this.edatService.reverteMascarasData();
 	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
 	    break; 
 	  } 
@@ -123,6 +123,7 @@ export class CadastroDatComponent implements OnInit {
 	    break; 
 	  }  
 	  case CadastroDatComponent.TESTEMUNHAS: {
+		this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
 	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
 	    break; 
 	  }  
@@ -158,7 +159,7 @@ export class CadastroDatComponent implements OnInit {
   }
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
-		this.edatService.limpaMascaras();
+		
 		//console.log(JSON.stringify(this.edatService.eDAT));
 		
 		$('#loadingModal').modal('show'); // fecha modal

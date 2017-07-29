@@ -34,91 +34,91 @@ export class EDATService {
 
   constructor(private http: Http) {
     this.eDAT = {
-		"isPropietario" : "",
-		"renavam": "",
-		"placa": "",
+		"isPropietario" : "S",
+		"renavam": "12313",
+		"placa": "12321",
 		"marcaVeiculo": "",
 		"modeloVeiculo": "",
-		"chassi": "",
+		"chassi": "12321323112",
 		"tipoVeiculo": {
 			"id": ""
 		},
 		"acidenteDat": [{
 			"tipoAcidente": "",
-			"dataAcidente": "",
+			"dataAcidente": "2017-07-29",
 			"horaAcidente": "",
 			"zona": "",
 			"logradouro":{
             },
 			"numeroEndereco": "",
 			"logradouroCruzamento": {
-			}
+			}, "numeroLogradouroAcidenteCruzamento":""
 		}],
 		"relatoDat":[ {
 			"descricaoRelatoAcidente": ""
 		}],
-		"cor": "",
-		"cnh": "",
-		"dataValidadeCNH": "",
-		"categoriaCnh": "",
-		"sexo": "",
-		"nomeMunicipe": "",
-		"dataNascimento": "",
-		"cpf": "",
-		"rg": "",
-		"orgaoExpedidor": "",
-		"emailMunicipe": "",
+		"cor": "asdas",
+		"cnh": "2312321312",
+		"dataValidadeCNH": "2000-11-10",
+		"categoriaCnh": "A",
+		"sexo": "M",
+		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
+		"dataNascimento": "1987-03-30",
+		"cpf": "07046919658",
+		"rg": "13243028",
+		"orgaoExpedidor": "sspmmg",
+		"emailMunicipe": "felipeems87@gmail.com",
 		"logradouro":{
 			"id":"",
 			"nomeLogradouro":"",
 			"tipoLogradouro":"",
 			"nomeBairro":"",
-			"cep":"",
+			"cep":"38400230",
 			"nomeCidade":"",
 			"uf":""
 		},
-		"numeroEndereco": "",
+		"numeroEndereco": "212",
 		"complementoEndereco": "",
-		"telefone": "",
-		"celular": "",
+		"telefone": "11111111",
+		"celular": "111111111",
 		"ipRequisicao": "",
 		"codigoConfirmacaoDat": "",
 		"outrosVeiculosDat": [],
 		"testemunhasDat": [],
 		"fotosDat": [
 			{
-				"descricaoFoto": "",
+				"descricaoFoto": "asd 1",
 				"urlFoto": "",
 				"decodeImagem":""
 			},
 			{
-				"descricaoFoto": "",
+				"descricaoFoto": "asd 2",
 				"urlFoto": "",
 				"decodeImagem":""
 			},
 			{
-				"descricaoFoto": "",
+				"descricaoFoto": "asd 3",
 				"urlFoto": "",
 				"decodeImagem":""
 			},
 			{
-				"descricaoFoto": "",
+				"descricaoFoto": "asd 4",
 				"urlFoto": "",
 				"decodeImagem":""
 			},
 			{
-				"descricaoFoto": "",
+				"descricaoFoto": "asd 5",
 				"urlFoto": "",
 				"decodeImagem":""
 			}
 		],
-		"docPropietario": "",
-		"nomePropietario": "",
+		"docPropietario": "12",
+		"nomePropietario": "Felipe",
 		"enviouSms": "S",
 		"numeroEnvioSms": "",
-		"emailEnviaConfirmacao": "",
-		"confirmacaoDados": "N",
-		"temSeguro": ""
+		"emailEnviaConfirmacao": "felipeems87@gmail.com",
+		"confirmacaoDados": "S",
+		"temSeguro": "S"
 	}
   }
   
@@ -139,7 +139,7 @@ export class EDATService {
   }
   
   /* Limpa máscaras de CPF e padroniza mascara de telefone */
-  limpaMascaras() {
+  alteraFormatoPadraoData() {
 	this.eDAT.cpf = this.eDAT.cpf.replace(/\D/g,'');
 	let date: string;
 	
@@ -162,10 +162,12 @@ export class EDATService {
 		date = testemunha.dataNascimento.split("-");
 		testemunha.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
 	}
+	console.log('limpa');
+	console.log(this.eDAT.dataValidadeCNH);
   }  
   
   /* Atualiza as datas para o padrao do type date */
-  reverteMascarasData() {
+  alteraFormatoInputData() {
 	let date: string;
 	
 	if(this.eDAT.acidenteDat[0].dataAcidente) {
@@ -187,5 +189,7 @@ export class EDATService {
 		date = testemunha.dataNascimento.split("/");
 		testemunha.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
 	}
+	console.log('revert');
+	console.log(this.eDAT.dataValidadeCNH);
   }
 }

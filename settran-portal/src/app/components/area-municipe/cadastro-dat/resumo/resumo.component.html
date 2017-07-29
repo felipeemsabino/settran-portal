@@ -61,12 +61,12 @@
 					<div class="col-md-8">
 						<label id="6">{{edatService.eDAT.acidenteDat[0].logradouro.tipoLogradouro + " " +
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro + " " +
-													  edatService.eDAT.acidenteDat[0].logradouro.numeroEndereco + " " +
+(edatService.eDAT.acidenteDat[0].numeroEndereco != '' ? edatService.eDAT.acidenteDat[0].numeroEndereco : '') + " " +
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeBairro + " " }}</label>
 						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0" 
 							   id="7">{{edatService.eDAT.acidenteDat[0].logradouroCruzamento.tipoLogradouro + " " +
 													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeLogradouro + " " +
-													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.numeroEndereco + " " +
+(edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento != '' ? edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento : '') + " " +
 													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeBairro + " " }}</label>
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 						<label for="8">Data e hora do acidente: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="8">{{edatService.eDAT.acidenteDat[0].dataAcidente + " " + edatService.eDAT.acidenteDat[0].dataAcidente}}</label>
+						<label id="8">{{edatService.eDAT.acidenteDat[0].dataAcidente + " " + edatService.eDAT.acidenteDat[0].horaAcidente}}</label>
 					</div>
 				</div>
 			</li>
@@ -97,8 +97,10 @@
 						<label for="10">Outros veículos: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="10" *ngFor='let veiculo of edatService.eDAT.outrosVeiculosDat;'>
-						{{veiculo.placa+"/"+veiculo.marcaVeiculo+"/"+veiculo.modeloVeiculo}}</label>
+						<div *ngFor='let veiculo of edatService.eDAT.outrosVeiculosDat;'>
+							<label id="10">{{veiculo.placa+" / "+veiculo.marcaVeiculo+" / "+veiculo.modeloVeiculo}}</label>
+							<br/>
+						</div>
 				    </div>
 				</div>
 			</li>
@@ -108,8 +110,13 @@
 						<label for="11">Testemunhas: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="11" *ngFor='let testemunha of edatService.eDAT.testemunhasDat;'>
-						{{testemunha.nomeTestemunha+"/"+testemunha.dataNascimento+"/"+testemunha.rg+"/"+testemunha.orgaoExpedidor}}</label>
+						<div *ngFor='let testemunha of edatService.eDAT.testemunhasDat;'>
+							<label id="10">{{testemunha.nomeTestemunha
+							+(testemunha.dataNascimento != '' ? ' / '+testemunha.dataNascimento : '')
+							+(testemunha.rg != '' ? ' / '+testemunha.rg : '')
+							+(testemunha.orgaoExpedidor != '' ? ' / '+testemunha.orgaoExpedidor : '')}}</label>
+							<br/>
+						</div>
 				    </div>
 				</div>
 			</li>
