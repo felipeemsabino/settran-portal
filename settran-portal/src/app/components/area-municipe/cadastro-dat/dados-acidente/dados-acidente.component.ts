@@ -16,7 +16,7 @@ export class DadosAcidenteComponent implements OnInit {
   tooltipColisao = 'Colisão: é o impacto de dois ou mais veículos em movimento, frente a frente ou pela traseira.';
   tooltipCapotamento = 'Capotamento: quando um veículo em movimento gira em qualquer sentido, ficando com as rodas para cima, mesmo que momentaneamente.';
   
-  constructor(private edatService: EDATService) {}
+  constructor(public edatService: EDATService) {}
 
   ngOnInit() {
 	this.configuraAutoComplete();

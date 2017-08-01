@@ -8,7 +8,7 @@ import { EDATService } from '../../../shared/services/e-dat.service';
 })
 export class TestemunhasComponent implements OnInit {
 
-  constructor(private edatService: EDATService) { }
+  constructor(public edatService: EDATService) { }
 
   ngOnInit() {
   }

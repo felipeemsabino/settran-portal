@@ -13,7 +13,7 @@ declare var $:any; // JQUERY
 })
 export class ConfirmacaoDatComponent implements OnInit {
 
-  constructor(private edatService: EDATService, private confirmacaoedatService: ConfirmacaodatService) { }
+  constructor(public edatService: EDATService, private confirmacaoedatService: ConfirmacaodatService) { }
 
   ngOnInit() {
    if(!this.edatService.eDAT.enviouSms) {

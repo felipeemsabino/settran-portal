@@ -17,7 +17,7 @@ export class PerguntasPreliminaresComponent implements OnInit {
   perguntas: any[];
   perguntasUsuario: any[];
   
-  constructor(private regrasService: RegrasService, private edatService: EDATService) {
+  constructor(private regrasService: RegrasService, public edatService: EDATService) {
   }
 
   ngOnInit() {

@@ -14,7 +14,7 @@ declare var $:any; // JQUERY
 })
 export class OutrosVeiculosComponent implements OnInit {
 
-  constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService, private edatService: EDATService) {}
+  constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService, public edatService: EDATService) {}
 
   ngOnInit() {
     if(this.edatService.tiposVeiculo.length == 0) {

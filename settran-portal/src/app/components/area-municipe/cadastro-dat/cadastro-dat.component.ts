@@ -23,7 +23,7 @@ export class CadastroDatComponent implements OnInit {
   eDAT: any;
   currentPage: string;
     
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, private edatService: EDATService) {	
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, public edatService: EDATService) {	
   
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 		

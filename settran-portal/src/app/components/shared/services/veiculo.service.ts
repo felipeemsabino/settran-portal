@@ -27,10 +27,17 @@ export class VeiculoService {
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
     let options = new RequestOptions({ headers: header });
 
-    return this.http.get('http://fipeapi.appspot.com/api/1/'+descTipoVeiculo+'/marcas.json',
+    /*return this.http.get('http://fipeapi.appspot.com/api/1/'+descTipoVeiculo+'/marcas.json',
+							options)
+                     .map((res:Response) =>this.extractData(res))
+                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));*/
+	console.log('descTipoVeiculo -> ' + descTipoVeiculo);
+    return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/getmarcas?tipoveiculo='+descTipoVeiculo,
 							options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+					 
+					 
   }
   
   getModelosVeiculo(descTipoVeiculo: string, idMarcaVeiculo: string) {
@@ -39,7 +46,14 @@ export class VeiculoService {
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
     let options = new RequestOptions({ headers: header });
 
-    return this.http.get('http://fipeapi.appspot.com/api/1/'+descTipoVeiculo+'/veiculos/'+idMarcaVeiculo+'.json',
+    /*return this.http.get('http://fipeapi.appspot.com/api/1/'+descTipoVeiculo+'/veiculos/'+idMarcaVeiculo+'.json',
+							options)
+                     .map((res:Response) =>this.extractData(res))
+                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));*/
+	
+	console.log('descTipoVeiculo -> ' + descTipoVeiculo);
+	console.log('idMarcaVeiculo -> ' + idMarcaVeiculo);
+	return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/getmodelos?tipoveiculo='+descTipoVeiculo+'&idmarca='+idMarcaVeiculo,
 							options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));

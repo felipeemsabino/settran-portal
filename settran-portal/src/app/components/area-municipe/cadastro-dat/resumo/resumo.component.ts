@@ -10,7 +10,7 @@ declare var $:any; // JQUERY
 })
 export class ResumoComponent implements OnInit {
 
-  constructor(private edatService: EDATService) { }
+  constructor(public edatService: EDATService) { }
 
   ngOnInit() {   
     if(!this.edatService.eDAT.confirmacaoDados) {

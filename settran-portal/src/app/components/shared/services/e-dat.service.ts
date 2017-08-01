@@ -33,7 +33,94 @@ export class EDATService {
   };
 
   constructor(private http: Http) {
-    this.eDAT = {
+  this.eDAT = {
+		"isPropietario" : "",
+		"renavam": "",
+		"placa": "",
+		"marcaVeiculo": "",
+		"modeloVeiculo": "",
+		"chassi": "",
+		"tipoVeiculo": {
+			"id": ""
+		},
+		"acidenteDat": [{
+			"tipoAcidente": "",
+			"dataAcidente": "",
+			"horaAcidente": "",
+			"zona": "",
+			"logradouro":{
+            },
+			"numeroEndereco": "",
+			"logradouroCruzamento": {
+			}, "numeroLogradouroAcidenteCruzamento":""
+		}],
+		"relatoDat":[ {
+			"descricaoRelatoAcidente": ""
+		}],
+		"cor": "",
+		"cnh": "",
+		"dataValidadeCNH": "",
+		"categoriaCnh": "",
+		"sexo": "",
+		"nomeMunicipe": "",
+		"dataNascimento": "",
+		"cpf": "",
+		"rg": "",
+		"orgaoExpedidor": "",
+		"emailMunicipe": "",
+		"logradouro":{
+			"id":"",
+			"nomeLogradouro":"",
+			"tipoLogradouro":"",
+			"nomeBairro":"",
+			"cep":"",
+			"nomeCidade":"",
+			"uf":""
+		},
+		"numeroEndereco": "",
+		"complementoEndereco": "",
+		"telefone": "",
+		"celular": "",
+		"ipRequisicao": "",
+		"codigoConfirmacaoDat": "",
+		"outrosVeiculosDat": [],
+		"testemunhasDat": [],
+		"fotosDat": [
+			{
+				"descricaoFoto": "",
+				"urlFoto": "",
+				"decodeImagem":""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": "",
+				"decodeImagem":""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": "",
+				"decodeImagem":""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": "",
+				"decodeImagem":""
+			},
+			{
+				"descricaoFoto": "",
+				"urlFoto": "",
+				"decodeImagem":""
+			}
+		],
+		"docPropietario": "",
+		"nomePropietario": "",
+		"enviouSms": "",
+		"numeroEnvioSms": "",
+		"emailEnviaConfirmacao": "",
+		"confirmacaoDados": "",
+		"temSeguro": ""
+	}
+    /*this.eDAT = {
 		"isPropietario" : "S",
 		"renavam": "12313",
 		"placa": "12321",
@@ -119,7 +206,7 @@ export class EDATService {
 		"emailEnviaConfirmacao": "felipeems87@gmail.com",
 		"confirmacaoDados": "S",
 		"temSeguro": "S"
-	}
+	}*/
   }
   
   enviarEDAT() {

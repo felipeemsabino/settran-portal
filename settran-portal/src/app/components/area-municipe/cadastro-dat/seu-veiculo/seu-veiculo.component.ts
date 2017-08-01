@@ -14,7 +14,7 @@ declare var $:any; // JQUERY
 })
 export class SeuVeiculoComponent implements OnInit {
   
-  constructor(private edatService: EDATService, private veiculoService: VeiculoService, private enderecoService: EnderecoService) { 
+  constructor(public edatService: EDATService, private veiculoService: VeiculoService, private enderecoService: EnderecoService) { 
   }
 
   ngOnInit() {
@@ -100,6 +100,8 @@ export class SeuVeiculoComponent implements OnInit {
 					  }, //Bind to view
 					  err => {
 						console.log(err);
+						
+						$('#loadingModal').modal('hide'); // fecha modal
 					  });
   }
   
@@ -126,6 +128,8 @@ export class SeuVeiculoComponent implements OnInit {
 					  }, //Bind to view
 					  err => {
 						console.log(err);
+						
+						$('#loadingModal').modal('hide'); // fecha modal
 					  });
   }
   
