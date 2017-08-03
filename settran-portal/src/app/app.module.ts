@@ -36,6 +36,7 @@ import { ConfirmacaoDatComponent } from './components/area-municipe/cadastro-dat
 import { ResumoComponent } from './components/area-municipe/cadastro-dat/resumo/resumo.component';
 import { EDATService } from './components/shared/services/e-dat.service';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { ConsultadatService } from './components/area-municipe/consulta-dat/services/consultadat.service';
 
 const appRoutes: Routes = [
 	  {
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
 			{ path: 'resumo', component: ResumoComponent }
 		]
 	  },
+	  { path: 'consulta-dat', component: ConsultaDatComponent },
 	  { path: 'cadastro-regra', component: CadastroRegraComponent },
 	  { path: 'cadastro-faq', component: CadastroFaqComponent }
 ];
@@ -113,7 +115,7 @@ const appRoutes: Routes = [
     },
     {
       provide: 'IDataService', useClass: FaqService, multi: true
-    }, EDATService ],
+    }, EDATService, ConsultadatService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
