@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AgenteService } from '../services/agente.service';
 import { URLSearchParams } from '@angular/http';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -26,7 +27,7 @@ export class PopupAgenteComponent implements OnInit {
     this.confirmacaoSenha = "";
   }
 
-  constructor(private agenteService: AgenteService) {
+  constructor(private agenteService: AgenteService, private popupController: PopupControllerComponent) {
   }
 
   ngOnInit() {
@@ -58,26 +59,28 @@ export class PopupAgenteComponent implements OnInit {
       return false;
     }
 
-  	$('#loadingModal').modal('show'); // abre loadingModal
+      this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
       params = this.entity;
       // Salva dado
       this.agenteService.saveData(params)
                         .subscribe(
                             result => {
-                              $('#loadingModal').modal('hide'); // fecha loadingModal
-
                               if(result.status == 400) {
-                                alert(result.json());
+                                this.popupController.showPopupMessage("Atenção!", result.json(), true);
                               } else {
-                                alert('Os dados foram gravados com sucesso.');
-                                $('#recarregaGrid').click();
+                                this.popupController.showPopupMessage("Atenção!",
+                                "Registro gravado com sucesso.", true);
+
+                                $('#loadingModal').on('hidden.bs.modal', function () {
+                                  $('#agenteModal').modal('hide');
+                                  $('#recarregaGrid').click();
+                                  $('#loadingModal').unbind('hidden');
+                                });
                               }
                             }, //Bind to view
                             err => {
-                              $('#loadingModal').modal('hide'); // fecha loadingModal
-
-                              alert('Ocorreram erros ao gravar os dados! Por favor, tente novamente!');
-                              console.log(err);
+                              this.popupController.showPopupMessage("Atenção!",
+                              "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);                              console.log(err);
                             });
   }
 
@@ -103,7 +106,7 @@ export class PopupAgenteComponent implements OnInit {
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) retorno = false;
 
     if(retorno == false) {
-      alert('Por favor, entre com um CPF válido.');
+      this.popupController.showPopupMessage("Atenção!", "O CPF informado não é válido.", true);
     }
     return retorno;
   }
@@ -113,7 +116,7 @@ export class PopupAgenteComponent implements OnInit {
   	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   	if(!$('.email').val().match(re)) {
-  		alert('Por favor, entre com um email válido.');
+      this.popupController.showPopupMessage("Atenção!", "O email informado não é válido.", true);
   		return false;
   	}
   	return true;
@@ -121,7 +124,7 @@ export class PopupAgenteComponent implements OnInit {
 
   validaSenha() {
     if(!this.validaSenhas()) {
-      alert('Senhas não conferem.');
+      this.popupController.showPopupMessage("Atenção!", "As senhas não conferem.", true);
       return false;
     }
     return true;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { URLSearchParams, QueryEncoder, Http, Response } from '@angular/http';
 import { IDataService } from '../../interfaces/idata-service';
+import { PopupControllerComponent } from '../popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -17,16 +18,17 @@ export class GridComponent implements OnInit {
   @Input('service') service: number;
   @Input('row_detail') rowDetail: any;
   @Input('columns') columnsConfiguration: any;
-  
+
   @Output() onObjectChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(@Inject('IDataService') private providerService: IDataService[]) {
-	this.params = new URLSearchParams();
+  constructor(@Inject('IDataService') private providerService: IDataService[],
+              private popupController: PopupControllerComponent) {
+	   this.params = new URLSearchParams();
   }
 
   ngOnInit() {
-	this.getData();
-	this.setCPFMask();
+  	this.getData();
+  	this.setCPFMask();
   }
 
   params: URLSearchParams; // parametro que será enviado para a tela de manutenção
@@ -38,36 +40,35 @@ export class GridComponent implements OnInit {
   numeroPaginas: number[]; // armazena o numero das paginas
   retornoQtdRestante: number = 0; // quantos fetchedData existem para serem mostrados em pesquisa
   fetchedData: any[];
-	
+
   getData() {
-	$('#loadingModal').modal('show'); // abre loadingModal
-	
+    this.popupController.showPopupMessage("Aguarde!","Carregando registros...", false);
+
   	this.setUrlParams();
-	let retorno: any[];
+	  let retorno: any[];
     // Get all data
 
-    this.providerService[this.service].getData(this.params)
-                      .subscribe(
-                          result => {
+    this.providerService[this.service].getData(this.params).subscribe(
+            result => {
 							if(result.length > 0) {
 								if(this.isPaginated)
 									this.retornoQtdRestante = Number((<any>result.pop()).split(":")[1].replace("}",""));
-								
+
 								this.fetchedData = result;
-								
+
 								if(this.isPaginated)
 									this.createRange();
 							}
-							$('#loadingModal').modal('hide'); // fecha modal
+							this.popupController.hidePopupMessage(); // fecha modal
 							this.resetMasks();
-                          }, //Bind to view
-                          err => {
-                            console.log(err);
-							alert('Ocorreram erros ao recuperar os registros! Por favor, tente novamente!');
-							$('#loadingModal').modal('hide'); // fecha modal
-                          });
+            }, //Bind to view
+            err => {
+              console.log(err);
+							this.popupController.showPopupMessage("Atenção!",
+              "Ocorreram erros ao carregar os registros. Por favor, tente novamente.", true) // fecha modal
+            });
   }
-  
+
   setUrlParams() {
 	this.params = new URLSearchParams();
 	for(var index = 0;index < this.columnsConfiguration.length;index++) {
@@ -82,7 +83,7 @@ export class GridComponent implements OnInit {
 	this.params.set('initialPosition', ""+this.initialPosition);
     this.params.set('finalPosition', ""+this.finalPosition);
   }
-  
+
   /* Método auxiliar da paginação.
   * Calcula a página atual que o usuário se encontra e a próxima página.
   */
@@ -93,7 +94,7 @@ export class GridComponent implements OnInit {
     this.paginaAtual = proximaPagina;
     this.getData();
   }
-  
+
   /*
   * Calcula quantas páginas serão necessárias para mostrar todos os resultados da pesquisa.
   * Essa função é chamada diretamente no HTML para criar os números de paginção abaixo da tabela.
@@ -122,7 +123,7 @@ export class GridComponent implements OnInit {
   callObjectWindow(object: any) {
 	this.onObjectChange.emit(object);
   }
-	
+
   moveUp(rowNumber: any) {
 	console.log(rowNumber);
 	let currentObj = this.fetchedData[rowNumber];
@@ -132,7 +133,7 @@ export class GridComponent implements OnInit {
 	this.fetchedData[rowNumber-1] = currentObj;
 	this.reorderData(currentObj, this.fetchedData[rowNumber]);
   }
-  
+
   moveDown(rowNumber: any) {
 	console.log(rowNumber);
 	let currentObj = this.fetchedData[rowNumber];
@@ -142,10 +143,10 @@ export class GridComponent implements OnInit {
 	this.fetchedData[rowNumber+1] = currentObj;
 	this.reorderData(currentObj, this.fetchedData[rowNumber]);
   }
-  
+
   reorderData(movedRow: any, row: any) {
-	$('#loadingModal').modal('show'); // abre loadingModal
-	
+    this.popupController.showPopupMessage("Aguarde!","Reordenando registros...", false);
+
 	let body = [];
 	body.push(movedRow);
 	body.push(row);
@@ -153,20 +154,20 @@ export class GridComponent implements OnInit {
     this.providerService[this.service].reorderData(JSON.stringify(body))
                       .subscribe(
                           result => {
-							$('#loadingModal').modal('hide'); // fecha modal
+                            this.popupController.hidePopupMessage();
                           }, //Bind to view
                           err => {
                             console.log(err);
-							alert('Ocorreram erros ao reordenar os registros! Por favor, tente novamente!');
-							$('#loadingModal').modal('hide'); // fecha modal
+                            this.popupController.showPopupMessage("Atenção!",
+                            "Ocorreram erros ao reordenar os registros! Por favor, tente novamente.", true);
                             $('#recarregaGrid').click();
                           });
   }
-  
+
   setCPFMask () {
 	$('.cpf').mask('000.000.000-00', {reverse: true});
   }
-  
+
   resetMasks() {
 	setTimeout(function() {
 	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});

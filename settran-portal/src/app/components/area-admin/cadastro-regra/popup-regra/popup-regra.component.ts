@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RegrasService } from '../services/regras.service';
 import { URLSearchParams } from '@angular/http';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -11,9 +12,9 @@ declare var $:any; // JQUERY
   providers: [RegrasService]
 })
 export class PopupRegraComponent implements OnInit {
-  
+
   entity: any;
-  
+
   @Input('object')
   set object(value: any) {
 	this.entity = Object.assign({}, value);
@@ -21,52 +22,64 @@ export class PopupRegraComponent implements OnInit {
 	  this.entity.resposta = 'S';
 	}
   }
-  constructor(private regrasService: RegrasService) { }
+  constructor(private regrasService: RegrasService, private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
   }
-  
+
   onSubmit() {
-	$('#loadingModal').modal('show'); // abre loadingModal
-	console.log(this.entity);
+    this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
+
     let params: URLSearchParams = new URLSearchParams();
     params = this.entity;
     // Salva dado
     this.regrasService.saveData(params)
                       .subscribe(
                           result => {
-							$('#loadingModal').modal('hide'); // fecha loadingModal
-                            $('#recarregaGrid').click();
+                            this.popupController.showPopupMessage("Atenção!",
+                            "Registro gravado com sucesso.", true);
+                            $('#loadingModal').on('hidden.bs.modal', function () {
+                              $('#regrasModal').modal('hide');
+                              $('#recarregaGrid').click();
+                              $('#loadingModal').unbind('hidden');
+                            });
                           }, //Bind to view
                           err => {
-                            alert('Ocorreram erros ao gravar os dados! Por favor, tente novament!');
-							$('#loadingModal').modal('hide'); // fecha loadingModal
+                            this.popupController.showPopupMessage("Atenção!",
+                            "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);                              console.log(err);
                             console.log(err);
                           });
   }
-  
+
   deleteData () {
-	$('#loadingModal').modal('show'); // abre loadingModal
-	
-    let params: URLSearchParams = new URLSearchParams();
-    params = this.entity;
-    // Deleta dado
-    this.regrasService.deleteData(this.entity.id)
-                      .subscribe(
-                          result => {
-                            alert('Dado deletado com sucesso!');
-							
-							$('#regrasModal').modal('hide'); // fecha modal
-							$('#loadingModal').modal('hide'); // fecha loadingModal
-                            $('#recarregaGrid').click();
-                          }, //Bind to view
-                          err => {
-                            alert('Ocorreram erros ao deletar o dado! Por favor, tente novament!');
-							$('#loadingModal').modal('hide'); // fecha loadingModal
-                          });
+    var txt;
+    var r = confirm("Deseja realmente remover esse registro?");
+    if (r == true) {
+      this.popupController.showPopupMessage("Aguarde!", "Removendo registro...", false);
+
+      let params: URLSearchParams = new URLSearchParams();
+      params = this.entity;
+      // Deleta dado
+      this.regrasService.deleteData(this.entity.id)
+                        .subscribe(
+                            result => {
+                              this.popupController.showPopupMessage("Atenção!",
+                              "Registro removido com sucesso.", true);
+                              $('#regrasModal').modal('hide'); // fecha modal
+                              $('#loadingModal').on('hidden.bs.modal', function () {
+                                $('#recarregaGrid').click();
+                                $('#loadingModal').unbind('hidden');
+                              });
+                            }, //Bind to view
+                            err => {
+                              this.popupController.showPopupMessage("Atenção!",
+                              "Ocorreram erros ao remover o registro! Por favor, tente novamente.", true);                              console.log(err);
+                              console.log(err);
+                            });
+    }
   }
-  
+
   alteraResposta (resposta: string) {
-	this.entity.resposta = resposta;
+	   this.entity.resposta = resposta;
   }
 }
