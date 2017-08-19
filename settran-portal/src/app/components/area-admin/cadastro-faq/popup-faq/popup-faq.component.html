@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edição</h4>
+        <h4 class="modal-title">{{entity.id ? 'Alterar pergunta frequente' : 'Criar nova pergunta frequente'}}</h4>
       </div>
       <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
 	    <div class="modal-body">
@@ -14,7 +14,7 @@
 			</div>
 			<div class="form-group">
 				<label for="email">Pergunta</label>
-				<input type="text" class="form-control" id="pergunta" name="pergunta" required 
+				<input type="text" class="form-control" id="pergunta" name="pergunta" required
 				  [(ngModel)]="entity.pergunta">
 			</div>
 			<div class="form-group">
@@ -24,7 +24,7 @@
 			</div>
 		</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" style="float:left;" data-dismiss="modal"
+          <button *ngIf="entity.id" type="button" class="btn btn-danger" style="float:left;" data-dismiss="modal"
             (click)="deleteData()">Excluir</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-success" [disabled]="!usuarioForm.form.valid">Salvar</button>
