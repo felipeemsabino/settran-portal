@@ -10,7 +10,7 @@ declare var $:any; // JQUERY
   styleUrls: ['./cadastro-dat.component.css']
 })
 export class CadastroDatComponent implements OnInit {
-  
+
   static readonly PERGUNTAS_PRELIMINARES = "/cadastro-dat/perguntas-preliminares";
   static readonly SEU_VEICULO = "/cadastro-dat/seu-veiculo";
   static readonly DADOS_ACIDENTE = "/cadastro-dat/dados-acidente";
@@ -22,11 +22,11 @@ export class CadastroDatComponent implements OnInit {
 
   eDAT: any;
   currentPage: string;
-    
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, public edatService: EDATService) {	
-  
+
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, public edatService: EDATService) {
+
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
-		
+
 	parentRouter.events.subscribe((val) => {
 	  if(val instanceof NavigationEnd) {
         this.currentPage = val.url;
@@ -37,131 +37,132 @@ export class CadastroDatComponent implements OnInit {
   ngOnInit() {
     this.getUserIp();
   }
-  
+
   cancelar() {
 	alert('cancelar');
   }
-  
+
   changePage(action: string) {
 	if(action == "back")
 	  this.voltar();
 	else if (action == "next")
 	  this.avancar();
   }
-  
+
   voltar() {
-  
+
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
-	    break; 
+	    break;
 	  }
 	  case CadastroDatComponent.SEU_VEICULO: {
 	    this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
-	    break; 
+	    break;
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.OUTROS_VEICULOS: {
 	    this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.TESTEMUNHAS: {
 	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
 		this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
 	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
 	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.RESUMO: {
 	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
-	    break; 
-	  } 
+	    break;
+	  }
 	}
   }
-  
+
   avancar() {
 	if(!this.validarEmail()){
 		return false;
 	}
-	
+
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
 		if(!this.validarPerguntas())
 			break;
-		
+
 	    this.parentRouter.navigate([CadastroDatComponent.SEU_VEICULO]);
-	    break; 
+	    break;
 	  }
 	  case CadastroDatComponent.SEU_VEICULO: {
 		if(!this.validarAbaSeuVeiculo())
 			break;
 
 		this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
-	    break; 
+	    break;
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
 		if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
 			break;
-			
+
 	    this.parentRouter.navigate([CadastroDatComponent.OUTROS_VEICULOS]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.OUTROS_VEICULOS: {
 		if(!this.validaDadosObrigatorios () || !this.validaAba4Options())
 			break;
-			
+
 	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.TESTEMUNHAS: {
 		this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
 	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
 	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
-	    break; 
-	  }  
+	    break;
+	  }
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
 	    if(this.edatService.codigoVerificado == 'N' || !this.edatService.codigoVerificado) {
 		  return;
 		}
 	    this.parentRouter.navigate([CadastroDatComponent.RESUMO]);
-	    break; 
-	  } 
+	    break;
+	  }
 	  default: { // navegar para tela inicial
 	    //this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
-	    break; 
+	    break;
 	  }
 	}
-  }  
-  
+  }
+
   validarEmail() {
     if($('.email').length == 0)
-		return true;
-		
-	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		  return true;
 
-	if(!$('.email').val().match(re)) {
-		alert('Por favor, entre com um email válido.');
-		return false;
-	}
-	return true;
+  	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+  	if(!$('.email').val().match(re)) {
+  		alert('Por favor, entre com um email válido.');
+  		return false;
+  	}
+  	return true;
   }
+  
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
-		
+
 		//console.log(JSON.stringify(this.edatService.eDAT));
-		
+
 		$('#loadingModal').modal('show'); // fecha modal
 		this.edatService.enviarEDAT()
 				  .subscribe(
@@ -170,23 +171,23 @@ export class CadastroDatComponent implements OnInit {
 						$('#loadingModal').modal('hide'); // fecha modal
 					  }, //Bind to view
 					  err => {
-						console.log(err);	
+						console.log(err);
 						alert('Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!');
-						$('#loadingModal').modal('hide'); // fecha modal	
+						$('#loadingModal').modal('hide'); // fecha modal
 					  });
 	} else {
 		alert('Necessário aceitar os termos e condições antes de prosseguir.');
 	}
   }
-  
+
   getPergPreliminaresUrl() {
     return CadastroDatComponent.PERGUNTAS_PRELIMINARES;
   }
-  
+
   getResumoUrl() {
     return CadastroDatComponent.RESUMO;
   }
-  
+
   /* Validacao de perguntas */
   validarPerguntas(){
     let validacao = true;
@@ -195,13 +196,13 @@ export class CadastroDatComponent implements OnInit {
 		return validacao;
 
 	validacao = this.validarRespostasEsperadas();
-	
+
 	if(!validacao)
 		$('#modalAlertaRegras').modal('show');
 	return validacao;
-	
+
   }
-  
+
   validarTotalRespostas(){
     if(this.edatService.perguntas.length == 0)
 		return false;
@@ -213,7 +214,7 @@ export class CadastroDatComponent implements OnInit {
 	}
 	return true;
   }
-  
+
   validarRespostasEsperadas() {
     this.edatService.respostasInvalidas = new Array();
     for (let index in this.edatService.resultadoPerguntas) {
@@ -225,37 +226,37 @@ export class CadastroDatComponent implements OnInit {
 		return true;
 	return false;
   }
-  
+
   /* Validacao dos dados seu-veiculo */
-  
+
     validarAbaSeuVeiculo(){
-      let validacao = true;	
-	  
+      let validacao = true;
+
 	  validacao = this.validaDadosObrigatorios();
 	  if(!validacao)
 		return validacao;
-	  
+
 	  validacao = this.validaAba2Email();
 	  if(!validacao)
 		return validacao;
-		
+
 	  return validacao;
 	}
-	
+
 	validaDadosObrigatorios () {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
 	  camposObrigatorios.removeClass('has-error');
-	  
+
 	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
 		camposNaoPreenchidos.parent().addClass('has-error');
 		alert('Favor preencher todos os campos obrigatórios.');
 		return false;
 	  }
-	  
+
 	  return true;
 	}
-	
+
 	validaAba2Email() {
 	  let camposEmails = $( ".form-group.municipe-email" );
 	  camposEmails.removeClass('has-error');
@@ -266,27 +267,27 @@ export class CadastroDatComponent implements OnInit {
 		camposEmails.addClass('has-error');
 		return false;
 	  }
-	  
+
 	  if ( $( "#emailMunicipe" ).val() != $( "#emailMunicipeConfirm" ).val() ){
 	    alert('E-mails não conferem.');
 		camposEmails.addClass('has-error');
 		return false;
 	  }
-	  
+
 	  return true;
 	}
-	
+
 	validaAba3Options() {
 	  if(this.edatService.eDAT.acidenteDat[0].tipoAcidente == "") {
 	    alert('Favor informar o tipo de acidente.');
 		return false;
 	  }
-	   
+
 	  if(this.edatService.eDAT.acidenteDat[0].zona == "") {
 	    alert('Favor informar a zona.');
 		return false;
 	  }
-	  
+
 	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
 	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
 	  if(dataAcidente < dataLimite) {
@@ -295,7 +296,7 @@ export class CadastroDatComponent implements OnInit {
 	  }
 	  return true;
 	}
-	
+
 	validaAba4Options() {
 	  for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
 	    if(veiculo.temSeguro == "") {
@@ -303,10 +304,10 @@ export class CadastroDatComponent implements OnInit {
 		  return false;
 	    }
 	  }
-	  
+
 	  return true;
 	}
-	
+
 	getUserIp(){
 		let self = this;
 		$.getJSON('//freegeoip.net/json/?callback=?', function(data) {

@@ -15,32 +15,38 @@ export class AgenteService implements IDataService {
 	let header = new Headers();
 	header.append('Content-Type', 'application/json');
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
-	
+
     let options = new RequestOptions({ headers: header, search: params });
 
     return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/agente/listaagentes/', options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
-  
-  saveData(params: URLSearchParams): Observable<any []> {
+
+  saveData(params: URLSearchParams): Observable<any> {
   	let header = new Headers();
-	header.append('Content-Type', 'application/json');
-	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
+  	header.append('Content-Type', 'application/json');
+  	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
     let options = new RequestOptions({ headers: header });
 
     return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/agente/cadastraragente/',
 							params, options)
                      .map((res:Response) =>this.extractData(res))
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                     .catch((error: any) => {
+                       if(error.status == 400){
+                         return [error];
+                       } else {
+                        return Observable.arguments(new Error(error));
+                       }
+                    });
   }
-  
+
   deleteData(dataId: any): Observable<any []>  {
-	return null;
+	   return null;
   }
-  
+
   reorderData(body: string): Observable<any []> {
-	return null;
+	   return null;
   }
 
   extractData(res: Response) {
