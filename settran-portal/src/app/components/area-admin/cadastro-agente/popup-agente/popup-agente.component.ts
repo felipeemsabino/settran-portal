@@ -45,7 +45,9 @@ export class PopupAgenteComponent implements OnInit {
   }
 
   validaSenhas() {
-    if(this.entity.senha != $('#confirmacaoSenha').val()) {
+    if(!this.entity.senha && this.entity.id)
+      return true;
+    if(this.entity.senha.length == 0 || this.entity.senha != $('#confirmacaoSenha').val()) {
   		return false;
   	}
   	return true;
