@@ -24,6 +24,7 @@ export class CadastroDatComponent implements OnInit {
   eDAT: any;
   currentPage: string;
   aba: number;
+  action: string = '';
 
   constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
     public edatService: EDATService, private popupController: PopupControllerComponent) {
@@ -34,6 +35,21 @@ export class CadastroDatComponent implements OnInit {
   	parentRouter.events.subscribe((val) => {
     	  if(val instanceof NavigationEnd) {
             this.currentPage = val.url;
+            if(this.action == 'back'){
+
+                if(this.aba > 1)
+                  this.aba--;
+                $('#aba'+this.aba).css('background-color','#F0E68C');
+                $('#aba'+(this.aba+1)).css('background-color','transparent');
+            }
+            else if(this.action == 'next'){
+
+              if(this.aba < 8) // recupera id da aba
+                this.aba++;
+              $('#aba'+this.aba).css('background-color','#F0E68C'); // altera cor de background das abas
+              $('#aba'+(this.aba-1)).css('background-color','transparent');
+            }
+            $("html,body").scrollTop(100);
     	  }
       });
   }
@@ -47,6 +63,7 @@ export class CadastroDatComponent implements OnInit {
   }
 
   changePage(action: string) {
+    this.action = action;
   	if(action == "back")
   	  this.voltar();
   	else if (action == "next")
@@ -54,12 +71,6 @@ export class CadastroDatComponent implements OnInit {
   }
 
   voltar() {
-
-  $("html,body").scrollTop(100);
-  if(this.aba > 1)
-    this.aba--;
-  $('#aba'+this.aba).css('background-color','#F0E68C');
-  $('#aba'+(this.aba+1)).css('background-color','transparent');
 
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
@@ -99,12 +110,6 @@ export class CadastroDatComponent implements OnInit {
   }
 
   avancar() {
-
-  $("html,body").scrollTop(100); // mantem scroll no topo
-  if(this.aba < 8) // recupera id da aba
-    this.aba++;
-  $('#aba'+this.aba).css('background-color','#F0E68C'); // altera cor de background das abas
-  $('#aba'+(this.aba-1)).css('background-color','transparent');
 
   /*if(!this.validarEmail()){
 		return false;
