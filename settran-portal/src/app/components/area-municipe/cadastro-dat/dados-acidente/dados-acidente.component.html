@@ -3,27 +3,27 @@
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Tipo do Acidente</legend>
 		<div class="row">
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Abalroamento'" (change)="alteraTipoAcidente('Abalroamento');" >Abalroamento</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Abalroamento'" (change)="alteraTipoAcidente('Abalroamento');" >Abalroamento</label>
 				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipAbalroamento}}"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Choque'" (change)="alteraTipoAcidente('Choque');" >Choque</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Choque'" (change)="alteraTipoAcidente('Choque');" >Choque</label>
 				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipChoque}}"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Tombamento'" (change)="alteraTipoAcidente('Tombamento');" >Tombamento</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Tombamento'" (change)="alteraTipoAcidente('Tombamento');" >Tombamento</label>
 				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipTombamento}}"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Colisão'" (change)="alteraTipoAcidente('Colisão');" >Colisão</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Colisão'" (change)="alteraTipoAcidente('Colisão');" >Colisão</label>
 				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipColisao}}"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Capotamento'" (change)="alteraTipoAcidente('Capotamento');" >Capotamento</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Capotamento'" (change)="alteraTipoAcidente('Capotamento');" >Capotamento</label>
 				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipCapotamento}}"></span>
 			</div>
 			<div class="col-md-2">
-				<label><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Outro'" (change)="alteraTipoAcidente('Outro');" >Outro</label>
+				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Outro'" (change)="alteraTipoAcidente('Outro');" >Outro</label>
 			</div>
 		</div>
 	</fieldset>
@@ -50,8 +50,8 @@
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="zona">Zona</label><br/>
-			  <label><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat[0].zona == 'RURAL'" (change)="alteraZona('RURAL');" >Rural</label>
-			  <label><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat[0].zona == 'URBANA'" (change)="alteraZona('URBANA');" >Urbana</label>
+			  <label class='label-zona-obrigatorio'><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat[0].zona == 'RURAL'" (change)="alteraZona('RURAL');" >Rural</label>
+			  <label class='label-zona-obrigatorio'><input type="radio" name="zona" [checked]="edatService.eDAT.acidenteDat[0].zona == 'URBANA'" (change)="alteraZona('URBANA');" >Urbana</label>
 			</div>
 		</div>
 		<div class="row">

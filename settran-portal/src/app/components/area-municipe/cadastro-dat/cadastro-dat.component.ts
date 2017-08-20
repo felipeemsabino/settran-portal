@@ -334,18 +334,30 @@ export class CadastroDatComponent implements OnInit {
 	  return true;
   }
 
+  marcaLabelInvalido(labelClass: string){
+    let camposObrigatorios = $( "."+labelClass );
+    camposObrigatorios.addClass('label-has-error');
+  }
+
+  desmarcaLabelInvalido(labelClass: string){
+    let camposObrigatorios = $( "."+labelClass );
+    camposObrigatorios.removeClass('label-has-error');
+  }
+
 	validaAba3Options() {
 	  if(this.edatService.eDAT.acidenteDat[0].tipoAcidente == "") {
       this.popupController.showPopupMessage("Atenção!",
       'Favor informar o tipo de acidente.', true);
-		return false;
-	  }
+        this.marcaLabelInvalido('label-tipo-acid-obrigatorio');
+		    return false;
+	  } else { this.desmarcaLabelInvalido('label-tipo-acid-obrigatorio'); }
 
 	  if(this.edatService.eDAT.acidenteDat[0].zona == "") {
       this.popupController.showPopupMessage("Atenção!",
       'Favor informar a zona em que o acidente ocorreu.', true);
+        this.marcaLabelInvalido('label-zona-obrigatorio');
       return false;
-	  }
+    } else { this.desmarcaLabelInvalido('label-zona-obrigatorio'); }
 
 	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
 	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
