@@ -212,15 +212,15 @@ export class CadastroDatComponent implements OnInit {
   /* Validacao de perguntas */
   validarPerguntas(){
     let validacao = true;
-	validacao = this.validarTotalRespostas();
-	if(!validacao)
-		return validacao;
+  	validacao = this.validarTotalRespostas();
+  	if(!validacao)
+  		return validacao;
 
-	validacao = this.validarRespostasEsperadas();
+  	validacao = this.validarRespostasEsperadas();
 
-	if(!validacao)
-		$('#modalAlertaRegras').modal('show');
-	return validacao;
+  	if(!validacao)
+  		$('#modalAlertaRegras').modal('show');
+  	return validacao;
 
   }
 
@@ -228,26 +228,28 @@ export class CadastroDatComponent implements OnInit {
     if(this.edatService.perguntas.length == 0)
 		return false;
     for (let p of this.edatService.perguntas) {
-		if(p.resposta.length == 0) {
-      this.popupController.showPopupMessage("Atenção!",
-      'Por favor, responda todas as perguntas antes de prosseguir com o registro da eDAT.', true);
+  		if(p.resposta.length == 0) {
+        this.popupController.showPopupMessage("Atenção!",
+        'Por favor, responda todas as perguntas antes de prosseguir com o registro da eDAT.', true);
 
-			return false;
-		}
-	}
+  			return false;
+  		}
+  	}
 	return true;
   }
 
   validarRespostasEsperadas() {
     this.edatService.respostasInvalidas = new Array();
     for (let index in this.edatService.resultadoPerguntas) {
-		if(this.edatService.resultadoPerguntas[index].resposta != this.edatService.perguntas[index].resposta ) {
-			this.edatService.respostasInvalidas.push(this.edatService.resultadoPerguntas[index]);
-		}
-	}
-	if(this.edatService.respostasInvalidas.length == 0)
-		return true;
-	return false;
+  		if(this.edatService.resultadoPerguntas[index].resposta != this.edatService.perguntas[index].resposta ) {
+  			this.edatService.respostasInvalidas.push(this.edatService.resultadoPerguntas[index]);
+  		}
+  	}
+
+    if(this.edatService.respostasInvalidas.length == 0)
+  		return true;
+
+    return false;
   }
 
   /* Validacao dos dados seu-veiculo */

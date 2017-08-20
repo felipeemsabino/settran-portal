@@ -3,7 +3,6 @@
 		<div *ngFor='let pergunta of edatService.perguntas;let currentElementIndex = index;'>
 			<h4>{{pergunta.descricaoRegra}}</h4>
 			<div>
-				<label>Resposta</label> <br>
 				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'S'" (change)="alteraResposta(pergunta.id, 'S');" >Sim</label>
 				<label><input type="radio" name="radiogroup{{currentElementIndex}}" [checked]="pergunta.resposta == 'N'" (change)="alteraResposta(pergunta.id, 'N');" >Não</label>
 			</div>
