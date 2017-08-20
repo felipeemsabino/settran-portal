@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./validar-dat.component.css']
 })
 export class ValidarDatComponent implements OnInit {
+  gridTitle: string = "Validar eDAT";
 
   constructor() { }
 

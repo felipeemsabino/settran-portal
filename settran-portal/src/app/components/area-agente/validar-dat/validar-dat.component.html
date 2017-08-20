@@ -1,3 +1,15 @@
-<p>
-  validar-dat works!
-</p>
+<app-grid
+  [gridTitle]="gridTitle"
+  [service]="3"
+  [paginated]="false"
+  [reorder]="false"
+  [search]="false"
+  (onObjectChange)="updateObjectParameter($event)"
+  [row_detail]="{'isModal':true,'modalName':'#agenteModal'}"
+  [columns]="[
+	{'name':'#','filter':false,'attr':''},
+	{'name':'Número','filter':false,'attr':'numero'},
+	{'name':'Solicitante', 'filter':false, 'attr':'solicitante'},
+  {'name':'Data Limite Parecer', 'filter':false, 'attr':'dataLimite'}]" >
+</app-grid>
+<app-popup-agente [object]="object"></app-popup-agente>

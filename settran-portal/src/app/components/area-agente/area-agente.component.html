@@ -1,3 +1,16 @@
-<p>
-  area-agente works!
-</p>
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" style="background-color:#F0E68C !important;text-align:center !important;color:black !important;font-weight:bold !important;">
+			<a style="text-align:center;text-weight:bolder;color:black;" href="javascript:;" data-toggle="tab">Menu</a></li>
+        <li role="presentation"><a style="color: black !important;" href="javascript:;" [routerLink]="['validar-dat']">Validar DAT</a></li>
+        <li role="presentation"><a style="color: black !important;" href="javascript:;" [routerLink]="['revisar-dat']">Revisar eDAT</a></li>
+      </ul>
+    </div>
+    <div class="col-md-9 middle-panel">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

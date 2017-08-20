@@ -38,6 +38,7 @@ import { EDATService } from './components/shared/services/e-dat.service';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { ConsultadatService } from './components/area-municipe/consulta-dat/services/consultadat.service';
 import { PopupControllerComponent } from './components/shared/popup-controller/popup-controller.component';
+import { ValidardatService } from './components/area-agente/validar-dat/services/validardat.service';
 
 const appRoutes: Routes = [
 	  {
@@ -47,9 +48,17 @@ const appRoutes: Routes = [
 		path: 'area-admin',
 		component: AreaAdminComponent,
 		  children: [
-			{ path: 'cadastro-agente', component: CadastroAgenteComponent },
-			{ path: 'cadastro-regra', component: CadastroRegraComponent },
-			{ path: 'cadastro-faq', component: CadastroFaqComponent }
+				{ path: 'cadastro-agente', component: CadastroAgenteComponent },
+				{ path: 'cadastro-regra', component: CadastroRegraComponent },
+				{ path: 'cadastro-faq', component: CadastroFaqComponent }
+		  ]
+	  },
+	  {
+		path: 'area-agente',
+		component: AreaAgenteComponent,
+		  children: [
+				{ path: 'validar-dat', component: ValidarDatComponent },
+				{ path: 'revisar-dat', component: RevisarDatComponent }
 		  ]
 	  },
 	  {
@@ -117,7 +126,11 @@ const appRoutes: Routes = [
     },
     {
       provide: 'IDataService', useClass: FaqService, multi: true
-    }, EDATService, ConsultadatService, PopupControllerComponent! ],
+    },
+    {
+      provide: 'IDataService', useClass: ValidardatService, multi: true
+    },
+		EDATService, ConsultadatService, PopupControllerComponent! ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
