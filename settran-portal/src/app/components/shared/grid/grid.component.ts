@@ -15,6 +15,7 @@ export class GridComponent implements OnInit {
   @Input('paginated') isPaginated: boolean;
   @Input('reorder') reorder: boolean;
   @Input('search') search: boolean;
+  @Input('create') create: boolean;
   @Input('service') service: number;
   @Input('row_detail') rowDetail: any;
   @Input('columns') columnsConfiguration: any;
@@ -121,7 +122,7 @@ export class GridComponent implements OnInit {
   }
 
   callObjectWindow(object: any) {
-	this.onObjectChange.emit(object);
+	   this.onObjectChange.emit(object);
   }
 
   moveUp(rowNumber: any) {

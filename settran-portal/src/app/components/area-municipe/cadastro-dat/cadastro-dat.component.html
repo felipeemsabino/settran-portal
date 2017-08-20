@@ -20,24 +20,24 @@
 		  </router-outlet>
 	  </div>
 	  <div class="panel-footer">
-		<div class="row" style="text-align: center;">
-		  <div class="col col-md-4">
-			<button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
-		  </div>
-		  <div class="col col-md-4">
-			<button href="#top" type="button" class="btn btn-success" (click)="changePage('back');" *ngIf="currentPage !== getPergPreliminaresUrl();">
-				<< Voltar</button>
-		  </div>
-		  <div class="col col-md-4">
-			<button type="button" class="btn btn-primary" (click)="changePage('next');" *ngIf="currentPage !== getResumoUrl();">
-				Próximo >></button>
-			<button type="button" class="btn btn-primary" (click)="confirmar();" *ngIf="currentPage === getResumoUrl();"
-			  style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Confirmar</button>
-		  </div>
-		</div>
-		<div class="row" style="text-align: center; padding-top: 10px;">
-		  <label>Identificamos seu IP: {{edatService.eDAT.ipRequisicao}}</label>
-		</div>
+			<div class="row" style="text-align: center;">
+			  <div class="col col-md-4">
+				<button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
+			  </div>
+			  <div class="col col-md-4">
+				<button href="#top" type="button" class="btn btn-success" (click)="changePage('back');" *ngIf="currentPage !== getPergPreliminaresUrl();">
+					<< Voltar</button>
+			  </div>
+			  <div class="col col-md-4">
+				<button type="button" class="btn btn-primary" (click)="changePage('next');" *ngIf="currentPage !== getResumoUrl();">
+					Próximo >></button>
+				<button type="button" class="btn btn-primary" (click)="confirmar();" *ngIf="currentPage === getResumoUrl();"
+				  style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Confirmar</button>
+			  </div>
+			</div>
+			<div class="row" style="text-align: center; padding-top: 10px;">
+			  <label>Identificamos seu IP: {{edatService.eDAT.ipRequisicao}}</label>
+			</div>
 	  </div>
 	</div>
 </div>

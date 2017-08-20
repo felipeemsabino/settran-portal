@@ -19,10 +19,13 @@ export class HomeComponent implements OnInit {
               private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
-
-    	setTimeout(function() {
-    	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
-    	}, 500);
+    $(document).ready(function() {
+      $('.equal-height-panels .panel').matchHeight();
+      $.fn.matchHeight.update();
+    });
+  	setTimeout(function() {
+  	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
+  	}, 500);
   }
 
 	registerCredentials: any = {usuario: '', senha: ''};
@@ -67,11 +70,11 @@ export class HomeComponent implements OnInit {
   }
 
   entrar () {
-    /*if(this.registerCredentials.usuario === 'agente' && this.registerCredentials.senha === 'agente') {
+    if(this.registerCredentials.usuario === 'agente' && this.registerCredentials.senha === 'agente') {
       this.router.navigate(['/area-agente']);
     } else if(this.registerCredentials.usuario === 'admin' && this.registerCredentials.senha === 'admin') {
       this.router.navigate(['/area-admin']);
-    }*/
+    }
 
     if(!this.validaCamposLogin()){
       return false;

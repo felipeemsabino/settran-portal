@@ -2,7 +2,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading clearfix" style="background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">{{gridTitle}}
 	<div class="pull-right">
-		<button type="button" class="btn btn-primary" (click)="callObjectWindow({})" 
+		<button *ngIf="create" type="button" class="btn btn-primary" (click)="callObjectWindow({})"
 			attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
 			attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}">
 		  <span class="glyphicon glyphicon-plus"></span> Novo
@@ -37,23 +37,23 @@
         </thead>
         <tbody>
           <tr *ngFor='let fData of fetchedData; let currentElementIndex = index;'>
-			<td *ngIf="reorder===true" style="text-align:center;padding: 0px;vertical-align: middle;">
-				<div class="row" *ngIf="currentElementIndex > 0">
-				  <span class="glyphicon glyphicon glyphicon-chevron-up arrow-icon" style="cursor:pointer;" (click)="moveUp(currentElementIndex);"></span>
-				</div>
-				<div class="row" *ngIf="currentElementIndex < fetchedData.length-1">
-				  <span class="glyphicon glyphicon glyphicon-chevron-down arrow-icon" style="cursor:pointer;" (click)="moveDown(currentElementIndex);"></span>
-				</div>
-			</td>
-            <td 
-			  style="cursor:pointer;text-align:center"
-              (click)="callObjectWindow(fData)" 	
-			  attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
-			  attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}"
-			  [ngClass]="column.class"
-			  *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ? currentElementIndex : fData[column.attr]}}
-			</td>
-		  </tr>
+      			<td *ngIf="reorder===true" style="text-align:center;padding: 0px;vertical-align: middle;">
+      				<div class="row" *ngIf="currentElementIndex > 0">
+      				  <span class="glyphicon glyphicon glyphicon-chevron-up arrow-icon" style="cursor:pointer;" (click)="moveUp(currentElementIndex);"></span>
+      				</div>
+      				<div class="row" *ngIf="currentElementIndex < fetchedData.length-1">
+      				  <span class="glyphicon glyphicon glyphicon-chevron-down arrow-icon" style="cursor:pointer;" (click)="moveDown(currentElementIndex);"></span>
+      				</div>
+      			</td>
+            <td
+              style="cursor:pointer;text-align:center"
+              (click)="callObjectWindow(fData)"
+              attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
+              attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}"
+              [ngClass]="column.class"
+              *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ? currentElementIndex : fData[column.attr]}}
+             </td>
+    		  </tr>
         </tbody>
       </table>
     </div>

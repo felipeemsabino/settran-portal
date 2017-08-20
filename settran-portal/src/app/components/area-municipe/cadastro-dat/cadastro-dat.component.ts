@@ -32,6 +32,8 @@ export class CadastroDatComponent implements OnInit {
 
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 
+    this.edatService.limparDados();
+    
   	parentRouter.events.subscribe((val) => {
     	  if(val instanceof NavigationEnd) {
             this.currentPage = val.url;
