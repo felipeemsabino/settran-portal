@@ -62,6 +62,7 @@ export class CadastroDatComponent implements OnInit {
      var txt;
      var r = confirm("Tem certeza que deseja cancelar o registro da DAT?");
      if (r == true) {
+       this.edatService.cancelarEDAT();
        this.parentRouter.navigate(['']);
      }
   }

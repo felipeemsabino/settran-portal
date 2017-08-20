@@ -33,181 +33,359 @@ export class EDATService {
 	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>."
   };
 
+  cancelarEDAT() {
+    /*this.eDAT = {
+      "isPropietario" : "",
+      "renavam": "",
+      "placa": "",
+      "marcaVeiculo": "",
+      "modeloVeiculo": "",
+      "chassi": "",
+      "tipoVeiculo": {
+        "id": ""
+      },
+      "acidenteDat": [{
+        "tipoAcidente": "",
+        "dataAcidente": "",
+        "horaAcidente": "",
+        "zona": "",
+        "logradouro":{
+              },
+        "numeroEndereco": "",
+        "logradouroCruzamento": {
+        }, "numeroLogradouroAcidenteCruzamento":""
+      }],
+      "relatoDat":[ {
+        "descricaoRelatoAcidente": ""
+      }],
+      "cor": "",
+      "cnh": "",
+      "dataValidadeCNH": "",
+      "categoriaCnh": "",
+      "sexo": "",
+      "nomeMunicipe": "",
+      "dataNascimento": "",
+      "cpf": "",
+      "rg": "",
+      "orgaoExpedidor": "",
+      "emailMunicipe": "",
+      "logradouro":{
+        "id":"",
+        "nomeLogradouro":"",
+        "tipoLogradouro":"",
+        "nomeBairro":"",
+        "cep":"",
+        "nomeCidade":"",
+        "uf":""
+      },
+      "numeroEndereco": "",
+      "complementoEndereco": "",
+      "telefone": "",
+      "celular": "",
+      "ipRequisicao": "",
+      "codigoConfirmacaoDat": "",
+      "outrosVeiculosDat": [],
+      "testemunhasDat": [],
+      "fotosDat": [
+        {
+          "descricaoFoto": "",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "",
+          "urlFoto": "",
+          "decodeImagem":""
+        }
+      ],
+      "docPropietario": "",
+      "nomePropietario": "",
+      "enviouSms": "",
+      "numeroEnvioSms": "",
+      "emailEnviaConfirmacao": "",
+      "confirmacaoDados": "",
+      "temSeguro": ""
+    }*/
+      this.eDAT = {
+      "isPropietario" : "S",
+      "renavam": "12313",
+      "placa": "hax3321",
+      "marcaVeiculo": "",
+      "modeloVeiculo": "",
+      "chassi": "12321323112",
+      "tipoVeiculo": {
+        "id": ""
+      },
+      "acidenteDat": [{
+        "tipoAcidente": "",
+        "dataAcidente": "2017-07-29",
+        "horaAcidente": "",
+        "zona": "",
+        "logradouro":{
+              },
+        "numeroEndereco": "",
+        "logradouroCruzamento": {
+        }, "numeroLogradouroAcidenteCruzamento":""
+      }],
+      "relatoDat":[ {
+        "descricaoRelatoAcidente": ""
+      }],
+      "cor": "asdas",
+      "cnh": "2312321312",
+      "dataValidadeCNH": "2000-11-10",
+      "categoriaCnh": "A",
+      "sexo": "M",
+      "nomeMunicipe": "Felipe Eduardo Menezes Sabino",
+      "dataNascimento": "1987-03-30",
+      "cpf": "07046919658",
+      "rg": "13243028",
+      "orgaoExpedidor": "sspmmg",
+      "emailMunicipe": "felipeems87@gmail.com",
+      "logradouro":{
+        "id":"",
+        "nomeLogradouro":"",
+        "tipoLogradouro":"",
+        "nomeBairro":"",
+        "cep":"38400230",
+        "nomeCidade":"",
+        "uf":""
+      },
+      "numeroEndereco": "212",
+      "complementoEndereco": "",
+      "telefone": "11111111",
+      "celular": "111111111",
+      "ipRequisicao": "",
+      "codigoConfirmacaoDat": "",
+      "outrosVeiculosDat": [],
+      "testemunhasDat": [],
+      "fotosDat": [
+        {
+          "descricaoFoto": "asd 1",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "asd 2",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "asd 3",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "asd 4",
+          "urlFoto": "",
+          "decodeImagem":""
+        },
+        {
+          "descricaoFoto": "asd 5",
+          "urlFoto": "",
+          "decodeImagem":""
+        }
+      ],
+      "docPropietario": "12",
+      "nomePropietario": "Felipe",
+      "enviouSms": "",
+      "numeroEnvioSms": "",
+      "emailEnviaConfirmacao": "felipeems87@gmail.com",
+      "confirmacaoDados": "S",
+      "temSeguro": "S"
+    }
+
+  }
+
   constructor(private http: Http) {
-  /*this.eDAT = {
-		"isPropietario" : "",
-		"renavam": "",
-		"placa": "",
-		"marcaVeiculo": "",
-		"modeloVeiculo": "",
-		"chassi": "",
-		"tipoVeiculo": {
-			"id": ""
-		},
-		"acidenteDat": [{
-			"tipoAcidente": "",
-			"dataAcidente": "",
-			"horaAcidente": "",
-			"zona": "",
-			"logradouro":{
-            },
-			"numeroEndereco": "",
-			"logradouroCruzamento": {
-			}, "numeroLogradouroAcidenteCruzamento":""
-		}],
-		"relatoDat":[ {
-			"descricaoRelatoAcidente": ""
-		}],
-		"cor": "",
-		"cnh": "",
-		"dataValidadeCNH": "",
-		"categoriaCnh": "",
-		"sexo": "",
-		"nomeMunicipe": "",
-		"dataNascimento": "",
-		"cpf": "",
-		"rg": "",
-		"orgaoExpedidor": "",
-		"emailMunicipe": "",
-		"logradouro":{
-			"id":"",
-			"nomeLogradouro":"",
-			"tipoLogradouro":"",
-			"nomeBairro":"",
-			"cep":"",
-			"nomeCidade":"",
-			"uf":""
-		},
-		"numeroEndereco": "",
-		"complementoEndereco": "",
-		"telefone": "",
-		"celular": "",
-		"ipRequisicao": "",
-		"codigoConfirmacaoDat": "",
-		"outrosVeiculosDat": [],
-		"testemunhasDat": [],
-		"fotosDat": [
-			{
-				"descricaoFoto": "",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "",
-				"urlFoto": "",
-				"decodeImagem":""
-			}
-		],
-		"docPropietario": "",
-		"nomePropietario": "",
-		"enviouSms": "",
-		"numeroEnvioSms": "",
-		"emailEnviaConfirmacao": "",
-		"confirmacaoDados": "",
-		"temSeguro": ""
-	}*/
-    this.eDAT = {
-		"isPropietario" : "S",
-		"renavam": "12313",
-		"placa": "hax3321",
-		"marcaVeiculo": "",
-		"modeloVeiculo": "",
-		"chassi": "12321323112",
-		"tipoVeiculo": {
-			"id": ""
-		},
-		"acidenteDat": [{
-			"tipoAcidente": "",
-			"dataAcidente": "2017-07-29",
-			"horaAcidente": "",
-			"zona": "",
-			"logradouro":{
-            },
-			"numeroEndereco": "",
-			"logradouroCruzamento": {
-			}, "numeroLogradouroAcidenteCruzamento":""
-		}],
-		"relatoDat":[ {
-			"descricaoRelatoAcidente": ""
-		}],
-		"cor": "asdas",
-		"cnh": "2312321312",
-		"dataValidadeCNH": "2000-11-10",
-		"categoriaCnh": "A",
-		"sexo": "M",
-		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
-		"dataNascimento": "1987-03-30",
-		"cpf": "07046919658",
-		"rg": "13243028",
-		"orgaoExpedidor": "sspmmg",
-		"emailMunicipe": "felipeems87@gmail.com",
-		"logradouro":{
-			"id":"",
-			"nomeLogradouro":"",
-			"tipoLogradouro":"",
-			"nomeBairro":"",
-			"cep":"38400230",
-			"nomeCidade":"",
-			"uf":""
-		},
-		"numeroEndereco": "212",
-		"complementoEndereco": "",
-		"telefone": "11111111",
-		"celular": "111111111",
-		"ipRequisicao": "",
-		"codigoConfirmacaoDat": "",
-		"outrosVeiculosDat": [],
-		"testemunhasDat": [],
-		"fotosDat": [
-			{
-				"descricaoFoto": "asd 1",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "asd 2",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "asd 3",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "asd 4",
-				"urlFoto": "",
-				"decodeImagem":""
-			},
-			{
-				"descricaoFoto": "asd 5",
-				"urlFoto": "",
-				"decodeImagem":""
-			}
-		],
-		"docPropietario": "12",
-		"nomePropietario": "Felipe",
-		"enviouSms": "",
-		"numeroEnvioSms": "",
-		"emailEnviaConfirmacao": "felipeems87@gmail.com",
-		"confirmacaoDados": "S",
-		"temSeguro": "S"
-	}
+    /*this.eDAT = {
+  		"isPropietario" : "",
+  		"renavam": "",
+  		"placa": "",
+  		"marcaVeiculo": "",
+  		"modeloVeiculo": "",
+  		"chassi": "",
+  		"tipoVeiculo": {
+  			"id": ""
+  		},
+  		"acidenteDat": [{
+  			"tipoAcidente": "",
+  			"dataAcidente": "",
+  			"horaAcidente": "",
+  			"zona": "",
+  			"logradouro":{
+              },
+  			"numeroEndereco": "",
+  			"logradouroCruzamento": {
+  			}, "numeroLogradouroAcidenteCruzamento":""
+  		}],
+  		"relatoDat":[ {
+  			"descricaoRelatoAcidente": ""
+  		}],
+  		"cor": "",
+  		"cnh": "",
+  		"dataValidadeCNH": "",
+  		"categoriaCnh": "",
+  		"sexo": "",
+  		"nomeMunicipe": "",
+  		"dataNascimento": "",
+  		"cpf": "",
+  		"rg": "",
+  		"orgaoExpedidor": "",
+  		"emailMunicipe": "",
+  		"logradouro":{
+  			"id":"",
+  			"nomeLogradouro":"",
+  			"tipoLogradouro":"",
+  			"nomeBairro":"",
+  			"cep":"",
+  			"nomeCidade":"",
+  			"uf":""
+  		},
+  		"numeroEndereco": "",
+  		"complementoEndereco": "",
+  		"telefone": "",
+  		"celular": "",
+  		"ipRequisicao": "",
+  		"codigoConfirmacaoDat": "",
+  		"outrosVeiculosDat": [],
+  		"testemunhasDat": [],
+  		"fotosDat": [
+  			{
+  				"descricaoFoto": "",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			}
+  		],
+  		"docPropietario": "",
+  		"nomePropietario": "",
+  		"enviouSms": "",
+  		"numeroEnvioSms": "",
+  		"emailEnviaConfirmacao": "",
+  		"confirmacaoDados": "",
+  		"temSeguro": ""
+  	}*/
+      this.eDAT = {
+  		"isPropietario" : "S",
+  		"renavam": "12313",
+  		"placa": "hax3321",
+  		"marcaVeiculo": "",
+  		"modeloVeiculo": "",
+  		"chassi": "12321323112",
+  		"tipoVeiculo": {
+  			"id": ""
+  		},
+  		"acidenteDat": [{
+  			"tipoAcidente": "",
+  			"dataAcidente": "2017-07-29",
+  			"horaAcidente": "",
+  			"zona": "",
+  			"logradouro":{
+              },
+  			"numeroEndereco": "",
+  			"logradouroCruzamento": {
+  			}, "numeroLogradouroAcidenteCruzamento":""
+  		}],
+  		"relatoDat":[ {
+  			"descricaoRelatoAcidente": ""
+  		}],
+  		"cor": "asdas",
+  		"cnh": "2312321312",
+  		"dataValidadeCNH": "2000-11-10",
+  		"categoriaCnh": "A",
+  		"sexo": "M",
+  		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
+  		"dataNascimento": "1987-03-30",
+  		"cpf": "07046919658",
+  		"rg": "13243028",
+  		"orgaoExpedidor": "sspmmg",
+  		"emailMunicipe": "felipeems87@gmail.com",
+  		"logradouro":{
+  			"id":"",
+  			"nomeLogradouro":"",
+  			"tipoLogradouro":"",
+  			"nomeBairro":"",
+  			"cep":"38400230",
+  			"nomeCidade":"",
+  			"uf":""
+  		},
+  		"numeroEndereco": "212",
+  		"complementoEndereco": "",
+  		"telefone": "11111111",
+  		"celular": "111111111",
+  		"ipRequisicao": "",
+  		"codigoConfirmacaoDat": "",
+  		"outrosVeiculosDat": [],
+  		"testemunhasDat": [],
+  		"fotosDat": [
+  			{
+  				"descricaoFoto": "asd 1",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "asd 2",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "asd 3",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "asd 4",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			},
+  			{
+  				"descricaoFoto": "asd 5",
+  				"urlFoto": "",
+  				"decodeImagem":""
+  			}
+  		],
+  		"docPropietario": "12",
+  		"nomePropietario": "Felipe",
+  		"enviouSms": "",
+  		"numeroEnvioSms": "",
+  		"emailEnviaConfirmacao": "felipeems87@gmail.com",
+  		"confirmacaoDados": "S",
+  		"temSeguro": "S"
+  	}
   }
 
   enviarEDAT() {

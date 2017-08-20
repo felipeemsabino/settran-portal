@@ -130,7 +130,7 @@ const appRoutes: Routes = [
     {
       provide: 'IDataService', useClass: ValidardatService, multi: true
     },
-		EDATService, ConsultadatService, PopupControllerComponent! ],
+		EDATService, ConsultadatService, PopupControllerComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

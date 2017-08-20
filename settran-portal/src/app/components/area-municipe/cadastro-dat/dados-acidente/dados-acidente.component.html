@@ -4,24 +4,50 @@
 		<div class="row">
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Abalroamento'" (change)="alteraTipoAcidente('Abalroamento');" >Abalroamento</label>
-				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipAbalroamento}}"></span>
+				<span
+					rel="popover"
+					data-img="/assets/Icones-eDAT-01.png"
+					style="width:50px"
+					title="Abalroamento: ocorre quando um veículo em movimento é colhido lateral ou transversalmente, por um veículo, também em movimento."
+					class='glyphicon glyphicon-question-sign'>
+				</span>
 			</div>
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Choque'" (change)="alteraTipoAcidente('Choque');" >Choque</label>
-				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipChoque}}"></span>
-			</div>
+				<span
+					rel="popover"
+					data-img="/assets/Icones-eDAT-02.png"
+					style="width:50px"
+					title="Choque: é o impacto de um veículo em movimento contra qualquer obstáculo: poste, muro, árvore, etc., inclusive com outro veículo estacionado ou parado."
+					class='glyphicon glyphicon-question-sign'>
+				</span>			</div>
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Tombamento'" (change)="alteraTipoAcidente('Tombamento');" >Tombamento</label>
-				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipTombamento}}"></span>
-			</div>
+				<span
+					rel="popover"
+					data-img="/assets/Icones-eDAT-03.png"
+					style="width:50px"
+					title="Tombamento: ocorre quando o veículo sai de sua posição normal, se imobilizando sobre uma de suas laterais, sua frente ou sua traseira."
+					class='glyphicon glyphicon-question-sign'>
+				</span>			</div>
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Colisão'" (change)="alteraTipoAcidente('Colisão');" >Colisão</label>
-				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipColisao}}"></span>
-			</div>
+				<span
+					rel="popover"
+					data-img="/assets/Icones-eDAT-04.png"
+					style="width:50px"
+					title="Colisão: é o impacto de dois ou mais veículos em movimento, frente a frente ou pela traseira."
+					class='glyphicon glyphicon-question-sign'>
+				</span>			</div>
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Capotamento'" (change)="alteraTipoAcidente('Capotamento');" >Capotamento</label>
-				<span class='glyphicon glyphicon-question-sign' data-toggle="tooltip" title="{{tooltipCapotamento}}"></span>
-			</div>
+				<span
+					rel="popover"
+					data-img="/assets/Icones-eDAT-05.png"
+					style="width:50px"
+					title="Capotamento: quando um veículo em movimento gira em qualquer sentido, ficando com as rodas para cima, mesmo que momentaneamente."
+					class='glyphicon glyphicon-question-sign'>
+				</span>			</div>
 			<div class="col-md-2">
 				<label class='label-tipo-acid-obrigatorio'><input type="radio" name="tipoAcidente" [checked]="edatService.eDAT.acidenteDat[0].tipoAcidente == 'Outro'" (change)="alteraTipoAcidente('Outro');" >Outro</label>
 			</div>
@@ -30,21 +56,21 @@
 	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Dados do Acidente</legend>
 		<div class="row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-2">
 			  <label class="control-label" for="dataAcidente">Data</label>
 			  <input type="date" class="form-control" id="dataAcidente" [(ngModel)]="edatService.eDAT.acidenteDat[0].dataAcidente">
 			</div>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-2">
 			  <label class="control-label" for="horaAcidente">Hora</label>
 			  <input type="time" class="form-control" id="horaAcidente" [(ngModel)]="edatService.eDAT.acidenteDat[0].horaAcidente">
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-2">
 			  <label class="control-label" for="municipio">Município</label>
 			  <input type="text" class="form-control" id="municipio" readonly [(ngModel)]="this.edatService.eDAT.acidenteDat[0].logradouro.nomeCidade">
 			</div>
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-2">
 			  <label class="control-label" for="bairro">Bairro</label>
 			  <input type="text" class="form-control" id="bairro" readonly [(ngModel)]="edatService.eDAT.acidenteDat[0].logradouro.nomeBairro">
 			</div>

@@ -12,7 +12,6 @@ declare var $:any; // JQUERY
   providers: [RegrasService]
 })
 export class PerguntasPreliminaresComponent implements OnInit {
-
   params: URLSearchParams;
   perguntas: any[];
   perguntasUsuario: any[];
@@ -21,9 +20,8 @@ export class PerguntasPreliminaresComponent implements OnInit {
   }
 
   ngOnInit() {
-
-	if(this.edatService.resultadoPerguntas.length == 0)
-	  this.getData();
+    if(this.edatService.resultadoPerguntas.length == 0)
+	    this.getData();
   }
 
   getData() {
