@@ -3,6 +3,7 @@ import { EDATService } from '../../../shared/services/e-dat.service';
 import { VeiculoService } from '../../../shared/services/veiculo.service';
 import { EnderecoService } from '../../../shared/services/endereco.service';
 import { URLSearchParams } from '@angular/http';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -14,7 +15,8 @@ declare var $:any; // JQUERY
 })
 export class SeuVeiculoComponent implements OnInit {
 
-  constructor(public edatService: EDATService, private veiculoService: VeiculoService, private enderecoService: EnderecoService) {
+  constructor(public edatService: EDATService, private veiculoService: VeiculoService,
+    private enderecoService: EnderecoService, private popupController: PopupControllerComponent) {
   }
 
   ngOnInit() {
@@ -31,9 +33,14 @@ export class SeuVeiculoComponent implements OnInit {
   resetMasks() {
 	setTimeout(function() {
 		$('.cep').mask('00000-000');
-		$('.phone').mask('0000-0000');
+		$('.phone').mask('(00) 0000-0000');
 		$('.phone_with_ddd').mask('(00) 00000-0000');
 		$('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.placa').mask('SSS-0000');
+    $('.renavam').mask('00000000000');
+    $('.cnh').mask('00000000000');
+    $('.categoria-cnh').mask('SSS');
+
 	}, 500);
   }
 
@@ -70,7 +77,7 @@ export class SeuVeiculoComponent implements OnInit {
     this.veiculoService.getTiposVeiculo(new URLSearchParams())
                       .subscribe(
                           result => {
-							this.edatService.tiposVeiculo = result;
+							             this.edatService.tiposVeiculo = result;
                           }, //Bind to view
                           err => {
                             console.log(err);
@@ -79,90 +86,93 @@ export class SeuVeiculoComponent implements OnInit {
 
   getMarcasVeiculo() {
     let tipoVeiculoDesc = $("#tipoVeiculo option:selected").text();
-	let tipoVeiculoVal = $( '#tipoVeiculo' ).val();
+    let tipoVeiculoVal = $( '#tipoVeiculo' ).val();
 
     if(tipoVeiculoVal === "") {
-	  return;
-	}
+  	  return;
+  	}
 
 	this.edatService.eDAT.tipoVeiculo.id = tipoVeiculoVal;
 
-	$('#loadingModal').modal('show'); // abre loadingModal
+  this.popupController.showPopupMessage("Atenção!",
+  'Carregando marcas.', false);
 
 	this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc)
 				  .subscribe(
 					  result => {
-						console.log(this.edatService);
-						this.edatService.seuVeiculoMarcas = result;
-						this.edatService.seuVeiculoModelos = new Array();
+  						console.log(this.edatService);
+  						this.edatService.seuVeiculoMarcas = result;
+  						this.edatService.seuVeiculoModelos = new Array();
 
-						$('#loadingModal').modal('hide'); // fecha modal
+  						this.popupController.hidePopupMessage();
 					  }, //Bind to view
 					  err => {
-						console.log(err);
-
-						$('#loadingModal').modal('hide'); // fecha modal
+  						console.log(err);
+              this.popupController.showPopupMessage("Atenção!",
+              'Não foi possível carregar as marcas.', true);
 					  });
   }
 
   getModelosVeiculo(){
     let tipoVeiculoDesc = $("#tipoVeiculo option:selected").text();
-	let tipoVeiculoVal = $( '#tipoVeiculo' ).val();
-	let marcaVeiculoVal = $( '#marcaVeiculo' ).val();
+  	let tipoVeiculoVal = $( '#tipoVeiculo' ).val();
+  	let marcaVeiculoVal = $( '#marcaVeiculo' ).val();
     let marcaVeiculoDesc = $("#marcaVeiculo option:selected").text();
 
     if(tipoVeiculoVal === "" || marcaVeiculoVal === "") {
-	  return;
-	}
+  	  return;
+  	}
 
 	this.edatService.eDAT.marcaVeiculo = marcaVeiculoDesc;
 
-	$('#loadingModal').modal('show'); // abre loadingModal
+  this.popupController.showPopupMessage("Atenção!",
+  'Carregando modelos.', false);
 
 	this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal)
 				  .subscribe(
 					  result => {
 						this.edatService.seuVeiculoModelos = result;
-
-						$('#loadingModal').modal('hide'); // fecha modal
+            this.popupController.hidePopupMessage();
 					  }, //Bind to view
 					  err => {
 						console.log(err);
 
-						$('#loadingModal').modal('hide'); // fecha modal
-					  });
+            this.popupController.showPopupMessage("Atenção!",
+            'Não foi possível carregar os modelos.', true);					  });
   }
 
   setModeloVeiculo () {
     let modeloVeiculoDesc = $("#modeloVeiculo option:selected").text();
-
-	this.edatService.eDAT.modeloVeiculo = modeloVeiculoDesc;
+	  this.edatService.eDAT.modeloVeiculo = modeloVeiculoDesc;
   }
 
   getCEP() { //38411876
-	let cep = $( '#cep' ).val();
+	   let cep = $( '#cep' ).val();
 
     if(cep === "") {
-	  return;
-	}
+      return;
+    }
 
-	let params: URLSearchParams = new URLSearchParams();
-	params.set("cep", cep.replace(/\D/g,'')); // remove nao numericos
+  	let params: URLSearchParams = new URLSearchParams();
+  	params.set("cep", cep.replace(/\D/g,'')); // remove nao numericos
 
-	$('#loadingModal').modal('show'); // abre loadingModal
+    this.popupController.showPopupMessage("Atenção!",
+    'Buscando endereço.', false);
 
-	this.enderecoService.getCEP(params)
-				  .subscribe(
-					  result => {
-						if(result.length > 0) {
-						  this.edatService.eDAT.logradouro = result[0];
-						  console.log(this.edatService.eDAT);
-						}
-						$('#loadingModal').modal('hide'); // fecha modal
-					  }, //Bind to view
-					  err => {
-						console.log(err);
-					  });
+  	this.enderecoService.getCEP(params)
+  				  .subscribe(
+  					  result => {
+    						if(result.length > 0) {
+    						  this.edatService.eDAT.logradouro = result[0];
+    						  console.log(this.edatService.eDAT);
+    						}
+                this.popupController.hidePopupMessage();
+              }, //Bind to view
+  					  err => {
+    						console.log(err);
+                this.popupController.showPopupMessage("Atenção!",
+                'Não foi possível buscar o endereço.', false);
+  					  });
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { EDATService } from '../../shared/services/e-dat.service';
+import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -22,16 +23,19 @@ export class CadastroDatComponent implements OnInit {
 
   eDAT: any;
   currentPage: string;
+  aba: number;
 
-  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute, public edatService: EDATService) {
+  constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
+    public edatService: EDATService, private popupController: PopupControllerComponent) {
+    this.aba = 1;
 
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 
-	parentRouter.events.subscribe((val) => {
-	  if(val instanceof NavigationEnd) {
-        this.currentPage = val.url;
-	  }
-    });
+  	parentRouter.events.subscribe((val) => {
+    	  if(val instanceof NavigationEnd) {
+            this.currentPage = val.url;
+    	  }
+      });
   }
 
   ngOnInit() {
@@ -39,17 +43,23 @@ export class CadastroDatComponent implements OnInit {
   }
 
   cancelar() {
-	alert('cancelar');
+	   alert('cancelar');
   }
 
   changePage(action: string) {
-	if(action == "back")
-	  this.voltar();
-	else if (action == "next")
-	  this.avancar();
+  	if(action == "back")
+  	  this.voltar();
+  	else if (action == "next")
+  	  this.avancar();
   }
 
   voltar() {
+
+  $("html,body").scrollTop(100);
+  if(this.aba > 1)
+    this.aba--;
+  $('#aba'+this.aba).css('background-color','#F0E68C');
+  $('#aba'+(this.aba+1)).css('background-color','transparent');
 
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
@@ -89,9 +99,16 @@ export class CadastroDatComponent implements OnInit {
   }
 
   avancar() {
-	if(!this.validarEmail()){
+
+  $("html,body").scrollTop(100); // mantem scroll no topo
+  if(this.aba < 8) // recupera id da aba
+    this.aba++;
+  $('#aba'+this.aba).css('background-color','#F0E68C'); // altera cor de background das abas
+  $('#aba'+(this.aba-1)).css('background-color','transparent');
+
+  /*if(!this.validarEmail()){
 		return false;
-	}
+	}*/
 
 	switch(this.currentPage) {
 	  case CadastroDatComponent.PERGUNTAS_PRELIMINARES: {
@@ -123,7 +140,10 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.TESTEMUNHAS: {
-		this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
+      if(!this.validaDataNascTestemunha())
+        break;
+
+		  this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
 	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
 	    break;
 	  }
@@ -152,32 +172,28 @@ export class CadastroDatComponent implements OnInit {
   	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   	if(!$('.email').val().match(re)) {
-  		alert('Por favor, entre com um email válido.');
+      this.popupController.showPopupMessage("Atenção!", 'Por favor, entre com um email válido.', true);
   		return false;
   	}
   	return true;
   }
-  
+
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
 
 		//console.log(JSON.stringify(this.edatService.eDAT));
-
-		$('#loadingModal').modal('show'); // fecha modal
 		this.edatService.enviarEDAT()
 				  .subscribe(
 					  result => {
-						alert('e-DAT criada com sucesso!');
-						$('#loadingModal').modal('hide'); // fecha modal
+            this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
 					  }, //Bind to view
 					  err => {
 						console.log(err);
-						alert('Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!');
-						$('#loadingModal').modal('hide'); // fecha modal
+            this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!', true);
 					  });
-	} else {
-		alert('Necessário aceitar os termos e condições antes de prosseguir.');
-	}
+  	} else {
+      this.popupController.showPopupMessage("Atenção!", 'Necessário aceitar os termos e condições antes de prosseguir!', true);
+  	}
   }
 
   getPergPreliminaresUrl() {
@@ -208,7 +224,9 @@ export class CadastroDatComponent implements OnInit {
 		return false;
     for (let p of this.edatService.perguntas) {
 		if(p.resposta.length == 0) {
-			alert('Por favor, responda todas as perguntas antes de prosseguir com o registro da DAT.');
+      this.popupController.showPopupMessage("Atenção!",
+      'Por favor, responda todas as perguntas antes de prosseguir com o registro da eDAT.', true);
+
 			return false;
 		}
 	}
@@ -232,15 +250,19 @@ export class CadastroDatComponent implements OnInit {
     validarAbaSeuVeiculo(){
       let validacao = true;
 
-	  validacao = this.validaDadosObrigatorios();
-	  if(!validacao)
-		return validacao;
+  	  validacao = this.validaDadosObrigatorios();
+  	  if(!validacao)
+  		return validacao;
 
-	  validacao = this.validaAba2Email();
-	  if(!validacao)
-		return validacao;
+  	  validacao = this.validaAba2Email();
+  	  if(!validacao)
+  		return validacao;
 
-	  return validacao;
+  	  validacao = this.validaDataNascimento();
+  	  if(!validacao)
+  		return validacao;
+
+  	  return validacao;
 	}
 
 	validaDadosObrigatorios () {
@@ -249,59 +271,100 @@ export class CadastroDatComponent implements OnInit {
 
 	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
-		camposNaoPreenchidos.parent().addClass('has-error');
-		alert('Favor preencher todos os campos obrigatórios.');
-		return false;
+      camposNaoPreenchidos.parent().addClass('has-error');
+
+      this.popupController.showPopupMessage("Atenção!",
+      'Favor preencher todos os campos obrigatórios.', true);
+
+      return false;
 	  }
 
 	  return true;
 	}
 
-	validaAba2Email() {
+  validaAba2Email() {
 	  let camposEmails = $( ".form-group.municipe-email" );
 	  camposEmails.removeClass('has-error');
 	  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 
 	  if( !$( "#emailMunicipe" ).val().match(emailRegex) ) {
-	    alert('Favor inserir um e-mail válido.');
-		camposEmails.addClass('has-error');
-		return false;
+
+      this.popupController.showPopupMessage("Atenção!",
+      'Favor inserir um e-mail válido.', true);
+      camposEmails.addClass('has-error');
+      return false;
 	  }
 
 	  if ( $( "#emailMunicipe" ).val() != $( "#emailMunicipeConfirm" ).val() ){
-	    alert('E-mails não conferem.');
-		camposEmails.addClass('has-error');
-		return false;
+      this.popupController.showPopupMessage("Atenção!",
+      'Os e-mails informados não conferem.', true);
+      camposEmails.addClass('has-error');
+      return false;
 	  }
 
 	  return true;
 	}
 
+  validaDataNascTestemunha(){
+    for(let testemunha of this.edatService.eDAT.testemunhasDat) {
+      let hoje = new Date().getTime();
+  	  let dataNascimento = new Date(testemunha.dataNascimento).getTime();
+  	  if(hoje <= dataNascimento) {
+          this.popupController.showPopupMessage("Atenção!",
+          'Data de nascimento inválida.', true);
+  	      return false;
+  	  }
+    }
+    return true;
+  }
+
+  validaDataNascimento() {
+    let hoje = new Date().getTime();
+	  let dataNascimento = new Date(this.edatService.eDAT.dataNascimento).getTime();
+	  if(hoje <= dataNascimento) {
+        this.popupController.showPopupMessage("Atenção!",
+        'Data de nascimento inválida.', true);
+	      return false;
+	  }
+	  return true;
+  }
+
 	validaAba3Options() {
 	  if(this.edatService.eDAT.acidenteDat[0].tipoAcidente == "") {
-	    alert('Favor informar o tipo de acidente.');
+      this.popupController.showPopupMessage("Atenção!",
+      'Favor informar o tipo de acidente.', true);
 		return false;
 	  }
 
 	  if(this.edatService.eDAT.acidenteDat[0].zona == "") {
-	    alert('Favor informar a zona.');
-		return false;
+      this.popupController.showPopupMessage("Atenção!",
+      'Favor informar a zona em que o acidente ocorreu.', true);
+      return false;
 	  }
 
 	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
 	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
 	  if(dataAcidente < dataLimite) {
-		alert('Não é possível registrar eDAT com data do acidente anterior a 30 dias!');
-		return false;
+      this.popupController.showPopupMessage("Atenção!",
+      'Não é possível registrar eDAT com data do acidente anterior a 30 dias!', true);
+      return false;
 	  }
-	  return true;
+
+    let hoje = new Date().getTime();
+	  if(hoje <= dataAcidente) {
+        this.popupController.showPopupMessage("Atenção!",
+        'Não é possível registrar eDAT com data do acidente futura!', true);
+	      return false;
+	  }
+	     return true;
 	}
 
 	validaAba4Options() {
 	  for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
 	    if(veiculo.temSeguro == "") {
-		  alert('Favor informar se os veículos possuem seguro.');
-		  return false;
+        this.popupController.showPopupMessage("Atenção!",
+        'Por favor, informe se os veículos possuem seguro.', true);
+    		  return false;
 	    }
 	  }
 

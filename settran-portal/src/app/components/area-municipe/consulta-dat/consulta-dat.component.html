@@ -12,25 +12,32 @@
 					<div class="row">
 						<div class="form-group">
 						  <label class="control-label" for="codigoConfirmacao">Número da DAT</label>
-						  <input type="text" class="form-control" id="codigoConfirmacao" name="codigoConfirmacao" 
+						  <input type="text" class="form-control" id="codigoConfirmacao" name="codigoConfirmacao"
 						  [(ngModel)]="dadosConsulta.codigoConfirmacao" required>
 						</div>
 						<div class="form-group">
 						  <label class="control-label" for="cpf">CPF do solicitante</label>
-						  <input type="text" class="form-control cpf" id="cpf" name="cpf" 
+						  <input type="text" class="form-control cpf" id="cpf" name="cpf"
 						  [(ngModel)]="dadosConsulta.cpf" required>
 						</div>
 						<div class="form-group">
 						  <label class="control-label" for="cnh">CNH do solicitante</label>
-						  <input type="text" class="form-control" id="cnh" name="cnh" 
+						  <input type="text" class="form-control cnh" id="cnh" name="cnh"
 						  [(ngModel)]="dadosConsulta.cnh" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group nao-obrigatorio">
+						<div class="form-group col-md-2">
 						  <label class="control-label" for="captcha">Digite os caracteres</label>
-						  <input type="text" class="form-control" id="captcha" name="captcha" 
-						  [(ngModel)]="captcha">
+						  <input type="text" class="form-control" id="captcha" name="captcha"
+						  [(ngModel)]="captchaUsuario">
+						</div>
+						<div class="form-group nao-obrigatorio col-md-3">
+							<div [ngStyle]="{ 'background-image': 'url(' + captchaURLImg + ')'}" style="height:69px;background-repeat: no-repeat;"></div>
+						</div>
+						<div class="form-group nao-obrigatorio col-md-2">
+							<button type="submit" class="btn btn-primary"
+							  style="background-color: #F0E68C;border-color: #F0E68C;color: black;margin-top:25px;" (click)="carregarCaptcha();">Recarregar</button>
 						</div>
 					</div>
 			</fieldset>

@@ -1,20 +1,20 @@
 <app-header></app-header>
-<div class="container-fluid">
+<div oncopy="return false" oncut="return false" onpaste="return false" class="container-fluid" data-spy="scroll" data-target=".navbar" data-offset="50" id="top">
 	<div class="panel panel-default">
 	  <div class="panel-heading" style="font-family:Arial, Helvetica, sans-serif;font-size: large;background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">
 		Cadastro eDAT
 	  </div>
 	  <div class="panel-body">
-	  	  <ul class="nav nav-pills">
+  	  <ul class="nav nav-pills" >
 		    <li role="presentation" class="active" >
-		    <a style="background-color:#F0E68C !important;color: black !important;" href="javascript:;">1. Perguntas Preliminares</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">2. Seu Veículo e Você</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">3. Dados do Acidente</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">4. Outros Veículos</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">5. Testemunhas</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">6. Relato do Acidente</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">7. Confirmação da DAT</a></li>
-		    <li role="presentation"><a style="color: black !important;" href="javascript:;">8. Resumo</a></li>
+		    <a id="aba1" style="cursor:default;background-color:#F0E68C !important;color: black !important;" href="javascript:;">1. Perguntas Preliminares</a></li>
+		    <li role="presentation"><a id="aba2" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">2. Seu Veículo e Você</a></li>
+		    <li role="presentation"><a id="aba3" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">3. Dados do Acidente</a></li>
+		    <li role="presentation"><a id="aba4" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">4. Outros Veículos</a></li>
+		    <li role="presentation"><a id="aba5" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">5. Testemunhas</a></li>
+		    <li role="presentation"><a id="aba6" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">6. Relato do Acidente</a></li>
+		    <li role="presentation"><a id="aba7" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">7. Confirmação da DAT</a></li>
+		    <li role="presentation"><a id="aba8" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">8. Resumo</a></li>
 		  </ul>
 		  <router-outlet>
 		  </router-outlet>
@@ -25,7 +25,7 @@
 			<button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
 		  </div>
 		  <div class="col col-md-4">
-			<button type="button" class="btn btn-success" (click)="changePage('back');" *ngIf="currentPage !== getPergPreliminaresUrl();">
+			<button href="#top" type="button" class="btn btn-success" (click)="changePage('back');" *ngIf="currentPage !== getPergPreliminaresUrl();">
 				<< Voltar</button>
 		  </div>
 		  <div class="col col-md-4">

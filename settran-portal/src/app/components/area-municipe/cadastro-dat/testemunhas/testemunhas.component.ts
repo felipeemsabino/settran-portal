@@ -14,12 +14,16 @@ export class TestemunhasComponent implements OnInit {
   }
 
   removerTestemunha(index: number) {
-    this.edatService.eDAT.testemunhasDat.splice(index, 1);
+    var txt;
+    var r = confirm("Deseja realmente remover esse registro?");
+    if (r == true) {
+      this.edatService.eDAT.testemunhasDat.splice(index, 1);
+    }
   }
-  
+
   adicionarTestemunha() {
 	var self = this;
-	
+
 	this.edatService.eDAT.testemunhasDat.push({
 		"nomeTestemunha": "",
 		"dataNascimento": "",

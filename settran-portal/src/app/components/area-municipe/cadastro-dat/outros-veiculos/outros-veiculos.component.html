@@ -7,7 +7,7 @@
 				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Adicionar
 				</button>
 			</div>
-		</div>		
+		</div>
 	</fieldset>
 	<fieldset *ngIf="edatService.eDAT.outrosVeiculosDat.length > 0" style="border: 0px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Dados dos Veículos</legend>
@@ -20,39 +20,39 @@
 				  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remover
 				</button>
 			  </div>
-			  <div id="collapse{{currentElementIndex+1}}" class="panel-collapse collapse">
+			  <div id="collapse{{currentElementIndex+1}}" class="panel-collapse">
 				<div class="panel-body">
 					<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 						<legend style="width:inherit;padding:0 10px;border-bottom:none;">Dados do Veículo</legend>
 						<div class="row">
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="placa">Placa</label>
-							  <input type="text" class="form-control" id="placa" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].placa">
+							  <input type="text" class="form-control placa" id="placa" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].placa">
 							</div>
 							<div class="form-group col-md-3">
 								<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
 								<select class="form-control" id="tipoVeiculo{{currentElementIndex}}" (change)="getMarcasVeiculo(currentElementIndex)">
 									<option value="">Selecione</option>
-									<option *ngFor='let tipo of edatService.tiposVeiculo;' 
-									[selected]="tipo.id == edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id" 
+									<option *ngFor='let tipo of edatService.tiposVeiculo;'
+									[selected]="tipo.id == edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id"
 									value="{{tipo.id}}">{{tipo.descTipoVeiculo}}</option>
 								</select>
 							</div>
-							<div class="form-group col-md-3">			
+							<div class="form-group col-md-3">
 							  <label class="control-label" for="marcaVeiculo">Marca</label>
 								<select class="form-control" id="marcaVeiculo{{currentElementIndex}}" (change)="getModelosVeiculo(currentElementIndex)">
 									<option value="">Selecione</option>
-									<option *ngFor='let marca of edatService.arraysMarcasVeiculo[currentElementIndex];'  
-									[selected]="marca.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].marcaVeiculo" 
+									<option *ngFor='let marca of edatService.arraysMarcasVeiculo[currentElementIndex];'
+									[selected]="marca.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].marcaVeiculo"
 									value="{{marca.id}}">{{marca.fipe_name}}</option>
 								</select>
 							</div>
-							<div class="form-group col-md-3">				
+							<div class="form-group col-md-3">
 							  <label class="control-label" for="modeloVeiculo">Modelo</label>
 								<select class="form-control" id="modeloVeiculo{{currentElementIndex}}" (change)="setModeloVeiculo(currentElementIndex)">
 									<option value="">Selecione</option>
-									<option *ngFor='let modelo of edatService.arraysModeloVeiculo[currentElementIndex];' 
-									[selected]="modelo.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].modeloVeiculo" 
+									<option *ngFor='let modelo of edatService.arraysModeloVeiculo[currentElementIndex];'
+									[selected]="modelo.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].modeloVeiculo"
 									value="{{modelo.fipe_name}}">{{modelo.fipe_name}}</option>
 								</select>
 							</div>
@@ -71,7 +71,7 @@
 						<div class="row">
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="cnh">CNH</label>
-							  <input type="text" class="form-control" id="cnh" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cnh">
+							  <input type="text" class="form-control cnh" id="cnh" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cnh">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="cpf">CPF</label>
@@ -85,13 +85,13 @@
 							  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
 							  <input type="text" class="form-control" id="orgaoExpedidor" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].orgaoExpedidor">
 							</div>
-						</div>	
+						</div>
 						<div class="row">
 							<div class="form-group col-md-12">
 							  <label class="control-label" for="nome">Nome</label>
 							  <input type="text" class="form-control" id="nome" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].nomeCondutorOutroVeiculo">
 							</div>
-						</div>							
+						</div>
 					</fieldset>
 					<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 						<legend style="width:inherit;padding:0 10px;border-bottom:none;">Endereço</legend>
@@ -99,7 +99,7 @@
 							<div class="form-group nao-obrigatorio col-md-4">
 							  <label class="control-label" for="cep">CEP</label>
 							  <div class="input-group">
-								<input type="text" class="form-control cep" id="cep{{currentElementIndex}}" 
+								<input type="text" class="form-control cep" id="cep{{currentElementIndex}}"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.cep">
 								<div class="input-group-btn">
 								  <span class="input-group-btn ">
@@ -112,36 +112,36 @@
 							</div>
 							<div class="form-group nao-obrigatorio col-md-4">
 							  <label class="control-label" for="municipio">Município</label>
-							  <input type="text" class="form-control" id="municipio" value="Uberlândia" readonly 
+							  <input type="text" class="form-control" id="municipio" value="Uberlândia" readonly
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.nomeCidade">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-4">
 							  <label class="control-label" for="uf">UF</label>
-							  <input type="text" class="form-control" id="uf" readonly 
+							  <input type="text" class="form-control" id="uf" readonly
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.uf">
 							</div>
-						</div>		
+						</div>
 						<div class="row">
 							<div class="form-group nao-obrigatorio col-md-8">
 							  <label class="control-label" for="logradouro">Logradouro</label>
-							  <input type="text" class="form-control" id="logradouro" readonly 
+							  <input type="text" class="form-control" id="logradouro" readonly
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.nomeLogradouro">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-2">
 							  <label class="control-label" for="numeroEndereco">Nº</label>
-							  <input type="text" class="form-control" id="numeroEndereco" 
+							  <input type="text" class="form-control" id="numeroEndereco"
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].numeroEndereco">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-2">
 							  <label class="control-label" for="complementoEndereco">Compl.</label>
-							  <input type="text" class="form-control" id="complementoEndereco" 
+							  <input type="text" class="form-control" id="complementoEndereco"
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].complementoEndereco">
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group nao-obrigatorio col-md-6">
 							  <label class="control-label" for="telefone">Telefone</label>
-							  <input type="text" class="form-control phone_with_ddd" id="telefone" 
+							  <input type="text" class="form-control phone_with_ddd" id="telefone"
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].telefone">
 							</div>
 						</div>
@@ -149,6 +149,6 @@
 				</div>
 			  </div>
 			</div>
-		</div>		
+		</div>
 	</fieldset>
 </div>

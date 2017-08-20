@@ -11,20 +11,21 @@ export class EDATService {
   public resultadoPerguntas: any[] = new Array();
   public perguntas: any[] = new Array();
   public respostasInvalidas: any[] = new Array();
-  
+  public emailMunicipeConfirm: string = "felipeems87@gmail.com";
+
   tiposVeiculo: any[] = new Array();
-  
+
   /*Aba seus veiculos*/
   seuVeiculoMarcas: any[];
   seuVeiculoModelos: any[];
-  
+
   /*Aba outros envolvidos*/
   arraysMarcasVeiculo: any[];
   arraysModeloVeiculo: any[];
-  
+
   /*Aba confirmação dat*/
   codigoVerificado: string;
-  
+
   public textosPadrao: any = {
 	  "padrao1":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
 	  "padrao2":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>.",
@@ -33,7 +34,7 @@ export class EDATService {
   };
 
   constructor(private http: Http) {
-  this.eDAT = {
+  /*this.eDAT = {
 		"isPropietario" : "",
 		"renavam": "",
 		"placa": "",
@@ -119,11 +120,11 @@ export class EDATService {
 		"emailEnviaConfirmacao": "",
 		"confirmacaoDados": "",
 		"temSeguro": ""
-	}
-    /*this.eDAT = {
+	}*/
+    this.eDAT = {
 		"isPropietario" : "S",
 		"renavam": "12313",
-		"placa": "12321",
+		"placa": "hax3321",
 		"marcaVeiculo": "",
 		"modeloVeiculo": "",
 		"chassi": "12321323112",
@@ -206,9 +207,9 @@ export class EDATService {
 		"emailEnviaConfirmacao": "felipeems87@gmail.com",
 		"confirmacaoDados": "S",
 		"temSeguro": "S"
-	}*/
+	}
   }
-  
+
   enviarEDAT() {
     let header = new Headers();
 	header.append('Content-Type', 'application/json');
@@ -224,54 +225,54 @@ export class EDATService {
   extractData(res: Response) {
     return res.json();
   }
-  
+
   /* Limpa máscaras de CPF e padroniza mascara de telefone */
   alteraFormatoPadraoData() {
 	this.eDAT.cpf = this.eDAT.cpf.replace(/\D/g,'');
 	let date: string;
-	
+
 	if(this.eDAT.acidenteDat[0].dataAcidente) {
 		date = this.eDAT.acidenteDat[0].dataAcidente.split("-");
 		this.eDAT.acidenteDat[0].dataAcidente = date[2]+"/"+date[1]+"/"+date[0];
 	}
-	
+
 	if(this.eDAT.dataValidadeCNH) {
 		date = this.eDAT.dataValidadeCNH.split("-");
 		this.eDAT.dataValidadeCNH = date[2]+"/"+date[1]+"/"+date[0];
 	}
-	
+
 	if(this.eDAT.dataNascimento) {
 		date = this.eDAT.dataNascimento.split("-");
 		this.eDAT.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
 	}
-	
+
 	for (let testemunha of this.eDAT.testemunhasDat) {
 		date = testemunha.dataNascimento.split("-");
 		testemunha.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
 	}
 	console.log('limpa');
 	console.log(this.eDAT.dataValidadeCNH);
-  }  
-  
+  }
+
   /* Atualiza as datas para o padrao do type date */
   alteraFormatoInputData() {
 	let date: string;
-	
+
 	if(this.eDAT.acidenteDat[0].dataAcidente) {
 		date = this.eDAT.acidenteDat[0].dataAcidente.split("/");
 		this.eDAT.acidenteDat[0].dataAcidente = date[2]+"-"+date[1]+"-"+date[0];
 	}
-	
+
 	if(this.eDAT.dataValidadeCNH) {
 		date = this.eDAT.dataValidadeCNH.split("/");
 		this.eDAT.dataValidadeCNH = date[2]+"-"+date[1]+"-"+date[0];
 	}
-	
+
 	if(this.eDAT.dataNascimento) {
 		date = this.eDAT.dataNascimento.split("/");
 		this.eDAT.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
 	}
-	
+
 	for (let testemunha of this.eDAT.testemunhasDat) {
 		date = testemunha.dataNascimento.split("/");
 		testemunha.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
