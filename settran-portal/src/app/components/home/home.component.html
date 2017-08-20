@@ -9,11 +9,11 @@
 					<h4 class="form-signin-heading">Dados de usuario</h4>
 					<div class="row-fluid" style="padding-bottom: 10px">
 						<label for="username" class="sr-only">E-mail</label>
-						<input type="email" id="username" name="username" [(ngModel)]="registerCredentials.user" class="form-control" placeholder="Email" required autofocus>
+						<input type="email" id="username" name="username" [(ngModel)]="registerCredentials.usuario" class="form-control" placeholder="Email" required autofocus>
 					</div>
 					<div class="row-fluid" style="padding-bottom: 10px">
 						<label for="password" class="sr-only">Senha</label>
-						<input type="password" id="password" name="password" [(ngModel)]="registerCredentials.pass" class="form-control" placeholder="Senha" required>
+						<input type="password" id="password" name="password" [(ngModel)]="registerCredentials.senha" class="form-control" placeholder="Senha" required>
 					</div>
 					<div class="row-fluid" style="padding-bottom: 10px;">
 						<button class="btn" (click)="entrar()"
@@ -21,7 +21,7 @@
 					</div>
 					<div>
 					  <label>
-						<a style="color:black;cursor:pointer;"> Esqueci minha senha </a>
+						<a style="color:black;cursor:pointer;" type="submit" data-toggle="modal" data-target="#esqueciSenhaModal"> Esqueci minha senha </a>
 					  </label>
 					</div>
 				  </form>
@@ -66,3 +66,24 @@
 	<p style="">Telefone: (31) 3333-3333</p>
 	<p style="">Av. Professor Mario Werneck, 6534, Buritis - Uberlandia - Minas Gerais</p>
 </div>
+<div id="esqueciSenhaModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Esqueci minha senha</h4>
+      </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="cpf">Informe seu CPF para receber uma nova senha</label>
+						<input type="text" class="form-control cpf" id="cpf" name="cpf" required
+						  [(ngModel)]="esqueciSenha.cpf" >
+					</div>
+				</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success" (click)="recuperarSenha()">Recuperar Senha</button>
+        </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
