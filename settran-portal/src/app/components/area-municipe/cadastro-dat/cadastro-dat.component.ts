@@ -59,7 +59,11 @@ export class CadastroDatComponent implements OnInit {
   }
 
   cancelar() {
-	   alert('cancelar');
+     var txt;
+     var r = confirm("Tem certeza que deseja cancelar o registro da DAT?");
+     if (r == true) {
+       this.parentRouter.navigate(['']);
+     }
   }
 
   changePage(action: string) {
@@ -157,7 +161,7 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
-	    if(this.edatService.codigoVerificado == 'N' || !this.edatService.codigoVerificado) {
+	    if(!this.validaCodigo()) {
 		  return;
 		}
 	    this.parentRouter.navigate([CadastroDatComponent.RESUMO]);
@@ -396,4 +400,13 @@ export class CadastroDatComponent implements OnInit {
 		  self.edatService.eDAT.ipRequisicao = data.ip;
 		});
 	}
+
+  validaCodigo() {
+    if(this.edatService.codigoVerificado == 'N' || !this.edatService.codigoVerificado){
+      this.popupController.showPopupMessage("Atenção!",
+      'Por favor, valide o código recebido no email ou sms antes de prosseguir.', true);
+        return false;
+    }
+    return true;
+  }
 }

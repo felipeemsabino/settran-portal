@@ -3,11 +3,10 @@
 		<h3 for="descricaoRelatoAcidente">Atenção!</h3>
 		<label class="control-label" style="text-align: left;">
 			Antes de confirmar a DAT confira todos os dados informados navegando pela janelas/abas anteriores. Caso necessário, altere ou complemente
-			essas informações.<br/>
-			Após a conferência dos dados, confirme seu email e informe o código de confirmação da DAT.<br/>
+			essas informações. Após a conferência dos dados, confirme seu email e informe o código de confirmação da DAT.
 			Você também pode optar por receber o código de confirmação por SMS.
 		</label>
-	</div>	
+	</div>
 	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Confirme seu email e telefone de celular</legend>
 		<div class="row">
@@ -15,19 +14,19 @@
 				<label class="control-label" for="foto4">Email para o qual será enviado o código de confirmação da DAT:</label>
 				<input type="text" class="form-control email" id="emailConfirmacaoEDAT" [(ngModel)]="edatService.eDAT.emailEnviaConfirmacao">
 			</div>
-		</div>	
+		</div>
 		<div class="row">
 			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
 				<div class="checkbox">
 				  <label class="control-label" for="nomePropietario">
-					<input id="condutorProprietario" type="checkbox" 
-					[checked]="edatService.eDAT.enviouSms == 'S'" (click)="setReceberSMS();">
+					<input id="condutorProprietario" type="checkbox"
+					(click)="setReceberSMS();">
 					Desejo receber o código de confirmação também por SMS.
 				  </label>
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div *ngIf="mostrarCampoCelular" class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="nomePropietario">Telefone celular:</label>
 			  <input type="text" class="form-control" id="nomePropietario" [(ngModel)]="edatService.eDAT.numeroEnvioSms">
@@ -36,7 +35,7 @@
 			  <label for="enviarConfirmacao">&nbsp;</label>
 			  <button type="button" class="btn btn-primary form-control" id="enviarConfirmacao" (click)="enviarCodigo()">Enviar código para Email/SMS</button>
 			</div>
-		</div>			
+		</div>
 	</fieldset>
 	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Confirme o código</legend>

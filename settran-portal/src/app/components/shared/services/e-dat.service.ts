@@ -202,7 +202,7 @@ export class EDATService {
 		],
 		"docPropietario": "12",
 		"nomePropietario": "Felipe",
-		"enviouSms": "S",
+		"enviouSms": "",
 		"numeroEnvioSms": "",
 		"emailEnviaConfirmacao": "felipeems87@gmail.com",
 		"confirmacaoDados": "S",
