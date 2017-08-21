@@ -9,7 +9,7 @@ export class LoginService {
 
   constructor(private http: Http) { }
 
-  realizaLogin(params: URLSearchParams): Observable<any []> {
+  realizaLogin(params: URLSearchParams): Observable<any> {
 
     let header = new Headers();
     header.append('Content-Type', 'application/json');
@@ -19,7 +19,13 @@ export class LoginService {
 
     return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/agente/login/', options)
                      .map((res:Response) =>this.extractData(res))
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                     .catch((error: any) => {
+                       if(error.status == 404){
+                         return [error];
+                       } else {
+                        return Observable.arguments(new Error(error));
+                       }
+                    });
   }
 
   recuperarSenha(params: URLSearchParams): Observable<any []> {

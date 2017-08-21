@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular
 import { URLSearchParams, QueryEncoder, Http, Response } from '@angular/http';
 import { IDataService } from '../../interfaces/idata-service';
 import { PopupControllerComponent } from '../popup-controller/popup-controller.component';
+import { UserService } from '../../shared/services/user.service';
 
 declare var $:any; // JQUERY
 
@@ -23,13 +24,15 @@ export class GridComponent implements OnInit {
   @Output() onObjectChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(@Inject('IDataService') private providerService: IDataService[],
-              private popupController: PopupControllerComponent) {
+              private popupController: PopupControllerComponent, private userService: UserService) {
 	   this.params = new URLSearchParams();
   }
 
   ngOnInit() {
-  	this.getData();
-  	this.setCPFMask();
+    if(this.userService.userIsLogged() == true) {
+    	this.getData();
+    	this.setCPFMask();
+    }
   }
 
   params: URLSearchParams; // parametro que será enviado para a tela de manutenção

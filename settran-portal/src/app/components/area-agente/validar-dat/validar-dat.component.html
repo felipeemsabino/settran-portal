@@ -1,15 +1,26 @@
-<app-grid
-  [gridTitle]="gridTitle"
-  [service]="3"
-  [paginated]="false"
-  [reorder]="false"
-  [search]="false"
-  (onObjectChange)="updateObjectParameter($event)"
-  [row_detail]="{'isModal':true,'modalName':'#agenteModal'}"
-  [columns]="[
-	{'name':'#','filter':false,'attr':''},
-	{'name':'Número','filter':false,'attr':'numero'},
-	{'name':'Solicitante', 'filter':false, 'attr':'solicitante'},
-  {'name':'Data Limite Parecer', 'filter':false, 'attr':'dataLimite'}]" >
-</app-grid>
-<app-popup-agente [object]="object"></app-popup-agente>
+<router-outlet>
+  <app-grid *ngIf="mostrarGrid"
+    [gridTitle]="gridTitle"
+    [service]="3"
+    [paginated]="true"
+    [reorder]="false"
+    [search]="false"
+    [create]="false"
+    (onObjectChange)="updateObjectParameter($event)"
+    [row_detail]="{'isModal':false,'modalName':''}"
+    [columns]="[
+  	{'name':'#','filter':false,'attr':''},
+  	{'name':'Número','filter':false,'attr':'codigoConfirmacaoDat'},
+  	{'name':'Solicitante', 'filter':false, 'attr':'nomeMunicipe'},
+    {'name':'Data Limite Parecer', 'filter':false, 'attr':'dataRegistro'}]" >
+  </app-grid>
+</router-outlet>
+<div class="row" style="text-align: center;" *ngIf="!mostrarGrid">
+  <div class="col col-md-6">
+    <button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
+  </div>
+  <div class="col col-md-6">
+    <button type="button" class="btn btn-primary" (click)="validarDAT();"
+      style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Validar DAT</button>
+  </div>
+</div>

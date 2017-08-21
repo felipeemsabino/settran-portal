@@ -3,6 +3,7 @@ import { RouterModule, Routes, Router }   from '@angular/router';
 import { LoginService } from './services/login.service';
 import { URLSearchParams } from '@angular/http';
 import { PopupControllerComponent } from '../shared/popup-controller/popup-controller.component';
+import { UserService } from '../shared/services/user.service';
 
 declare var $:any; // JQUERY
 
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router,
               private loginService: LoginService,
+              private userService: UserService,
               private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
@@ -54,28 +56,26 @@ export class HomeComponent implements OnInit {
     let params: URLSearchParams = new URLSearchParams();
 
     this.popupController.showPopupMessage("Aguarde!", "Recuperando sua senha.", false);
-    params = this.registerCredentials;
+
+    params.set("cpf",this.esqueciSenha.cpf.replace(/[^0-9]/g,''));
     // Salva dado
     this.loginService.recuperarSenha(params)
                       .subscribe(
                           result => {
                             console.log(result);
+                            this.esqueciSenha.cpf = "";
                             this.popupController.showPopupMessage("Aguarde!", "Sua senha foi recuperada com sucesso, verifique seu e-mail cadastrado para maiores informações.", true);
 
                           }, //Bind to view
                           err => {
                             this.popupController.showPopupMessage("Atenção!",
-                            "Ocorreram erros ao recuperar sua senha! Por favor, tente novamente.", true);                              console.log(err);
+                            "Ocorreram erros ao recuperar sua senha! Por favor, tente novamente.", true);
+                            this.esqueciSenha.cpf = "";
+                                                          console.log(err);
                           });
   }
 
   entrar () {
-    if(this.registerCredentials.usuario === 'agente' && this.registerCredentials.senha === 'agente') {
-      this.router.navigate(['/area-agente']);
-    } else if(this.registerCredentials.usuario === 'admin' && this.registerCredentials.senha === 'admin') {
-      this.router.navigate(['/area-admin']);
-    }
-
     if(!this.validaCamposLogin()){
       return false;
     }
@@ -87,11 +87,30 @@ export class HomeComponent implements OnInit {
     this.loginService.realizaLogin(params)
                       .subscribe(
                           result => {
-                            console.log(result);
+                            if(result.status == 404) {
+                              this.popupController.showPopupMessage("Atenção!",
+                              "Usuário ou senha inválidos! Por favor, tente novamente.", true);
+                            } else {
+                              this.popupController.hidePopupMessage();
+                              this.userService.registerLogin(result);
+                              this.redirecionarUsuario(result);
+                            }
                           }, //Bind to view
                           err => {
                             this.popupController.showPopupMessage("Atenção!",
                             "Ocorreram erros ao realizar o login! Por favor, tente novamente.", true);                              console.log(err);
                           });
+  }
+
+  redirecionarUsuario(userData: any) {
+      if(this.userService.userIsLogged() == false) {
+        return false;
+      }
+
+      if(userData.adm == 'N') {
+        this.router.navigate(['/area-agente']);
+      } else if(userData.adm == 'S') {
+        this.router.navigate(['/area-admin']);
+      }
   }
 }

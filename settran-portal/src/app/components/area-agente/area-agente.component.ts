@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-area-agente',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AreaAgenteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.userIsLogged();
   }
 
 }

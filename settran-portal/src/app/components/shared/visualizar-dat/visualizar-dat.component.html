@@ -1,0 +1,31 @@
+<div oncopy="return false" oncut="return false" onpaste="return false" class="container-fluid" data-spy="scroll" data-target=".navbar" data-offset="50" id="top">
+	<div class="panel panel-default">
+	  <div class="panel-heading" style="font-family:Arial, Helvetica, sans-serif;font-size: large;background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">
+		Revisar eDAT
+	  </div>
+	  <div class="panel-body">
+  	  <ul class="nav nav-pills" >
+		    <li role="presentation" class="active" ><a id="aba1" style="cursor:default;background-color:#F0E68C !important;color: black !important;" href="javascript:;">1. Seu Veículo e Você</a></li>
+		    <li role="presentation"><a id="aba2" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">2. Dados do Acidente</a></li>
+		    <li role="presentation"><a id="aba3" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">3. Outros Veículos</a></li>
+		    <li role="presentation"><a id="aba4" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">4. Testemunhas</a></li>
+		    <li role="presentation"><a id="aba5" style="background-color: transparent;cursor:default;color: black !important;" href="javascript:;">5. Relato do Acidente</a></li>
+		  </ul>
+		  <router-outlet>
+		  </router-outlet>
+	  </div>
+	  <div class="panel-footer">
+			<div class="row" style="text-align: center;">
+			  <div class="col col-md-4">
+				<button href="#top" type="button" class="btn btn-success"
+        (click)="changePage('back');" *ngIf="currentPage !== getSeusDadosURL();">
+					<< Voltar</button>
+			  </div>
+			  <div class="col col-md-4">
+				<button type="button" class="btn btn-primary" (click)="changePage('next');" *ngIf="currentPage !== getRelatoUrl();">
+					Próximo >></button>
+			  </div>
+			</div>
+	  </div>
+	</div>
+</div>

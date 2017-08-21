@@ -39,6 +39,11 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { ConsultadatService } from './components/area-municipe/consulta-dat/services/consultadat.service';
 import { PopupControllerComponent } from './components/shared/popup-controller/popup-controller.component';
 import { ValidardatService } from './components/area-agente/validar-dat/services/validardat.service';
+import { VisualizarDatComponent } from './components/shared/visualizar-dat/visualizar-dat.component';
+import { EdatStorageService } from './components/shared/services/edat-storage.service';
+import { SeuVeiculoValidarDatComponent } from './components/area-municipe/cadastro-dat/seu-veiculo-validar-dat/seu-veiculo-validar-dat.component';
+import { UserService } from './components/shared/services/user.service';
+import { SubheaderComponent } from './components/shared/subheader/subheader.component';
 
 const appRoutes: Routes = [
 	  {
@@ -57,7 +62,23 @@ const appRoutes: Routes = [
 		path: 'area-agente',
 		component: AreaAgenteComponent,
 		  children: [
-				{ path: 'validar-dat', component: ValidarDatComponent },
+				{
+					path: 'validar-dat',
+					component: ValidarDatComponent,
+				  children: [
+						{
+							path: 'visualizar-dat',
+							component: VisualizarDatComponent,
+							children: [
+								{ path: 'seu-veiculo-validar-dat', component: SeuVeiculoValidarDatComponent },
+								{ path: 'dados-acidente', component: DadosAcidenteComponent },
+								{ path: 'outros-veiculos', component: OutrosVeiculosComponent },
+								{ path: 'testemunhas', component: TestemunhasComponent },
+								{ path: 'relato', component: RelatoComponent }
+							]
+						}
+				  ]
+				},
 				{ path: 'revisar-dat', component: RevisarDatComponent }
 		  ]
 	  },
@@ -94,22 +115,25 @@ const appRoutes: Routes = [
     CadastroDatComponent,
     ConsultaDatComponent,
     RetificaDatComponent,
-	GridComponent,
-	PopupRegraComponent,
-	PopupAgenteComponent,
-	PopupFaqComponent,
-	FaqHomeComponent,
-	KeysPipe,
-	PerguntasPreliminaresComponent,
-	SeuVeiculoComponent,
-	DadosAcidenteComponent,
-	OutrosVeiculosComponent,
-	TestemunhasComponent,
-	RelatoComponent,
-	ConfirmacaoDatComponent,
-	ResumoComponent,
-	HeaderComponent,
-	PopupControllerComponent
+		GridComponent,
+		PopupRegraComponent,
+		PopupAgenteComponent,
+		PopupFaqComponent,
+		FaqHomeComponent,
+		KeysPipe,
+		PerguntasPreliminaresComponent,
+		SeuVeiculoComponent,
+		DadosAcidenteComponent,
+		OutrosVeiculosComponent,
+		TestemunhasComponent,
+		RelatoComponent,
+		ConfirmacaoDatComponent,
+		ResumoComponent,
+		HeaderComponent,
+		PopupControllerComponent,
+		VisualizarDatComponent,
+		SeuVeiculoValidarDatComponent,
+		SubheaderComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +154,7 @@ const appRoutes: Routes = [
     {
       provide: 'IDataService', useClass: ValidardatService, multi: true
     },
-		EDATService, ConsultadatService, PopupControllerComponent ],
+		EDATService, ConsultadatService, PopupControllerComponent, EdatStorageService, UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,7 +16,7 @@ export class ValidardatService {
 	header.append('Content-Type', 'application/json');
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
 
-    let options = new RequestOptions({ headers: header });
+    let options = new RequestOptions({ headers: header, search: params });
 
     return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/listaedatnaovalidadas/', options)
                      .map((res:Response) =>this.extractData(res))

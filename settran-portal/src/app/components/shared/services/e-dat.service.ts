@@ -12,6 +12,7 @@ export class EDATService {
   public perguntas: any[] = new Array();
   public respostasInvalidas: any[] = new Array();
   public emailMunicipeConfirm: string = "felipeems87@gmail.com";
+  public validar: boolean = false;
 
   tiposVeiculo: any[] = new Array();
 
@@ -390,8 +391,8 @@ export class EDATService {
 
   enviarEDAT() {
     let header = new Headers();
-	header.append('Content-Type', 'application/json');
-	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
+  	header.append('Content-Type', 'application/json');
+  	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
     let options = new RequestOptions({ headers: header });
 
     return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/cadastrardat/',
@@ -457,5 +458,10 @@ export class EDATService {
 	}
 	console.log('revert');
 	console.log(this.eDAT.dataValidadeCNH);
+  }
+
+  limparDados() {
+    this.emailMunicipeConfirm = "";
+    this.validar = false;
   }
 }
