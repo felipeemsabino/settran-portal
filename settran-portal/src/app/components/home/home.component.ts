@@ -15,6 +15,8 @@ declare var $:any; // JQUERY
 })
 export class HomeComponent implements OnInit {
 
+  userIp: string;
+
   constructor(private router: Router,
               private loginService: LoginService,
               private userService: UserService,
@@ -28,6 +30,8 @@ export class HomeComponent implements OnInit {
   	setTimeout(function() {
   	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
   	}, 500);
+
+    this.getUserIp();
   }
 
 	registerCredentials: any = {usuario: '', senha: ''};
@@ -58,13 +62,18 @@ export class HomeComponent implements OnInit {
     this.popupController.showPopupMessage("Aguarde!", "Recuperando sua senha.", false);
 
     params.set("cpf",this.esqueciSenha.cpf.replace(/[^0-9]/g,''));
+    params.set("ip", this.userIp);
     // Salva dado
     this.loginService.recuperarSenha(params)
                       .subscribe(
                           result => {
-                            console.log(result);
-                            this.esqueciSenha.cpf = "";
-                            this.popupController.showPopupMessage("Aguarde!", "Sua senha foi recuperada com sucesso, verifique seu e-mail cadastrado para maiores informações.", true);
+                            if(result.status == 404) {
+                              this.popupController.showPopupMessage("Atenção!",
+                              result.json(), true);
+                            } else {
+                              this.esqueciSenha.cpf = "";
+                              this.popupController.showPopupMessage("Aguarde!", "Sua senha foi recuperada com sucesso, verifique seu e-mail cadastrado para maiores informações.", true);
+                            }
 
                           }, //Bind to view
                           err => {
@@ -112,5 +121,14 @@ export class HomeComponent implements OnInit {
       } else if(userData.adm == 'S') {
         this.router.navigate(['/area-admin']);
       }
+  }
+
+  getUserIp(){
+    this.userIp = "192.168.2.2";
+
+    /*let self = this;
+    $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+      self.userIp = data.ip;
+    });*/
   }
 }

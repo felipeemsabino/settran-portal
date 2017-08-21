@@ -194,7 +194,7 @@ export class CadastroDatComponent implements OnInit {
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
 
-		//console.log(JSON.stringify(this.edatService.eDAT));
+		console.log(JSON.stringify(this.edatService.eDAT));
 		this.edatService.enviarEDAT()
 				  .subscribe(
 					  result => {
@@ -399,10 +399,12 @@ export class CadastroDatComponent implements OnInit {
 	}
 
 	getUserIp(){
-		let self = this;
+    this.edatService.eDAT.ipRequisicao = "192.168.2.2";
+
+		/*let self = this;
 		$.getJSON('//freegeoip.net/json/?callback=?', function(data) {
 		  self.edatService.eDAT.ipRequisicao = data.ip;
-		});
+		});*/
 	}
 
   validaCodigo() {

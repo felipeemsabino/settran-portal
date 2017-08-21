@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
 import { Router }   from '@angular/router';
 
+declare var $:any; // JQUERY
+
 @Injectable()
 export class UserService {
 

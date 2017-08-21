@@ -22,9 +22,18 @@ export class ConfirmacaoDatComponent implements OnInit {
    if(!this.edatService.eDAT.enviouSms) {
      this.edatService.eDAT.enviouSms = 'N';
    }
+   this.resetMasks();
   }
 
+  resetMasks() {
+  	setTimeout(function() {
+
+  		$('.phone').mask('(00) 00000-0000');
+
+  	}, 500);
+  }
   setReceberSMS(){
+    this.resetMasks();
   	if(this.edatService.eDAT.enviouSms == 'S') {
   		this.edatService.eDAT.enviouSms = 'N';
       this.mostrarCampoCelular = false;

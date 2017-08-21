@@ -89,31 +89,6 @@ export class EDATService {
       "outrosVeiculosDat": [],
       "testemunhasDat": [],
       "fotosDat": [
-        {
-          "descricaoFoto": "",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "",
-          "urlFoto": "",
-          "decodeImagem":""
-        }
       ],
       "docPropietario": "",
       "nomePropietario": "",
@@ -176,31 +151,7 @@ export class EDATService {
       "outrosVeiculosDat": [],
       "testemunhasDat": [],
       "fotosDat": [
-        {
-          "descricaoFoto": "asd 1",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "asd 2",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "asd 3",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "asd 4",
-          "urlFoto": "",
-          "decodeImagem":""
-        },
-        {
-          "descricaoFoto": "asd 5",
-          "urlFoto": "",
-          "decodeImagem":""
-        }
+
       ],
       "docPropietario": "12",
       "nomePropietario": "Felipe",
@@ -267,31 +218,6 @@ export class EDATService {
   		"outrosVeiculosDat": [],
   		"testemunhasDat": [],
   		"fotosDat": [
-  			{
-  				"descricaoFoto": "",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			}
   		],
   		"docPropietario": "",
   		"nomePropietario": "",
@@ -354,31 +280,6 @@ export class EDATService {
   		"outrosVeiculosDat": [],
   		"testemunhasDat": [],
   		"fotosDat": [
-  			{
-  				"descricaoFoto": "asd 1",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "asd 2",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "asd 3",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "asd 4",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			},
-  			{
-  				"descricaoFoto": "asd 5",
-  				"urlFoto": "",
-  				"decodeImagem":""
-  			}
   		],
   		"docPropietario": "12",
   		"nomePropietario": "Felipe",
