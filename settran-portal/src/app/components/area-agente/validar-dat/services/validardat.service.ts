@@ -11,7 +11,7 @@ export class ValidardatService {
   constructor(private http: Http) { }
 
   getData(params: URLSearchParams): Observable<any []> {
-alert('get data validar');
+
 	let header = new Headers();
 	header.append('Content-Type', 'application/json');
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');

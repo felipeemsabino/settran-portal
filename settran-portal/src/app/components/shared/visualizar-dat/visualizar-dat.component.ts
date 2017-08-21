@@ -44,7 +44,7 @@ export class VisualizarDatComponent implements OnInit {
         this.DADOS_ACIDENTE = "/area-agente/revisar-dat/visualizar-dat/dados-acidente";
         this.OUTROS_VEICULOS = "/area-agente/revisar-dat/visualizar-dat/outros-veiculos";
         this.TESTEMUNHAS = "/area-agente/revisar-dat/visualizar-dat/testemunhas";
-        this.RELATO_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/relato";
+        this.RELATO_ACIDENTE = "/area-agente/revisar-dat/visualizar-dat/relato";
       }
 
       this.parentRouter.navigate([this.SEU_VEICULO]);

@@ -4,7 +4,7 @@
     [service]="4"
     [paginated]="true"
     [reorder]="false"
-    [search]="false"
+    [search]="true"
     [create]="false"
     (onObjectChange)="updateObjectParameter($event)"
     [row_detail]="{'isModal':false,'modalName':''}"
@@ -16,12 +16,36 @@
     {'name':'Status', 'filter':false, 'attr':'dataRegistro'}]" >
   </app-grid>
 </router-outlet>
-<div class="row" style="text-align: center;" *ngIf="!mostrarGrid">
-  <div class="col col-md-6">
-    <button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
-  </div>
-  <div class="col col-md-6">
-    <button type="button" class="btn btn-primary" (click)="validarDAT();"
-      style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Revisar DAT</button>
+<div class="container-fluid" id="bottom" >
+  <div class="panel panel-default">
+
+    <div class="panel-body">
+      <fieldset>
+    		<legend>Deferir solicitação de retificação?</legend>
+        <div class="row" style="margin-left: 15px;">
+          <div class="col">
+    			  <label class='label-zona-obrigatorio'><input type="radio" name="zona"
+    					[checked]="edatService.eDAT.acidenteDat[0].zona == 'RURAL'"
+    					(change)="alteraZona('RURAL');"
+    					[disabled]="edatService.edicaoDAT == false">Deferir</label>
+    			  <label class='label-zona-obrigatorio'><input type="radio" name="zona"
+    					[checked]="edatService.eDAT.acidenteDat[0].zona == 'URBANA'"
+    					(change)="alteraZona('URBANA');"
+    					[disabled]="edatService.edicaoDAT == false">Indeferir</label>
+          </div>
+        </div>
+  	  </fieldset>
+    </div>
+    <div class="panel-footer">
+      <div class="row" style="text-align: center;">
+        <div class="col col-md-6">
+          <button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
+        </div>
+        <div class="col col-md-6">
+          <button type="button" class="btn btn-primary" (click)="validarDAT();"
+          style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Indeferir</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
