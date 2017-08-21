@@ -42,7 +42,7 @@ export class ConfirmacaoDatComponent implements OnInit {
   	  return;
   	}
 
-  	if(this.edatService.eDAT.enviouSms == "S") {
+  	if(this.edatService.eDAT.enviouSms == "S" && this.edatService.eDAT.numeroEnvioSms.length == 0) {
       this.popupController.showPopupMessage("Atenção!", 'Por favor, preencha o campo de telefone.', true);
   	  return;
   	}

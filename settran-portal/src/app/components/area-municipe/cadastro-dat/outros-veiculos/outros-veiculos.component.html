@@ -3,7 +3,8 @@
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Outros Envolvidos</legend>
 		<div class="row">
 			<div class="col-md-2">
-				<button type="button" class="btn btn-default btn-lg" style="background-color:#F0E68C" (click)="adicionaVeiculo()" >
+				<button type="button" class="btn btn-default btn-lg" style="background-color:#F0E68C"
+				(click)="adicionaVeiculo()" [disabled]="edatService.edicaoDAT == false">
 				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Adicionar
 				</button>
 			</div>
@@ -16,8 +17,9 @@
 			  <div class="panel-heading">
 				<a data-toggle="collapse" href="#collapse{{currentElementIndex+1}}">
 				Registro {{currentElementIndex+1}}</a>
-				<button type="button" class="btn btn-danger btn-xs pull-right" (click)="removerVeiculo(currentElementIndex)" >
-				  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remover
+				<button type="button" class="btn btn-danger btn-xs pull-right"
+				(click)="removerVeiculo(currentElementIndex)" [disabled]="edatService.edicaoDAT == false">
+				  <span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>Remover
 				</button>
 			  </div>
 			  <div id="collapse{{currentElementIndex+1}}" class="panel-collapse">
@@ -27,11 +29,15 @@
 						<div class="row">
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="placa">Placa</label>
-							  <input type="text" class="form-control placa" id="placa" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].placa">
+							  <input type="text" class="form-control placa" id="placa"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].placa"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 							<div class="form-group col-md-3">
 								<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
-								<select class="form-control" id="tipoVeiculo{{currentElementIndex}}" (change)="getMarcasVeiculo(currentElementIndex)">
+								<select class="form-control" id="tipoVeiculo{{currentElementIndex}}"
+								(change)="getMarcasVeiculo(currentElementIndex)"
+								[disabled]="edatService.edicaoDAT == false">
 									<option value="">Selecione</option>
 									<option *ngFor='let tipo of edatService.tiposVeiculo;'
 									[selected]="tipo.id == edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id"
@@ -40,7 +46,9 @@
 							</div>
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="marcaVeiculo">Marca</label>
-								<select class="form-control" id="marcaVeiculo{{currentElementIndex}}" (change)="getModelosVeiculo(currentElementIndex)">
+								<select class="form-control" id="marcaVeiculo{{currentElementIndex}}"
+								(change)="getModelosVeiculo(currentElementIndex)"
+								[disabled]="edatService.edicaoDAT == false">
 									<option value="">Selecione</option>
 									<option *ngFor='let marca of edatService.arraysMarcasVeiculo[currentElementIndex];'
 									[selected]="marca.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].marcaVeiculo"
@@ -49,7 +57,9 @@
 							</div>
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="modeloVeiculo">Modelo</label>
-								<select class="form-control" id="modeloVeiculo{{currentElementIndex}}" (change)="setModeloVeiculo(currentElementIndex)">
+								<select class="form-control" id="modeloVeiculo{{currentElementIndex}}"
+								(change)="setModeloVeiculo(currentElementIndex)"
+								[disabled]="edatService.edicaoDAT == false">
 									<option value="">Selecione</option>
 									<option *ngFor='let modelo of edatService.arraysModeloVeiculo[currentElementIndex];'
 									[selected]="modelo.fipe_name == edatService.eDAT.outrosVeiculosDat[currentElementIndex].modeloVeiculo"
@@ -60,9 +70,18 @@
 						<div class="row">
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
-							  <label><input type="radio" name="possuiSeguro{{currentElementIndex}}" [checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'S'" (change)="alteraPossuiSeguro('S', currentElementIndex);" >Sim</label>
-							  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'N'" (change)="alteraPossuiSeguro('N', currentElementIndex);" >Não</label>
-							  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == '-'" (change)="alteraPossuiSeguro('-', currentElementIndex);" >Não sei</label>
+							  <label><input type="radio" name="possuiSeguro{{currentElementIndex}}"
+									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'S'"
+									(change)="alteraPossuiSeguro('S', currentElementIndex);"
+									[disabled]="edatService.edicaoDAT == false">Sim</label>
+							  <label><input type="radio" name="possuiSeguro"
+									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'N'"
+									(change)="alteraPossuiSeguro('N', currentElementIndex);"
+									[disabled]="edatService.edicaoDAT == false">Não</label>
+							  <label><input type="radio" name="possuiSeguro"
+									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == '-'"
+									(change)="alteraPossuiSeguro('-', currentElementIndex);"
+									[disabled]="edatService.edicaoDAT == false">Não sei</label>
 							</div>
 						</div>
 					</fieldset>
@@ -71,25 +90,35 @@
 						<div class="row">
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="cnh">CNH</label>
-							  <input type="text" class="form-control cnh" id="cnh" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cnh">
+							  <input type="text" class="form-control cnh" id="cnh"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cnh"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="cpf">CPF</label>
-							  <input type="text" class="form-control cpf" id="cpf" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cpf">
+							  <input type="text" class="form-control cpf" id="cpf"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cpf"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="rg">RG</label>
-							  <input type="text" class="form-control" id="rg" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].rg">
+							  <input type="text" class="form-control" id="rg"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].rg"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
-							  <input type="text" class="form-control" id="orgaoExpedidor" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].orgaoExpedidor">
+							  <input type="text" class="form-control" id="orgaoExpedidor"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].orgaoExpedidor"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-md-9">
 							  <label class="control-label" for="nome">Nome</label>
-							  <input type="text" class="form-control" id="nome" [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].nomeCondutorOutroVeiculo">
+							  <input type="text" class="form-control" id="nome"
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].nomeCondutorOutroVeiculo"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 						</div>
 					</fieldset>
@@ -100,10 +129,12 @@
 							  <label class="control-label" for="cep">CEP</label>
 							  <div class="input-group">
 								<input type="text" class="form-control cep" id="cep{{currentElementIndex}}"
-								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.cep">
+								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.cep"
+								[disabled]="edatService.edicaoDAT == false">
 								<div class="input-group-btn">
 								  <span class="input-group-btn ">
-									<button type="button" class="btn" (click)="getCEP(currentElementIndex)">
+									<button type="button" class="btn" (click)="getCEP(currentElementIndex)"
+										[disabled]="edatService.edicaoDAT == false">
 									  <span class="glyphicon glyphicon-search"></span>
 									</button>
 								  </span>
@@ -130,19 +161,22 @@
 							<div class="form-group nao-obrigatorio col-md-1">
 							  <label class="control-label" for="numeroEndereco">Nº</label>
 							  <input type="text" class="form-control" id="numeroEndereco"
-							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].numeroEndereco">
+							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].numeroEndereco"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-2">
 							  <label class="control-label" for="complementoEndereco">Compl.</label>
 							  <input type="text" class="form-control" id="complementoEndereco"
-							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].complementoEndereco">
+							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].complementoEndereco"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group nao-obrigatorio col-md-4">
 							  <label class="control-label" for="telefone">Telefone</label>
 							  <input type="text" class="form-control phone_with_ddd" id="telefone"
-							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].telefone">
+							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].telefone"
+								[disabled]="edatService.edicaoDAT == false">
 							</div>
 						</div>
 					</fieldset>

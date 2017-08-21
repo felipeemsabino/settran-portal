@@ -15,6 +15,7 @@ export class DadosAcidenteComponent implements OnInit {
   ngOnInit() {
   	this.configuraAutoComplete();
   	this.setTooltips();
+    console.log('dados do acidente '+ this.edatService.edicaoDAT);
   }
 
   setTooltips() {

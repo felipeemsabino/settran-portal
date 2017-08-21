@@ -6,12 +6,12 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
 @Injectable()
-export class ValidardatService {
+export class RevisardatService {
 
   constructor(private http: Http) { }
 
   getData(params: URLSearchParams): Observable<any []> {
-alert('get data validar');
+    alert('getData revisar');
 	let header = new Headers();
 	header.append('Content-Type', 'application/json');
 	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
@@ -35,7 +35,7 @@ alert('get data validar');
   	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
     let options = new RequestOptions({ headers: header });
 
-    return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/validardat/',
+    return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/listaedatnaovalidadas/',
 							params, options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error: any) => {

@@ -4,7 +4,8 @@
 		<div class="row">
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="placa">Placa</label>
-			  <input type="text" class="form-control placa" id="placa" [(ngModel)]="edatService.eDAT.placa">
+			  <input type="text" class="form-control placa" id="placa" [(ngModel)]="edatService.eDAT.placa"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 				<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
@@ -12,45 +13,65 @@
 					<option value="">Select</option>
 					<option *ngFor='let tipo of edatService.tiposVeiculo;'
 					[selected]="tipo.id == edatService.eDAT.tipoVeiculo.id"
-					value="{{tipo.id}}">{{tipo.descTipoVeiculo}}</option>
+					value="{{tipo.id}}"
+					[disabled]="edatService.edicaoDAT == false">{{tipo.descTipoVeiculo}}</option>
 				</select>
 			</div>
-			<div class="form-group col-md-3">
+			<div *ngIf="edatService.edicaoDAT" class="form-group col-md-3">
 			  <label class="control-label" for="marcaVeiculo">Marca</label>
 				<select class="form-control" id="marcaVeiculo" (change)="getModelosVeiculo()">
 					<option value="">Select</option>
 					<option *ngFor='let marca of edatService.seuVeiculoMarcas;'
 					[selected]="marca.fipe_name == edatService.eDAT.marcaVeiculo"
-					value="{{marca.id}}">{{marca.fipe_name}}</option>
+					value="{{marca.id}}"
+					[disabled]="edatService.edicaoDAT == false">{{marca.fipe_name}}</option>
 				</select>
 			</div>
-			<div class="form-group col-md-3">
+			<div *ngIf="edatService.edicaoDAT" class="form-group col-md-3">
 			  <label class="control-label" for="modeloVeiculo">Modelo</label>
 				<select class="form-control" id="modeloVeiculo" (change)="setModeloVeiculo()">
 					<option value="">Select</option>
 					<option *ngFor='let modelo of edatService.seuVeiculoModelos;'
 					[selected]="modelo.fipe_name == edatService.eDAT.modeloVeiculo"
-					value="{{modelo.fipe_name}}">{{modelo.fipe_name}}</option>
+					value="{{modelo.fipe_name}}"
+					[disabled]="edatService.edicaoDAT == false">{{modelo.fipe_name}}</option>
 				</select>
+			</div>
+			<div *ngIf="!edatService.edicaoDAT" class="form-group col-md-3">
+				<label class="control-label" for="marcaVeiculo">Marca</label>
+				<input type="text" class="form-control" id="marcaVeiculo"
+				[(ngModel)]="edatService.eDAT.marcaVeiculo"
+				[disabled]="edatService.edicaoDAT == false">
+			</div>
+			<div *ngIf="!edatService.edicaoDAT" class="form-group col-md-3">
+				<label class="control-label" for="modeloVeiculo">Modelo</label>
+				<input type="text" class="form-control" id="modelVeiculo"
+					[(ngModel)]="edatService.eDAT.modeloVeiculo"
+					[disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="chassi">Chassi</label>
-			  <input type="text" class="form-control chassi" id="chassi" maxlength="17" [(ngModel)]="edatService.eDAT.chassi">
+			  <input type="text" class="form-control chassi" id="chassi" maxlength="17"
+				[(ngModel)]="edatService.eDAT.chassi" [disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="renavam">Renavam</label>
-			  <input type="text" class="form-control renavam" id="renavam" [(ngModel)]="edatService.eDAT.renavam">
+			  <input type="text" class="form-control renavam" id="renavam"
+				[(ngModel)]="edatService.eDAT.renavam" [disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="cor">Cor</label>
-			  <input type="text" class="form-control" id="cor" [(ngModel)]="edatService.eDAT.cor">
+			  <input type="text" class="form-control" id="cor" [(ngModel)]="edatService.eDAT.cor"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
-			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'S'" (change)="alteraPossuiSeguro('S');" >Sim</label>
-			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'N'" (change)="alteraPossuiSeguro('N');" >Não</label>
+			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'S'"
+					(change)="alteraPossuiSeguro('S');" [disabled]="edatService.edicaoDAT == false">Sim</label>
+			  <label><input type="radio" name="possuiSeguro" [checked]="edatService.eDAT.temSeguro == 'N'"
+					(change)="alteraPossuiSeguro('N');" [disabled]="edatService.edicaoDAT == false">Não</label>
 			</div>
 		</div>
 	</fieldset>
@@ -59,54 +80,67 @@
 		<div class="row">
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="cnh">CNH</label>
-			  <input type="text" class="form-control cnh" id="cnh" [(ngModel)]="edatService.eDAT.cnh">
+			  <input type="text" class="form-control cnh" id="cnh" [(ngModel)]="edatService.eDAT.cnh"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="dataValidadeCNH">Validade CNH</label>
-			  <input type="date" class="form-control" id="dataValidadeCNH" [(ngModel)]="edatService.eDAT.dataValidadeCNH">
+			  <input type="date" class="form-control" id="dataValidadeCNH" [(ngModel)]="edatService.eDAT.dataValidadeCNH"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="categoriaCnh">Categoria CNH</label>
-			  <input type="text" class="form-control categoria-cnh" id="categoriaCnh" [(ngModel)]="edatService.eDAT.categoriaCnh">
+			  <input type="text" class="form-control categoria-cnh" id="categoriaCnh"
+				[(ngModel)]="edatService.eDAT.categoriaCnh" [disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="sexo">Sexo</label><br/>
-			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'F'" (change)="alteraSexo('F');" >Fem.</label>
-			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'M'" (change)="alteraSexo('M');" >Masc.</label>
+			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'F'" (change)="alteraSexo('F');"
+					[disabled]="edatService.edicaoDAT == false">Fem.</label>
+			  <label><input type="radio" name="sexo" [checked]="edatService.eDAT.sexo == 'M'" (change)="alteraSexo('M');"
+					[disabled]="edatService.edicaoDAT == false">Masc.</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-9">
 			  <label class="control-label" for="nomeMunicipe">Nome</label>
-			  <input type="text" class="form-control" id="nomeMunicipe" [(ngModel)]="this.edatService.eDAT.nomeMunicipe">
+			  <input type="text" class="form-control" id="nomeMunicipe" [(ngModel)]="this.edatService.eDAT.nomeMunicipe"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="dataNascimento">Data Nascimento</label>
-			  <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="edatService.eDAT.dataNascimento">
+			  <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="edatService.eDAT.dataNascimento"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="cpf">CPF</label>
-			  <input type="tel" class="form-control cpf" id="cpf" [(ngModel)]="this.edatService.eDAT.cpf">
+			  <input type="tel" class="form-control cpf" id="cpf" [(ngModel)]="this.edatService.eDAT.cpf"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="rg">RG</label>
-			  <input type="text" class="form-control" id="rg" [(ngModel)]="this.edatService.eDAT.rg">
+			  <input type="text" class="form-control" id="rg" [(ngModel)]="this.edatService.eDAT.rg"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
-			  <input type="text" pattern="[a-zA-Z]{6}" class="form-control" id="orgaoExpedidor" [(ngModel)]="edatService.eDAT.orgaoExpedidor">
+			  <input type="text" pattern="[a-zA-Z]{6}" class="form-control" id="orgaoExpedidor"
+				[(ngModel)]="edatService.eDAT.orgaoExpedidor" [disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-6 municipe-email">
 			  <label class="control-label" for="emailMunicipe">Email</label>
-			  <input type="text" class="form-control email" id="emailMunicipe" [(ngModel)]="edatService.eDAT.emailMunicipe">
+			  <input type="text" class="form-control email" id="emailMunicipe" [(ngModel)]="edatService.eDAT.emailMunicipe"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-6 municipe-email">
 			  <label class="control-label" for="emailMunicipeConfirm">Confirme o email</label>
-			  <input type="text" class="form-control email" id="emailMunicipeConfirm" [(ngModel)]="edatService.emailMunicipeConfirm">
+			  <input type="text" class="form-control email" id="emailMunicipeConfirm"
+				[(ngModel)]="edatService.emailMunicipeConfirm"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 	</fieldset>
@@ -116,10 +150,11 @@
 			<div class="form-group col-md-2">
 			  <label class="control-label" for="cep">CEP</label>
 			  <div class="input-group">
-				<input type="text" class="form-control cep" id="cep" [(ngModel)]="edatService.eDAT.logradouro.cep">
+				<input type="text" class="form-control cep" id="cep" [(ngModel)]="edatService.eDAT.logradouro.cep"
+				[disabled]="edatService.edicaoDAT == false">
 				<div class="input-group-btn">
 				  <span class="input-group-btn ">
-				    <button type="button" class="btn" (click)="getCEP()">
+				    <button type="button" class="btn" (click)="getCEP()" [disabled]="edatService.edicaoDAT == false">
 					  <span class="glyphicon glyphicon-search"></span>
 					</button>
 				  </span>
@@ -142,21 +177,25 @@
 			</div>
 			<div class="form-group col-md-2">
 			  <label class="control-label" for="numeroEndereco">Nº</label>
-			  <input type="text" class="form-control" id="numeroEndereco" [(ngModel)]="edatService.eDAT.numeroEndereco">
+			  <input type="text" class="form-control" id="numeroEndereco" [(ngModel)]="edatService.eDAT.numeroEndereco"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group nao-obrigatorio col-md-2">
 			  <label class="control-label" for="complementoEndereco">Compl.</label>
-			  <input type="text" class="form-control" id="complementoEndereco" [(ngModel)]="edatService.eDAT.complementoEndereco">
+			  <input type="text" class="form-control" id="complementoEndereco"
+				[(ngModel)]="edatService.eDAT.complementoEndereco" [disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="telefone">Telefone residencial</label>
-			  <input type="text" class="form-control phone" id="telefone" [(ngModel)]="edatService.eDAT.telefone">
+			  <input type="text" class="form-control phone" id="telefone" [(ngModel)]="edatService.eDAT.telefone"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-4">
 			  <label class="control-label" for="celular">Telefone celular</label>
-			  <input type="text" class="form-control phone_with_ddd" id="celular" [(ngModel)]="edatService.eDAT.celular">
+			  <input type="text" class="form-control phone_with_ddd" id="celular" [(ngModel)]="edatService.eDAT.celular"
+				[disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 	</fieldset>
@@ -166,7 +205,8 @@
 			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
 				<div class="checkbox">
 				  <label class="control-label" for="nomePropietario">
-					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.isPropietario == 'S'"  (click)="setDadosProprietario();">O condutor é o proprietário
+					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.isPropietario == 'S'"
+					(click)="setDadosProprietario();" [disabled]="edatService.edicaoDAT == false">O condutor é o proprietário
 				  </label>
 				</div>
 			</div>
@@ -174,11 +214,13 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="nomePropietario">Nome do Proprietário</label>
-			  <input type="text" class="form-control" id="nomePropietario" [(ngModel)]="this.edatService.eDAT.nomePropietario">
+			  <input type="text" class="form-control" id="nomePropietario"
+				[(ngModel)]="this.edatService.eDAT.nomePropietario" [disabled]="edatService.edicaoDAT == false">
 			</div>
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="docProprietario">CPF/CNPJ Proprietário</label>
-			  <input type="text" class="form-control cpf" id="docProprietario" [(ngModel)]="this.edatService.eDAT.docPropietario">
+			  <input type="text" class="form-control cpf" id="docProprietario"
+				[(ngModel)]="this.edatService.eDAT.docPropietario" [disabled]="edatService.edicaoDAT == false">
 			</div>
 		</div>
 	</fieldset>

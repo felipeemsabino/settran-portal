@@ -16,25 +16,41 @@ declare var $:any; // JQUERY
 })
 export class VisualizarDatComponent implements OnInit {
 
-    static readonly SEU_VEICULO = "/area-agente/validar-dat/visualizar-dat/seu-veiculo-validar-dat";
-    static readonly DADOS_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/dados-acidente";
-    static readonly OUTROS_VEICULOS = "/area-agente/validar-dat/visualizar-dat/outros-veiculos";
-    static readonly TESTEMUNHAS = "/area-agente/validar-dat/visualizar-dat/testemunhas";
-    static readonly RELATO_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/relato";
+     SEU_VEICULO = "";
+     DADOS_ACIDENTE = "";
+     OUTROS_VEICULOS = "";
+     TESTEMUNHAS = "";
+     RELATO_ACIDENTE = "";
 
     eDAT: any;
     currentPage: string;
     aba: number;
     action: string = '';
+    sub: any;
 
     constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
       public edatService: EDATService, private popupController: PopupControllerComponent,
       private veiculoService: VeiculoService, private enderecoService: EnderecoService) {
       this.aba = 1;
 
-      this.parentRouter.navigate([VisualizarDatComponent.SEU_VEICULO]);
+      if(this.edatService.edicaoDAT == false) {
+        this.SEU_VEICULO = "/area-agente/validar-dat/visualizar-dat/seu-veiculo-validar-dat";
+        this.DADOS_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/dados-acidente";
+        this.OUTROS_VEICULOS = "/area-agente/validar-dat/visualizar-dat/outros-veiculos";
+        this.TESTEMUNHAS = "/area-agente/validar-dat/visualizar-dat/testemunhas";
+        this.RELATO_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/relato";
+      } else {
+        this.SEU_VEICULO = "/area-agente/revisar-dat/visualizar-dat/seu-veiculo-validar-dat";
+        this.DADOS_ACIDENTE = "/area-agente/revisar-dat/visualizar-dat/dados-acidente";
+        this.OUTROS_VEICULOS = "/area-agente/revisar-dat/visualizar-dat/outros-veiculos";
+        this.TESTEMUNHAS = "/area-agente/revisar-dat/visualizar-dat/testemunhas";
+        this.RELATO_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/relato";
+      }
+
+      this.parentRouter.navigate([this.SEU_VEICULO]);
 
     	parentRouter.events.subscribe((val) => {
+
       	  if(val instanceof NavigationEnd) {
               this.currentPage = val.url;
               if(this.action == 'back'){
@@ -57,6 +73,7 @@ export class VisualizarDatComponent implements OnInit {
     }
 
     ngOnInit() {
+      console.log('comecou a visualizar-dat '+this.edatService.edicaoDAT);
     }
 
     cancelar() {
@@ -79,21 +96,21 @@ export class VisualizarDatComponent implements OnInit {
     voltar() {
 
   	switch(this.currentPage) {
-  	  case VisualizarDatComponent.DADOS_ACIDENTE: {
-  	    this.parentRouter.navigate([VisualizarDatComponent.SEU_VEICULO]);
+  	  case this.DADOS_ACIDENTE: {
+  	    this.parentRouter.navigate([this.SEU_VEICULO]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.OUTROS_VEICULOS: {
-  	    this.parentRouter.navigate([VisualizarDatComponent.DADOS_ACIDENTE]);
+  	  case this.OUTROS_VEICULOS: {
+  	    this.parentRouter.navigate([this.DADOS_ACIDENTE]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.TESTEMUNHAS: {
-  	    this.parentRouter.navigate([VisualizarDatComponent.OUTROS_VEICULOS]);
+  	  case this.TESTEMUNHAS: {
+  	    this.parentRouter.navigate([this.OUTROS_VEICULOS]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.RELATO_ACIDENTE: {
+  	  case this.RELATO_ACIDENTE: {
   		this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
-  	    this.parentRouter.navigate([VisualizarDatComponent.TESTEMUNHAS]);
+  	    this.parentRouter.navigate([this.TESTEMUNHAS]);
   	    break;
   	  }
   	}
@@ -106,37 +123,37 @@ export class VisualizarDatComponent implements OnInit {
   	}*/
 
   	switch(this.currentPage) {
-  	  case VisualizarDatComponent.SEU_VEICULO: {
-  		if(this.edatService.validar && !this.validarAbaSeuVeiculo())
+  	  case this.SEU_VEICULO: {
+  		if(this.edatService.edicaoDAT && !this.validarAbaSeuVeiculo())
   			break;
 
-  		this.parentRouter.navigate([VisualizarDatComponent.DADOS_ACIDENTE]);
+  		this.parentRouter.navigate([this.DADOS_ACIDENTE]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.DADOS_ACIDENTE: {
-  		if(this.edatService.validar && !this.validaDadosObrigatorios () || !this.validaAba3Options())
+  	  case this.DADOS_ACIDENTE: {
+  		if(this.edatService.edicaoDAT && !this.validaDadosObrigatorios () || !this.validaAba3Options())
   			break;
 
-  	    this.parentRouter.navigate([VisualizarDatComponent.OUTROS_VEICULOS]);
+  	    this.parentRouter.navigate([this.OUTROS_VEICULOS]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.OUTROS_VEICULOS: {
-  		if(this.edatService.validar && !this.validaDadosObrigatorios () || !this.validaAba4Options())
+  	  case this.OUTROS_VEICULOS: {
+  		if(this.edatService.edicaoDAT && !this.validaDadosObrigatorios () || !this.validaAba4Options())
   			break;
 
-  	    this.parentRouter.navigate([VisualizarDatComponent.TESTEMUNHAS]);
+  	    this.parentRouter.navigate([this.TESTEMUNHAS]);
   	    break;
   	  }
-  	  case VisualizarDatComponent.TESTEMUNHAS: {
-        if(this.edatService.validar && !this.validaDataNascTestemunha())
+  	  case this.TESTEMUNHAS: {
+        if(this.edatService.edicaoDAT && !this.validaDataNascTestemunha())
           break;
 
   		  this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
-  	    this.parentRouter.navigate([VisualizarDatComponent.RELATO_ACIDENTE]);
+  	    this.parentRouter.navigate([this.RELATO_ACIDENTE]);
   	    break;
   	  }
   	  default: { // navegar para tela inicial
-  	    //this.parentRouter.navigate([VisualizarDatComponent.PERGUNTAS_PRELIMINARES]);
+  	    //this.parentRouter.navigate([this.PERGUNTAS_PRELIMINARES]);
   	    break;
   	  }
   	}
@@ -174,11 +191,11 @@ export class VisualizarDatComponent implements OnInit {
     }
 
     getSeusDadosURL() {
-      return VisualizarDatComponent.SEU_VEICULO;
+      return this.SEU_VEICULO;
     }
 
     getRelatoUrl() {
-      return VisualizarDatComponent.RELATO_ACIDENTE;
+      return this.RELATO_ACIDENTE;
     }
 
     /* Validacao de perguntas */

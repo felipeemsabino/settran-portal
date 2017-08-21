@@ -44,6 +44,7 @@ import { EdatStorageService } from './components/shared/services/edat-storage.se
 import { SeuVeiculoValidarDatComponent } from './components/area-municipe/cadastro-dat/seu-veiculo-validar-dat/seu-veiculo-validar-dat.component';
 import { UserService } from './components/shared/services/user.service';
 import { SubheaderComponent } from './components/shared/subheader/subheader.component';
+import { RevisardatService } from './components/area-agente/revisar-dat/services/revisardat.service';
 
 const appRoutes: Routes = [
 	  {
@@ -79,7 +80,23 @@ const appRoutes: Routes = [
 						}
 				  ]
 				},
-				{ path: 'revisar-dat', component: RevisarDatComponent }
+				{
+					path: 'revisar-dat',
+					component: RevisarDatComponent,
+				  children: [
+						{
+							path: 'visualizar-dat',
+							component: VisualizarDatComponent,
+							children: [
+								{ path: 'seu-veiculo-validar-dat', component: SeuVeiculoValidarDatComponent },
+								{ path: 'dados-acidente', component: DadosAcidenteComponent },
+								{ path: 'outros-veiculos', component: OutrosVeiculosComponent },
+								{ path: 'testemunhas', component: TestemunhasComponent },
+								{ path: 'relato', component: RelatoComponent }
+							]
+						}
+				  ]
+				}
 		  ]
 	  },
 	  {
@@ -153,6 +170,9 @@ const appRoutes: Routes = [
     },
     {
       provide: 'IDataService', useClass: ValidardatService, multi: true
+    },
+    {
+      provide: 'IDataService', useClass: RevisardatService, multi: true
     },
 		EDATService, ConsultadatService, PopupControllerComponent, EdatStorageService, UserService ],
   bootstrap: [AppComponent]

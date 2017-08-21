@@ -78,7 +78,8 @@ export class SeuVeiculoValidarDatComponent implements OnInit {
                       .subscribe(
                           result => {
 							             this.edatService.tiposVeiculo = result;
-                           this.getMarcasVeiculo();
+                           if(this.edatService.edicaoDAT == true)
+                            this.getMarcasVeiculo();
                           }, //Bind to view
                           err => {
                             console.log(err);

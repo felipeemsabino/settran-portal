@@ -10,24 +10,24 @@
 			<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 				<legend style="width:inherit;padding:0 10px;border-bottom:none;">Dados para consulta</legend>
 					<div class="row">
-						<div class="form-group">
+						<div class="form-group col-md-3">
 						  <label class="control-label" for="codigoConfirmacao">Número da DAT</label>
 						  <input type="text" class="form-control" id="codigoConfirmacao" name="codigoConfirmacao"
 						  [(ngModel)]="dadosConsulta.codigoConfirmacao" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-3">
 						  <label class="control-label" for="cpf">CPF do solicitante</label>
 						  <input type="text" class="form-control cpf" id="cpf" name="cpf"
 						  [(ngModel)]="dadosConsulta.cpf" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-3">
 						  <label class="control-label" for="cnh">CNH do solicitante</label>
 						  <input type="text" class="form-control cnh" id="cnh" name="cnh"
 						  [(ngModel)]="dadosConsulta.cnh" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-2">
+						<div class="form-group col-md-3">
 						  <label class="control-label" for="captcha">Digite os caracteres</label>
 						  <input type="text" class="form-control" id="captcha" name="captcha"
 						  [(ngModel)]="captchaUsuario">

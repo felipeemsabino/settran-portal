@@ -1,7 +1,7 @@
 <div oncopy="return false" oncut="return false" onpaste="return false" class="container-fluid" data-spy="scroll" data-target=".navbar" data-offset="50" id="top">
 	<div class="panel panel-default">
 	  <div class="panel-heading" style="font-family:Arial, Helvetica, sans-serif;font-size: large;background-color:#F0E68C;text-align:center;color:black;font-weight:bold;">
-		Revisar eDAT
+		 EDAT
 	  </div>
 	  <div class="panel-body">
   	  <ul class="nav nav-pills" >
@@ -16,12 +16,12 @@
 	  </div>
 	  <div class="panel-footer">
 			<div class="row" style="text-align: center;">
-			  <div class="col col-md-4">
+			  <div class="col col-md-6">
 				<button href="#top" type="button" class="btn btn-success"
         (click)="changePage('back');" *ngIf="currentPage !== getSeusDadosURL();">
 					<< Voltar</button>
 			  </div>
-			  <div class="col col-md-4">
+			  <div class="col col-md-6">
 				<button type="button" class="btn btn-primary" (click)="changePage('next');" *ngIf="currentPage !== getRelatoUrl();">
 					Próximo >></button>
 			  </div>
