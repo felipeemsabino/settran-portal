@@ -13,16 +13,17 @@ export class TestemunhasComponent implements OnInit {
   constructor(public edatService: EDATService, public applicationRef: ApplicationRef) { }
 
   ngOnInit() {
-    this.onDateFocus();
+    this.resetFiledsConfigurations();
   }
 
-  onDateFocus() {
+  resetFiledsConfigurations() {
     this.applyDatePicker();
     this.resetMasks();
   }
 
   resetMasks() {
     $('.date-picker-settran').mask('00/00/0000');
+    $('.orgao-exp').mask('SSSSSSSSSS');
   }
 
   applyDatePicker() {
@@ -33,7 +34,6 @@ export class TestemunhasComponent implements OnInit {
        changeYear: true,
        onSelect: function(date) {
          var posicao = this.id.split('dataNascimento')[1];
-         console.log('posicao ->'+posicao);
          me.edatService.eDAT.testemunhasDat[posicao].dataNascimento = date;
        }
     });
@@ -56,8 +56,6 @@ export class TestemunhasComponent implements OnInit {
   		"rg": "",
   		"orgaoExpedidor": ""
   	});
-
-      this.onDateFocus();
   }
 
 }

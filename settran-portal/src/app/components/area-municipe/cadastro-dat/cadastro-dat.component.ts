@@ -325,7 +325,7 @@ export class CadastroDatComponent implements OnInit {
   validaDataNascTestemunha(){
     for(let testemunha of this.edatService.eDAT.testemunhasDat) {
       let hoje = new Date().getTime();
-  	  let dataNascimento = new Date(testemunha.dataNascimento).getTime();
+  	  let dataNascimento = $.datepicker.parseDate('dd/mm/yy',testemunha.dataNascimento).getTime();
   	  if(hoje <= dataNascimento) {
           this.popupController.showPopupMessage("Atenção!",
           'Data de nascimento inválida.', true);

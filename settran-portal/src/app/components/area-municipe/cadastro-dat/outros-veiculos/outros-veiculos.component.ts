@@ -18,29 +18,21 @@ export class OutrosVeiculosComponent implements OnInit {
 
   ngOnInit() {
     if(this.edatService.tiposVeiculo.length == 0) {
-	  this.getTiposVeiculo();
-	}
+  	  this.getTiposVeiculo();
+  	}
 
-	if(!this.edatService.arraysMarcasVeiculo && !this.edatService.arraysModeloVeiculo) {
-	  this.edatService.arraysMarcasVeiculo = new Array();
-	  this.edatService.arraysModeloVeiculo = new Array();
-	}
-	this.resetMasks();
+  	if(!this.edatService.arraysMarcasVeiculo && !this.edatService.arraysModeloVeiculo) {
+  	  this.edatService.arraysMarcasVeiculo = new Array();
+  	  this.edatService.arraysModeloVeiculo = new Array();
+  	}
+    this.resetFiledsConfigurations();
   }
 
-  setMasks() {
-  	$('.cep').mask('00000-000');
-  	$('.phone').mask('0000-0000');
-    $('.phone_with_ddd').mask('(00) 00000-0000');
-  	$('.cpf').mask('000.000.000-00', {reverse: true});
-    $('.placa').mask('SSS-0000');
-    $('.renavam').mask('00000000000');
-    $('.cnh').mask('00000000000');
-    $('.categoria-cnh').mask('SSS');
+  resetFiledsConfigurations() {
+    this.resetMasks();
   }
 
   resetMasks() {
-	setTimeout(function() {
 		$('.cep').mask('00000-000');
 		$('.phone_with_ddd').mask('(00) 00000-0000');
 		$('.cpf').mask('000.000.000-00', {reverse: true});
@@ -48,7 +40,7 @@ export class OutrosVeiculosComponent implements OnInit {
     $('.renavam').mask('00000000000');
     $('.cnh').mask('00000000000');
     $('.categoria-cnh').mask('SSS');
-	}, 500);
+    $('.orgao-exp').mask('SSSSSSSSSS');
   }
 
   removerVeiculo(index: number) {
@@ -87,12 +79,6 @@ export class OutrosVeiculosComponent implements OnInit {
   		"complementoEndereco": "",
   		"telefone": ""
   	});
-
-    this.resetMasks();
-
-  	$('.panel').on('shown.bs.collapse', function (e) {
-  	   self.setMasks();
-  	})
   }
 
   alteraPossuiSeguro(possuiSeguro: string, currentElementIndex: number) {
@@ -140,8 +126,8 @@ export class OutrosVeiculosComponent implements OnInit {
 
   getModelosVeiculo(currentElementIndex: number){
     let tipoVeiculoDesc = $("#tipoVeiculo"+currentElementIndex+" option:selected").text();
-	let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
-	let marcaVeiculoVal = $( '#marcaVeiculo'+currentElementIndex ).val();
+  	let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
+  	let marcaVeiculoVal = $( '#marcaVeiculo'+currentElementIndex ).val();
     let marcaVeiculoDesc = $("#marcaVeiculo"+currentElementIndex+" option:selected").text();
 
     if(tipoVeiculoVal === "" || marcaVeiculoVal === "") {

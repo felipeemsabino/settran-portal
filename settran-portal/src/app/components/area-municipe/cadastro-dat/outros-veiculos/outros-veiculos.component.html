@@ -31,7 +31,7 @@
 							  <label class="control-label" for="placa">Placa</label>
 							  <input type="text" class="form-control placa" id="placa"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].placa"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (focus)="resetFiledsConfigurations();">
 							</div>
 							<div class="form-group col-md-3">
 								<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
@@ -92,25 +92,25 @@
 							  <label class="control-label" for="cnh">CNH</label>
 							  <input type="text" class="form-control cnh" id="cnh"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cnh"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (focus)="resetFiledsConfigurations();">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="cpf">CPF</label>
 							  <input type="text" class="form-control cpf" id="cpf"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].cpf"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (focus)="resetFiledsConfigurations();">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="rg">RG</label>
 							  <input type="text" class="form-control" id="rg"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].rg"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (focus)="resetFiledsConfigurations();">
 							</div>
 							<div class="form-group nao-obrigatorio col-md-3">
 							  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
-							  <input type="text" class="form-control" id="orgaoExpedidor"
+							  <input type="text" class="form-control orgao-exp" id="orgaoExpedidor"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].orgaoExpedidor"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (focus)="resetFiledsConfigurations();">
 							</div>
 						</div>
 						<div class="row">
@@ -130,7 +130,7 @@
 							  <div class="input-group">
 								<input type="text" class="form-control cep" id="cep{{currentElementIndex}}"
 								[(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro.cep"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false"  (focus)="resetFiledsConfigurations();">
 								<div class="input-group-btn">
 								  <span class="input-group-btn ">
 									<button type="button" class="btn" (click)="getCEP(currentElementIndex)"
@@ -176,7 +176,7 @@
 							  <label class="control-label" for="telefone">Telefone</label>
 							  <input type="text" class="form-control phone_with_ddd" id="telefone"
 							  [(ngModel)]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].telefone"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false"  (focus)="resetFiledsConfigurations();">
 							</div>
 						</div>
 					</fieldset>

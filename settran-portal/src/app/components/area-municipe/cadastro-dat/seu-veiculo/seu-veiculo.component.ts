@@ -57,7 +57,7 @@ export class SeuVeiculoComponent implements OnInit {
       $('.cnh').mask('00000000000');
       $('.categoria-cnh').mask('SSS');
       $('.date-picker-settran').mask('00/00/0000');
-
+      $('.orgao-exp').mask('SSSSSSSSSS');
   	}, 500);
   }
 
