@@ -32,9 +32,19 @@ export class SeuVeiculoComponent implements OnInit {
   }
 
   applyDatePicker() {
+     var me = this;
      $( ".date-picker-settran" ).datepicker({
-       dateFormat: 'dd/mm/yy'
-     });
+       dateFormat: 'dd/mm/yy',
+       changeMonth: true,
+       changeYear: true,
+       onSelect: function(date) {
+         if(this.id == 'dataValidadeCNH') {
+           me.edatService.eDAT.dataValidadeCNH = date;
+         } else if(this.id == 'dataNascimento') {
+           me.edatService.eDAT.dataNascimento = date;
+         }
+       }
+    });
   }
   resetMasks() {
   	setTimeout(function() {
@@ -46,6 +56,7 @@ export class SeuVeiculoComponent implements OnInit {
       $('.renavam').mask('00000000000');
       $('.cnh').mask('00000000000');
       $('.categoria-cnh').mask('SSS');
+      $('.date-picker-settran').mask('00/00/0000');
 
   	}, 500);
   }

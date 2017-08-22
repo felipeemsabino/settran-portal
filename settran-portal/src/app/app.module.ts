@@ -154,9 +154,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-	RouterModule.forRoot(appRoutes),
-	FormsModule,
-	HttpModule
+		RouterModule.forRoot(appRoutes),
+		FormsModule,
+		HttpModule
   ],
   providers:
   [ {

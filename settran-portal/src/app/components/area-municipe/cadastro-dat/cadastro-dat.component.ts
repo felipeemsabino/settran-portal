@@ -337,7 +337,7 @@ export class CadastroDatComponent implements OnInit {
 
   validaDataNascimento() {
     let hoje = new Date().getTime();
-	  let dataNascimento = new Date(this.edatService.eDAT.dataNascimento).getTime();
+	  let dataNascimento = $.datepicker.parseDate('dd/mm/yy',this.edatService.eDAT.dataNascimento).getTime();
 	  if(hoje <= dataNascimento) {
         this.popupController.showPopupMessage("Atenção!",
         'Data de nascimento inválida.', true);
@@ -372,7 +372,7 @@ export class CadastroDatComponent implements OnInit {
     } else { this.desmarcaLabelInvalido('label-zona-obrigatorio'); }
 
 	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
-	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
+	  let dataAcidente = $.datepicker.parseDate('dd/mm/yy',this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
 	  if(dataAcidente < dataLimite) {
       this.popupController.showPopupMessage("Atenção!",
       'Não é possível registrar eDAT com data do acidente anterior a 30 dias!', true);

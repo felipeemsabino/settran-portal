@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 
 declare var $:any; // JQUERY
@@ -10,16 +10,33 @@ declare var $:any; // JQUERY
 })
 export class TestemunhasComponent implements OnInit {
 
-  constructor(public edatService: EDATService) { }
+  constructor(public edatService: EDATService, public applicationRef: ApplicationRef) { }
 
   ngOnInit() {
+    this.onDateFocus();
+  }
+
+  onDateFocus() {
     this.applyDatePicker();
+    this.resetMasks();
+  }
+
+  resetMasks() {
+    $('.date-picker-settran').mask('00/00/0000');
   }
 
   applyDatePicker() {
+     var me = this;
      $( ".date-picker-settran" ).datepicker({
-       dateFormat: 'dd/mm/yy'
-     });
+       dateFormat: 'dd/mm/yy',
+       changeMonth: true,
+       changeYear: true,
+       onSelect: function(date) {
+         var posicao = this.id.split('dataNascimento')[1];
+         console.log('posicao ->'+posicao);
+         me.edatService.eDAT.testemunhasDat[posicao].dataNascimento = date;
+       }
+    });
   }
 
   removerTestemunha(index: number) {
@@ -31,16 +48,16 @@ export class TestemunhasComponent implements OnInit {
   }
 
   adicionarTestemunha() {
-	var self = this;
+  	var self = this;
 
-	this.edatService.eDAT.testemunhasDat.push({
-		"nomeTestemunha": "",
-		"dataNascimento": "",
-		"rg": "",
-		"orgaoExpedidor": ""
-	});
-  this.applyDatePicker();
+  	this.edatService.eDAT.testemunhasDat.push({
+  		"nomeTestemunha": "",
+  		"dataNascimento": "",
+  		"rg": "",
+  		"orgaoExpedidor": ""
+  	});
 
+      this.onDateFocus();
   }
 
 }

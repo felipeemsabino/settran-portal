@@ -16,12 +16,27 @@ export class DadosAcidenteComponent implements OnInit {
   	this.configuraAutoComplete();
   	this.setTooltips();
     this.applyDatePicker();
+    this.resetMasks();
+  }
+
+  resetMasks() {
+  	setTimeout(function() {
+      $('.date-picker-settran').mask('00/00/0000');
+  	}, 500);
   }
 
   applyDatePicker() {
+     var me = this;
      $( ".date-picker-settran" ).datepicker({
-       dateFormat: 'dd/mm/yy'
-     });
+       dateFormat: 'dd/mm/yy',
+       changeMonth: true,
+       changeYear: true,
+       onSelect: function(date) {
+         if(this.id == 'dataAcidente') {
+           me.edatService.eDAT.acidenteDat[0].dataAcidente = date;
+         }
+       }
+    });
   }
 
   setTooltips() {

@@ -109,7 +109,7 @@ export class EDATService {
   }
 
   constructor(private http: Http) {
-    this.eDAT = {
+    /*this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
   		"placa": "",
@@ -178,8 +178,8 @@ export class EDATService {
   		"emailEnviaConfirmacao": "",
   		"confirmacaoDados": "",
   		"temSeguro": ""
-  	}
-    /*  this.eDAT = {
+  	}*/
+      this.eDAT = {
   		"isPropietario" : "S",
   		"renavam": "12313",
   		"placa": "hax3321",
@@ -249,7 +249,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "felipeems87@gmail.com",
   		"confirmacaoDados": "S",
   		"temSeguro": "S"
-  	}*/
+  	}
   }
 
   enviarEDAT() {
@@ -324,7 +324,7 @@ export class EDATService {
   }
 
   limparDados() {
-    this.emailMunicipeConfirm = "";
+    //this.emailMunicipeConfirm = "";
     this.validar = false;
     this.edicaoDAT = false;
   }
