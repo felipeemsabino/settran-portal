@@ -18,11 +18,11 @@ export class RevisarDatComponent implements OnInit {
   sub: any;
 
   constructor(private parentRouter: Router, private edatStorage: EdatStorageService,
-   private edatService: EDATService, private userService: UserService) {
+   public edatService: EDATService, private userService: UserService) {
 
   }
 
-  alteraSituacaoDAT() {
+  alteraSituacaoDAT(situacao: string) {
 
   }
 
@@ -45,6 +45,24 @@ export class RevisarDatComponent implements OnInit {
      this.edatService.limparDados();
      this.edatService.eDAT = edatObject;
      this.edatService.habilitarEdicaoCampos();
+
+     if(!this.edatService.eDAT.situacaoDat)
+      this.edatService.eDAT.situacaoDat = '';
+
+     if(!this.edatService.eDAT.textoValidacao)
+      this.edatService.eDAT.textoValidacao = '';
+
+     if(!this.edatService.eDAT.usuarioAgente)
+      this.edatService.eDAT.agente = { 'id':'' };
+
+      if(!this.edatService.eDAT.acidenteDat[0].logradouroCruzamento) {
+        this.edatService.eDAT.acidenteDat[0].logradouroCruzamento = {
+          "id":"",
+          "nomeLogradouro":"",
+          "tipoLogradouro":""
+        };
+      }
+      
      this.parentRouter.navigate(['/area-agente/revisar-dat/visualizar-dat/']);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 
+declare var $:any; // JQUERY
+
 @Component({
   selector: 'app-testemunhas',
   templateUrl: './testemunhas.component.html',
@@ -11,6 +13,13 @@ export class TestemunhasComponent implements OnInit {
   constructor(public edatService: EDATService) { }
 
   ngOnInit() {
+    this.applyDatePicker();
+  }
+
+  applyDatePicker() {
+     $( ".date-picker-settran" ).datepicker({
+       dateFormat: 'dd/mm/yy'
+     });
   }
 
   removerTestemunha(index: number) {
@@ -30,6 +39,8 @@ export class TestemunhasComponent implements OnInit {
 		"rg": "",
 		"orgaoExpedidor": ""
 	});
+  this.applyDatePicker();
+
   }
 
 }

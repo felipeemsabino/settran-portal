@@ -109,7 +109,7 @@ export class VisualizarDatComponent implements OnInit {
   	    break;
   	  }
   	  case this.RELATO_ACIDENTE: {
-  		this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
+  		  //this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
   	    this.parentRouter.navigate([this.TESTEMUNHAS]);
   	    break;
   	  }
@@ -148,7 +148,7 @@ export class VisualizarDatComponent implements OnInit {
         if(this.edatService.edicaoDAT && !this.validaDataNascTestemunha())
           break;
 
-  		  this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
+  		  //this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
   	    this.parentRouter.navigate([this.RELATO_ACIDENTE]);
   	    break;
   	  }
@@ -175,7 +175,8 @@ export class VisualizarDatComponent implements OnInit {
     confirmar() {
       if(this.edatService.eDAT.confirmacaoDados == 'S') {
 
-  		//console.log(JSON.stringify(this.edatService.eDAT));
+  		this.edatService.limpaAtributosBranco();
+  		console.log(JSON.stringify(this.edatService.eDAT));
   		this.edatService.enviarEDAT()
   				  .subscribe(
   					  result => {

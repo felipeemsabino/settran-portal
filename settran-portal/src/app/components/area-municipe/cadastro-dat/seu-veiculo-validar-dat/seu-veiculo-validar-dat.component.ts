@@ -24,12 +24,18 @@ export class SeuVeiculoValidarDatComponent implements OnInit {
   	  this.getTiposVeiculo();
   	}
   	this.resetMasks();
+    this.applyDatePicker();
   	if(!this.edatService.seuVeiculoMarcas && !this.edatService.seuVeiculoModelos) {
   	  this.edatService.seuVeiculoMarcas = new Array();
   	  this.edatService.seuVeiculoModelos = new Array();
   	}
   }
 
+  applyDatePicker() {
+     $( ".date-picker-settran" ).datepicker({
+       dateFormat: 'dd/mm/yy'
+     });
+  }
   resetMasks() {
 	setTimeout(function() {
 		$('.cep').mask('00000-000');

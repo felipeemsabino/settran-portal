@@ -60,6 +60,10 @@ export class ValidarDatComponent implements OnInit {
     let params: URLSearchParams = new URLSearchParams();
 
     this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
+
+		this.edatService.limpaAtributosBranco();
+		console.log(JSON.stringify(this.edatService.eDAT));
+
     params = this.edatService.eDAT;
 
     // Salva dado
@@ -92,6 +96,32 @@ export class ValidarDatComponent implements OnInit {
      this.edatService.eDAT = edatObject;
      this.edatService.eDAT.situacaoDat = '';
      this.edatService.eDAT.textoValidacao = '';
+     if(!this.edatService.eDAT.acidenteDat[0].logradouroCruzamento) {
+       this.edatService.eDAT.acidenteDat[0].logradouroCruzamento = {
+         "id":"",
+         "nomeLogradouro":"",
+         "tipoLogradouro":""
+       };
+     }
+    /* this.edatService.eDAT.fotosDat[0] = {
+       descricaoFoto: "asd 1", urlFoto: "aaa.jpg", decodeImagem: ""
+     }
+
+     this.edatService.eDAT.fotosDat[1] = {
+       descricaoFoto: "asd 2", urlFoto: "", decodeImagem: ""
+     }
+
+     this.edatService.eDAT.fotosDat[2] = {
+       descricaoFoto: "asd 3", urlFoto: "", decodeImagem: ""
+     }
+
+     this.edatService.eDAT.fotosDat[3] = {
+       descricaoFoto: "asd 4", urlFoto: "", decodeImagem: ""
+     }
+
+     this.edatService.eDAT.fotosDat[4] = {
+       descricaoFoto: "asd 5", urlFoto: "", decodeImagem: ""
+     }*/
      this.edatService.desabilitarEdicaoCampos();
      this.parentRouter.navigate(['/area-agente/validar-dat/visualizar-dat/']);
    }

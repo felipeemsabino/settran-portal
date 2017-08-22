@@ -24,17 +24,20 @@
     		<legend>Deferir solicitação de retificação?</legend>
         <div class="row" style="margin-left: 15px;">
           <div class="col">
-    			  <label class='label-zona-obrigatorio'><input type="radio" name="zona"
-    					[checked]="edatService.eDAT.acidenteDat[0].zona == 'RURAL'"
-    					(change)="alteraZona('RURAL');"
-    					[disabled]="edatService.edicaoDAT == false">Deferir</label>
-    			  <label class='label-zona-obrigatorio'><input type="radio" name="zona"
-    					[checked]="edatService.eDAT.acidenteDat[0].zona == 'URBANA'"
-    					(change)="alteraZona('URBANA');"
-    					[disabled]="edatService.edicaoDAT == false">Indeferir</label>
+    			  <label class=''><input type="radio" name="status-req"
+    					(change)="alteraSituacaoDAT('DEF');"
+    					>Deferir</label>
+    			  <label class=''><input type="radio" name="status-req"
+    					(change)="alteraSituacaoDAT('IND');"
+    					>Indeferir</label>
           </div>
         </div>
   	  </fieldset>
+      <div class="col col-md-9">
+        <label class="control-label" for="foto1">Parecer</label>
+        <textarea class="form-control" rows="5" maxlength="3000" id="parecerDAT"
+        [(ngModel)]="edatService.eDAT.textoValidacao"></textarea>
+      </div>
     </div>
     <div class="panel-footer">
       <div class="row" style="text-align: center;">

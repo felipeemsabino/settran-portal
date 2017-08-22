@@ -24,24 +24,30 @@ export class SeuVeiculoComponent implements OnInit {
   	  this.getTiposVeiculo();
   	}
   	this.resetMasks();
+    this.applyDatePicker();
   	if(!this.edatService.seuVeiculoMarcas && !this.edatService.seuVeiculoModelos) {
   	  this.edatService.seuVeiculoMarcas = new Array();
   	  this.edatService.seuVeiculoModelos = new Array();
   	}
   }
 
+  applyDatePicker() {
+     $( ".date-picker-settran" ).datepicker({
+       dateFormat: 'dd/mm/yy'
+     });
+  }
   resetMasks() {
-	setTimeout(function() {
-		$('.cep').mask('00000-000');
-		$('.phone').mask('(00) 0000-0000');
-		$('.phone_with_ddd').mask('(00) 00000-0000');
-		$('.cpf').mask('000.000.000-00', {reverse: true});
-    $('.placa').mask('SSS-0000');
-    $('.renavam').mask('00000000000');
-    $('.cnh').mask('00000000000');
-    $('.categoria-cnh').mask('SSS');
+  	setTimeout(function() {
+  		$('.cep').mask('00000-000');
+  		$('.phone').mask('(00) 0000-0000');
+  		$('.phone_with_ddd').mask('(00) 00000-0000');
+  		$('.cpf').mask('000.000.000-00', {reverse: true});
+      $('.placa').mask('SSS-0000');
+      $('.renavam').mask('00000000000');
+      $('.cnh').mask('00000000000');
+      $('.categoria-cnh').mask('SSS');
 
-	}, 500);
+  	}, 500);
   }
 
   resetCPFMask() {

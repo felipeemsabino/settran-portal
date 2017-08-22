@@ -49,9 +49,9 @@
 							</div>
 							<div class="form-group col-md-3">
 							  <label class="control-label" for="dataNascimento">Data Nascimento</label>
-							  <input type="date" class="form-control" id="dataNascimento"
+								<input type="text" id="dataNascimento" class="form-control date-picker-settran"
 								[(ngModel)]="edatService.eDAT.testemunhasDat[currentElementIndex].dataNascimento"
-								[disabled]="edatService.edicaoDAT == false">
+								[disabled]="edatService.edicaoDAT == false" (click)="applyDatePicker();">
 							</div>
 						</div>
 					</fieldset>

@@ -36,7 +36,7 @@ export class EDATService {
   };
 
   cancelarEDAT() {
-    /*this.eDAT = {
+    this.eDAT = {
       "isPropietario" : "",
       "renavam": "",
       "placa": "",
@@ -51,11 +51,14 @@ export class EDATService {
         "dataAcidente": "",
         "horaAcidente": "",
         "zona": "",
-        "logradouro":{
-              },
+        "logradouro":{ },
         "numeroEndereco": "",
         "logradouroCruzamento": {
-        }, "numeroLogradouroAcidenteCruzamento":""
+          "id":"",
+          "nomeLogradouro":"",
+          "tipoLogradouro":""
+        },
+        "numeroLogradouroAcidenteCruzamento":""
       }],
       "relatoDat":[ {
         "descricaoRelatoAcidente": ""
@@ -89,6 +92,11 @@ export class EDATService {
       "outrosVeiculosDat": [],
       "testemunhasDat": [],
       "fotosDat": [
+        {descricaoFoto: "asd 1", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 2", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 3", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 4", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 5", urlFoto: "", decodeImagem: ""}
       ],
       "docPropietario": "",
       "nomePropietario": "",
@@ -97,75 +105,11 @@ export class EDATService {
       "emailEnviaConfirmacao": "",
       "confirmacaoDados": "",
       "temSeguro": ""
-    }*/
-      this.eDAT = {
-      "isPropietario" : "S",
-      "renavam": "12313",
-      "placa": "hax3321",
-      "marcaVeiculo": "",
-      "modeloVeiculo": "",
-      "chassi": "12321323112",
-      "tipoVeiculo": {
-        "id": ""
-      },
-      "acidenteDat": [{
-        "tipoAcidente": "",
-        "dataAcidente": "2017-07-29",
-        "horaAcidente": "",
-        "zona": "",
-        "logradouro":{
-              },
-        "numeroEndereco": "",
-        "logradouroCruzamento": {
-        }, "numeroLogradouroAcidenteCruzamento":""
-      }],
-      "relatoDat":[ {
-        "descricaoRelatoAcidente": ""
-      }],
-      "cor": "asdas",
-      "cnh": "2312321312",
-      "dataValidadeCNH": "2000-11-10",
-      "categoriaCnh": "A",
-      "sexo": "M",
-      "nomeMunicipe": "Felipe Eduardo Menezes Sabino",
-      "dataNascimento": "1987-03-30",
-      "cpf": "07046919658",
-      "rg": "13243028",
-      "orgaoExpedidor": "sspmmg",
-      "emailMunicipe": "felipeems87@gmail.com",
-      "logradouro":{
-        "id":"",
-        "nomeLogradouro":"",
-        "tipoLogradouro":"",
-        "nomeBairro":"",
-        "cep":"38400230",
-        "nomeCidade":"",
-        "uf":""
-      },
-      "numeroEndereco": "212",
-      "complementoEndereco": "",
-      "telefone": "11111111",
-      "celular": "111111111",
-      "ipRequisicao": "",
-      "codigoConfirmacaoDat": "",
-      "outrosVeiculosDat": [],
-      "testemunhasDat": [],
-      "fotosDat": [
-
-      ],
-      "docPropietario": "12",
-      "nomePropietario": "Felipe",
-      "enviouSms": "",
-      "numeroEnvioSms": "",
-      "emailEnviaConfirmacao": "felipeems87@gmail.com",
-      "confirmacaoDados": "S",
-      "temSeguro": "S"
     }
-
   }
 
   constructor(private http: Http) {
-    /*this.eDAT = {
+    this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
   		"placa": "",
@@ -184,6 +128,9 @@ export class EDATService {
               },
   			"numeroEndereco": "",
   			"logradouroCruzamento": {
+          "id":"",
+          "nomeLogradouro":"",
+          "tipoLogradouro":""
   			}, "numeroLogradouroAcidenteCruzamento":""
   		}],
   		"relatoDat":[ {
@@ -218,6 +165,11 @@ export class EDATService {
   		"outrosVeiculosDat": [],
   		"testemunhasDat": [],
   		"fotosDat": [
+      {descricaoFoto: "asd 1", urlFoto: "", decodeImagem: ""},
+      {descricaoFoto: "asd 2", urlFoto: "", decodeImagem: ""},
+      {descricaoFoto: "asd 3", urlFoto: "", decodeImagem: ""},
+      {descricaoFoto: "asd 4", urlFoto: "", decodeImagem: ""},
+      {descricaoFoto: "asd 5", urlFoto: "", decodeImagem: ""}
   		],
   		"docPropietario": "",
   		"nomePropietario": "",
@@ -226,8 +178,8 @@ export class EDATService {
   		"emailEnviaConfirmacao": "",
   		"confirmacaoDados": "",
   		"temSeguro": ""
-  	}*/
-      this.eDAT = {
+  	}
+    /*  this.eDAT = {
   		"isPropietario" : "S",
   		"renavam": "12313",
   		"placa": "hax3321",
@@ -239,25 +191,29 @@ export class EDATService {
   		},
   		"acidenteDat": [{
   			"tipoAcidente": "",
-  			"dataAcidente": "2017-07-29",
+  			"dataAcidente": "15/08/2017",
   			"horaAcidente": "",
   			"zona": "",
   			"logradouro":{
               },
   			"numeroEndereco": "",
   			"logradouroCruzamento": {
-  			}, "numeroLogradouroAcidenteCruzamento":""
+            "id":"",
+            "nomeLogradouro":"",
+            "tipoLogradouro":""
+  			},
+        "numeroLogradouroAcidenteCruzamento":""
   		}],
   		"relatoDat":[ {
   			"descricaoRelatoAcidente": ""
   		}],
   		"cor": "asdas",
   		"cnh": "2312321312",
-  		"dataValidadeCNH": "2000-11-10",
+  		"dataValidadeCNH": "10/11/2019",
   		"categoriaCnh": "A",
   		"sexo": "M",
   		"nomeMunicipe": "Felipe Eduardo Menezes Sabino",
-  		"dataNascimento": "1987-03-30",
+  		"dataNascimento": "30/03/1987",
   		"cpf": "07046919658",
   		"rg": "13243028",
   		"orgaoExpedidor": "sspmmg",
@@ -280,6 +236,11 @@ export class EDATService {
   		"outrosVeiculosDat": [],
   		"testemunhasDat": [],
   		"fotosDat": [
+        {descricaoFoto: "asd 1", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 2", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 3", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 4", urlFoto: "", decodeImagem: ""},
+        {descricaoFoto: "asd 5", urlFoto: "", decodeImagem: ""}
   		],
   		"docPropietario": "12",
   		"nomePropietario": "Felipe",
@@ -288,7 +249,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "felipeems87@gmail.com",
   		"confirmacaoDados": "S",
   		"temSeguro": "S"
-  	}
+  	}*/
   }
 
   enviarEDAT() {
@@ -375,4 +336,58 @@ export class EDATService {
   desabilitarEdicaoCampos() {
     this.edicaoDAT = false;
   }
+
+  // limpa atributos vazios do json edat
+    limpaAtributosBranco () {
+      if(this.eDAT.acidenteDat[0].logradouroCruzamento && !this.eDAT.acidenteDat[0].logradouroCruzamento.id) {
+        delete this.eDAT.acidenteDat[0].logradouroCruzamento;
+      }
+
+      let cont = 0;
+      if(this.eDAT.fotosDat) {
+        if(this.eDAT.fotosDat[cont]) {
+          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+            this.eDAT.fotosDat.splice(cont, 1);
+          } else cont++;
+        }
+        if(this.eDAT.fotosDat[cont]) {
+          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+            this.eDAT.fotosDat.splice(cont, 1);
+          }else cont++;
+        }
+        if(this.eDAT.fotosDat[cont]) {
+          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+            this.eDAT.fotosDat.splice(cont, 1);
+          }else cont++;
+        }
+        if(this.eDAT.fotosDat[cont]) {
+          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+            this.eDAT.fotosDat.splice(cont, 1);
+          }else cont++;
+        }
+        if(this.eDAT.fotosDat[cont]) {
+          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+            this.eDAT.fotosDat.splice(cont, 1);
+          }
+        }
+      }
+    }
+
+    // limpa atributos vazios do json edat
+    setAtributosBrancos () {
+      if(!this.eDAT.acidenteDat[0].logradouroCruzamento) {
+        this.eDAT.acidenteDat[0].logradouroCruzamento = {
+          "id":"",
+          "nomeLogradouro":"",
+          "tipoLogradouro":""
+        };
+      }
+      let cont = 0;
+      if(this.eDAT.fotosDat) {
+        cont = 4 - this.eDAT.fotosDat.length;
+      }
+      for(let index = 0;index <= cont;index++) {
+        this.eDAT.fotosDat.push({descricaoFoto: "", urlFoto: "", decodeImagem: ""});
+      }
+    }
 }

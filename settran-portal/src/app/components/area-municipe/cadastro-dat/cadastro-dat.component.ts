@@ -102,7 +102,7 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
-		this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
+		  //this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
 	    this.parentRouter.navigate([CadastroDatComponent.TESTEMUNHAS]);
 	    break;
 	  }
@@ -111,6 +111,7 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.RESUMO: {
+      this.edatService.setAtributosBrancos();
 	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
 	    break;
 	  }
@@ -153,10 +154,10 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.TESTEMUNHAS: {
-      if(!this.validaDataNascTestemunha())
+      if(!this.validaDadosObrigatorios() || !this.validaDataNascTestemunha())
         break;
 
-		  this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
+		  //this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
 	    this.parentRouter.navigate([CadastroDatComponent.RELATO_ACIDENTE]);
 	    break;
 	  }
@@ -194,7 +195,8 @@ export class CadastroDatComponent implements OnInit {
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
 
-		console.log(JSON.stringify(this.edatService.eDAT));
+		this.edatService.limpaAtributosBranco();
+    console.log(this.edatService.eDAT);
 		this.edatService.enviarEDAT()
 				  .subscribe(
 					  result => {

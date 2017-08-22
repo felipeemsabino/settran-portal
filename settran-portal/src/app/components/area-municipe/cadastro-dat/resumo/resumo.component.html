@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding-top: 19px;">	
+<div class="container-fluid" style="padding-top: 19px;">
 	<fieldset style="border: 1px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Resumo da DAT</legend>
 		  <!-- List group -->
@@ -63,7 +63,7 @@
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro + " " +
 (edatService.eDAT.acidenteDat[0].numeroEndereco != '' ? edatService.eDAT.acidenteDat[0].numeroEndereco : '') + " " +
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeBairro + " " }}</label>
-						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0" 
+						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento && edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0" 
 							   id="7">{{edatService.eDAT.acidenteDat[0].logradouroCruzamento.tipoLogradouro + " " +
 													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeLogradouro + " " +
 (edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento != '' ? edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento : '') + " " +
@@ -138,7 +138,7 @@
 			<div class="form-group nao-obrigatorio" style="padding-left:15px;">
 				<div class="checkbox">
 				  <label class="control-label" for="nomePropietario">
-					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.confirmacaoDados == 'S'"  
+					<input id="condutorProprietario" type="checkbox" [checked]="edatService.eDAT.confirmacaoDados == 'S'"
 					(click)="setDadosProprietario();">DECLARO SEREM VERDADEIRAS AS INFORMAÇÕES AQUI PRESTADAS, SOBRE AS QUAIS ASSUMO
 					 TODAS AS RESPONSABILIDADES PERANTE O ARTIGO 299 DO CÓDIGO PENAL.
 				  </label>

@@ -66,71 +66,21 @@
 			</div>
 			<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>
 		</div>
-		<div *ngIf="!edatService.edicaoDAT">
+		<div *ngIf="!edatService.edicaoDAT && edatService.eDAT.fotosDat.length > 0">
 			<legend style="width:inherit;padding:0 10px;border-bottom:none;">Fotos anexadas</legend>
-			<div class="row">
+			<div class="row" *ngFor='let foto of edatService.eDAT.fotosDat;let currentElementIndex = index;'>
 				<div class="form-group col-md-6">
-					<label class="control-label" for="foto1">Foto 1:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden id="foto1" accept="image/*" (change)="changeListener($event, 0)">
+					<label class="control-label" for="foto1">Foto {{currentElementIndex+1}}:</label>
+					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden
+					id="foto+{{currentElementIndex}}" accept="image/*" (change)="changeListener($event, 0)">
 				</div>
 				<div class="form-group col-md-6">
 					<label class="control-label" for="foto1">Descrição da foto</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control" id="descFoto1" [(ngModel)]="edatService.eDAT.fotosDat[0].descricaoFoto">
+					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control"
+					id="descFoto+{{currentElementIndex}}" [(ngModel)]="edatService.eDAT.fotosDat[currentElementIndex].descricaoFoto">
 				</div>
 				<div class="form-group col-md-6">
-					<a target="_blank" href="{{edatService.eDAT.fotosDat[0].descricaoFoto}}">Foto 1</a>
-				</div>
-			</div>
-			<div class=" row">
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto2">Foto 2:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden id="foto2" accept="image/*" (change)="changeListener($event, 1)">
-				</div>
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto2">Descrição da foto</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control" id="descFoto2" [(ngModel)]="edatService.eDAT.fotosDat[1].descricaoFoto">
-				</div>
-				<div class="form-group col-md-6">
-					<a target="_blank" href="{{edatService.eDAT.fotosDat[0].descricaoFoto}}">Foto 2</a>
-				</div>
-			</div>
-			<div class=" row">
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto3">Foto 3:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden id="foto3" accept="image/*" (change)="changeListener($event, 2)">
-				</div>
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto3">Descrição da foto</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control" id="descFoto3" [(ngModel)]="edatService.eDAT.fotosDat[2].descricaoFoto">
-				</div>
-				<div class="form-group col-md-6">
-					<a target="_blank" href="{{edatService.eDAT.fotosDat[0].descricaoFoto}}">Foto 3</a>
-				</div>
-			</div>
-			<div class=" row">
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto4">Foto 4:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden id="foto4" accept="image/*" (change)="changeListener($event, 3)">
-				</div>
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto4">Descrição da foto</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control" id="descFoto4" [(ngModel)]="edatService.eDAT.fotosDat[3].descricaoFoto">
-				</div>
-				<div class="form-group col-md-6">
-					<a target="_blank" href="{{edatService.eDAT.fotosDat[0].descricaoFoto}}">Foto 4</a>
-				</div>
-			</div>
-			<div class=" row">
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto5">Foto 5:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden id="foto5" accept="image/*" (change)="changeListener($event, 4)">
-				</div>
-				<div class="form-group col-md-6">
-					<label class="control-label" for="foto5">Descrição da foto</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control" id="descFoto5" [(ngModel)]="edatService.eDAT.fotosDat[4].descricaoFoto">
-				</div>
-				<div class="form-group col-md-6">
-					<a target="_blank" href="{{edatService.eDAT.fotosDat[0].descricaoFoto}}">Foto 5:</a>
+					<a target="_blank" href="{{url+edatService.eDAT.fotosDat[currentElementIndex].descricaoFoto}}">Foto {{currentElementIndex+1}}</a>
 				</div>
 			</div>
 			<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>
