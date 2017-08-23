@@ -11,7 +11,6 @@ export class PopupControllerComponent implements OnInit {
 
   titulo: string = "a";
   subtitulo: string = "a";
-  closeButton: boolean;
 
   constructor() { }
 
@@ -23,9 +22,15 @@ export class PopupControllerComponent implements OnInit {
     $('#subtitulo-modal-popup').text(subtitulo);
 
     if(closeButton) {
+      $('.modal-footer.modal-popup').removeClass('hide');
       $('.modal-footer.modal-popup').addClass('show');
+      $('.modal-body.modal-loading').removeClass('show');
+      $('.modal-body.modal-loading').addClass('hide');
     } else {
-      $('.modal-footer.modal-popup').addClass('hide');
+      $('.modal-footer.modal-popup').removeClass('show');
+        $('.modal-footer.modal-popup').addClass('hide');
+      $('.modal-body.modal-loading').removeClass('hide');
+      $('.modal-body.modal-loading').addClass('show');
     }
 
     $('#loadingModal').modal('show');

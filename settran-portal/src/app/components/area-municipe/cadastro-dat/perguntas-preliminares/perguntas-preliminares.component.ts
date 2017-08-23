@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { URLSearchParams, QueryEncoder, Http, Response } from '@angular/http';
 import { RegrasService } from '../../../area-admin/cadastro-regra/services/regras.service';
 import { EDATService } from '../../../shared/services/e-dat.service';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -16,7 +17,8 @@ export class PerguntasPreliminaresComponent implements OnInit {
   perguntas: any[];
   perguntasUsuario: any[];
 
-  constructor(private regrasService: RegrasService, public edatService: EDATService) {
+  constructor(private regrasService: RegrasService, public edatService: EDATService,
+    private popupController: PopupControllerComponent) {
   }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class PerguntasPreliminaresComponent implements OnInit {
 
   getData() {
 
-	$('#loadingModal').modal('show');
+    this.popupController.showPopupMessage("Aguarde!", 'Carregando perguntas preliminares.', false);
 
   	this.setUrlParams();
 
@@ -41,12 +43,11 @@ export class PerguntasPreliminaresComponent implements OnInit {
                                 index++;
             							    });
               							}
-              							$('#loadingModal').modal('hide'); // fecha modal
+                            this.popupController.hidePopupMessage();
                             }, //Bind to view
                             err => {
-                                            console.log(err);
-                							alert('Ocorreram erros ao recuperar os registros! Por favor, tente novamente!');
-                							$('#loadingModal').modal('hide'); // fecha modal
+                              console.log(err);
+                              this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao carregar as perguntas preliminares.', true);
                             });
   }
 
