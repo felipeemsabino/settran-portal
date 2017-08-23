@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 
+declare var $:any; // JQUERY
+
 @Component({
   selector: 'app-relato',
   templateUrl: './relato.component.html',
@@ -118,7 +120,8 @@ export class RelatoComponent implements OnInit {
     var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-	  this.edatService.eDAT.fotosDat[index].decodeImagem = myReader.result;
+       this.edatService.eDAT.fotosDat[index].decodeImagem = myReader.result;
+       this.edatService.eDAT.fotosDat[index].urlFoto = $('#foto'+index).val();
     }
     myReader.readAsDataURL(file);
   }

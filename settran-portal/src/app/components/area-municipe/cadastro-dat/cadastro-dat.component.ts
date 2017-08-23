@@ -162,7 +162,7 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
-	    this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
+      this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
 	    break;
 	  }
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
