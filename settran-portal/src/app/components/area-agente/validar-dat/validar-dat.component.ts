@@ -21,7 +21,7 @@ declare var $:any; // JQUERY
   providers: [ValidardatService]
 })
 export class ValidarDatComponent implements OnInit {
-  gridTitle: string = "Validar eDAT";
+  gridTitle: string = "Validar DAT";
   object: any = {};
   mostrarGrid: boolean = true;
   sub: any;

@@ -52,23 +52,26 @@ export class RelatoComponent implements OnInit {
 	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
 		"<<tipoacidente>>", this.edatService.eDAT.acidenteDat[0].tipoAcidente);
 
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente += this.formataOutrosEnvolvidos()+".";
+	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente += this.formataOutrosEnvolvidos();
+
+    if(!this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.endsWith(".")) {
+      this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente += ".";
+    }
   }
 
   formataEnderecoAcidente() {
     let endereco = this.edatService.eDAT.acidenteDat[0].logradouro.tipoLogradouro + " " +
 				   this.edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro;
 
-	if (this.edatService.eDAT.acidenteDat[0].numeroEndereco != "") {
-	  endereco += " "+this.edatService.eDAT.acidenteDat[0].numeroEndereco;
-	}
+  	if (this.edatService.eDAT.acidenteDat[0].numeroEndereco != "") {
+  	  endereco += " "+this.edatService.eDAT.acidenteDat[0].numeroEndereco;
+  	}
 
-	endereco += " "+this.edatService.eDAT.acidenteDat[0].logradouro.nomeBairro +
-  (this.edatService.eDAT.acidenteDat[0].zona.length > 0 ?
-  +" zona "+this.edatService.eDAT.acidenteDat[0].zona.toLowerCase() :
-  '');
+  	endereco += " "+this.edatService.eDAT.acidenteDat[0].logradouro.nomeBairro +
+    (this.edatService.eDAT.acidenteDat[0].zona.length > 0 ?
+    " zona "+this.edatService.eDAT.acidenteDat[0].zona.toLowerCase() : '');
 
-	return endereco;
+  	return endereco;
   }
 
   formataEnderecoCruzamentoAcidente() {
@@ -86,7 +89,7 @@ export class RelatoComponent implements OnInit {
 
 	enderecoCruzamento += " "+this.edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeBairro +
   (this.edatService.eDAT.acidenteDat[0].zona.length > 0 ?
-  +" zona "+this.edatService.eDAT.acidenteDat[0].zona.toLowerCase() :
+  " zona "+this.edatService.eDAT.acidenteDat[0].zona.toLowerCase() :
   '');
 
 	return enderecoCruzamento;
@@ -104,7 +107,7 @@ export class RelatoComponent implements OnInit {
 			outrosEnvolvidosTexto += ",";
 		}
 		outrosEnvolvidosTexto += " o veículo " + veiculo.marcaVeiculo + "/" + veiculo.modeloVeiculo + " de placa " + veiculo.placa +
-		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + ", CPF " + (veiculo.cpf == '' ? "CPF <não informado; >" : veiculo.cpf);
+		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + (veiculo.cpf == '' ? " < CPF não informado; >" : ", CPF " + veiculo.cpf);
 		index++;
 	}
 

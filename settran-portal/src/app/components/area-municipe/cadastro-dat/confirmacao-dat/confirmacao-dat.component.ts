@@ -19,6 +19,8 @@ export class ConfirmacaoDatComponent implements OnInit {
     private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
+    this.edatService.eDAT.emailEnviaConfirmacao = this.edatService.eDAT.emailMunicipe;
+
    if(!this.edatService.eDAT.enviouSms) {
      this.edatService.eDAT.enviouSms = 'N';
    }
@@ -43,7 +45,11 @@ export class ConfirmacaoDatComponent implements OnInit {
   	}
   }
 
-  enviarCodigo(){
+  enviarNovoCodigo() {
+    this.enviarCodigo(true);
+  }
+
+  enviarCodigo(reenviar: boolean){
     let params: URLSearchParams = new URLSearchParams();
 
   	if(this.edatService.eDAT.emailEnviaConfirmacao == "") {
@@ -56,7 +62,8 @@ export class ConfirmacaoDatComponent implements OnInit {
   	  return;
   	}
 
-    this.popupController.showPopupMessage("Atenção!", 'Enviando confirmação.', false);
+    let mensagem: string = reenviar ? "Reenviando confirmação." : "Enviando confirmação.";
+    this.popupController.showPopupMessage("Atenção!", mensagem, false);
 
   	let dados: any = {
   		"emailMunicipe":this.edatService.eDAT.emailEnviaConfirmacao,
@@ -69,7 +76,7 @@ export class ConfirmacaoDatComponent implements OnInit {
     // Salva dado
     this.confirmacaoedatService.enviarCodigo(params).subscribe(
                           result => {
-                            this.popupController.showPopupMessage("Atenção!", 'Confirmação enviada com sucesso.', true);
+                            this.popupController.showPopupMessage("Atenção!", 'Confirmação enviada com sucesso. Por favor, verifique seu email/celular.', true);
                           }, //Bind to view
                           err => {
                             this.popupController.showPopupMessage("Atenção!",

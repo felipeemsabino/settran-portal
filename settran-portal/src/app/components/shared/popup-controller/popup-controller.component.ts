@@ -39,5 +39,4 @@ export class PopupControllerComponent implements OnInit {
   hidePopupMessage(){
     $('#loadingModal').modal('hide');
   }
-
 }

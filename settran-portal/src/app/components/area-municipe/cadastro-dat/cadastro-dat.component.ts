@@ -33,6 +33,7 @@ export class CadastroDatComponent implements OnInit {
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
 
     this.edatService.limparDados();
+    this.edatService.resetInfosUsuario();
 
   	parentRouter.events.subscribe((val) => {
     	  if(val instanceof NavigationEnd) {
@@ -57,17 +58,35 @@ export class CadastroDatComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getUserIp();
     this.edatService.habilitarEdicaoCampos();
   }
 
   cancelar() {
-     var txt;
-     var r = confirm("Tem certeza que deseja cancelar o registro da DAT?");
-     if (r == true) {
-       this.edatService.cancelarEDAT();
-       this.parentRouter.navigate(['']);
-     }
+    var me = this;
+
+     $( "#alertDialogText" ).dialog({
+       title:"Alerta",
+       modal: true,
+       dialogClass: "no-close",
+       buttons: [
+         {
+           text: "Sim",
+           click: function() {
+             me.edatService.cancelarEDAT();
+             me.parentRouter.navigate(['']);
+             $( this ).dialog( "close" );
+           }
+         },
+         {
+           text: "Não",
+           click: function() {
+             $( this ).dialog( "close" );
+           }
+         }
+       ]
+     }).text("Tem certeza que deseja cancelar o registro da DAT?");
   }
 
   changePage(action: string) {
@@ -167,8 +186,8 @@ export class CadastroDatComponent implements OnInit {
 	  }
 	  case CadastroDatComponent.CONFIRMACAO_DAT: {
 	    if(!this.validaCodigo()) {
-		  return;
-		}
+  		  return;
+  		}
 	    this.parentRouter.navigate([CadastroDatComponent.RESUMO]);
 	    break;
 	  }
@@ -194,13 +213,15 @@ export class CadastroDatComponent implements OnInit {
 
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
+    this.popupController.showPopupMessage("Aguarde!", 'Salvando DAT.', false);
 
 		this.edatService.limpaAtributosBranco();
-    console.log(this.edatService.eDAT);
+    console.log(JSON.stringify(this.edatService.eDAT, null, 2));
 		this.edatService.enviarEDAT()
 				  .subscribe(
 					  result => {
             this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
+            this.parentRouter.navigate(['']);
 					  }, //Bind to view
 					  err => {
 						console.log(err);

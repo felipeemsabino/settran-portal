@@ -3,6 +3,7 @@ import { EDATService } from '../../../shared/services/e-dat.service';
 import { VeiculoService } from '../../../shared/services/veiculo.service';
 import { EnderecoService } from '../../../shared/services/endereco.service';
 import { URLSearchParams } from '@angular/http';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -14,7 +15,8 @@ declare var $:any; // JQUERY
 })
 export class OutrosVeiculosComponent implements OnInit {
 
-  constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService, public edatService: EDATService) {}
+  constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService,
+    public edatService: EDATService, private popupController: PopupControllerComponent) {}
 
   ngOnInit() {
     if(this.edatService.tiposVeiculo.length == 0) {
@@ -82,46 +84,45 @@ export class OutrosVeiculosComponent implements OnInit {
   }
 
   alteraPossuiSeguro(possuiSeguro: string, currentElementIndex: number) {
-	this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro = possuiSeguro;
+	   this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro = possuiSeguro;
   }
 
   getTiposVeiculo() {
-
-    this.veiculoService.getTiposVeiculo(new URLSearchParams())
-                      .subscribe(
+    this.popupController.showPopupMessage("Atenção!",
+    'Carregando tipos de veículo.', false);
+    this.veiculoService.getTiposVeiculo(new URLSearchParams()).subscribe(
                           result => {
-							this.edatService.tiposVeiculo = result;
+							              this.edatService.tiposVeiculo = result;
                           }, //Bind to view
                           err => {
                             console.log(err);
-							$('#loadingModal').modal('hide'); // fecha modal
+                            this.popupController.hidePopupMessage();
                           });
   }
 
   getMarcasVeiculo(currentElementIndex: number) {
     let tipoVeiculoDesc = $("#tipoVeiculo"+currentElementIndex+" option:selected").text();
-	let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
+    let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
 
     if(tipoVeiculoVal === "") {
-	  return;
-	}
+      return;
+    }
 
-	this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id = tipoVeiculoVal;
+    this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id = tipoVeiculoVal;
 
-	$('#loadingModal').modal('show'); // abre loadingModal
-	console.log('tipoVeiculoDesc -> '+tipoVeiculoDesc);
-	this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc)
-				  .subscribe(
-					  result => {
-						this.edatService.arraysMarcasVeiculo[currentElementIndex] = result;
-						this.edatService.arraysModeloVeiculo[currentElementIndex] = new Array();
+    this.popupController.showPopupMessage("Atenção!",
+    'Carregando marcas.', false);
+    this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc).subscribe(
+      result => {
+          this.edatService.arraysMarcasVeiculo[currentElementIndex] = result;
+          this.edatService.arraysModeloVeiculo[currentElementIndex] = new Array();
 
-						$('#loadingModal').modal('hide'); // fecha modal
-					  }, //Bind to view
-					  err => {
-						console.log(err);
-						$('#loadingModal').modal('hide'); // fecha modal
-					  });
+          this.popupController.hidePopupMessage();
+      }, //Bind to view
+      err => {
+        console.log(err);
+        this.popupController.hidePopupMessage();
+      });
   }
 
   getModelosVeiculo(currentElementIndex: number){
@@ -131,57 +132,54 @@ export class OutrosVeiculosComponent implements OnInit {
     let marcaVeiculoDesc = $("#marcaVeiculo"+currentElementIndex+" option:selected").text();
 
     if(tipoVeiculoVal === "" || marcaVeiculoVal === "") {
-	  return;
-	}
+      return;
+    }
 
 	this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].marcaVeiculo = marcaVeiculoDesc;
 
-	$('#loadingModal').modal('show'); // abre loadingModal
-
-	this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal)
-				  .subscribe(
+  this.popupController.showPopupMessage("Atenção!",
+  'Carregando modelos.', false);
+	this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal).subscribe(
 					  result => {
-						this.edatService.arraysModeloVeiculo[currentElementIndex] = result;
-
-						$('#loadingModal').modal('hide'); // fecha modal
+  						this.edatService.arraysModeloVeiculo[currentElementIndex] = result;
+              this.popupController.hidePopupMessage();
 					  }, //Bind to view
 					  err => {
-						console.log(err);
-						$('#loadingModal').modal('hide'); // fecha modal
+  						console.log(err);
+  						this.popupController.hidePopupMessage();
 					  });
   }
 
   setModeloVeiculo (currentElementIndex: number) {
     let modeloVeiculoDesc = $("#modeloVeiculo"+currentElementIndex+" option:selected").text();
 
-	this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].modeloVeiculo = modeloVeiculoDesc;
-	console.log(this.edatService.eDAT.outrosVeiculosDat[currentElementIndex]);
+  	this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].modeloVeiculo = modeloVeiculoDesc;
   }
 
   getCEP(currentElementIndex: number) { //38411876
-	let cep = $( '#cep'+currentElementIndex ).val();
+  	let cep = $( '#cep'+currentElementIndex ).val();
 
-    if(cep === "") {
-	  return;
-	}
+      if(cep === "") {
+    	  return;
+    	}
 
-	let params: URLSearchParams = new URLSearchParams();
-	params.set("cep", cep.replace(/\D/g,'')); // remove nao numericos
+  	let params: URLSearchParams = new URLSearchParams();
+  	params.set("cep", cep.replace(/\D/g,'')); // remove nao numericos
 
-	$('#loadingModal').modal('show'); // abre loadingModal
+    this.popupController.showPopupMessage("Atenção!",
+    'Buscando endereço.', false);
 
-	this.enderecoService.getCEP(params)
+	   this.enderecoService.getCEP(params)
 				  .subscribe(
 					  result => {
 						if(result.length > 0) {
 						  this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].logradouro = result[0];
-						  console.log(this.edatService.eDAT.outrosVeiculosDat);
 						}
-						$('#loadingModal').modal('hide'); // fecha modal
+            this.popupController.hidePopupMessage();
 					  }, //Bind to view
 					  err => {
 						console.log(err);
-						$('#loadingModal').modal('hide'); // fecha modal
+            this.popupController.hidePopupMessage();
 					  });
   }
 }

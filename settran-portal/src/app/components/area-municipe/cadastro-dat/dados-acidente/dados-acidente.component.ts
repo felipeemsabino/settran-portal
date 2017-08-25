@@ -73,7 +73,7 @@ export class DadosAcidenteComponent implements OnInit {
 				//response( data );
 				response($.map(data, function(item) {
                     return {
-                        label: item.tipoLogradouro+" "+item.nomeLogradouro,
+                        label: item.nomeConcatenado,
                         value: item.nomeLogradouro,
 						fullObject: item
                     }

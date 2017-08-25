@@ -292,8 +292,6 @@ export class EDATService {
 		date = testemunha.dataNascimento.split("-");
 		testemunha.dataNascimento = date[2]+"/"+date[1]+"/"+date[0];
 	}
-	console.log('limpa');
-	console.log(this.eDAT.dataValidadeCNH);
   }
 
   /* Atualiza as datas para o padrao do type date */
@@ -319,8 +317,6 @@ export class EDATService {
 		date = testemunha.dataNascimento.split("/");
 		testemunha.dataNascimento = date[2]+"-"+date[1]+"-"+date[0];
 	}
-	console.log('revert');
-	console.log(this.eDAT.dataValidadeCNH);
   }
 
   limparDados() {
@@ -389,5 +385,13 @@ export class EDATService {
       for(let index = 0;index <= cont;index++) {
         this.eDAT.fotosDat.push({descricaoFoto: "", urlFoto: "", decodeImagem: ""});
       }
+    }
+
+    // limpa a resposta do usuario de perg preliminares
+    resetInfosUsuario () {
+      for (let pergunta of this.perguntas) {
+        pergunta.resposta = '';
+      }
+      this.emailMunicipeConfirm = '';
     }
 }

@@ -7,7 +7,7 @@
 			  [(ngModel)]="edatService.eDAT.relatoDat[0].descricaoRelatoAcidente"
 				[disabled]="edatService.edicaoDAT == false"></textarea>
 				<label class="control-label" for="descricaoRelatoAcidente">Máximo de caracteres: {{1500 - edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.length}}</label>
-				<label class="control-label" for="descricaoRelatoAcidente">*Este campo de texto é livre para que o usuário possa descrever o acidente com suas palavras.</label>
+				<label class="control-label" for="descricaoRelatoAcidente" style="color:red;font-style:italic;">*Este campo de texto é livre para que o usuário possa descrever o acidente com suas palavras.</label>
 			</div>
 		</div>
 	</fieldset>

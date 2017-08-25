@@ -74,11 +74,11 @@
 									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'S'"
 									(change)="alteraPossuiSeguro('S', currentElementIndex);"
 									[disabled]="edatService.edicaoDAT == false">Sim</label>
-							  <label><input type="radio" name="possuiSeguro"
+							  <label><input type="radio" name="possuiSeguro{{currentElementIndex}}"
 									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == 'N'"
 									(change)="alteraPossuiSeguro('N', currentElementIndex);"
 									[disabled]="edatService.edicaoDAT == false">Não</label>
-							  <label><input type="radio" name="possuiSeguro"
+							  <label><input type="radio" name="possuiSeguro{{currentElementIndex}}"
 									[checked]="edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro == '-'"
 									(change)="alteraPossuiSeguro('-', currentElementIndex);"
 									[disabled]="edatService.edicaoDAT == false">Não sei</label>
