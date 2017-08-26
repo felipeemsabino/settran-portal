@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AgenteService } from '../services/agente.service';
 import { URLSearchParams } from '@angular/http';
 import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
+import { Validator } from '../../../shared/utils/validator';
 
 declare var $:any; // JQUERY
 
@@ -15,19 +16,25 @@ export class PopupAgenteComponent implements OnInit {
 
   entity: any;
   confirmacaoSenha: string;
+  ativo: string;
+  validator: Validator;
 
   @Input('object')
   set object(value: any) {
   	this.entity = Object.assign({}, value);
-  	if(!this.entity.ativo) {
-  		this.entity.ativo = 'S';
-  		this.entity.adm = 'S';
-  	}
+    if(!this.entity.id) {
+      this.entity.ativo = 'S';
+      this.entity.adm = 'S';
+    }
   	this.resetMasks();
     this.confirmacaoSenha = "";
+    this.ativo = "S";
+    //console.log('setObject agente');
   }
 
   constructor(private agenteService: AgenteService, private popupController: PopupControllerComponent) {
+    this.validator = new Validator();
+    //console.log('constructor agente');
   }
 
   ngOnInit() {
@@ -36,11 +43,19 @@ export class PopupAgenteComponent implements OnInit {
 
   setCPFMask () {
 	   $('.cpf').mask('000.000.000-00', {reverse: true});
+     ​$('#usuario').keypress(function( e ) {
+         if(e.which === 32)
+             return false;
+     })​​​​​;​
   }
 
   resetMasks() {
   	setTimeout(function() {
   	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
+      ​$('#usuario').keypress(function( e ) {
+          if(e.which === 32)
+              return false;
+      })​​​​​;​
   	}, 500);
   }
 
@@ -55,62 +70,39 @@ export class PopupAgenteComponent implements OnInit {
 
   onSubmit() {
     let params: URLSearchParams = new URLSearchParams();
-    this.entity.cpfAgente = this.entity.cpfAgente.replace(/\D/g,'');
 
     if(!this.validaCampos()){
       return false;
     }
 
-      this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
-      params = this.entity;
-      // Salva dado
-      this.agenteService.saveData(params)
-                        .subscribe(
-                            result => {
-                              if(result.status == 400) {
-                                this.popupController.showPopupMessage("Atenção!", result.json(), true);
-                              } else {
-                                this.popupController.showPopupMessage("Atenção!",
-                                "Registro gravado com sucesso.", true);
-
-                                $('#loadingModal').on('hidden.bs.modal', function () {
-                                  $('#agenteModal').modal('hide');
-                                  $('#recarregaGrid').click();
-                                  $('#loadingModal').unbind('hidden');
-                                });
-                              }
-                            }, //Bind to view
-                            err => {
+    this.entity.cpfAgente = this.entity.cpfAgente.replace(/\D/g,'');
+    this.entity.ativo = this.ativo;
+    this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
+    params = this.entity;
+    // Salva dado
+    this.agenteService.saveData(params)
+                      .subscribe(
+                          result => {
+                            if(result.status == 400) {
+                              this.popupController.showPopupMessage("Atenção!", result.json(), true);
+                            } else {
                               this.popupController.showPopupMessage("Atenção!",
-                              "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);                              console.log(err);
-                            });
-  }
+                              "Registro gravado com sucesso.", true);
 
-  validaCPF() {
-    var strCPF = this.entity.cpfAgente;
-    var retorno = true;
-    var Soma;
-    var Resto;
-    Soma = 0;
-    if (strCPF == "00000000000") retorno = false;
-
-    for (var i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-
-    if ((Resto == 10) || (Resto == 11))  Resto = 0;
-    if (Resto != parseInt(strCPF.substring(9, 10)) ) retorno = false;
-
-    Soma = 0;
-    for (var i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-
-    if ((Resto == 10) || (Resto == 11))  Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11) ) ) retorno = false;
-
-    if(retorno == false) {
-      this.popupController.showPopupMessage("Atenção!", "O CPF informado não é válido.", true);
-    }
-    return retorno;
+                              $('#loadingModal').on('hidden.bs.modal', function () {
+                                $('#agenteModal').modal('hide');
+                                $('#recarregaGrid').click();
+                                $('#loadingModal').unbind('hidden');
+                              });
+                            }
+                            this.resetMasks();
+                          }, //Bind to view
+                          err => {
+                            this.popupController.showPopupMessage("Atenção!",
+                            "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);
+                            console.log(err);
+                            this.resetMasks();
+                          });
   }
 
   validaEmail() {
@@ -133,7 +125,12 @@ export class PopupAgenteComponent implements OnInit {
   }
 
   validaCampos(){
-    if(!this.validaCPF() || !this.validaSenha() || !this.validaEmail())
+    if(!this.validator.validaCPF(this.validator.limpaMascaraCPF(this.entity.cpfAgente))) {
+      this.popupController.showPopupMessage("Atenção!", "O CPF informado não é válido.", true);
+      return false;
+    }
+
+    if(!this.validaSenha() || !this.validaEmail())
       return false;
 
       return true;
@@ -143,9 +140,11 @@ export class PopupAgenteComponent implements OnInit {
 
   setAtivo() {
     if(this.entity.ativo == 'S')
-  		this.entity.ativo = 'N';
+  		this.ativo = 'N';
   	if(this.entity.ativo == 'N')
-  		this.entity.ativo = 'S';
+  		this.ativo = 'S';
+
+    console.log(this.entity.ativo);
   }
 
   alteraAdm(adm: string) {

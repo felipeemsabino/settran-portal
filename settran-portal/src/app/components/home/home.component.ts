@@ -96,9 +96,11 @@ export class HomeComponent implements OnInit {
     this.loginService.realizaLogin(params)
                       .subscribe(
                           result => {
+                            console.log(result);
                             if(result.status == 404) {
                               this.popupController.showPopupMessage("Atenção!",
-                              "Usuário ou senha inválidos! Por favor, tente novamente.", true);
+                              result.json(), true);
+                              //"Usuário ou senha inválidos! Por favor, tente novamente.", true);
                             } else {
                               this.popupController.hidePopupMessage();
                               this.userService.registerLogin(result);
