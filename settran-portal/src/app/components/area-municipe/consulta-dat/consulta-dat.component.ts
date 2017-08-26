@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConsultadatService } from './services/consultadat.service';
 import { URLSearchParams } from '@angular/http';
 import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
-
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
 
 declare var $:any; // JQUERY
 
@@ -19,7 +19,8 @@ export class ConsultaDatComponent implements OnInit {
   captchaURLImg: string = "";
   captchaBaseUrl: string = "http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat";
 
-  constructor(private datService: ConsultadatService, private popupController: PopupControllerComponent) { }
+  constructor(private parentRouter: Router, private datService: ConsultadatService,
+    private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
     this.dadosConsulta = {
@@ -40,7 +41,28 @@ export class ConsultaDatComponent implements OnInit {
   }
 
   cancelar(){
+    var me = this;
 
+     $( "#alertDialogText" ).dialog({
+       title:"Alerta",
+       modal: true,
+       dialogClass: "no-close",
+       buttons: [
+         {
+           text: "Sim",
+           click: function() {
+             me.parentRouter.navigate(['']);
+             $( this ).dialog( "close" );
+           }
+         },
+         {
+           text: "Não",
+           click: function() {
+             $( this ).dialog( "close" );
+           }
+         }
+       ]
+     }).text("Tem certeza que deseja cancelar?");
   }
 
   verificaCaptcha() {
