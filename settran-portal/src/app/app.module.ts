@@ -114,8 +114,7 @@ const appRoutes: Routes = [
 		]
 	  },
 	  { path: 'consulta-dat', component: ConsultaDatComponent },
-	  { path: 'cadastro-regra', component: CadastroRegraComponent },
-	  { path: 'cadastro-faq', component: CadastroFaqComponent }
+	  { path: 'retifica-dat', component: RetificaDatComponent }
 ];
 
 @NgModule({
