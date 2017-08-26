@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { EDATService } from '../../shared/services/e-dat.service';
 import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
+import { Validator } from '../../shared/utils/validator';
 
 declare var $:any; // JQUERY
 
@@ -25,9 +26,12 @@ export class CadastroDatComponent implements OnInit {
   currentPage: string;
   aba: number;
   action: string = '';
+  validator: Validator;
 
   constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
     public edatService: EDATService, private popupController: PopupControllerComponent) {
+    this.validator = new Validator();
+
     this.aba = 1;
 
     this.parentRouter.navigate([CadastroDatComponent.PERGUNTAS_PRELIMINARES]);
@@ -152,11 +156,11 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.SEU_VEICULO: {
-		if(!this.validarAbaSeuVeiculo())
-			break;
+      if(!this.validarAbaSeuVeiculo())
+			 break;
 
-		this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
-	    break;
+      this.parentRouter.navigate([CadastroDatComponent.DADOS_ACIDENTE]);
+	     break;
 	  }
 	  case CadastroDatComponent.DADOS_ACIDENTE: {
 		if(!this.validaDadosObrigatorios () || !this.validaAba3Options())
@@ -216,6 +220,7 @@ export class CadastroDatComponent implements OnInit {
     this.popupController.showPopupMessage("Aguarde!", 'Salvando DAT.', false);
 
 		this.edatService.limpaAtributosBranco();
+		this.edatService.removeMascaraCPF();
     console.log(JSON.stringify(this.edatService.eDAT, null, 2));
 		this.edatService.enviarEDAT()
 				  .subscribe(
@@ -290,18 +295,31 @@ export class CadastroDatComponent implements OnInit {
 
   	  validacao = this.validaDadosObrigatorios();
   	  if(!validacao)
-  		return validacao;
+  		  return validacao;
 
   	  validacao = this.validaAba2Email();
   	  if(!validacao)
-  		return validacao;
+  		  return validacao;
 
   	  validacao = this.validaDataNascimento();
   	  if(!validacao)
-  		return validacao;
+  		  return validacao;
+
+      validacao = this.validaCPF(this.edatService.eDAT.cpf);
+      if(!validacao)
+        return validacao;
 
   	  return validacao;
 	}
+
+  validaCPF(cpfStr: string) {
+      if (!this.validator.validaCPF(this.edatService.limpaMascaraCPF(cpfStr))){
+        this.popupController.showPopupMessage("Atenção!",
+        'O CPF informado não é válido.', true);
+        return false;
+      }
+      return true;
+  }
 
 	validaDadosObrigatorios () {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
@@ -411,11 +429,13 @@ export class CadastroDatComponent implements OnInit {
 
 	validaAba4Options() {
 	  for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
-	    if(veiculo.temSeguro == "") {
+      if(veiculo.temSeguro == "") {
         this.popupController.showPopupMessage("Atenção!",
         'Por favor, informe se os veículos possuem seguro.', true);
     		  return false;
 	    }
+      if(!this.validaCPF(veiculo.cpf))
+        return false;
 	  }
 
 	  return true;

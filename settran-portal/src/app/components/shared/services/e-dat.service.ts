@@ -394,4 +394,16 @@ export class EDATService {
       }
       this.emailMunicipeConfirm = '';
     }
+
+    removeMascaraCPF() {
+      this.eDAT.cpf = this.limpaMascaraCPF(this.eDAT.cpf);
+
+      for (let veiculo of this.eDAT.outrosVeiculosDat) {
+        veiculo.cpf = this.limpaMascaraCPF(veiculo.cpf);
+      }
+    }
+
+    limpaMascaraCPF(cpf: string) {
+      return cpf.replace(/\D/g,'');
+    }
 }

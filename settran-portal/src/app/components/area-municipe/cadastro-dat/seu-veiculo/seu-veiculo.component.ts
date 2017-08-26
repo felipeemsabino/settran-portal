@@ -77,7 +77,7 @@ export class SeuVeiculoComponent implements OnInit {
 
   setDadosProprietario() {
     this.edatService.eDAT.isPropietario = this.edatService.eDAT.isPropietario == 'S' ? 'N' : 'S';
-  	console.log(' -> '+this.edatService.eDAT.isPropietario);
+
   	if(this.edatService.eDAT.isPropietario == 'N') {
   		this.edatService.eDAT.nomePropietario = '';
   		this.edatService.eDAT.docPropietario = '';
