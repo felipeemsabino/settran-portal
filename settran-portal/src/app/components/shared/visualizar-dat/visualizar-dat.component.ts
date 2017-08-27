@@ -74,6 +74,7 @@ export class VisualizarDatComponent implements OnInit {
 
     ngOnInit() {
       console.log('comecou a visualizar-dat '+this.edatService.edicaoDAT);
+      console.log('comecou a visualizar-dat '+this.edatService.eDAT);
     }
 
     cancelar() {

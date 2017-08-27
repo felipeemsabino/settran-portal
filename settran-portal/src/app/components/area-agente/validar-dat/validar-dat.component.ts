@@ -25,6 +25,7 @@ export class ValidarDatComponent implements OnInit {
   object: any = {};
   mostrarGrid: boolean = true;
   sub: any;
+  nomeAgente: string;
 
   constructor(private validarDATService: ValidardatService, private parentRouter: Router, private edatStorage: EdatStorageService,
    private edatService: EDATService, private userService: UserService,
@@ -33,11 +34,33 @@ export class ValidarDatComponent implements OnInit {
 
   ngOnInit() {
     this.userService.userIsLogged();
+    this.nomeAgente = this.userService.nomeUsuario;
   }
 
   cancelar() {
-    this.mostrarGrid = true;
-    this.parentRouter.navigate(['area-agente/validar-dat']);
+    var me = this;
+
+     $( "#alertDialogText" ).dialog({
+       title:"Alerta",
+       modal: true,
+       dialogClass: "no-close",
+       buttons: [
+         {
+           text: "Sim",
+           click: function() {
+            me.mostrarGrid = true;
+            me.parentRouter.navigate(['area-agente/validar-dat']);
+             $( this ).dialog( "close" );
+           }
+         },
+         {
+           text: "Não",
+           click: function() {
+             $( this ).dialog( "close" );
+           }
+         }
+       ]
+     }).text("Tem certeza que deseja cancelar?");
   }
 
   alteraSituacaoDAT() {
@@ -45,27 +68,41 @@ export class ValidarDatComponent implements OnInit {
   }
 
   validaParametrosParecer() {
-    if(this.edatService.eDAT.situacaoDat.length == 0 || this.edatService.eDAT.textoValidacao.length == 0) {
-      this.popupController.showPopupMessage('Atenção','Favor preencher os campos antes de prosseguir.',true);
-      return false;
+    let retorno: boolean = true;
+    if(this.edatService.eDAT.textoValidacao.length == 0) {
+      $('#parecerDAT').parent().addClass('has-error');
+      retorno = false;
     }
-    return true;
+    if(this.edatService.eDAT.situacaoDat.length == 0) {
+      $('#situacaoDAT').parent().addClass('has-error');
+      retorno = false;
+    }
+
+    return retorno;
+  }
+
+  removeClasseErro() {
+    $('#parecerDAT').parent().removeClass('has-error');
+    $('#situacaoDAT').parent().removeClass('has-error');
   }
 
   validarDAT() {
-
+    this.removeClasseErro();
     if(!this.validaParametrosParecer()) {
+      this.popupController.showPopupMessage('Atenção','Favor preencher os campos antes de prosseguir.',true);
       return false;
     }
+
     let params: URLSearchParams = new URLSearchParams();
 
-    this.popupController.showPopupMessage("Aguarde!", "Salvando registros...", false);
+    this.popupController.showPopupMessage("Aguarde!", "Validação da DAT sendo registrada.", false);
 
 		this.edatService.limpaAtributosBranco();
 		console.log(JSON.stringify(this.edatService.eDAT));
 
     params = this.edatService.eDAT;
 
+    var me = this;
     // Salva dado
     this.validarDATService.saveData(params)
                       .subscribe(
@@ -74,13 +111,12 @@ export class ValidarDatComponent implements OnInit {
                               this.popupController.showPopupMessage("Atenção!", result.json(), true);
                             } else {
                               this.popupController.showPopupMessage("Atenção!",
-                              "Registro gravado com sucesso.", true);
+                              "DAT validada com sucesso.", true);
 
                                 $('#loadingModal').on('hidden.bs.modal', function () {
-                                $('#agenteModal').modal('hide');
-                                $('#recarregaGrid').click();
-                                $('#loadingModal').unbind('hidden');
-                              });
+                                  me.mostrarGrid = true;
+                                  me.parentRouter.navigate(['area-agente/validar-dat']);
+                                });
                             }
                           }, //Bind to view
                           err => {

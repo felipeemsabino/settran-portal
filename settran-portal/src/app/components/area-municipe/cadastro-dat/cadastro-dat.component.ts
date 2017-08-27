@@ -38,7 +38,7 @@ export class CadastroDatComponent implements OnInit {
 
     this.edatService.limparDados();
     this.edatService.resetInfosUsuario();
-
+    this.edatService.limparDadosDAT();
   	parentRouter.events.subscribe((val) => {
     	  if(val instanceof NavigationEnd) {
             this.currentPage = val.url;

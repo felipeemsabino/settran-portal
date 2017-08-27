@@ -18,7 +18,7 @@ export class OutrosVeiculosComponent implements OnInit {
   constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService,
     public edatService: EDATService, private popupController: PopupControllerComponent) {}
 
-  ngOnInit() {
+  ngOnInit() { console.log('this.edatService.edicaoDAT - > '+this.edatService.edicaoDAT);
     if(this.edatService.tiposVeiculo.length == 0) {
   	  this.getTiposVeiculo();
   	}

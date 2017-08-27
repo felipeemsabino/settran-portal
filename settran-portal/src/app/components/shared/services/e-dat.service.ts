@@ -35,80 +35,7 @@ export class EDATService {
 	  "padrao4":"Declaro para os fins de direito, advertido das penas de lei, na qualidade de Condutor e proprietário, que na data de << data do acidente>>, às <<hora do acidente>>, no endereço << endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>, cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>, UBERLANDIA-MG, o veículo << marca/modelo>> , placa << placa>> conduzido por mim, << nomeSolicitante>>, CPF << cpf solicitante>>, envolveu-se em um acidente sem vítima do tipo <<tipoacidente>>."
   };
 
-  cancelarEDAT() {
-    this.eDAT = {
-      "isPropietario" : "",
-      "renavam": "",
-      "placa": "",
-      "marcaVeiculo": "",
-      "modeloVeiculo": "",
-      "chassi": "",
-      "tipoVeiculo": {
-        "id": ""
-      },
-      "acidenteDat": [{
-        "tipoAcidente": "",
-        "dataAcidente": "",
-        "horaAcidente": "",
-        "zona": "",
-        "logradouro":{ },
-        "numeroEndereco": "",
-        "logradouroCruzamento": {
-          "id":"",
-          "nomeLogradouro":"",
-          "tipoLogradouro":""
-        },
-        "numeroLogradouroAcidenteCruzamento":""
-      }],
-      "relatoDat":[ {
-        "descricaoRelatoAcidente": ""
-      }],
-      "cor": "",
-      "cnh": "",
-      "dataValidadeCNH": "",
-      "categoriaCnh": "",
-      "sexo": "",
-      "nomeMunicipe": "",
-      "dataNascimento": "",
-      "cpf": "",
-      "rg": "",
-      "orgaoExpedidor": "",
-      "emailMunicipe": "",
-      "logradouro":{
-        "id":"",
-        "nomeLogradouro":"",
-        "tipoLogradouro":"",
-        "nomeBairro":"",
-        "cep":"",
-        "nomeCidade":"",
-        "uf":""
-      },
-      "numeroEndereco": "",
-      "complementoEndereco": "",
-      "telefone": "",
-      "celular": "",
-      "ipRequisicao": "",
-      "codigoConfirmacaoDat": "",
-      "outrosVeiculosDat": [],
-      "testemunhasDat": [],
-      "fotosDat": [
-        {"descricaoFoto": "asd 1", "urlFoto": "", "decodeImagem": ""},
-        {"descricaoFoto": "asd 2", "urlFoto": "", "decodeImagem": ""},
-        {"descricaoFoto": "asd 3", "urlFoto": "", "decodeImagem": ""},
-        {"descricaoFoto": "asd 4", "urlFoto": "", "decodeImagem": ""},
-        {"descricaoFoto": "asd 5", "urlFoto": "", "decodeImagem": ""}
-      ],
-      "docPropietario": "",
-      "nomePropietario": "",
-      "enviouSms": "",
-      "numeroEnvioSms": "",
-      "emailEnviaConfirmacao": "",
-      "confirmacaoDados": "",
-      "temSeguro": ""
-    }
-  }
-
-  constructor(private http: Http) {
+  limparDadosDAT() {
     /*this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
@@ -251,6 +178,13 @@ export class EDATService {
   		"temSeguro": "S"
   	}
   }
+  cancelarEDAT() {
+    this.limparDadosDAT();
+  }
+
+  constructor(private http: Http) {
+    this.limparDadosDAT();
+  }
 
   enviarEDAT() {
     let header = new Headers();
@@ -342,27 +276,27 @@ export class EDATService {
       let cont = 0;
       if(this.eDAT.fotosDat) {
         if(this.eDAT.fotosDat[cont]) {
-          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+          if(this.eDAT.fotosDat[cont].decodeImagem && this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
             this.eDAT.fotosDat.splice(cont, 1);
           } else cont++;
         }
         if(this.eDAT.fotosDat[cont]) {
-          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+          if(this.eDAT.fotosDat[cont].decodeImagem && this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
             this.eDAT.fotosDat.splice(cont, 1);
           }else cont++;
         }
         if(this.eDAT.fotosDat[cont]) {
-          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+          if(this.eDAT.fotosDat[cont].decodeImagem && this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
             this.eDAT.fotosDat.splice(cont, 1);
           }else cont++;
         }
         if(this.eDAT.fotosDat[cont]) {
-          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+          if(this.eDAT.fotosDat[cont].decodeImagem && this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
             this.eDAT.fotosDat.splice(cont, 1);
           }else cont++;
         }
         if(this.eDAT.fotosDat[cont]) {
-          if(this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
+          if(this.eDAT.fotosDat[cont].decodeImagem && this.eDAT.fotosDat[cont].decodeImagem.length == 0) {
             this.eDAT.fotosDat.splice(cont, 1);
           }
         }

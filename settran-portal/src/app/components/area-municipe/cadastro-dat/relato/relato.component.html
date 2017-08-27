@@ -116,24 +116,24 @@
 			</div>
 			<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>
 		</div>
-		<div *ngIf="!edatService.edicaoDAT && edatService.eDAT.fotosDat.length > 0">
+		<div class="row" *ngIf="edatService.edicaoDAT == false && edatService.eDAT.fotosDat.length == 0">
+			<h5>Nenhuma foto foi anexada.</h5>
+		</div>
+		<div *ngIf="!edatService.edicaoDAT">
 			<legend style="width:inherit;padding:0 10px;border-bottom:none;">Fotos anexadas</legend>
 			<div class="row" *ngFor='let foto of edatService.eDAT.fotosDat;let currentElementIndex = index;'>
 				<div class="form-group col-md-6">
-					<label class="control-label" for="foto1">Foto {{currentElementIndex+1}}:</label>
-					<input [disabled]="edatService.edicaoDAT == false" type="file" class="form-control" hidden
-					id="foto+{{currentElementIndex}}" accept="image/*" (change)="changeListener($event, 0)">
-				</div>
-				<div class="form-group col-md-6">
 					<label class="control-label" for="foto1">Descrição da foto</label>
 					<input [disabled]="edatService.edicaoDAT == false" type="text" class="form-control"
-					id="descFoto+{{currentElementIndex}}" [(ngModel)]="edatService.eDAT.fotosDat[currentElementIndex].descricaoFoto">
+					id="descFoto+{{currentElementIndex}}"
+					[(ngModel)]="foto.descricaoFoto">
 				</div>
 				<div class="form-group col-md-6">
-					<a target="_blank" href="{{url+edatService.eDAT.fotosDat[currentElementIndex].descricaoFoto}}">Foto {{currentElementIndex+1}}</a>
+					<label class="control-label" for="foto1">Clique aqui para carregar a foto</label>
+					<a class="form-control" target="_blank" href="{{url+foto.urlFoto}}">
+						Foto {{currentElementIndex+1}}</a>
 				</div>
 			</div>
-			<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>
 		</div>
 	</fieldset>
 </div>
