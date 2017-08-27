@@ -19,10 +19,6 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  reloadUserInfos() {
-    this.setInfosUsuario(JSON.parse(localStorage.getItem('currentUser')));
-  }
-
   setInfosUsuario(usuario: any) {
     if(usuario.adm == 'S')
       this.tipoUsuario = 'ADM';
@@ -48,4 +44,23 @@ export class UserService {
       return false;
     }
   }
+
+    getUserName () {
+      return JSON.parse(localStorage.getItem('currentUser')).nomeAgente;
+    }
+
+    getUserPerfil () {
+      if (JSON.parse(localStorage.getItem('currentUser')).adm == 'S') {
+        return "ADM";
+      }
+      else if (JSON.parse(localStorage.getItem('currentUser')).adm == 'N') {
+        return "Agente"
+      } else {
+        return "";
+      }
+    }
+
+    getUsetData () {
+      return JSON.parse(localStorage.getItem('currentUser'));
+    }
 }

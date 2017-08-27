@@ -12,13 +12,9 @@ export class SubheaderComponent implements OnInit {
   nomeUsuario: string = '';
 
   constructor(private userService: UserService) {
-    console.log('constructor');
   }
 
   ngOnInit() {
-    this.userService.reloadUserInfos();
-    this.tipoUsuario = this.userService.tipoUsuario;
-    this.nomeUsuario = this.userService.nomeUsuario;
   }
 
   logout() {
