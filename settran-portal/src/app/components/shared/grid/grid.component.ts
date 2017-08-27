@@ -54,11 +54,11 @@ export class GridComponent implements OnInit {
 
     this.providerService[this.service].getData(this.params).subscribe(
             result => {
-							if(result.length > 0) {
+							if(result.length > 0 || result["id"]) {
 								if(this.isPaginated)
 									this.retornoQtdRestante = Number((<any>result.pop()).split(":")[1].replace("}",""));
 
-								this.fetchedData = result;
+					        this.fetchedData = result;
 
 								if(this.isPaginated)
 									this.createRange();
@@ -74,18 +74,23 @@ export class GridComponent implements OnInit {
   }
 
   setUrlParams() {
-	this.params = new URLSearchParams();
-	for(var index = 0;index < this.columnsConfiguration.length;index++) {
+  	this.params = new URLSearchParams();
+  	for(var index = 0;index < this.columnsConfiguration.length;index++) {
       if(this.columnsConfiguration[index].filter === true) {
-		if(this.columnsConfiguration[index].class == 'cpf') {
-		  this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value.replace(/\D/g,''));
-		}else {
-	      this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value);
-		}
-	  }
-	}
-	this.params.set('initialPosition', ""+this.initialPosition);
-    this.params.set('finalPosition', ""+this.finalPosition);
+    		if(this.columnsConfiguration[index].class == 'cpf') {
+    		  this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value.replace(/\D/g,''));
+    		} else {
+            if(this.columnsConfiguration[index].filterName)
+    	       this.params.set(this.columnsConfiguration[index].filterName, this.columnsConfiguration[index].value);
+            else
+    	       this.params.set(this.columnsConfiguration[index].attr, this.columnsConfiguration[index].value);
+    		}
+  	  }
+  	}
+    if(this.isPaginated) {
+      this.params.set('initialPosition', ""+this.initialPosition);
+      this.params.set('finalPosition', ""+this.finalPosition);
+    }
   }
 
   /* Método auxiliar da paginação.

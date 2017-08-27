@@ -9,6 +9,7 @@ export class UserService {
 
   public tipoUsuario: string;
   public nomeUsuario: string;
+  public userId: string;
 
   constructor(private router: Router, private popupController: PopupControllerComponent) {
   }
@@ -29,6 +30,7 @@ export class UserService {
       this.tipoUsuario = 'Agente';
 
     this.nomeUsuario = usuario.nomeAgente;
+    this.userId = usuario.id;
   }
 
   logout() {

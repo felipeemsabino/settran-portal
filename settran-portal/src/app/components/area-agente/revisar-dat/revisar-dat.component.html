@@ -2,7 +2,7 @@
   <app-grid *ngIf="mostrarGrid"
     [gridTitle]="gridTitle"
     [service]="4"
-    [paginated]="true"
+    [paginated]="false"
     [reorder]="false"
     [search]="true"
     [create]="false"
@@ -10,16 +10,16 @@
     [row_detail]="{'isModal':false,'modalName':''}"
     [columns]="[
   	{'name':'#','filter':false,'attr':''},
-  	{'name':'Número','filter':true,'attr':'codigoConfirmacaoDat'},
+  	{'name':'Número','filter':true,'attr':'codigoConfirmacaoDat','filterName':'codigoConfirmacao'},
   	{'name':'Solicitante', 'filter':false, 'attr':'nomeMunicipe'},
-  	{'name':'Parecer do Agente', 'filter':false, 'attr':'nomeMunicipe'},
-    {'name':'Status', 'filter':false, 'attr':'dataRegistro'}]" >
+  	{'name':'Parecer do Agente', 'filter':false, 'attr':'textoValidacao'},
+    {'name':'Status', 'filter':false, 'attr':'situacaoDat'}]" >
   </app-grid>
 </router-outlet>
 <div class="container-fluid" id="bottom" >
   <div class="panel panel-default">
 
-    <div class="panel-body">
+    <div class="panel-body" *ngIf="mostrarPainelRetificacao">
       <fieldset>
     		<legend>Deferir solicitação de retificação?</legend>
         <div class="row" style="margin-left: 15px;">
@@ -34,9 +34,9 @@
         </div>
   	  </fieldset>
       <div class="col col-md-9">
-        <label class="control-label" for="foto1">Parecer</label>
+        <label class="control-label" for="foto1">Parecer atual</label>
         <textarea class="form-control" rows="5" maxlength="3000" id="parecerDAT"
-        [(ngModel)]="edatService.eDAT.textoValidacao"></textarea>
+        [(ngModel)]="textoValidacao"></textarea>
       </div>
     </div>
     <div class="panel-footer">
@@ -44,9 +44,9 @@
         <div class="col col-md-6">
           <button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
         </div>
-        <div class="col col-md-6">
-          <button type="button" class="btn btn-primary" (click)="validarDAT();"
-          style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Indeferir</button>
+        <div class="col col-md-6" *ngIf="mostrarBotaoRevisar">
+          <button type="button" class="btn btn-primary" (click)="revisarDAT();"
+          style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Revisar</button>
         </div>
       </div>
     </div>

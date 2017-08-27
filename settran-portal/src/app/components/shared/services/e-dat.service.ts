@@ -14,6 +14,7 @@ export class EDATService {
   public emailMunicipeConfirm: string = "felipeems87@gmail.com";
   public validar: boolean = false;
   public edicaoDAT: boolean = false; // flag utilizada para validacao e revisao de dat, na validacao nao e permitido a edicao, ja na revisao e permitido a edicao
+  public edicaoFotos: boolean = true;
 
   tiposVeiculo: any[] = new Array();
 
@@ -255,8 +256,8 @@ export class EDATService {
 
   limparDados() {
     //this.emailMunicipeConfirm = "";
-    this.validar = false;
     this.edicaoDAT = false;
+    this.edicaoFotos = true;
   }
 
   habilitarEdicaoCampos() {

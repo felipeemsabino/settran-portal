@@ -98,7 +98,10 @@ export class ValidarDatComponent implements OnInit {
     this.popupController.showPopupMessage("Aguarde!", "Validação da DAT sendo registrada.", false);
 
 		this.edatService.limpaAtributosBranco();
-		console.log(JSON.stringify(this.edatService.eDAT));
+
+    console.log(JSON.stringify(this.edatService.eDAT));
+
+    this.edatService.eDAT.agente = { "id": this.userService.userId };
 
     params = this.edatService.eDAT;
 
