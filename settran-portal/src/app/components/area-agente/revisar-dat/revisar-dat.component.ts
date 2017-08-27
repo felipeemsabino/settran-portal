@@ -100,7 +100,7 @@ export class RevisarDatComponent implements OnInit {
   }
 
   revisarDAT() {
-    this.edatService.eDAT.agente = { "id": this.userService.userId };
+    this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
 
     this.edatService.eDAT.textoValidacao += this.textoValidacao +
     "Atuailzado em: " + this.userService.nomeUsuario +

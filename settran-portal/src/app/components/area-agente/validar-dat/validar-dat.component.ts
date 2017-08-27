@@ -99,9 +99,9 @@ export class ValidarDatComponent implements OnInit {
 
 		this.edatService.limpaAtributosBranco();
 
-    console.log(JSON.stringify(this.edatService.eDAT));
+    this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
 
-    this.edatService.eDAT.agente = { "id": this.userService.userId };
+    console.log(JSON.stringify(this.edatService.eDAT));
 
     params = this.edatService.eDAT;
 
