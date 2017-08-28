@@ -109,6 +109,8 @@ export class RevisarDatComponent implements OnInit {
     let params: URLSearchParams = new URLSearchParams();
 
     params = this.edatService.eDAT;
+    console.log('mostrando json revisao');
+    console.log(JSON.stringify(this.edatService.eDAT, null, 2));
 
     var me = this;
     // Salva dado

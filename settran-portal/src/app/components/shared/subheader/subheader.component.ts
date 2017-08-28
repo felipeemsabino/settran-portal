@@ -11,7 +11,7 @@ export class SubheaderComponent implements OnInit {
   tipoUsuario: string = '';
   nomeUsuario: string = '';
 
-  constructor(private userService: UserService) {
+  constructor(public userService: UserService) {
   }
 
   ngOnInit() {

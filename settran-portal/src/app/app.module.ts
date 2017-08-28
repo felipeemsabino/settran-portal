@@ -45,6 +45,7 @@ import { SeuVeiculoValidarDatComponent } from './components/area-municipe/cadast
 import { UserService } from './components/shared/services/user.service';
 import { SubheaderComponent } from './components/shared/subheader/subheader.component';
 import { RevisardatService } from './components/area-agente/revisar-dat/services/revisardat.service';
+import { OutrosVeiculosValidarDatComponent } from './components/area-municipe/cadastro-dat/outros-veiculos-validar-dat/outros-veiculos-validar-dat.component';
 
 const appRoutes: Routes = [
 	  {
@@ -73,7 +74,7 @@ const appRoutes: Routes = [
 							children: [
 								{ path: 'seu-veiculo-validar-dat', component: SeuVeiculoValidarDatComponent },
 								{ path: 'dados-acidente', component: DadosAcidenteComponent },
-								{ path: 'outros-veiculos', component: OutrosVeiculosComponent },
+								{ path: 'outros-veiculos-validar-dat', component: OutrosVeiculosValidarDatComponent },
 								{ path: 'testemunhas', component: TestemunhasComponent },
 								{ path: 'relato', component: RelatoComponent }
 							]
@@ -149,7 +150,8 @@ const appRoutes: Routes = [
 		PopupControllerComponent,
 		VisualizarDatComponent,
 		SeuVeiculoValidarDatComponent,
-		SubheaderComponent
+		SubheaderComponent,
+		OutrosVeiculosValidarDatComponent
   ],
   imports: [
     BrowserModule,

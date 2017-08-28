@@ -16,7 +16,7 @@
 	<fieldset *ngIf="edatService.eDAT.testemunhasDat.length > 0" style="border: 0px groove #ddd !important;padding: 0 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-box-shadow:  0px 0px 0px 0px #000;box-shadow:  0px 0px 0px 0px #000;">
 		<legend style="width:inherit;padding:0 10px;border-bottom:none;">Testemunhas</legend>
 		<div class="row" *ngFor='let testemunha of edatService.eDAT.testemunhasDat;let currentElementIndex = index;'>
-			<div class="panel panel-default">
+			<div class="panel panel-default" id="panel{{currentElementIndex+1}}">
 			  <div class="panel-heading">
 				<a data-toggle="collapse" href="#collapse{{currentElementIndex+1}}">
 				Testemunha {{currentElementIndex+1}}</a>

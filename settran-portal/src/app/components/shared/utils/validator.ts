@@ -27,4 +27,8 @@ export class Validator {
   limpaMascaraCPF(strCPF: string) {
     return strCPF.replace(/\D/g,'');
   }
+
+  validaPlaca(strPlaca: string) {
+
+  }
 }

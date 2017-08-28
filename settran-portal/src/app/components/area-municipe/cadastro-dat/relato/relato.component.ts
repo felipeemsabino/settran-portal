@@ -124,7 +124,8 @@ export class RelatoComponent implements OnInit {
 
     myReader.onloadend = (e) => {
        this.edatService.eDAT.fotosDat[index].decodeImagem = myReader.result;
-       this.edatService.eDAT.fotosDat[index].urlFoto = $('#foto'+index).val();
+       this.edatService.eDAT.fotosDat[index].urlFoto = $('#foto'+index).val().split('\\')[$('#foto'+index).val().split('\\').length-1];
+
     }
     myReader.readAsDataURL(file);
   }

@@ -15,7 +15,6 @@ export class RetificaDatComponent implements OnInit {
 
   ngOnInit() {
     var me = this;
-
      $( "#alertDialogText" ).dialog({
        title:"Alerta",
        modal: true,
@@ -24,7 +23,7 @@ export class RetificaDatComponent implements OnInit {
          {
            text: "Ok",
            click: function() {
-            window.open('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rel/retificacaodat.pdf', "_self");
+            window.open('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rel/retificacaodat.pdf', "_blank");
              $( this ).dialog( "close" );
            }
          }

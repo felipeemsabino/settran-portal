@@ -24,9 +24,9 @@ export class ConsultaDatComponent implements OnInit {
 
   ngOnInit() {
     this.dadosConsulta = {
-      "codigoConfirmacao":"0-4340",
-      "cpf":"07046919658",
-      "cnh":"111111"
+      "codigoConfirmacao":"",
+      "cpf":"",
+      "cnh":""
     };
     this.captchaUsuario = "";
     this.resetCPFMask();
@@ -96,7 +96,7 @@ export class ConsultaDatComponent implements OnInit {
   }
 
   carregarCaptcha(){
-    this.popupController.showPopupMessage("Aguarde!", "Carregando dados.", false);
+    this.popupController.showPopupMessage("Aguarde!", "Carregando captcha.", false);
 
     this.datService.recarregarCaptcha()
                       .subscribe(
@@ -118,7 +118,7 @@ export class ConsultaDatComponent implements OnInit {
      let params: URLSearchParams = new URLSearchParams();
 	   this.dadosConsulta.cpf = this.dadosConsulta.cpf.replace(/\D/g,'');
      params = this.dadosConsulta;
-     this.popupController.showPopupMessage("Aguarde!", "Carregando dados.", false);
+     this.popupController.showPopupMessage("Aguarde!", "Carregando DAT.", false);
 
     // Salva dado
     this.datService.consultaDat(params)

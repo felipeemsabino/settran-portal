@@ -19,12 +19,12 @@
 					<label class="control-label" for="foto1">Foto 1:</label>
 					<div class="row">
 						<div class="col col-md-3">
-							<input type="file" class="form-control" style="width:102px;"hidden id="foto0" accept="image/*"
+							<input type="file" class="form-control" hidden id="foto0" accept="image/*"
 							(change)="changeListener($event, 0)">
 						</div>
 						<div class="col col-md-9">
 							<input type="text" class="form-control" id="fotoPath0"
-							[(ngModel)]="edatService.eDAT.fotosDat[0].urlFoto">
+							[(ngModel)]="edatService.eDAT.fotosDat[0].urlFoto" disabled>
 						</div>
 					</div>
 				</div>
@@ -39,12 +39,12 @@
 					<label class="control-label" for="foto1">Foto 2:</label>
 					<div class="row">
 						<div class="col col-md-3">
-							<input type="file" class="form-control" style="width:102px;"hidden id="foto1" accept="image/*"
+							<input type="file" class="form-control" hidden id="foto1" accept="image/*"
 							(change)="changeListener($event, 1)">
 						</div>
 						<div class="col col-md-9">
 							<input type="text" class="form-control" id="fotoPath1"
-							[(ngModel)]="edatService.eDAT.fotosDat[1].urlFoto">
+							[(ngModel)]="edatService.eDAT.fotosDat[1].urlFoto" disabled>
 						</div>
 					</div>
 				</div>
@@ -59,12 +59,12 @@
 					<label class="control-label" for="foto1">Foto 3:</label>
 					<div class="row">
 						<div class="col col-md-3">
-							<input type="file" class="form-control" style="width:102px;"hidden id="foto2" accept="image/*"
-							(change)="changeListener($event, 2)">
+							<input type="file" class="form-control" hidden id="foto2" accept="image/*"
+							(change)="changeListener($event, 2)" >
 						</div>
 						<div class="col col-md-9">
 							<input type="text" class="form-control" id="fotoPath2"
-							[(ngModel)]="edatService.eDAT.fotosDat[2].urlFoto">
+							[(ngModel)]="edatService.eDAT.fotosDat[2].urlFoto" disabled>
 						</div>
 					</div>
 				</div>
@@ -79,12 +79,12 @@
 					<label class="control-label" for="foto1">Foto 4:</label>
 					<div class="row">
 						<div class="col col-md-3">
-							<input type="file" class="form-control" style="width:102px;"hidden id="foto3" accept="image/*"
+							<input type="file" class="form-control" hidden id="foto3" accept="image/*"
 							(change)="changeListener($event, 3)">
 						</div>
 						<div class="col col-md-9">
 							<input type="text" class="form-control" id="fotoPath3"
-							[(ngModel)]="edatService.eDAT.fotosDat[3].urlFoto">
+							[(ngModel)]="edatService.eDAT.fotosDat[3].urlFoto" disabled>
 						</div>
 					</div>
 				</div>
@@ -99,12 +99,12 @@
 					<label class="control-label" for="foto4">Foto 5:</label>
 					<div class="row">
 						<div class="col col-md-3">
-							<input type="file" class="form-control" style="width:102px;"hidden id="foto4" accept="image/*"
+							<input type="file" class="form-control" hidden id="foto4" accept="image/*"
 							(change)="changeListener($event, 4)">
 						</div>
 						<div class="col col-md-9">
 							<input type="text" class="form-control" id="fotoPath4"
-							[(ngModel)]="edatService.eDAT.fotosDat[4].urlFoto">
+							[(ngModel)]="edatService.eDAT.fotosDat[4].urlFoto" disabled>
 						</div>
 					</div>
 				</div>

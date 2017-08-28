@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 import { VeiculoService } from '../../../shared/services/veiculo.service';
 import { EnderecoService } from '../../../shared/services/endereco.service';
@@ -8,12 +8,12 @@ import { PopupControllerComponent } from '../../../shared/popup-controller/popup
 declare var $:any; // JQUERY
 
 @Component({
-  selector: 'app-outros-veiculos',
-  templateUrl: './outros-veiculos.component.html',
-  styleUrls: ['./outros-veiculos.component.css'],
+  selector: 'app-outros-veiculos-validar-dat',
+  templateUrl: './outros-veiculos-validar-dat.component.html',
+  styleUrls: ['./outros-veiculos-validar-dat.component.css'],
   providers: [VeiculoService, EnderecoService]
 })
-export class OutrosVeiculosComponent implements OnInit {
+export class OutrosVeiculosValidarDatComponent implements OnInit {
 
   constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService,
     public edatService: EDATService, private popupController: PopupControllerComponent) {}
@@ -82,19 +82,6 @@ export class OutrosVeiculosComponent implements OnInit {
   		"complementoEndereco": "",
   		"telefone": ""
   	});
-  }
-  @ViewChildren('allRows') things: QueryList<any>;
-
-  ngAfterViewInit() {
-    this.things.changes.subscribe(t => {
-      this.ngForRendred();
-    })
-  }
-
-  ngForRendred() {
-    if(this.edatService.eDAT.outrosVeiculosDat.length == 0)
-      return;
-    document.getElementById('panel'+this.edatService.eDAT.outrosVeiculosDat.length).scrollIntoView();
   }
 
   alteraPossuiSeguro(possuiSeguro: string, currentElementIndex: number) {

@@ -126,11 +126,11 @@ export class HomeComponent implements OnInit {
   }
 
   getUserIp(){
-    this.userIp = "192.168.2.2";
+    //this.userIp = "192.168.2.2";
 
-    /*let self = this;
+    let self = this;
     $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
       self.userIp = data.ip;
-    });*/
+    });
   }
 }

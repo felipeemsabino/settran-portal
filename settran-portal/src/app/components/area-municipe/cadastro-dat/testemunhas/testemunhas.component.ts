@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ApplicationRef, ViewChildren, QueryList  } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 
 declare var $:any; // JQUERY
@@ -57,5 +57,18 @@ export class TestemunhasComponent implements OnInit {
   		"orgaoExpedidor": ""
   	});
   }
+  @ViewChildren('allRows') things: QueryList<any>;
 
+  ngAfterViewInit() {
+    this.things.changes.subscribe(t => {
+      this.ngForRendred();
+    })
+  }
+
+  ngForRendred() {
+    this.applyDatePicker();
+    if(this.edatService.eDAT.testemunhasDat.length == 0)
+      return;
+    document.getElementById('panel'+this.edatService.eDAT.testemunhasDat.length).scrollIntoView();
+  }
 }

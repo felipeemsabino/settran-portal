@@ -36,7 +36,7 @@ export class VisualizarDatComponent implements OnInit {
       if(this.edatService.edicaoDAT == false) {
         this.SEU_VEICULO = "/area-agente/validar-dat/visualizar-dat/seu-veiculo-validar-dat";
         this.DADOS_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/dados-acidente";
-        this.OUTROS_VEICULOS = "/area-agente/validar-dat/visualizar-dat/outros-veiculos";
+        this.OUTROS_VEICULOS = "/area-agente/validar-dat/visualizar-dat/outros-veiculos-validar-dat";
         this.TESTEMUNHAS = "/area-agente/validar-dat/visualizar-dat/testemunhas";
         this.RELATO_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/relato";
       } else {

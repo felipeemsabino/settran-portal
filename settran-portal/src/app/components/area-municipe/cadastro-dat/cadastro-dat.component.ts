@@ -313,7 +313,10 @@ export class CadastroDatComponent implements OnInit {
 	}
 
   validaCPF(cpfStr: string) {
-      if (!this.validator.validaCPF(this.edatService.limpaMascaraCPF(cpfStr))){
+      let cpfFormatado = this.edatService.limpaMascaraCPF(cpfStr).trim();
+      if(cpfFormatado.length == 0)
+        return true;
+      if (!this.validator.validaCPF(cpfFormatado)){
         this.popupController.showPopupMessage("Atenção!",
         'O CPF informado não é válido.', true);
         return false;
@@ -324,18 +327,23 @@ export class CadastroDatComponent implements OnInit {
 	validaDadosObrigatorios () {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
 	  camposObrigatorios.removeClass('has-error');
-
+    let retorno: boolean = true;
 	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
       camposNaoPreenchidos.parent().addClass('has-error');
 
+      retorno = false;
+	  }
+    if(this.edatService.eDAT.sexo == "") {
+        this.marcaLabelInvalido('label-radio-obrigatorio');
+        retorno = false;
+    } else { this.desmarcaLabelInvalido('label-radio-obrigatorio'); }
+
+    if(!retorno) {
       this.popupController.showPopupMessage("Atenção!",
       'Favor preencher todos os campos obrigatórios.', true);
-
-      return false;
-	  }
-
-	  return true;
+    }
+	  return retorno;
 	}
 
   validaAba2Email() {
@@ -442,12 +450,12 @@ export class CadastroDatComponent implements OnInit {
 	}
 
 	getUserIp(){
-    this.edatService.eDAT.ipRequisicao = "192.168.2.2";
+    //this.edatService.eDAT.ipRequisicao = "192.168.2.2";
 
-		/*let self = this;
+		let self = this;
 		$.getJSON('//freegeoip.net/json/?callback=?', function(data) {
 		  self.edatService.eDAT.ipRequisicao = data.ip;
-		});*/
+		});
 	}
 
   validaCodigo() {
