@@ -11,7 +11,7 @@ export class EDATService {
   public resultadoPerguntas: any[] = new Array();
   public perguntas: any[] = new Array();
   public respostasInvalidas: any[] = new Array();
-  public emailMunicipeConfirm: string = "felipeems87@gmail.com";
+  public emailMunicipeConfirm: string = "";
   public validar: boolean = false;
   public edicaoDAT: boolean = false; // flag utilizada para validacao e revisao de dat, na validacao nao e permitido a edicao, ja na revisao e permitido a edicao
   public edicaoFotos: boolean = true;
@@ -37,7 +37,7 @@ export class EDATService {
   };
 
   limparDadosDAT() {
-    /*this.eDAT = {
+    this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
   		"placa": "",
@@ -106,8 +106,8 @@ export class EDATService {
   		"emailEnviaConfirmacao": "",
   		"confirmacaoDados": "",
   		"temSeguro": ""
-  	}*/
-      this.eDAT = {
+  	}
+      /*this.eDAT = {
   		"isPropietario" : "S",
   		"renavam": "12313",
   		"placa": "hax3321",
@@ -177,7 +177,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "felipeems87@gmail.com",
   		"confirmacaoDados": "S",
   		"temSeguro": "S"
-  	}
+  	}*/
   }
   cancelarEDAT() {
     this.limparDadosDAT();

@@ -20,15 +20,30 @@ export class SeuVeiculoValidarDatComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.edatService.tiposVeiculo.length == 0) {
+    //if(this.edatService.tiposVeiculo.length == 0) {
   	  this.getTiposVeiculo();
-  	}
+  	//}
   	this.resetMasks();
     this.applyDatePicker();
   	if(!this.edatService.seuVeiculoMarcas && !this.edatService.seuVeiculoModelos) {
   	  this.edatService.seuVeiculoMarcas = new Array();
   	  this.edatService.seuVeiculoModelos = new Array();
   	}
+
+
+    for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) { // preenche logradouro caso n exista
+      if(!veiculo.logradouro) {
+        veiculo.logradouro = {
+    			"id":"-1",
+    			"nomeLogradouro":"",
+    			"tipoLogradouro":"",
+    			"nomeBairro":"",
+    			"cep":"",
+    			"nomeCidade":"",
+    			"uf":""
+    		}
+      }
+    }
   }
 
   applyDatePicker() {

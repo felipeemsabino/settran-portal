@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
 import { VeiculoService } from '../../../shared/services/veiculo.service';
 import { EnderecoService } from '../../../shared/services/endereco.service';
@@ -28,7 +28,9 @@ export class OutrosVeiculosValidarDatComponent implements OnInit {
   	  this.edatService.arraysMarcasVeiculo = new Array();
   	  this.edatService.arraysModeloVeiculo = new Array();
   	}
+
     this.resetFiledsConfigurations();
+
   }
 
   resetFiledsConfigurations() {
@@ -83,7 +85,19 @@ export class OutrosVeiculosValidarDatComponent implements OnInit {
   		"telefone": ""
   	});
   }
+  @ViewChildren('allRows') things: QueryList<any>;
 
+  ngAfterViewInit() {
+    this.things.changes.subscribe(t => {
+      this.ngForRendred();
+    })
+  }
+
+  ngForRendred() {
+    if(this.edatService.eDAT.outrosVeiculosDat.length == 0)
+      return;
+    document.getElementById('panel'+this.edatService.eDAT.outrosVeiculosDat.length).scrollIntoView();
+  }
   alteraPossuiSeguro(possuiSeguro: string, currentElementIndex: number) {
 	   this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].temSeguro = possuiSeguro;
   }

@@ -28,7 +28,7 @@ export class RevisarDatComponent implements OnInit {
   textoValidacao: string = "";
 
   constructor(private parentRouter: Router, private edatStorage: EdatStorageService,
-   public edatService: EDATService, private userService: UserService,
+   public edatService: EDATService, public userService: UserService,
    private popupController: PopupControllerComponent, private revisarDATService: RevisardatService) {
      this.mostrarPainelRetificacao = false;
      this.mostrarBotaoRevisar = false;
@@ -107,9 +107,9 @@ export class RevisarDatComponent implements OnInit {
     "Atualizado por: " + $.datepicker.formatDate( "dd/mm/yy", new Date() );
 
     let params: URLSearchParams = new URLSearchParams();
-
+    this.edatService.limpaAtributosBranco();
+    this.edatService.removeMascaraCPF();
     params = this.edatService.eDAT;
-    console.log('mostrando json revisao');
     console.log(JSON.stringify(this.edatService.eDAT, null, 2));
 
     var me = this;

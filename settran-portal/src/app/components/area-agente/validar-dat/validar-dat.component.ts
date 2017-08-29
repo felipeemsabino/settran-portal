@@ -28,7 +28,7 @@ export class ValidarDatComponent implements OnInit {
   nomeAgente: string;
 
   constructor(private validarDATService: ValidardatService, private parentRouter: Router, private edatStorage: EdatStorageService,
-   private edatService: EDATService, private userService: UserService,
+   private edatService: EDATService, public userService: UserService,
    private popupController: PopupControllerComponent) {
   }
 

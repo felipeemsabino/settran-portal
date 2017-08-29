@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router,
               private loginService: LoginService,
-              private userService: UserService,
+              public userService: UserService,
               private popupController: PopupControllerComponent) { }
 
   ngOnInit() {

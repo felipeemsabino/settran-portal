@@ -5,6 +5,7 @@ import { EDATService } from '../../shared/services/e-dat.service';
 import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
 import { VeiculoService } from '../../shared/services/veiculo.service';
 import { EnderecoService } from '../../shared/services/endereco.service';
+import { Validator } from '../../shared/utils/validator';
 
 declare var $:any; // JQUERY
 
@@ -27,11 +28,13 @@ export class VisualizarDatComponent implements OnInit {
     aba: number;
     action: string = '';
     sub: any;
+    validator: Validator;
 
     constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
       public edatService: EDATService, private popupController: PopupControllerComponent,
       private veiculoService: VeiculoService, private enderecoService: EnderecoService) {
       this.aba = 1;
+      this.validator = new Validator();
 
       if(this.edatService.edicaoDAT == false) {
         this.SEU_VEICULO = "/area-agente/validar-dat/visualizar-dat/seu-veiculo-validar-dat";
@@ -147,7 +150,7 @@ export class VisualizarDatComponent implements OnInit {
   	    break;
   	  }
   	  case this.TESTEMUNHAS: {
-        if(this.edatService.edicaoDAT && !this.validaDataNascTestemunha())
+        if(this.edatService.edicaoDAT && !this.validaDadosObrigatorios() || !this.validaDataNascTestemunha())
           break;
 
   		  //this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
@@ -261,24 +264,45 @@ export class VisualizarDatComponent implements OnInit {
     	  if(!validacao)
     		return validacao;
 
+        validacao = this.validaCPF(this.edatService.eDAT.cpf);
+        if(!validacao)
+          return validacao;
+
     	  return validacao;
   	}
 
-  	validaDadosObrigatorios () {
-  	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
-  	  camposObrigatorios.removeClass('has-error');
+    validaCPF(cpfStr: string) {
+        let cpfFormatado = this.edatService.limpaMascaraCPF(cpfStr).trim();
+        if(cpfFormatado.length == 0)
+          return true;
+        if (!this.validator.validaCPF(cpfFormatado)){
+          this.popupController.showPopupMessage("Atenção!",
+          'O CPF informado não é válido.', true);
+          return false;
+        }
+        return true;
+    }
 
+  	validaDadosObrigatorios () {
+      let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
+  	  camposObrigatorios.removeClass('has-error');
+      let retorno: boolean = true;
   	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
   	  if (camposNaoPreenchidos.length > 0) {
         camposNaoPreenchidos.parent().addClass('has-error');
 
+        retorno = false;
+  	  }
+      if(this.edatService.eDAT.sexo == "") {
+          this.marcaLabelInvalido('label-radio-obrigatorio');
+          retorno = false;
+      } else { this.desmarcaLabelInvalido('label-radio-obrigatorio'); }
+
+      if(!retorno) {
         this.popupController.showPopupMessage("Atenção!",
         'Favor preencher todos os campos obrigatórios.', true);
-
-        return false;
-  	  }
-
-  	  return true;
+      }
+  	  return retorno;
   	}
 
     validaAba2Email() {
@@ -307,7 +331,7 @@ export class VisualizarDatComponent implements OnInit {
     validaDataNascTestemunha(){
       for(let testemunha of this.edatService.eDAT.testemunhasDat) {
         let hoje = new Date().getTime();
-    	  let dataNascimento = new Date(testemunha.dataNascimento).getTime();
+    	  let dataNascimento = $.datepicker.parseDate('dd/mm/yy',testemunha.dataNascimento).getTime();
     	  if(hoje <= dataNascimento) {
             this.popupController.showPopupMessage("Atenção!",
             'Data de nascimento inválida.', true);
@@ -319,7 +343,7 @@ export class VisualizarDatComponent implements OnInit {
 
     validaDataNascimento() {
       let hoje = new Date().getTime();
-  	  let dataNascimento = new Date(this.edatService.eDAT.dataNascimento).getTime();
+      let dataNascimento = $.datepicker.parseDate('dd/mm/yy',this.edatService.eDAT.dataNascimento).getTime();
   	  if(hoje <= dataNascimento) {
           this.popupController.showPopupMessage("Atenção!",
           'Data de nascimento inválida.', true);
@@ -354,7 +378,7 @@ export class VisualizarDatComponent implements OnInit {
       } else { this.desmarcaLabelInvalido('label-zona-obrigatorio'); }
 
   	  let dataLimite = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
-  	  let dataAcidente = new Date(this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
+      let dataAcidente = $.datepicker.parseDate('dd/mm/yy',this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
   	  if(dataAcidente < dataLimite) {
         this.popupController.showPopupMessage("Atenção!",
         'Não é possível registrar eDAT com data do acidente anterior a 30 dias!', true);
@@ -371,12 +395,14 @@ export class VisualizarDatComponent implements OnInit {
   	}
 
   	validaAba4Options() {
-  	  for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
-  	    if(veiculo.temSeguro == "") {
+      for (let veiculo of this.edatService.eDAT.outrosVeiculosDat) {
+        if(veiculo.temSeguro == "") {
           this.popupController.showPopupMessage("Atenção!",
           'Por favor, informe se os veículos possuem seguro.', true);
       		  return false;
   	    }
+        if(veiculo.cpf && veiculo.cpf.length > 0 && !this.validaCPF(veiculo.cpf))
+          return false;
   	  }
 
   	  return true;

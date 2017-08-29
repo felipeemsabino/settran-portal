@@ -12,7 +12,7 @@ export class CadastroRegraComponent implements OnInit {
 
   object: any = {};
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
     this.userService.userIsLogged();

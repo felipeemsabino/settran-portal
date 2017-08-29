@@ -442,7 +442,7 @@ export class CadastroDatComponent implements OnInit {
         'Por favor, informe se os veículos possuem seguro.', true);
     		  return false;
 	    }
-      if(veiculo.cpf.length > 0 && !this.validaCPF(veiculo.cpf))
+      if(veiculo.cpf && veiculo.cpf.length > 0 && !this.validaCPF(veiculo.cpf))
         return false;
 	  }
 

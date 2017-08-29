@@ -112,7 +112,7 @@
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="dataNascimento">Data Nascimento</label>
-				<input type="text" id="dataNascimento" class="form-control date-picker-settran" 
+				<input type="text" id="dataNascimento" class="form-control date-picker-settran"
 				[(ngModel)]="edatService.eDAT.dataNascimento"
 				[disabled]="edatService.edicaoDAT == false">
 			</div>
@@ -191,7 +191,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-4 nao-obrigatorio">
 			  <label class="control-label" for="telefone">Telefone residencial</label>
 			  <input type="text" class="form-control phone" id="telefone" [(ngModel)]="edatService.eDAT.telefone"
 				[disabled]="edatService.edicaoDAT == false">

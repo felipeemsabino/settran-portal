@@ -24,7 +24,7 @@ export class GridComponent implements OnInit {
   @Output() onObjectChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(@Inject('IDataService') private providerService: IDataService[],
-              private popupController: PopupControllerComponent, private userService: UserService) {
+              private popupController: PopupControllerComponent, public userService: UserService) {
 	   this.params = new URLSearchParams();
   }
 

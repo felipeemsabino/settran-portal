@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 })
 export class AreaAdminComponent implements OnInit {
 
-  constructor(private userService: UserService, private parentRouter: Router) { }
+  constructor(public userService: UserService, private parentRouter: Router) { }
 
   ngOnInit() {
     this.userService.userIsLogged();
-    
+
     if(this.userService.getUsetData().adm == 'N') {
       this.parentRouter.navigate(['/area-agente/']);
     }
