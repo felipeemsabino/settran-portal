@@ -28,10 +28,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-4">
 					<label class="control-label" for="foto0">Descrição da foto</label>
 					<input type="text" class="form-control" id="descFoto0"
 					[(ngModel)]="edatService.eDAT.fotosDat[0].descricaoFoto">
+				</div>
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-danger" (click)="removerFoto(0);" style="margin-top:24px;">Remover</button>
 				</div>
 			</div>
 			<div class=" row">
@@ -48,10 +51,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-4">
 					<label class="control-label" for="foto1">Descrição da foto</label>
 					<input type="text" class="form-control" id="descFoto1"
 					[(ngModel)]="edatService.eDAT.fotosDat[1].descricaoFoto">
+				</div>
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-danger" (click)="removerFoto(1);" style="margin-top:24px;">Remover</button>
 				</div>
 			</div>
 			<div class=" row">
@@ -68,10 +74,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-4">
 					<label class="control-label" for="foto2">Descrição da foto</label>
 					<input type="text" class="form-control" id="descFoto2"
 					[(ngModel)]="edatService.eDAT.fotosDat[2].descricaoFoto">
+				</div>
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-danger" (click)="removerFoto(2);" style="margin-top:24px;">Remover</button>
 				</div>
 			</div>
 			<div class=" row">
@@ -88,10 +97,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-4">
 					<label class="control-label" for="foto3">Descrição da foto</label>
 					<input type="text" class="form-control" id="descFoto3"
 					[(ngModel)]="edatService.eDAT.fotosDat[3].descricaoFoto">
+				</div>
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-danger" (click)="removerFoto(3);" style="margin-top:24px;">Remover</button>
 				</div>
 			</div>
 			<div class=" row">
@@ -108,10 +120,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-4">
 					<label class="control-label" for="foto4">Descrição da foto</label>
 					<input type="text" class="form-control" id="descFoto4"
 					[(ngModel)]="edatService.eDAT.fotosDat[4].descricaoFoto">
+				</div>
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-danger" (click)="removerFoto(4);" style="margin-top:24px;">Remover</button>
 				</div>
 			</div>
 			<label class="control-label" for="descricaoRelatoAcidente" style="color:red;">Tamanho máximo de cada foto: 300Kb</label>

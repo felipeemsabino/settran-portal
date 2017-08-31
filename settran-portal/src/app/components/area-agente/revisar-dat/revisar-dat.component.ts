@@ -101,10 +101,11 @@ export class RevisarDatComponent implements OnInit {
 
   revisarDAT() {
     this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
+    let txtValidacaoAux = this.edatService.eDAT.textoValidacao;
 
     this.edatService.eDAT.textoValidacao += this.textoValidacao +
-    "Atuailzado em: " + this.userService.nomeUsuario +
-    "Atualizado por: " + $.datepicker.formatDate( "dd/mm/yy", new Date() );
+    " (Atuailzado por: " + this.userService.getUserName() + " em " +
+    $.datepicker.formatDate( "dd/mm/yy", new Date() ) + ")";
 
     let params: URLSearchParams = new URLSearchParams();
     this.edatService.limpaAtributosBranco();
@@ -119,7 +120,8 @@ export class RevisarDatComponent implements OnInit {
                           result => {
                             if(result.status == 400) {
                               this.popupController.showPopupMessage("Atenção!", result.json(), true);
-                              this.textoValidacao = this.edatService.eDAT.textoValidacao;
+                              this.textoValidacao = txtValidacaoAux;
+                              this.edatService.eDAT.textoValidacao = txtValidacaoAux;
                             } else {
                               this.popupController.showPopupMessage("Atenção!",
                               "DAT validada com sucesso.", true);
@@ -131,7 +133,8 @@ export class RevisarDatComponent implements OnInit {
                             }
                           }, //Bind to view
                           err => {
-                            this.textoValidacao = this.edatService.eDAT.textoValidacao;
+                            this.textoValidacao = txtValidacaoAux;
+                            this.edatService.eDAT.textoValidacao = txtValidacaoAux;
                             this.popupController.showPopupMessage("Atenção!",
                             "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);                              console.log(err);
                           });
@@ -139,6 +142,10 @@ export class RevisarDatComponent implements OnInit {
 
   public updateObjectParameter(edatObject: any):void {
     console.log('updateObjectParameter revisar-dat');
+    console.log(this.edatService.eDAT.textoValidacao);
+    console.log(this.edatService.eDAT.situacaoDat);
+
+    console.log("adasdsdsa");
 	   this.object = edatObject;
      this.edatService.eDAT = edatObject;
      this.mostrarPainelRetificacao = true;

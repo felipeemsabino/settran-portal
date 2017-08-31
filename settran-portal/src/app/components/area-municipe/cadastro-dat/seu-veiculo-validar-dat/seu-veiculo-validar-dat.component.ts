@@ -47,8 +47,19 @@ export class SeuVeiculoValidarDatComponent implements OnInit {
   }
 
   applyDatePicker() {
+     var me = this;
      $( ".date-picker-settran" ).datepicker({
-       dateFormat: 'dd/mm/yy'
+       dateFormat: 'dd/mm/yy',
+       changeMonth: true,
+       changeYear: true,
+       yearRange: "-100:+0",
+       onSelect: function(date) {
+         if(this.id == 'dataValidadeCNH') {
+           me.edatService.eDAT.dataValidadeCNH = date;
+         } else if(this.id == 'dataNascimento') {
+           me.edatService.eDAT.dataNascimento = date;
+         }
+       }
      });
   }
   resetMasks() {

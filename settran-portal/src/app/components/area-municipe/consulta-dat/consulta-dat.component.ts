@@ -67,7 +67,7 @@ export class ConsultaDatComponent implements OnInit {
 
   verificaCaptcha() {
     if(this.captchaLetras != this.captchaUsuario) {
-      this.popupController.showPopupMessage("Atenção!", "Captcha inválido.", true);
+      this.popupController.showPopupMessage("Atenção!", "Código de validação incorreto.", true);
       return false;
     }
     return true;

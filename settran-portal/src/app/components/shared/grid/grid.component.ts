@@ -39,7 +39,7 @@ export class GridComponent implements OnInit {
 
   // Parametros para pesquisa. Filtros e paginção
   initialPosition: number = 0;     //paginação
-  finalPosition: number = 9; //paginação
+  finalPosition: number = 10; //paginação
   paginaAtual: number = 0;//paginação
   numeroPaginas: number[]; // armazena o numero das paginas
   retornoQtdRestante: number = 0; // quantos fetchedData existem para serem mostrados em pesquisa
@@ -111,11 +111,11 @@ export class GridComponent implements OnInit {
   createRange(){
     this.numeroPaginas = [];
     if(this.retornoQtdRestante === undefined){
-		return;
-	}
+  		return;
+  	}
 
-    var paginas: number = Number((this.retornoQtdRestante/10).toFixed(0)); //10 itens por pagina
-
+    var paginas: number = //Number((this.retornoQtdRestante/10).toFixed(0)); //10 itens por pagina
+    paginas = Number((this.retornoQtdRestante/10).toFixed(0)) == 0 ? 1 : Number((this.retornoQtdRestante/10).toFixed(0));
     for(var i = 0; i <= paginas; i++){
        this.numeroPaginas.push(i+1);
     }

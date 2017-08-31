@@ -150,4 +150,8 @@ export class PopupAgenteComponent implements OnInit {
   alteraAdm(adm: string) {
     this.entity.adm = adm;
   }
+
+  cancelar() {
+    $('#recarregaGrid').click();
+  }
 }

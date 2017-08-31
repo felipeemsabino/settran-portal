@@ -1,5 +1,6 @@
 import { Component, OnInit, ApplicationRef, ViewChildren, QueryList  } from '@angular/core';
 import { EDATService } from '../../../shared/services/e-dat.service';
+import { PopupControllerComponent } from '../../../shared/popup-controller/popup-controller.component';
 
 declare var $:any; // JQUERY
 
@@ -10,7 +11,7 @@ declare var $:any; // JQUERY
 })
 export class TestemunhasComponent implements OnInit {
 
-  constructor(public edatService: EDATService, public applicationRef: ApplicationRef) { }
+  constructor(public edatService: EDATService, public applicationRef: ApplicationRef, private popupController: PopupControllerComponent) { }
 
   ngOnInit() {
     this.resetFiledsConfigurations();
@@ -32,6 +33,7 @@ export class TestemunhasComponent implements OnInit {
        dateFormat: 'dd/mm/yy',
        changeMonth: true,
        changeYear: true,
+       yearRange: "-100:+0",
        onSelect: function(date) {
          var posicao = this.id.split('dataNascimento')[1];
          me.edatService.eDAT.testemunhasDat[posicao].dataNascimento = date;
@@ -50,12 +52,18 @@ export class TestemunhasComponent implements OnInit {
   adicionarTestemunha() {
   	var self = this;
 
-  	this.edatService.eDAT.testemunhasDat.push({
-  		"nomeTestemunha": "",
-  		"dataNascimento": "",
-  		"rg": "",
-  		"orgaoExpedidor": ""
-  	});
+    if(this.edatService.eDAT.testemunhasDat.length == 2) {
+
+      this.popupController.showPopupMessage("Atenção!",
+      'Não é possível inserir mais de 2 testemunhas.', true);
+    } else {
+    	this.edatService.eDAT.testemunhasDat.push({
+    		"nomeTestemunha": "",
+    		"dataNascimento": "",
+    		"rg": "",
+    		"orgaoExpedidor": ""
+    	});
+    }
   }
   @ViewChildren('allRows') things: QueryList<any>;
 

@@ -37,6 +37,7 @@ export class SeuVeiculoComponent implements OnInit {
        dateFormat: 'dd/mm/yy',
        changeMonth: true,
        changeYear: true,
+       yearRange: "-100:+0",
        onSelect: function(date) {
          if(this.id == 'dataValidadeCNH') {
            me.edatService.eDAT.dataValidadeCNH = date;

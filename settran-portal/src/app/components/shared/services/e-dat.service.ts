@@ -37,7 +37,7 @@ export class EDATService {
   };
 
   limparDadosDAT() {
-    this.eDAT = {
+    /*this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
   		"placa": "",
@@ -106,8 +106,8 @@ export class EDATService {
   		"emailEnviaConfirmacao": "",
   		"confirmacaoDados": "",
   		"temSeguro": ""
-  	}
-      /*this.eDAT = {
+  	}*/
+      this.eDAT = {
   		"isPropietario" : "S",
   		"renavam": "12313",
   		"placa": "hax3321",
@@ -177,7 +177,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "felipeems87@gmail.com",
   		"confirmacaoDados": "S",
   		"temSeguro": "S"
-  	}*/
+  	}
   }
   cancelarEDAT() {
     this.limparDadosDAT();
@@ -196,7 +196,13 @@ export class EDATService {
     return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/cadastrardat/',
 							this.eDAT, options)
                      .map((res:Response) =>this.extractData(res))
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                     .catch((error: any) => {
+                       if(error.status == 400){
+                         return [error];
+                       } else {
+                        return Observable.arguments(new Error(error));
+                       }
+                    });
   }
 
   extractData(res: Response) {
@@ -334,7 +340,8 @@ export class EDATService {
       this.eDAT.cpf = this.limpaMascaraCPF(this.eDAT.cpf);
 
       for (let veiculo of this.eDAT.outrosVeiculosDat) {
-        veiculo.cpf = this.limpaMascaraCPF(veiculo.cpf);
+        if(veiculo.cpf)
+          veiculo.cpf = this.limpaMascaraCPF(veiculo.cpf);
       }
     }
 

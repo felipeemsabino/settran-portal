@@ -59,31 +59,37 @@ export class OutrosVeiculosValidarDatComponent implements OnInit {
   adicionaVeiculo() {
   	var self = this;
 
-  	this.edatService.eDAT.outrosVeiculosDat.push({
-  		"placa": "",
-  		"marcaVeiculo": "",
-  		"modeloVeiculo": "",
-  		"tipoVeiculo": {
-  			"id": ""
-  		},
-  		"temSeguro":"",
-  		"cnh": "",
-  		"cpf": "",
-  		"rg": "",
-  		"orgaoExpedidor": "",
-  		"nomeCondutorOutroVeiculo": "",
-  		"logradouro":{
-  			"id":"-1",
-  			"nomeLogradouro":"",
-  			"tipoLogradouro":"",
-  			"nomeBairro":"",
-  			"cep":"",
-  			"nomeCidade":"",
-  			"uf":""
-  		},
-  		"complementoEndereco": "",
-  		"telefone": ""
-  	});
+    if(this.edatService.eDAT.outrosVeiculosDat.length == 4) {
+
+      this.popupController.showPopupMessage("Atenção!",
+      'Não é possível inserir mais de 4 envolvidos.', true);
+    } else {
+    	this.edatService.eDAT.outrosVeiculosDat.push({
+    		"placa": "",
+    		"marcaVeiculo": "",
+    		"modeloVeiculo": "",
+    		"tipoVeiculo": {
+    			"id": ""
+    		},
+    		"temSeguro":"",
+    		"cnh": "",
+    		"cpf": "",
+    		"rg": "",
+    		"orgaoExpedidor": "",
+    		"nomeCondutorOutroVeiculo": "",
+    		"logradouro":{
+    			"id":"-1",
+    			"nomeLogradouro":"",
+    			"tipoLogradouro":"",
+    			"nomeBairro":"",
+    			"cep":"",
+    			"nomeCidade":"",
+    			"uf":""
+    		},
+    		"complementoEndereco": "",
+    		"telefone": ""
+    	});
+   }
   }
   @ViewChildren('allRows') things: QueryList<any>;
 

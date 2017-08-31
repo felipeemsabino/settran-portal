@@ -225,8 +225,12 @@ export class CadastroDatComponent implements OnInit {
 		this.edatService.enviarEDAT()
 				  .subscribe(
 					  result => {
-            this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
-            this.parentRouter.navigate(['']);
+              if(result.status == 400) {
+                this.popupController.showPopupMessage("Atenção!", result.json(), true);
+              } else {
+                this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
+                this.parentRouter.navigate(['']);
+              }
 					  }, //Bind to view
 					  err => {
 						console.log(err);

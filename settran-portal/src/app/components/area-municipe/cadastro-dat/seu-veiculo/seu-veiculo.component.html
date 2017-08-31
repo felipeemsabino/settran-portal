@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="placa">Placa</label>
-			  <input type="text" class="form-control placa" id="placa" [(ngModel)]="edatService.eDAT.placa" style="text-transform: uppercase">
+			  <input type="text" class="form-control placa" id="placa" maxlength="8" [(ngModel)]="edatService.eDAT.placa" style="text-transform: uppercase">
 			</div>
 			<div class="form-group col-md-3">
 				<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="cor">Cor</label>
-			  <input type="text" class="form-control" id="cor" [(ngModel)]="edatService.eDAT.cor">
+			  <input type="text" class="form-control" id="cor" maxlength="15" [(ngModel)]="edatService.eDAT.cor">
 			</div>
 			<div class="form-group nao-obrigatorio col-md-3">
 			  <label class="control-label" for="temSeguro">Possui seguro?</label><br/>
@@ -79,7 +79,7 @@
 		<div class="row">
 			<div class="form-group col-md-9">
 			  <label class="control-label" for="nomeMunicipe">Nome</label>
-			  <input type="text" class="form-control" id="nomeMunicipe" [(ngModel)]="this.edatService.eDAT.nomeMunicipe">
+			  <input type="text" class="form-control" id="nomeMunicipe" maxlength="100" [(ngModel)]="this.edatService.eDAT.nomeMunicipe">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="dataNascimento">Data Nascimento</label>
@@ -94,7 +94,7 @@
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="rg">RG</label>
-			  <input type="text" class="form-control" id="rg" [(ngModel)]="this.edatService.eDAT.rg">
+			  <input type="text" class="form-control" id="rg" maxlength="15" [(ngModel)]="this.edatService.eDAT.rg">
 			</div>
 			<div class="form-group col-md-3">
 			  <label class="control-label" for="orgaoExpedidor">Órgão Exp.</label>
@@ -104,12 +104,12 @@
 		<div class="row">
 			<div class="form-group col-md-6 municipe-email">
 			  <label class="control-label" for="emailMunicipe">Email</label>
-			  <input type="text" class="form-control email" id="emailMunicipe"
+			  <input type="text" class="form-control email" id="emailMunicipe" maxlength="50"
 				[(ngModel)]="edatService.eDAT.emailMunicipe">
 			</div>
 			<div class="form-group col-md-6 municipe-email">
 			  <label class="control-label" for="emailMunicipeConfirm">Confirme o email</label>
-			  <input type="text" class="form-control email" id="emailMunicipeConfirm"
+			  <input type="text" class="form-control email" id="emailMunicipeConfirm" maxlength="50"
 				[(ngModel)]="edatService.emailMunicipeConfirm">
 			</div>
 		</div>
@@ -178,7 +178,7 @@
 		<div class="row">
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="nomePropietario">Nome do Proprietário</label>
-			  <input type="text" class="form-control" id="nomePropietario" [(ngModel)]="this.edatService.eDAT.nomePropietario">
+			  <input type="text" class="form-control" id="nomePropietario" maxlength="100" [(ngModel)]="this.edatService.eDAT.nomePropietario">
 			</div>
 			<div class="form-group col-md-6">
 			  <label class="control-label" for="docProprietario">CPF/CNPJ Proprietário</label>

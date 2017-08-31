@@ -107,7 +107,7 @@ export class RelatoComponent implements OnInit {
 			outrosEnvolvidosTexto += ",";
 		}
 		outrosEnvolvidosTexto += " o veículo " + veiculo.marcaVeiculo + "/" + veiculo.modeloVeiculo + " de placa " + veiculo.placa +
-		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + (veiculo.cpf == '' ? " < CPF não informado; >" : ", CPF " + veiculo.cpf);
+		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + (veiculo.cpf == '' ? " < CPF não informado >" : ", CPF " + veiculo.cpf);
 		index++;
 	}
 
@@ -128,6 +128,12 @@ export class RelatoComponent implements OnInit {
 
     }
     myReader.readAsDataURL(file);
+  }
+
+  removerFoto(index: number) {
+    this.edatService.eDAT.fotosDat[index].decodeImagem = "";
+    this.edatService.eDAT.fotosDat[index].urlFoto = "";
+    this.edatService.eDAT.fotosDat[index].descricaoFoto = "";
   }
 
 }
