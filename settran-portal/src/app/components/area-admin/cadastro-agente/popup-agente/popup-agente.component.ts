@@ -28,8 +28,9 @@ export class PopupAgenteComponent implements OnInit {
     }
   	this.resetMasks();
     this.confirmacaoSenha = "";
-    this.ativo = "S";
-    //console.log('setObject agente');
+    this.ativo = this.entity.ativo;
+
+    console.log('setObject agente'+ JSON.stringify(this.entity));
   }
 
   constructor(private agenteService: AgenteService, private popupController: PopupControllerComponent) {
