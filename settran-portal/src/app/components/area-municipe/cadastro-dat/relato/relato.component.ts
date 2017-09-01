@@ -15,48 +15,53 @@ export class RelatoComponent implements OnInit {
   url = "http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/img/";
   ngOnInit() {
 
+  }
+
+  insereTextoPadrao() {
+    this.edatService.relatoAux = "";
+
     if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
-	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao1;
-	} else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
-	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao2;
-	} else if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
-	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao3;
-	} else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
-	  this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.textosPadrao.padrao4;
-	}
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< data do acidente>>", this.edatService.eDAT.acidenteDat[0].dataAcidente);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<<hora do acidente>>", this.edatService.eDAT.acidenteDat[0].horaAcidente);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>", this.formataEnderecoAcidente());
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		", cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>", this.formataEnderecoCruzamentoAcidente());
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< marca/modelo>>", this.edatService.eDAT.marcaVeiculo+"/"+this.edatService.eDAT.modeloVeiculo);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< placa>>", this.edatService.eDAT.placa);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< nomeSolicitante>>", this.edatService.eDAT.nomeMunicipe);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<< cpf solicitante>>", this.edatService.eDAT.cpf);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.replace(
-		"<<tipoacidente>>", this.edatService.eDAT.acidenteDat[0].tipoAcidente);
-
-	this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente += this.formataOutrosEnvolvidos();
-
-    if(!this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente.endsWith(".")) {
-      this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente += ".";
+      this.edatService.relatoAux = this.edatService.textosPadrao.padrao1;
+    } else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
+      this.edatService.relatoAux = this.edatService.textosPadrao.padrao2;
+    } else if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
+      this.edatService.relatoAux = this.edatService.textosPadrao.padrao3;
+    } else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
+      this.edatService.relatoAux = this.edatService.textosPadrao.padrao4;
     }
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< data do acidente>>", this.edatService.eDAT.acidenteDat[0].dataAcidente);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<<hora do acidente>>", this.edatService.eDAT.acidenteDat[0].horaAcidente);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< endereço do acidente(tipologradouro, logradouro, n°, bairro, zona)>>", this.formataEnderecoAcidente());
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      ", cruzamento com <<caso haja cruzamento, endereço do cruzamento(tipologradouro, logradouro, n°)>>", this.formataEnderecoCruzamentoAcidente());
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< marca/modelo>>", this.edatService.eDAT.marcaVeiculo+"/"+this.edatService.eDAT.modeloVeiculo);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< placa>>", this.edatService.eDAT.placa);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< nomeSolicitante>>", this.edatService.eDAT.nomeMunicipe);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<< cpf solicitante>>", this.edatService.eDAT.cpf);
+
+    this.edatService.relatoAux = this.edatService.relatoAux.replace(
+      "<<tipoacidente>>", this.edatService.eDAT.acidenteDat[0].tipoAcidente);
+
+    this.edatService.relatoAux += this.formataOutrosEnvolvidos();
+
+      if(!this.edatService.relatoAux.endsWith(".")) {
+        this.edatService.relatoAux += ".";
+      }
   }
 
   formataEnderecoAcidente() {

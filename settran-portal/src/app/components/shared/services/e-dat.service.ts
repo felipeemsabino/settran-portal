@@ -15,6 +15,7 @@ export class EDATService {
   public validar: boolean = false;
   public edicaoDAT: boolean = false; // flag utilizada para validacao e revisao de dat, na validacao nao e permitido a edicao, ja na revisao e permitido a edicao
   public edicaoFotos: boolean = true;
+  public relatoAux: string = "";
 
   tiposVeiculo: any[] = new Array();
 
@@ -334,6 +335,7 @@ export class EDATService {
         pergunta.resposta = '';
       }
       this.emailMunicipeConfirm = '';
+      this.relatoAux = '';
     }
 
     removeMascaraCPF() {

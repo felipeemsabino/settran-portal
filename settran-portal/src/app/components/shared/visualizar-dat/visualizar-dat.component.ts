@@ -35,7 +35,8 @@ export class VisualizarDatComponent implements OnInit {
       private veiculoService: VeiculoService, private enderecoService: EnderecoService) {
       this.aba = 1;
       this.validator = new Validator();
-
+      this.edatService.resetInfosUsuario();
+      this.edatService.relatoAux = this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente;
       if(this.edatService.edicaoDAT == false) {
         this.SEU_VEICULO = "/area-agente/validar-dat/visualizar-dat/seu-veiculo-validar-dat";
         this.DADOS_ACIDENTE = "/area-agente/validar-dat/visualizar-dat/dados-acidente";
@@ -177,20 +178,39 @@ export class VisualizarDatComponent implements OnInit {
     	return true;
     }
 
+    validaParametrosRelato() {
+        let validacao = true;
+
+        validacao = this.validaDadosObrigatorios();
+        if(!validacao)
+          return validacao;
+
+        validacao = this.validator.validaRelatoAcidente(this.edatService.relatoAux);
+        if(!validacao) {
+          this.popupController.showPopupMessage("Atenção!", 'O tamanho do texto no campo Relato do Acidente não pode exceder 1500 caracteres.', true);
+          return validacao;
+        }
+
+        return validacao;
+    }
+
     confirmar() {
       if(this.edatService.eDAT.confirmacaoDados == 'S') {
-
-  		this.edatService.limpaAtributosBranco();
-  		console.log(JSON.stringify(this.edatService.eDAT));
-  		this.edatService.enviarEDAT()
-  				  .subscribe(
-  					  result => {
-              this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
-  					  }, //Bind to view
-  					  err => {
-  						console.log(err);
-              this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!', true);
-  					  });
+        if(!this.validaParametrosRelato()) {
+          return;
+        }
+        this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.relatoAux;
+    		this.edatService.limpaAtributosBranco();
+    		console.log(JSON.stringify(this.edatService.eDAT));
+    		this.edatService.enviarEDAT()
+    				  .subscribe(
+    					  result => {
+                this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
+    					  }, //Bind to view
+    					  err => {
+    						console.log(err);
+                this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!', true);
+    					  });
     	} else {
         this.popupController.showPopupMessage("Atenção!", 'Necessário aceitar os termos e condições antes de prosseguir!', true);
     	}
@@ -287,7 +307,7 @@ export class VisualizarDatComponent implements OnInit {
       let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
   	  camposObrigatorios.removeClass('has-error');
       let retorno: boolean = true;
-  	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
+  	  let camposNaoPreenchidos = camposObrigatorios.find('input, select, textarea').filter(function() { return $(this).val() == ""; });
   	  if (camposNaoPreenchidos.length > 0) {
         camposNaoPreenchidos.parent().addClass('has-error');
 

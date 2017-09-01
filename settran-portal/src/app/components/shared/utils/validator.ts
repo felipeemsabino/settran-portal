@@ -31,4 +31,11 @@ export class Validator {
   validaPlaca(strPlaca: string) {
 
   }
+
+  validaRelatoAcidente (relato: string) {
+    if (relato.length > 1500) {
+      return false;
+    }
+    return true;
+  }
 }

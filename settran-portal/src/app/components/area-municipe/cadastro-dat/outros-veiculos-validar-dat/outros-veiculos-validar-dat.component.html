@@ -41,8 +41,9 @@
 								<select class="form-control" id="tipoVeiculo{{currentElementIndex}}"
 								(change)="getMarcasVeiculo(currentElementIndex)"
 								[disabled]="edatService.edicaoDAT == false">
-									<option value="">Selecione</option>
+									<option [disabled]="edatService.edicaoDAT == false" value="">Selecione</option>
 									<option *ngFor='let tipo of edatService.tiposVeiculo;'
+									[disabled]="edatService.edicaoDAT == false"
 									[selected]="tipo.id == edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id"
 									value="{{tipo.id}}">{{tipo.descTipoVeiculo}}</option>
 								</select>

@@ -135,6 +135,7 @@ export class ValidarDatComponent implements OnInit {
      this.edatService.eDAT = edatObject;
      this.edatService.eDAT.situacaoDat = '';
      this.edatService.eDAT.textoValidacao = '';
+     console.log(this.edatService.relatoAux);
      if(!this.edatService.eDAT.acidenteDat[0].logradouroCruzamento) {
        this.edatService.eDAT.acidenteDat[0].logradouroCruzamento = {
          "id":"",

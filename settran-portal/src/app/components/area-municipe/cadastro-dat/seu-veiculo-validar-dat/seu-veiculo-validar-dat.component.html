@@ -9,8 +9,8 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label class="control-label" for="tipoVeiculo">Tipo de Veículo</label>
-				<select class="form-control" id="tipoVeiculo" (change)="getMarcasVeiculo()">
-					<option value="">Select</option>
+				<select [disabled]="edatService.edicaoDAT == false" class="form-control" id="tipoVeiculo" (change)="getMarcasVeiculo()">
+					<option [disabled]="edatService.edicaoDAT == false" value="">Select</option>
 					<option *ngFor='let tipo of edatService.tiposVeiculo;'
 					[selected]="tipo.id == edatService.eDAT.tipoVeiculo.id"
 					value="{{tipo.id}}"

@@ -63,7 +63,7 @@
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro + " " +
 (edatService.eDAT.acidenteDat[0].numeroEndereco != '' ? edatService.eDAT.acidenteDat[0].numeroEndereco : '') + " " +
 													  edatService.eDAT.acidenteDat[0].logradouro.nomeBairro + " " }}</label>
-						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento && edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0" 
+						<label *ngIf="edatService.eDAT.acidenteDat[0].logradouroCruzamento && edatService.eDAT.acidenteDat[0].logradouroCruzamento.length == 0"
 							   id="7">{{edatService.eDAT.acidenteDat[0].logradouroCruzamento.tipoLogradouro + " " +
 													  edatService.eDAT.acidenteDat[0].logradouroCruzamento.nomeLogradouro + " " +
 (edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento != '' ? edatService.eDAT.acidenteDat[0].numeroLogradouroAcidenteCruzamento : '') + " " +
@@ -126,7 +126,7 @@
 						<label for="12">Relato do acidente: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="12">{{edatService.eDAT.relatoDat[0].descricaoRelatoAcidente}}</label>
+						<label id="12">{{edatService.relatoAux}}</label>
 					</div>
 				</div>
 			</li>

@@ -185,6 +185,10 @@ export class CadastroDatComponent implements OnInit {
 	    break;
 	  }
 	  case CadastroDatComponent.RELATO_ACIDENTE: {
+      if(!this.validaParametrosRelato()) {
+        break;
+      }
+
       this.parentRouter.navigate([CadastroDatComponent.CONFIRMACAO_DAT]);
 	    break;
 	  }
@@ -215,10 +219,27 @@ export class CadastroDatComponent implements OnInit {
   	return true;
   }
 
+
+  validaParametrosRelato() {
+      let validacao = true;
+
+      validacao = this.validaDadosObrigatorios();
+      if(!validacao)
+        return validacao;
+
+      validacao = this.validator.validaRelatoAcidente(this.edatService.relatoAux);
+      if(!validacao) {
+        this.popupController.showPopupMessage("Atenção!", 'O tamanho do texto no campo Relato do Acidente não pode exceder 1500 caracteres.', true);
+        return validacao;
+      }
+
+      return validacao;
+  }
+
   confirmar() {
     if(this.edatService.eDAT.confirmacaoDados == 'S') {
     this.popupController.showPopupMessage("Aguarde!", 'Salvando DAT.', false);
-
+    this.edatService.eDAT.relatoDat[0].descricaoRelatoAcidente = this.edatService.relatoAux;
 		this.edatService.limpaAtributosBranco();
 		this.edatService.removeMascaraCPF();
     console.log(JSON.stringify(this.edatService.eDAT, null, 2));
@@ -332,7 +353,7 @@ export class CadastroDatComponent implements OnInit {
 	  let camposObrigatorios = $( ".form-group" ).not(".nao-obrigatorio");
 	  camposObrigatorios.removeClass('has-error');
     let retorno: boolean = true;
-	  let camposNaoPreenchidos = camposObrigatorios.find('input, select').filter(function() { return $(this).val() == ""; });
+	  let camposNaoPreenchidos = camposObrigatorios.find('input, select, textarea').filter(function() { return $(this).val() == ""; });
 	  if (camposNaoPreenchidos.length > 0) {
       camposNaoPreenchidos.parent().addClass('has-error');
 
