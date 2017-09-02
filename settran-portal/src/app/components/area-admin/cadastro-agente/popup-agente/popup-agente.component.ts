@@ -137,7 +137,40 @@ export class PopupAgenteComponent implements OnInit {
       return true;
   }
 
-  deleteData () {}
+  deleteData () {
+    var txt;
+    var r = confirm("Deseja realmente remover esse registro?");
+    if (r == true) {
+      this.popupController.showPopupMessage("Aguarde!", "Removendo registro...", false);
+
+      let params: URLSearchParams = new URLSearchParams();
+      params = this.entity.id;
+      // Deleta dado
+      this.agenteService.deleteData(this.entity.id)
+                        .subscribe(
+                            result => {
+                              if(result.status == 400) {
+                                this.popupController.showPopupMessage("Atenção!", result.json(), true);
+                              } else {
+
+                                this.popupController.showPopupMessage("Atenção!",
+                                "Registro removido com sucesso.", true);
+                                $('#agenteModal').modal('hide'); // fecha modal
+                                  $('#loadingModal').on('hidden.bs.modal', function () {
+                                  $('#recarregaGrid').click();
+                                  $('#loadingModal').unbind('hidden');
+                                });
+                              }
+                              this.resetMasks();
+
+                            }, //Bind to view
+                            err => {
+                              this.popupController.showPopupMessage("Atenção!",
+                              "Ocorreram erros ao remover o registro! Por favor, tente novamente.", true);                              console.log(err);
+                              console.log(err);
+                            });
+    }
+  }
 
   setAtivo() {
     if(this.entity.ativo == 'S')

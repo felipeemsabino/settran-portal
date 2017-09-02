@@ -56,8 +56,8 @@
 			</div>
 		</div>
         <div class="modal-footer">
-          <button *ngIf="false" type="button" class="btn btn-danger" style="float:left;" data-dismiss="modal">
-            Excluir</button>
+          <button *ngIf="entity.id" type="button" class="btn btn-danger" style="float:left;" data-dismiss="modal"
+            (click)="deleteData()">Excluir</button>
           <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelar();">Cancelar</button>
           <button type="submit" class="btn btn-success" [disabled]="!usuarioForm.form.valid">Salvar</button>
         </div>
