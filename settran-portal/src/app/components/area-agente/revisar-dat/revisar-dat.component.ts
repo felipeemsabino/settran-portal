@@ -71,6 +71,7 @@ export class RevisarDatComponent implements OnInit {
     this.situacaoDatRet = '';
     this.mostrarBotaoRevisar = false;
     this.textoValidacao = "";
+    $('#loadingModal').on('hidden.bs.modal', function () {});
   }
 
   cancelar() {
@@ -112,6 +113,7 @@ export class RevisarDatComponent implements OnInit {
     this.edatService.removeMascaraCPF();
     params = this.edatService.eDAT;
     console.log(JSON.stringify(this.edatService.eDAT, null, 2));
+    this.popupController.showPopupMessage("Aguarde!", "Revisão da DAT sendo registrada.", false);
 
     var me = this;
     // Salva dado
@@ -124,11 +126,12 @@ export class RevisarDatComponent implements OnInit {
                               this.edatService.eDAT.textoValidacao = txtValidacaoAux;
                             } else {
                               this.popupController.showPopupMessage("Atenção!",
-                              "DAT validada com sucesso.", true);
+                              "DAT revisada com sucesso.", true);
 
                                 $('#loadingModal').on('hidden.bs.modal', function () {
                                   me.mostrarGrid = true;
-                                  me.parentRouter.navigate(['area-agente/validar-dat']);
+                                  me.parentRouter.navigate(['area-agente/revisar-dat']);
+                                  $('#loadingModal').unbind();
                                 });
                             }
                           }, //Bind to view

@@ -62,7 +62,9 @@ export class GridComponent implements OnInit {
 
 								if(this.isPaginated)
 									this.createRange();
-							}
+							} else {
+                this.fetchedData = [];
+              }
 							this.popupController.hidePopupMessage(); // fecha modal
 							this.resetMasks();
             }, //Bind to view
@@ -115,7 +117,8 @@ export class GridComponent implements OnInit {
   	}
 
     var paginas: number = //Number((this.retornoQtdRestante/10).toFixed(0)); //10 itens por pagina
-    paginas = Number((this.retornoQtdRestante/10).toFixed(0)) == 0 ? 1 : Number((this.retornoQtdRestante/10).toFixed(0));
+    paginas = this.retornoQtdRestante == 0 ? this.retornoQtdRestante : Number((this.retornoQtdRestante/10).toFixed(0)) == 0 ? 1 : Number((this.retornoQtdRestante/10).toFixed(0));
+
     for(var i = 0; i <= paginas; i++){
        this.numeroPaginas.push(i+1);
     }

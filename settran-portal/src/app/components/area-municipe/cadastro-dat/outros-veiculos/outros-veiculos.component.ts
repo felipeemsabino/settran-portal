@@ -15,6 +15,8 @@ declare var $:any; // JQUERY
 })
 export class OutrosVeiculosComponent implements OnInit {
 
+  scrollIntoView: boolean = true;
+
   constructor(private veiculoService: VeiculoService, private enderecoService: EnderecoService,
     public edatService: EDATService, private popupController: PopupControllerComponent) {}
 
@@ -29,6 +31,10 @@ export class OutrosVeiculosComponent implements OnInit {
   	  this.edatService.arraysModeloVeiculo = new Array();
   	}
     this.resetFiledsConfigurations();
+    for (var i = 0; i < this.edatService.eDAT.outrosVeiculosDat.length;i++) {
+      if(!this.edatService.arraysMarcasVeiculo[i] || this.edatService.arraysMarcasVeiculo[i].length == 0)
+        this.getMarcasVeiculoOutrosEnvolvidos(i);
+    }
   }
 
   resetFiledsConfigurations() {
@@ -100,7 +106,10 @@ export class OutrosVeiculosComponent implements OnInit {
   ngForRendred() {
     if(this.edatService.eDAT.outrosVeiculosDat.length == 0)
       return;
-    document.getElementById('panel'+this.edatService.eDAT.outrosVeiculosDat.length).scrollIntoView();
+
+    if(this.scrollIntoView)
+      document.getElementById('panel'+this.edatService.eDAT.outrosVeiculosDat.length).scrollIntoView();
+    this.scrollIntoView = true;
   }
 
   alteraPossuiSeguro(possuiSeguro: string, currentElementIndex: number) {
@@ -113,6 +122,7 @@ export class OutrosVeiculosComponent implements OnInit {
     this.veiculoService.getTiposVeiculo(new URLSearchParams()).subscribe(
                           result => {
 							              this.edatService.tiposVeiculo = result;
+                            this.scrollIntoView = false;
                           }, //Bind to view
                           err => {
                             console.log(err);
@@ -120,24 +130,67 @@ export class OutrosVeiculosComponent implements OnInit {
                           });
   }
 
-  getMarcasVeiculo(currentElementIndex: number) {
-    let tipoVeiculoDesc = $("#tipoVeiculo"+currentElementIndex+" option:selected").text();
-    let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
+  getMarcasVeiculoOutrosEnvolvidos(currentElementIndex: number) {
+    let tipoVeiculoDesc = '';
 
-    if(tipoVeiculoVal === "") {
-      return;
+    for(let tipo of this.edatService.tiposVeiculo) {
+      if(tipo.id == this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id) {
+        tipoVeiculoDesc = tipo.descTipoVeiculo;
+        break;
+      }
     }
 
-    this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id = tipoVeiculoVal;
-
-    this.popupController.showPopupMessage("Atenção!",
-    'Carregando marcas.', false);
+    this.popupController.showPopupMessage("Atenção!", 'Carregando marcas.', false);
     this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc).subscribe(
       result => {
           this.edatService.arraysMarcasVeiculo[currentElementIndex] = result;
           this.edatService.arraysModeloVeiculo[currentElementIndex] = new Array();
-
           this.popupController.hidePopupMessage();
+          this.scrollIntoView = false;
+          this.getModelosVeiculoOutrosEnvolvidos(currentElementIndex, tipoVeiculoDesc);
+      }, //Bind to view
+      err => {
+        console.log(err);
+        this.popupController.hidePopupMessage();
+      });
+  }
+
+  getModelosVeiculoOutrosEnvolvidos(currentElementIndex: number, tipoVeiculoDesc: string){
+    let marcaVeiculoVal = '';
+    for(let marca of this.edatService.arraysMarcasVeiculo[currentElementIndex]) {
+      if(marca.fipe_name == this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].marcaVeiculo) {
+        marcaVeiculoVal = marca.id;
+        break;
+      }
+    }
+
+    this.popupController.showPopupMessage("Atenção!", 'Carregando modelos.', false);
+    this.veiculoService.getModelosVeiculo(tipoVeiculoDesc, marcaVeiculoVal).subscribe(
+                result => {
+                  this.edatService.arraysModeloVeiculo[currentElementIndex] = result;
+                  this.popupController.hidePopupMessage();
+                  this.scrollIntoView = false;
+                }, //Bind to view
+                err => {
+                  console.log(err);
+                  this.popupController.hidePopupMessage();
+                });
+  }
+
+  getMarcasVeiculo(currentElementIndex: number) {
+    let tipoVeiculoDesc = $("#tipoVeiculo"+currentElementIndex+" option:selected").text();
+    let tipoVeiculoVal = $( '#tipoVeiculo'+currentElementIndex ).val();
+
+    if(tipoVeiculoVal)
+      this.edatService.eDAT.outrosVeiculosDat[currentElementIndex].tipoVeiculo.id = tipoVeiculoVal;
+
+    this.popupController.showPopupMessage("Atenção!", 'Carregando marcas.', false);
+    this.veiculoService.getMarcasVeiculo(tipoVeiculoDesc).subscribe(
+      result => {
+          this.edatService.arraysMarcasVeiculo[currentElementIndex] = result;
+          this.edatService.arraysModeloVeiculo[currentElementIndex] = new Array();
+          this.popupController.hidePopupMessage();
+          this.scrollIntoView = false;
       }, //Bind to view
       err => {
         console.log(err);
@@ -163,6 +216,7 @@ export class OutrosVeiculosComponent implements OnInit {
 					  result => {
   						this.edatService.arraysModeloVeiculo[currentElementIndex] = result;
               this.popupController.hidePopupMessage();
+              this.scrollIntoView = false;
 					  }, //Bind to view
 					  err => {
   						console.log(err);

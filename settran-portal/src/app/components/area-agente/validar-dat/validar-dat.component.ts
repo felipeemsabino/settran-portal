@@ -35,6 +35,7 @@ export class ValidarDatComponent implements OnInit {
   ngOnInit() {
     this.userService.userIsLogged();
     this.nomeAgente = this.userService.nomeUsuario;
+    $('#loadingModal').on('hidden.bs.modal', function () {});
   }
 
   cancelar() {
@@ -116,10 +117,11 @@ export class ValidarDatComponent implements OnInit {
                               this.popupController.showPopupMessage("Atenção!",
                               "DAT validada com sucesso.", true);
 
-                                $('#loadingModal').on('hidden.bs.modal', function () {
-                                  me.mostrarGrid = true;
-                                  me.parentRouter.navigate(['area-agente/validar-dat']);
-                                });
+                              $('#loadingModal').on('hidden.bs.modal', function () {
+                                me.mostrarGrid = true;
+                                me.parentRouter.navigate(['area-agente/validar-dat']);
+                                $('#loadingModal').unbind();
+                              });
                             }
                           }, //Bind to view
                           err => {

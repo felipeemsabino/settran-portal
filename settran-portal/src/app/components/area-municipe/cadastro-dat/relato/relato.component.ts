@@ -59,16 +59,16 @@ export class RelatoComponent implements OnInit {
 
     this.edatService.relatoAux += this.formataOutrosEnvolvidos();
 
-      if(!this.edatService.relatoAux.endsWith(".")) {
-        this.edatService.relatoAux += ".";
-      }
+    if(!this.edatService.relatoAux.endsWith(".")) {
+      this.edatService.relatoAux += ".";
+    }
   }
 
   formataEnderecoAcidente() {
     let endereco = this.edatService.eDAT.acidenteDat[0].logradouro.tipoLogradouro + " " +
 				   this.edatService.eDAT.acidenteDat[0].logradouro.nomeLogradouro;
 
-  	if (this.edatService.eDAT.acidenteDat[0].numeroEndereco != "") {
+  	if (this.edatService.eDAT.acidenteDat[0].numeroEndereco && this.edatService.eDAT.acidenteDat[0].numeroEndereco != "") {
   	  endereco += " "+this.edatService.eDAT.acidenteDat[0].numeroEndereco;
   	}
 
@@ -112,7 +112,7 @@ export class RelatoComponent implements OnInit {
 			outrosEnvolvidosTexto += ",";
 		}
 		outrosEnvolvidosTexto += " o veículo " + veiculo.marcaVeiculo + "/" + veiculo.modeloVeiculo + " de placa " + veiculo.placa +
-		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + (veiculo.cpf == '' ? " < CPF não informado >" : ", CPF " + veiculo.cpf);
+		", conduzido por " + veiculo.nomeCondutorOutroVeiculo + (!veiculo.cpf || veiculo.cpf == '' ? " < CPF não informado >" : ", CPF " + veiculo.cpf);
 		index++;
 	}
 
