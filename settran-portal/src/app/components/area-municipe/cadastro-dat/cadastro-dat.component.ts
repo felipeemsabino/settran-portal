@@ -291,7 +291,7 @@ export class CadastroDatComponent implements OnInit {
     for (let p of this.edatService.perguntas) {
   		if(p.resposta.length == 0) {
         this.popupController.showPopupMessage("Atenção!",
-        'Por favor, responda todas as perguntas antes de prosseguir com o registro da eDAT.', true);
+        'Por favor, responda todas as perguntas antes de prosseguir com o registro da DAT.', true);
 
   			return false;
   		}
@@ -447,14 +447,14 @@ export class CadastroDatComponent implements OnInit {
 	  let dataAcidente = $.datepicker.parseDate('dd/mm/yy',this.edatService.eDAT.acidenteDat[0].dataAcidente).getTime();
 	  if(dataAcidente < dataLimite) {
       this.popupController.showPopupMessage("Atenção!",
-      'Não é possível registrar eDAT com data do acidente anterior a 30 dias!', true);
+      'Não é possível registrar DAT com data do acidente anterior a 30 dias!', true);
       return false;
 	  }
 
     let hoje = new Date().getTime();
 	  if(hoje <= dataAcidente) {
         this.popupController.showPopupMessage("Atenção!",
-        'Não é possível registrar eDAT com data do acidente futura!', true);
+        'Não é possível registrar DAT com data do acidente futura!', true);
 	      return false;
 	  }
 	     return true;

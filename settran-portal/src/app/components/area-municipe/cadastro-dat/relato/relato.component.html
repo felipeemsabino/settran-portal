@@ -8,8 +8,12 @@
 				[disabled]="edatService.edicaoDAT == false"></textarea>
 				<label class="control-label" for="descricaoRelatoAcidente">Máximo de caracteres: {{1500 - edatService.relatoAux.length}}</label>
 				<label class="control-label" for="descricaoRelatoAcidente" style="color:red;font-style:italic;">*Este campo de texto é livre para que o usuário possa descrever o acidente com suas palavras.</label>
-			  <br/><label *ngIf="edatService.edicaoDAT" class="control-label" for="descricaoRelatoAcidente" style="color:red;font-style:italic;">*Utilize esse botão para inserir um texto padrão no campo de texto.</label>
-				<button *ngIf="edatService.edicaoDAT" type="button" class="btn btn-success" (click)="insereTextoPadrao();">Inserir texto padrão</button>
+			  <br/><label *ngIf="edatService.edicaoDAT" class="control-label" for="descricaoRelatoAcidente"
+				style="font-style:italic;">
+				Caso deseje utilizar o texto padrão sugerido pela Settran, clique no botão ao lado.</label>
+				<button *ngIf="edatService.edicaoDAT" type="button"
+				class="btn"
+				style="background-color: #F0E68C;border-color: #F0E68C;color: black;"(click)="insereTextoPadrao();">Inserir texto padrão</button>
 			</div>
 		</div>
 	</fieldset>

@@ -104,7 +104,7 @@ export class RevisarDatComponent implements OnInit {
     this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
     let txtValidacaoAux = this.edatService.eDAT.textoValidacao;
 
-    this.edatService.eDAT.textoValidacao += this.textoValidacao +
+    this.edatService.eDAT.textoValidacao += this.textoValidacao ? this.textoValidacao : '' +
     " (Atuailzado por: " + this.userService.getUserName() + " em " +
     $.datepicker.formatDate( "dd/mm/yy", new Date() ) + ")";
 
