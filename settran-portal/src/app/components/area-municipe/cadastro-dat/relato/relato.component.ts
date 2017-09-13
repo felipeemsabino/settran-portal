@@ -20,11 +20,13 @@ export class RelatoComponent implements OnInit {
   insereTextoPadrao() {
     this.edatService.relatoAux = "";
 
-    if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
+    if( (this.edatService.eDAT.isPropietario == 'N' || this.edatService.eDAT.isPropietario.length == 0)
+              && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
       this.edatService.relatoAux = this.edatService.textosPadrao.padrao1;
     } else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length == 0) {
       this.edatService.relatoAux = this.edatService.textosPadrao.padrao2;
-    } else if(this.edatService.eDAT.isPropietario == 'N' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
+    } else if( (this.edatService.eDAT.isPropietario == 'N' || this.edatService.eDAT.isPropietario.length == 0)
+              && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
       this.edatService.relatoAux = this.edatService.textosPadrao.padrao3;
     } else if(this.edatService.eDAT.isPropietario == 'S' && this.edatService.eDAT.outrosVeiculosDat.length >= 1) {
       this.edatService.relatoAux = this.edatService.textosPadrao.padrao4;

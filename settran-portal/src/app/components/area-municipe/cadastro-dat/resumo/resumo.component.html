@@ -29,7 +29,7 @@
 						<label for="3">CPF: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="3">{{edatService.eDAT.cpf}}</label>
+						<label id="3" class="cpf">{{edatService.eDAT.cpf}}</label>
 					</div>
 				</div>
 			</li>
@@ -49,7 +49,7 @@
 						<label for="5">Veículo do solicitante: </label>
 					</div>
 					<div class="col-md-8">
-						<label id="5">{{edatService.eDAT.placa + " - " + edatService.eDAT.marcaVeiculo + "/" + edatService.eDAT.modeloVeiculo }}</label>
+						<label id="5">{{[edatService.eDAT.placa.toUpperCase().slice(0, 3), '-', edatService.eDAT.placa.toUpperCase().slice(3)].join('') + " - " + edatService.eDAT.marcaVeiculo + "/" + edatService.eDAT.modeloVeiculo }}</label>
 					</div>
 				</div>
 			</li>

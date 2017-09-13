@@ -49,8 +49,14 @@ export class AgenteService implements IDataService {
 
   	return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/agente/excluiragente/',
 							{"id":id}, options)
-                     .map((res:Response) =>this.extractData(res))
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                .map((res:Response) =>this.extractData(res))
+                .catch((error: any) => {
+                  if(error.status == 400){
+                    return [error];
+                  } else {
+                   return Observable.arguments(new Error(error));
+                  }
+               });
   }
 
   reorderData(body: string): Observable<any []> {

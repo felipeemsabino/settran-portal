@@ -30,6 +30,8 @@ export class CadastroDatComponent implements OnInit {
 
   constructor(private parentRouter: Router, private activatedRoute: ActivatedRoute,
     public edatService: EDATService, private popupController: PopupControllerComponent) {
+    $.jMaskGlobals.maskElements = 'input,label';
+
     this.validator = new Validator();
 
     this.aba = 1;
@@ -249,13 +251,13 @@ export class CadastroDatComponent implements OnInit {
               if(result.status == 400) {
                 this.popupController.showPopupMessage("Atenção!", result.json(), true);
               } else {
-                this.popupController.showPopupMessage("Atenção!", 'EDAT criada com sucesso.', true);
+                this.popupController.showPopupMessage("Atenção!", 'DAT criado com sucesso.', true);
                 this.parentRouter.navigate(['']);
               }
 					  }, //Bind to view
 					  err => {
 						console.log(err);
-            this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao criar a e-DAT. Verifique os dados e tente novamente!', true);
+            this.popupController.showPopupMessage("Atenção!", 'Ocorreram erros ao criar o DAT. Verifique os dados e tente novamente!', true);
 					  });
   	} else {
       this.popupController.showPopupMessage("Atenção!", 'Necessário aceitar os termos e condições antes de prosseguir!', true);
@@ -331,6 +333,10 @@ export class CadastroDatComponent implements OnInit {
   		  return validacao;
 
       validacao = this.validaCPF(this.edatService.eDAT.cpf);
+      if(!validacao)
+        return validacao;
+
+      validacao = this.validaCPF(this.edatService.eDAT.docPropietario);
       if(!validacao)
         return validacao;
 

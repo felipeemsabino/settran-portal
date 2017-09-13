@@ -51,7 +51,8 @@
               attr.data-toggle="{{rowDetail.isModal === true ? 'modal' : ''}}"
               attr.data-target="{{rowDetail.isModal === true ? rowDetail.modalName : ''}}"
               [ngClass]="column.class"
-              *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ? currentElementIndex : fData[column.attr]}}
+              *ngFor='let column of columnsConfiguration;'>{{fData[column.attr] === undefined ?
+                currentElementIndex+1 : fData[column.attr] }}
              </td>
     		  </tr>
         </tbody>
@@ -60,7 +61,7 @@
     <nav style="text-align:center;" *ngIf="isPaginated">
       <ul class="pagination" max-size="10">
         <li>
-          <a href="javascript:;" aria-label="Previous">
+          <a href="javascript:;" aria-label="Previous" (click)="previousPage()">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -68,7 +69,7 @@
           <a href="javascript:;" (click)="calculaRange(item)">
           {{currentElementIndex+1}}</a></li>
         <li>
-          <a href="javascript:;" aria-label="Next">
+          <a href="javascript:;" aria-label="Next" (click)="nextPage()">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

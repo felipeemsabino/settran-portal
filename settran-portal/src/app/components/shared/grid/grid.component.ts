@@ -117,7 +117,9 @@ export class GridComponent implements OnInit {
   	}
 
     var paginas: number = //Number((this.retornoQtdRestante/10).toFixed(0)); //10 itens por pagina
-    paginas = this.retornoQtdRestante == 0 ? this.retornoQtdRestante : Number((this.retornoQtdRestante/10).toFixed(0)) == 0 ? 1 : Number((this.retornoQtdRestante/10).toFixed(0));
+    paginas = this.retornoQtdRestante == 0 ? this.retornoQtdRestante :
+    Number((this.retornoQtdRestante%10).toFixed(0)) == 0 ? 1 :
+    Number((this.retornoQtdRestante%10).toFixed(0));
 
     for(var i = 0; i <= paginas; i++){
        this.numeroPaginas.push(i+1);
@@ -185,4 +187,20 @@ export class GridComponent implements OnInit {
 	  $('.cpf').unmask().mask('000.000.000-00', {reverse: true});
 	}, 500);
   }
+
+  nextPage() {
+    let nextPageNumber = this.paginaAtual+1;
+
+    if(nextPageNumber > this.numeroPaginas[this.numeroPaginas.length-1])
+      return;
+    this.calculaRange(nextPageNumber);
+  }
+
+  previousPage() {
+    if(this.paginaAtual <= 1)
+      return;
+    let previousPageNumber = this.paginaAtual-1;
+    this.calculaRange(previousPageNumber);
+  }
+
 }

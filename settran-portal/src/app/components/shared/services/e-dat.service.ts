@@ -38,7 +38,7 @@ export class EDATService {
   };
 
   limparDadosDAT() {
-    /*this.eDAT = {
+    this.eDAT = {
   		"isPropietario" : "",
   		"renavam": "",
   		"placa": "",
@@ -107,7 +107,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "",
   		"confirmacaoDados": "",
   		"temSeguro": ""
-  	}*/
+  	}/*
       this.eDAT = {
   		"isPropietario" : "S",
   		"renavam": "12313",
@@ -178,7 +178,7 @@ export class EDATService {
   		"emailEnviaConfirmacao": "felipeems87@gmail.com",
   		"confirmacaoDados": "S",
   		"temSeguro": "S"
-  	}
+  	}*/
   }
   cancelarEDAT() {
     this.limparDadosDAT();

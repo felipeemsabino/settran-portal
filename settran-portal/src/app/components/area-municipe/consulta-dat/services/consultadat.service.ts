@@ -9,7 +9,7 @@ export class ConsultadatService {
 
   constructor(private http: Http) { }
 
-  consultaDat(params: URLSearchParams): Observable<any []> {
+  consultaDat(params: URLSearchParams): Observable<any> {
 
 	let header = new Headers();
 	header.append('Content-Type', 'application/json');
@@ -18,8 +18,14 @@ export class ConsultadatService {
     let options = new RequestOptions({ headers: header, search: params });
 
     return this.http.get('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/consultadat/', options)
-                     .map((res:Response) =>this.extractData(res))
-                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                        .map((res:Response) =>this.extractData(res))
+                        .catch((error: any) => {
+                          if(error.status == 400 || error.status == 404){
+                            return [error];
+                          } else {
+                           return Observable.arguments(new Error(error));
+                          }
+                       });
   }
 
   recarregarCaptcha(): Observable<any []> {

@@ -8,7 +8,7 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class CadastroRegraComponent implements OnInit {
 
-  gridTitle: string = "Cadastro de Regras eDAT";
+  gridTitle: string = "Cadastro de Regras DAT";
 
   object: any = {};
 

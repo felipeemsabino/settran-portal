@@ -67,3 +67,7 @@ body {
 .label-has-error{
   color: red;
 }
+
+.menu-item-selecionado {
+  background-color: whitesmoke;
+}

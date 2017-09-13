@@ -124,8 +124,12 @@ export class ConsultaDatComponent implements OnInit {
     this.datService.consultaDat(params)
                       .subscribe(
                           result => {
-                            this.popupController.hidePopupMessage();
-                            window.open("http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat"+result);
+                            if(result.status == 400 || result.status == 404) {
+                              this.popupController.showPopupMessage("Atenção!", result.json(), true);
+                            } else {
+                              this.popupController.hidePopupMessage();
+                              window.open("http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat"+result);
+                            }
                           }, //Bind to view
                           err => {
                             this.popupController.showPopupMessage("Atenção!", "Não foi possível carregar os dados. Tente novamente.", true);

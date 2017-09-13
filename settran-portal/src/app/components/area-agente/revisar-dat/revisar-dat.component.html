@@ -16,7 +16,7 @@
     {'name':'Status', 'filter':false, 'attr':'situacaoDat'}]" >
   </app-grid>
 </router-outlet>
-<div class="container-fluid" id="bottom" >
+<div class="container-fluid" id="bottom" *ngIf="mostrarBotaoRevisar">
   <div class="panel panel-default">
 
     <div class="panel-body" *ngIf="mostrarPainelRetificacao">
@@ -35,16 +35,22 @@
   	  </fieldset>
       <div class="col col-md-9">
         <label class="control-label" for="foto1">Parecer atual</label>
-        <textarea class="form-control" rows="5" maxlength="3000" id="parecerDAT"
+        <textarea class="form-control" rows="3" maxlength="3000" id="parecerDAT" disabled>
+          {{edatService.eDAT.textoValidacao}}
+        </textarea>
+      </div>
+      <div class="col col-md-9">
+        <label class="control-label" for="foto1">Novo parecer:</label>
+        <textarea class="form-control" rows="3" maxlength="3000" id="parecerDAT"
         [(ngModel)]="textoValidacao"></textarea>
       </div>
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer" >
       <div class="row" style="text-align: center;">
         <div class="col col-md-6">
           <button type="button" class="btn btn-danger" (click)="cancelar();">Cancelar</button>
         </div>
-        <div class="col col-md-6" *ngIf="mostrarBotaoRevisar">
+        <div class="col col-md-6" >
           <button type="button" class="btn btn-primary" (click)="revisarDAT();"
           style="background-color: #F0E68C;border-color: #F0E68C;color: black;">Revisar</button>
         </div>

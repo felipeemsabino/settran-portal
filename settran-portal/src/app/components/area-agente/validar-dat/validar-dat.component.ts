@@ -36,6 +36,12 @@ export class ValidarDatComponent implements OnInit {
     this.userService.userIsLogged();
     this.nomeAgente = this.userService.nomeUsuario;
     $('#loadingModal').on('hidden.bs.modal', function () {});
+    this.alteraCorItemSelecionado();
+  }
+
+  alteraCorItemSelecionado() {
+    $('.menu-item').removeClass('menu-item-selecionado');
+    $('.sub-menu-validar').addClass('menu-item-selecionado');
   }
 
   cancelar() {

@@ -44,6 +44,7 @@ export class SeuVeiculoValidarDatComponent implements OnInit {
     		}
       }
     }
+    this.edatService.emailMunicipeConfirm = this.edatService.eDAT.emailMunicipe;
   }
 
   applyDatePicker() {

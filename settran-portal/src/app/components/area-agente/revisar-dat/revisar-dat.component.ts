@@ -26,6 +26,7 @@ export class RevisarDatComponent implements OnInit {
   situacaoDatRet: string = '';
   mostrarBotaoRevisar: boolean = false;
   textoValidacao: string = "";
+  textoValidacaoOriginal: string = "";
 
   constructor(private parentRouter: Router, private edatStorage: EdatStorageService,
    public edatService: EDATService, public userService: UserService,
@@ -37,6 +38,8 @@ export class RevisarDatComponent implements OnInit {
 
   alteraSituacaoDAT(situacao: string) {
     this.situacaoDatRet = situacao;
+    this.edatService.eDAT.situacaoDat = this.situacaoDatRet;
+
     if(situacao == 'DEF') {
       this.mostrarPainelRetificacao = false;
       this.edatService.limparDados();
@@ -58,7 +61,7 @@ export class RevisarDatComponent implements OnInit {
            "tipoLogradouro":""
          };
        }
-
+      this.textoValidacao = '';
       this.parentRouter.navigate(['/area-agente/revisar-dat/visualizar-dat/']);
     } else this.parentRouter.navigate(['/area-agente/revisar-dat/']);
 
@@ -72,6 +75,12 @@ export class RevisarDatComponent implements OnInit {
     this.mostrarBotaoRevisar = false;
     this.textoValidacao = "";
     $('#loadingModal').on('hidden.bs.modal', function () {});
+    this.alteraCorItemSelecionado();
+  }
+
+  alteraCorItemSelecionado() {
+    $('.menu-item').removeClass('menu-item-selecionado');
+    $('.sub-menu-revisar').addClass('menu-item-selecionado');
   }
 
   cancelar() {
@@ -86,6 +95,7 @@ export class RevisarDatComponent implements OnInit {
            text: "Sim",
            click: function() {
               me.mostrarGrid = true;
+              this.mostrarBotaoCancelar = false;
               me.parentRouter.navigate(['area-agente']);
              $( this ).dialog( "close" );
            }
@@ -101,13 +111,20 @@ export class RevisarDatComponent implements OnInit {
   }
 
   revisarDAT() {
-    this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
-    let txtValidacaoAux = this.edatService.eDAT.textoValidacao;
+    if(this.situacaoDatRet.trim().length == 0) {
+      this.popupController.showPopupMessage("Atenção!", "Selecione Deferir ou Indeferir antes de prosseguir.", true);
+      return;
+    }
 
-    this.edatService.eDAT.textoValidacao += this.textoValidacao ? this.textoValidacao : '' +
-    " (Atuailzado por: " + this.userService.getUserName() + " em " +
+    this.edatService.eDAT.agente = { "id": this.userService.getUsetData().id };
+
+    this.edatService.eDAT.textoValidacao = (this.textoValidacaoOriginal ? this.textoValidacaoOriginal : "") +
+    " " + this.textoValidacao + " (Atualizado por: " + this.userService.getUserName() + " em " +
     $.datepicker.formatDate( "dd/mm/yy", new Date() ) + ")";
 
+    if(this.edatService.eDAT.textoValidacao) {
+      this.edatService.eDAT.textoValidacao = this.edatService.eDAT.textoValidacao.trim();
+    }
     let params: URLSearchParams = new URLSearchParams();
     this.edatService.limpaAtributosBranco();
     this.edatService.removeMascaraCPF();
@@ -122,22 +139,22 @@ export class RevisarDatComponent implements OnInit {
                           result => {
                             if(result.status == 400) {
                               this.popupController.showPopupMessage("Atenção!", result.json(), true);
-                              this.textoValidacao = txtValidacaoAux;
-                              this.edatService.eDAT.textoValidacao = txtValidacaoAux;
+                              this.edatService.eDAT.textoValidacao = this.textoValidacaoOriginal;
                             } else {
                               this.popupController.showPopupMessage("Atenção!",
                               "DAT revisada com sucesso.", true);
 
                                 $('#loadingModal').on('hidden.bs.modal', function () {
                                   me.mostrarGrid = true;
+                                  me.mostrarPainelRetificacao = false;
+                                  me.mostrarBotaoRevisar = false;
                                   me.parentRouter.navigate(['area-agente/revisar-dat']);
                                   $('#loadingModal').unbind();
                                 });
                             }
                           }, //Bind to view
                           err => {
-                            this.textoValidacao = txtValidacaoAux;
-                            this.edatService.eDAT.textoValidacao = txtValidacaoAux;
+                            this.edatService.eDAT.textoValidacao = this.textoValidacaoOriginal;
                             this.popupController.showPopupMessage("Atenção!",
                             "Ocorreram erros ao salvar o registro! Por favor, tente novamente.", true);                              console.log(err);
                           });
@@ -153,6 +170,8 @@ export class RevisarDatComponent implements OnInit {
      this.edatService.eDAT = edatObject;
      this.mostrarPainelRetificacao = true;
      this.mostrarBotaoRevisar = true;
-     this.textoValidacao = this.edatService.eDAT.textoValidacao;
+     this.textoValidacao = '';
+     this.situacaoDatRet = '';
+     this.textoValidacaoOriginal = this.edatService.eDAT.textoValidacao;
   }
 }

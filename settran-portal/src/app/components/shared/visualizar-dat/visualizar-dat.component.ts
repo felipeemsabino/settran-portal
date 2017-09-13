@@ -54,10 +54,9 @@ export class VisualizarDatComponent implements OnInit {
       this.parentRouter.navigate([this.SEU_VEICULO]);
 
     	parentRouter.events.subscribe((val) => {
-
       	  if(val instanceof NavigationEnd) {
               this.currentPage = val.url;
-              if(this.action == 'back'){
+              /*if(this.action == 'back'){
 
                   if(this.aba > 1)
                     this.aba--;
@@ -71,6 +70,7 @@ export class VisualizarDatComponent implements OnInit {
                 $('#aba'+this.aba).css('background-color','#F0E68C'); // altera cor de background das abas
                 $('#aba'+(this.aba-1)).css('background-color','transparent');
               }
+              */
               $("html,body").scrollTop(100);
       	  }
         });
@@ -101,25 +101,39 @@ export class VisualizarDatComponent implements OnInit {
 
     voltar() {
 
+        this.removeAbaSelecionadaCss();
   	switch(this.currentPage) {
+
   	  case this.DADOS_ACIDENTE: {
+      this.selecionaAba(1);
   	    this.parentRouter.navigate([this.SEU_VEICULO]);
   	    break;
   	  }
   	  case this.OUTROS_VEICULOS: {
+      this.selecionaAba(2);
   	    this.parentRouter.navigate([this.DADOS_ACIDENTE]);
   	    break;
   	  }
   	  case this.TESTEMUNHAS: {
+      this.selecionaAba(3);
   	    this.parentRouter.navigate([this.OUTROS_VEICULOS]);
   	    break;
   	  }
   	  case this.RELATO_ACIDENTE: {
   		  //this.edatService.alteraFormatoInputData(); // coloca as mascaras no padrao do input
+        this.selecionaAba(4);
   	    this.parentRouter.navigate([this.TESTEMUNHAS]);
   	    break;
   	  }
   	}
+    }
+
+  removeAbaSelecionadaCss() {
+      $('.menu-wizard').css('background-color','transparent');
+    }
+
+    selecionaAba(id: number) {
+      $('#aba'+id).css('background-color','#F0E68C');
     }
 
     avancar() {
@@ -128,11 +142,14 @@ export class VisualizarDatComponent implements OnInit {
   		return false;
   	}*/
 
+      this.removeAbaSelecionadaCss();
   	switch(this.currentPage) {
+
   	  case this.SEU_VEICULO: {
   		if(this.edatService.edicaoDAT && !this.validarAbaSeuVeiculo())
   			break;
 
+      this.selecionaAba(2);
   		this.parentRouter.navigate([this.DADOS_ACIDENTE]);
   	    break;
   	  }
@@ -140,13 +157,16 @@ export class VisualizarDatComponent implements OnInit {
   		if(this.edatService.edicaoDAT && !this.validaDadosObrigatorios () || !this.validaAba3Options())
   			break;
 
+        this.selecionaAba(3);
   	    this.parentRouter.navigate([this.OUTROS_VEICULOS]);
+
   	    break;
   	  }
   	  case this.OUTROS_VEICULOS: {
   		if(this.edatService.edicaoDAT && !this.validaDadosObrigatorios () || !this.validaAba4Options())
   			break;
 
+        this.selecionaAba(4);
   	    this.parentRouter.navigate([this.TESTEMUNHAS]);
   	    break;
   	  }
@@ -155,6 +175,8 @@ export class VisualizarDatComponent implements OnInit {
           break;
 
   		  //this.edatService.alteraFormatoPadraoData(); // coloca as mascaras no padrao do banco de dados
+
+        this.selecionaAba(5);
   	    this.parentRouter.navigate([this.RELATO_ACIDENTE]);
   	    break;
   	  }
