@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PopupControllerComponent } from '../../shared/popup-controller/popup-controller.component';
 import { Router }   from '@angular/router';
+import { Globals } from '../../shared/globals';
 
 declare var $:any; // JQUERY
 

@@ -3,6 +3,7 @@ import { Headers, Http, Response, URLSearchParams, RequestOptions } from '@angul
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
+import { Globals } from '../../shared/globals';
 
 @Injectable()
 export class EDATService {
@@ -184,17 +185,17 @@ export class EDATService {
     this.limparDadosDAT();
   }
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private globals: Globals) {
     this.limparDadosDAT();
   }
 
   enviarEDAT() {
     let header = new Headers();
   	header.append('Content-Type', 'application/json');
-  	header.append('authorization', 'e96b4ae0-e36a-648f-134f-44171c2dcb18');
+  	header.append('authorization', this.globals.authorization);
     let options = new RequestOptions({ headers: header });
 
-    return this.http.post('http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat/rest/edat/cadastrardat/',
+    return this.http.post(this.globals.baseURL + 'edat/cadastrardat/',
 							this.eDAT, options)
                      .map((res:Response) =>this.extractData(res))
                      .catch((error: any) => {

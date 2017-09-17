@@ -46,6 +46,7 @@ import { UserService } from './components/shared/services/user.service';
 import { SubheaderComponent } from './components/shared/subheader/subheader.component';
 import { RevisardatService } from './components/area-agente/revisar-dat/services/revisardat.service';
 import { OutrosVeiculosValidarDatComponent } from './components/area-municipe/cadastro-dat/outros-veiculos-validar-dat/outros-veiculos-validar-dat.component';
+import { Globals } from './components/shared/globals';
 
 const appRoutes: Routes = [
 	  {
@@ -175,7 +176,7 @@ const appRoutes: Routes = [
     {
       provide: 'IDataService', useClass: RevisardatService, multi: true
     },
-		EDATService, ConsultadatService, PopupControllerComponent, EdatStorageService, UserService ],
+		EDATService, ConsultadatService, PopupControllerComponent, EdatStorageService, UserService, Globals ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
