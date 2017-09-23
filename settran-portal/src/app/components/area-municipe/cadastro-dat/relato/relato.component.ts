@@ -12,7 +12,7 @@ export class RelatoComponent implements OnInit {
 
   constructor(public edatService: EDATService) { }
 
-  url = "http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/img/";
+  url = "http://ec2-54-232-223-144.sa-east-1.compute.amazonaws.com:8080/img/";
   ngOnInit() {
 
   }

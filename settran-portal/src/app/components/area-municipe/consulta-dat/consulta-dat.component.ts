@@ -17,7 +17,7 @@ export class ConsultaDatComponent implements OnInit {
   captchaUsuario: string;
   captchaLetras: string = "";
   captchaURLImg: string = "";
-  captchaBaseUrl: string = "http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat";
+  captchaBaseUrl: string = "http://ec2-54-232-223-144.sa-east-1.compute.amazonaws.com:8080/wsedat";
 
   constructor(private parentRouter: Router, private datService: ConsultadatService,
     private popupController: PopupControllerComponent) { }
@@ -128,7 +128,7 @@ export class ConsultaDatComponent implements OnInit {
                               this.popupController.showPopupMessage("Atenção!", result.json(), true);
                             } else {
                               this.popupController.hidePopupMessage();
-                              window.open("http://ec2-52-67-135-39.sa-east-1.compute.amazonaws.com:8080/wsedat"+result);
+                              window.open("http://ec2-54-232-223-144.sa-east-1.compute.amazonaws.com:8080/wsedat"+result);
                             }
                           }, //Bind to view
                           err => {

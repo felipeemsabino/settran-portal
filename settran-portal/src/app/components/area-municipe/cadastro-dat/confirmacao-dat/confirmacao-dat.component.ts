@@ -42,6 +42,7 @@ export class ConfirmacaoDatComponent implements OnInit {
   	} else if(this.edatService.eDAT.enviouSms == 'N') {
   		this.edatService.eDAT.enviouSms = 'S';
       this.mostrarCampoCelular = true;
+      this.edatService.eDAT.numeroEnvioSms = this.edatService.eDAT.celular;
   	}
   }
 
